@@ -1,38 +1,48 @@
 <template lang="pug">
-  div.kalix-navigate(:class="{'small':menuChk}")
-    ul.bd.bg(v-if="!menuChk")
-      li(v-for="item in treeData" v-bind:key="item.id" v-bind:class="{'active':item.isShow}")
-        div.s-flex.tit.tit-txt(@click="showTree(item,$event)")
-          div.s-flex_item
-            i.tit_icon(:class="bindClass(item.iconCls)")
-            span.txt {{item.text}}
-          div.arrow
-            i(:class="showIcon(item.isShow)")
+  div.kalix-navigate()
+    ul.column
+      li.column-item(v-for="columnItem in columnList")
+        div.tit.column-item-tt(v-on:click="columnClick(columnItem)" v-bind:class="{'active':columnItem.isActive}")
+          i.tit_icon(:class="bindClass(columnItem.iconCls)")
+          | {{columnItem.text}}
         el-collapse-transition
-          div.mn(v-show="item.isShow")
-            ul
-              li(v-for="item in item.children" v-bind:key="item.id")
-                div.tit(v-on:click="selectItem(item)" v-bind:class="currentCls(item)")
+          ul.bd(v-show="columnItem.isActive")
+            li(v-for="item in treeListData[columnItem.id]" v-bind:key="item.id" v-bind:class="{'active':item.isShow}")
+              div.s-flex.tit.tit-txt(@click="showTree(item,$event)")
+                div.s-flex_item
                   i.tit_icon(:class="bindClass(item.iconCls)")
-                  | {{item.text}}
-    ul.bd.samll(v-if="menuChk")
-      li(v-for="item in treeData")
-        div.s-flex.tit(v-bind:class="{'active':item.isShow}")
-          i.tit_icon(:class="bindClass(item.iconCls)")
-          div.mn
-            div.txt {{item.text}}
-            ul
-              li.tit(v-for="item in item.children"
-              v-bind:key="item.id"
-              v-on:click="selectItem(item)")
-                i.tit_icon(:class="bindClass(item.iconCls)")
-                | {{item.text}}
+                  span.txt {{item.text}}
+                div.arrow
+                  i(:class="showIcon(item.isShow)")
+              el-collapse-transition
+                div.mn(v-show="item.isShow")
+                  ul
+                    li(v-for="item in item.children" v-bind:key="item.id")
+                      div.tit(v-on:click="selectItem(item)" v-bind:class="currentCls(item)")
+                        i.tit_icon(:class="bindClass(item.iconCls)")
+                        | {{item.text}}
+
 </template>
 
 <script type="text/ecmascript-6">
   export default {
     name: 'KalixNavigate',
     props: {
+      reqUrl: {
+        type: String,
+        default: ''
+      },
+      params: {
+        type: Object,
+        default() {
+          return {
+            _dc: (new Date()).getTime(),
+            page: 1,
+            start: 0,
+            limit: 25
+          }
+        }
+      },
       cacheTime: {
         type: Number,
         default: ''
@@ -52,16 +62,23 @@
         treeData: [],
         clickedNode: null,
         flag: true,
+        columnList: [],
+        treeListData: {},
         menuChk: false
       }
     },
     activated() {
+      console.log('+++++++++++++= activated =++++++++++++++++')
+      this.initColumn()
       this.$KalixEventBus.$on('HeaderOnSmall', (e) => {
         this.menuChk = e
       })
       this.fetchData()
     },
     mounted() {
+      console.log('+++++++++++++= mounted =++++++++++++++++')
+      this.initColumn()
+      this.fetchData()
     },
     watch: {
       '$route'(to, from) {
@@ -71,46 +88,112 @@
       }
     },
     methods: {
-      fetchData() {
-        this.treeData = []
+      /**
+       *  获取栏目
+       */
+      initColumn() {
         if (this.$route.name === 'login') {
           return
         }
+        console.log(' ++++++++++ Kalix - Header')
+        let toolListData = {}
+        if (this.$KalixCatch.get('toolListData')) {
+          toolListData = JSON.parse(this.$KalixCatch.get('toolListData'))
+        }
+        console.log('KalixSecondPage toolListData', toolListData)
+        if (!this.$M_IsEmptyObject(toolListData)) {
+          this.columnList = toolListData
+          this._urlTransmit(toolListData)
+        } else {
+          if (this.reqUrl.length) {
+            this.$http.get(this.reqUrl, {
+              params: this.params
+            }).then(response => {
+              if (response && response.data) {
+                console.log('[toolListData] data:', response.data)
+                this.columnList = response.data
+                this.columnList.map(e => {
+                  this.$set(e, 'isActive', false)
+                })
+                toolListData = this.columnList
+                this._urlTransmit(toolListData)
+                this.$KalixCatch.save('toolListData', JSON.stringify(toolListData))
+              }
+            })
+          } else {
+            console.log(' ===== this.reqUrl is Null! ===== ')
+          }
+        }
+      },
+      /**
+       * Url 跳转
+       * @param data
+       * @private
+       */
+      _urlTransmit(data) {
+        console.log('data.length:', data.length)
+        console.log('data[0].id:', data[0].id)
+        let columnName = this.$route.params.app
+        if (!columnName) {
+          if (data.length && data[0].id) {
+            columnName = data[0].id
+          } else {
+            columnName = ''
+          }
+        }
+        this.columnList.map(e => {
+          e.isActive = e.id === columnName
+        })
+        this.$router.push({
+          path: `/${columnName}/`
+        })
+      },
+      columnClick(item) {
+        this.columnList.forEach((e) => {
+          e.isActive = (e !== item) ? false : !e.isActive
+        })
+        this.$router.push({
+          path: `/${item.id}/`
+        })
+        // this.getMenu()
+      },
+      fetchData() {
+        this.treeData = []
         let d = new Date()
         let cd = d.getTime()
-        let treeListData = {}
         this.currApp = this.$route.params.app
         this.currFun = this.$route.params.fun || ''
         if (this.$KalixCatch.get('treeListData')) {
-          treeListData = JSON.parse(this.$KalixCatch.get('treeListData'))
+          this.treeListData = JSON.parse(this.$KalixCatch.get('treeListData'))
         }
-        if (treeListData.createDate && (treeListData.createDate - cd) < this.cacheTime && treeListData[this.currApp]) {
-          this.treeData = treeListData[this.currApp]
+        if (this.treeListData.createDate && (this.treeListData.createDate - cd) < this.cacheTime && this.treeListData[this.currApp]) {
+          this.treeData = this.treeListData[this.currApp]
           this.setItemShow()
         } else {
           const data = {_dc: cd, node: 'root'}
           if (this.flag) {
             this.flag = false
-            this.$http.get(
-              this.url + this.currApp,
-              {
-                params: data
-              }).then(response => {
-              this.flag = true
-              let nowDate = new Date()
-              if (response.data && response.data.code !== 401) {
-                this.treeData = response.data
-                if (this.treeData.length) {
-                  this.treeData.forEach(e => {
-                    this.$set(e, 'isShow', false)
-                  })
-                  treeListData[this.currApp] = this.treeData
-                  treeListData.createDate = nowDate.getTime()
-                  this.setItemShow()
-                  this.$KalixCatch.save('treeListData', JSON.stringify(treeListData))
+            this.$http
+              .get(this.url + this.currApp,
+                {
+                  params: data
+                })
+              .then(response => {
+                this.flag = true
+                let nowDate = new Date()
+                if (response.data && response.data.code !== 401) {
+                  this.treeData = response.data
+                  if (this.treeData.length) {
+                    this.treeData.forEach(e => {
+                      this.$set(e, 'isShow', false)
+                    })
+                    this.treeListData[this.currApp] = this.treeData
+                    this.treeListData.createDate = nowDate.getTime()
+                    this.setItemShow()
+                    this.$KalixCatch.save('treeListData', JSON.stringify(this.treeListData))
+                  }
                 }
-              }
-            })
+              })
           }
         }
       },
@@ -155,31 +238,40 @@
     components: {}
   }
 </script>
-
 <style lang="stylus" type="text/stylus">
+  @import "~@/assets/stylus/border.styl"
   .kalix-navigate
-    width 250px
+    position relative
+    width 190px
     height 100%
     text-align left
     overflow hidden
     transition width .2s
     z-index 999
     overflow-y auto
+    background-color #f6f9fa
+    font-size 12px
+    color #666666
+    &:after
+      setRightLine(#e0e3ec)
     ul
       li
         width 100%
         .tit
-          height 64px
-          line-height 64px
+          position relative
+          height 45px
+          line-height 45px
           cursor pointer
+          color white
+          &:before
+            setBottomLine(#e0e3ec)
         .tit_icon
-          margin-right 12px
-          font-size 20px
-
-      &.bg
+          margin-right 9px
+          font-size 12px
+      &.bd
         li
           .tit
-            padding-left 22px
+            padding-left 42px
             padding-right 12px
             position relative
             transition color 0.5s
@@ -187,64 +279,48 @@
             transition opacity .2s
           .txt
             display inline-block
+            color white
+            &:hover,
+            &.active
+              background-color #3465cb
+              color #eaf715
+              &:before
+                visibility visible
           .arrow
             width 12px
+            color #ffffff
+          &.active
+            .tit-txt
+              background-color #3465cb
+              color #eaf715
           .mn
             .tit
-              &:hover
-                background-color #3c4a57
-                color #e09232
-              padding-left 44px
-              &:before
-                top 0
-                left 0
-                bottom 0
-                width 5px
-                //background-color #42b983
-                content ''
-                position absolute
-                display block
-                visibility hidden
+              padding-left 64px
+              color white
+              &:hover,
               &.active
-                background-color #384657
-                color #ffffff
+                background-color #3465cb
+                color #eaf715
                 &:before
                   visibility visible
 
-    &.small
-      width 65px
-      overflow visible
-      li
-        .tit
-          display block
-          position relative
-          text-align center
-          &:before
-            top 0
-            left 0
-            bottom 0
-            width 5px
-            content ''
-            position absolute
-            display block
-            visibility hidden
-          &.active
-            &:before
-              visibility visible
-          .mn
-            position absolute
-            left 50px
-            top 0
-            width 180px
-            text-align left
-            display none
-            ul
-              li.tit
-                padding-left 20px
-                text-align left
-                box-sizing border-box
-          &:hover
-            .mn
-              display block
-
+      &.column
+        .column-item
+          .column-item-tt
+            font-size 18px
+            transition all .2s
+            &.active
+              color white
+            &.router-link-active
+              background-color #d9eceb
+            .tit_icon
+              font-size 14px
+              color #ffffff
+              margin-left 20px
+            &:hover,
+            &.active
+              background-color #3465cb
+              color #eaf715
+              &:before
+                visibility visible
 </style>
