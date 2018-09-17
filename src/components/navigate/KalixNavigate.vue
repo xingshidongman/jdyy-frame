@@ -174,7 +174,8 @@
           cursor pointer
         .tit_icon
           margin-right 12px
-          font-size 24px
+          font-size 20px
+
       &.bg
         li
           .tit
@@ -192,7 +193,7 @@
             .tit
               &:hover
                 background-color #3c4a57
-                color #d6d9dc
+                color #e09232
               padding-left 44px
               &:before
                 top 0

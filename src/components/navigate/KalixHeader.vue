@@ -2,43 +2,46 @@
   div.kalix-header
     div.s-flex.bd
       div.logo
-        img(src="/static/images/logo_oa_horizontal.png")
-      div.s-flex_item.s-flex.mn
-        div.s-flex_item
-          div.s-flex.menu-main(v-bind:class="{'open':menuIsOpen}" v-on:mouseover="onOpenMenu(true)"  v-on:mouseout="onOpenMenu(false)")
-            ul.menu(ref="ulMenu")
-              li(v-for="item in menuList")
-                router-link.link-btn(tag="div" v-bind:to="{path:'/'+item.id}")
-                  i(:class="bindClass(item.iconCls)")
-                  | {{item.text}}
-            div.aside-btn(v-if="isShowAsideBtn")
-              div.line
-              div.arrow
-                div.arrow-mn
-              div.line
-        ul.aside
-          li
-            el-badge(v-if="msgCount > 0" v-bind:value="msgCount")
-              el-button(icon="el-icon-message" v-on:click="onMsgClick") 消息
-            el-button(v-else icon="el-icon-message" v-on:click="onMsgClick" style="margin-top:10px;") 消息
-          li
-            el-dropdown(v-on:command="onFlowCommand" style="margin-top:10px;")
-              el-button
-                | 待办工作
-                i.el-icon-arrow-down.el-icon--right
-              el-dropdown-menu(slot="dropdown")
-                el-dropdown-item 待办流程
-          li
-            el-dropdown(v-on:command="handleCommand" style="min-width:120px")
-              div.s-flex.el-dropdown-link
-                div.avatar-wrapper
-                  div.avatar(v-bind:style="styleObject")
-                  div.user-name {{userName}}
-                i.el-icon-caret-bottom.el-icon--right
-              el-dropdown-menu(slot="dropdown")
-                el-dropdown-item(command="changeInfo") 修改个人信息
-                el-dropdown-item(command="changePwd") 修改密码
-                el-dropdown-item(command="logout") 退出
+        img(src="/static/images/logo.png")
+        div.text {{msg}}
+      <!--div.s-flex_item.s-flex.mn-->
+        <!--div.s-flex_item-->
+          <!--div.s-flex.menu-main(v-bind:class="{'open':menuIsOpen}" v-on:mouseover="onOpenMenu(true)"  v-on:mouseout="onOpenMenu(false)")-->
+            <!--ul.menu(ref="ulMenu")-->
+              <!--li(v-for="item in menuList")-->
+                <!--router-link.link-btn(tag="div" v-bind:to="{path:'/'+item.id}")-->
+                  <!--i(:class="bindClass(item.iconCls)")-->
+                  <!--| {{item.text}}-->
+            <!--div.aside-btn(v-if="isShowAsideBtn")-->
+              <!--div.line-->
+              <!--div.arrow-->
+                <!--div.arrow-mn-->
+              <!--div.line-->
+        <!--ul.aside-->
+          <!--li-->
+            <!--el-badge(v-if="msgCount > 0" v-bind:value="msgCount")-->
+              <!--el-button(icon="el-icon-message" v-on:click="onMsgClick") 消息-->
+            <!--el-button(v-else icon="el-icon-message" v-on:click="onMsgClick" style="margin-top:10px;") 消息-->
+          <!--li-->
+            <!--el-dropdown(v-on:command="onFlowCommand" style="margin-top:10px;")-->
+              <!--el-button-->
+                <!--| 待办工作-->
+                <!--i.el-icon-arrow-down.el-icon&#45;&#45;right-->
+              <!--el-dropdown-menu(slot="dropdown")-->
+                <!--el-dropdown-item 待办流程-->
+          <!--li-->
+            <!--el-dropdown(v-on:command="handleCommand" style="min-width:120px")-->
+              <!--div.s-flex.el-dropdown-link-->
+                <!--div.avatar-wrapper-->
+                  <!--div.avatar(v-bind:style="styleObject")-->
+                  <!--div.user-name {{userName}}-->
+                <!--i.el-icon-caret-bottom.el-icon&#45;&#45;right-->
+              <!--el-dropdown-menu(slot="dropdown")-->
+                <!--el-dropdown-item(command="changeInfo") 修改个人信息-->
+                <!--el-dropdown-item(command="changePwd") 修改密码-->
+                <!--el-dropdown-item(command="logout") 退出-->
+
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -55,7 +58,8 @@
         menuIsOpen: false,
         isShowAsideBtn: false,
         isShowMessage: false,
-        isFlowCommand: false
+        isFlowCommand: false,
+        msg: '吉林大学第一医院骨关节外科临床资料登记系统'
       }
     },
     props: {
@@ -224,11 +228,20 @@
     z-index 9
     background-color #ffffff
     .bd
-      height 65px
+      height 250px
       .logo
-        width 250px
+        width 100%
+        height 250px
         overflow hidden
         transition width .2s
+      .text
+        display inline-block
+        position absolute
+        font-size 3.5vw
+        margin -150px 100px 0 100px
+        color white
+
+
         &.small
           width 65px
       .s-check__label
