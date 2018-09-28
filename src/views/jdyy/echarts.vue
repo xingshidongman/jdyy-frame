@@ -8,8 +8,7 @@
           div.left_zx
           div.left_xx
           div.left_xr
-          div.block
-            input.input_time(v-model="datevalue1"  type="date" )
+          input.input_time(v-model="datevalue1"  type="date" )
           div.left_block
             ul(v-for="item in items")
               li.block_box
@@ -41,8 +40,7 @@
             div.left_zx
             div.left_xx
             div.left_xr
-            div.block
-              input.input_time(v-model="datevalue2"  type="date" )
+            input.input_time(v-model="datevalue2"  type="date" )
             div( id="zhuzhuang" style="width: 90%;height: 300px;left:5%;")
     div.right
       div.left_box
@@ -364,13 +362,10 @@
             background-color #3ac8f3
             float right
             margin 423px -12px 0 0
-          .block
-            width 15%
-            float right
-            margin-right 60px
           .input_time
-            width 100%
+            width 120px
             margin-top 15px
+            margin-left 80%
             border 2px solid #23769a
             color #23769a
             background-color black
@@ -378,7 +373,7 @@
             width 90%
             margin auto
             position relative
-            margin-top 90px
+            margin-top 20px
             height 300px
             .block_box
               width 90%
