@@ -14,7 +14,6 @@ import './element-ui'
 import Tinymce from './components/Tinymce'
 import Squire from './components/squire/Squire'
 // Vue.use(ElementUI)
-
 Es6Promise.polyfill()
 Vue.config.productionTip = false
 

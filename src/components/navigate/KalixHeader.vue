@@ -249,7 +249,7 @@
         background url('/static/images/logo.png') no-repeat center
       .text
           font-size 3.5vw
-          width 85%
+          width 80%
           margin 100px 0 0 100px
           color white
           float left

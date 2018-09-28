@@ -7,19 +7,20 @@
 <template lang="pug">
   div.login(data-logig)
     div.from-warpper
+      div.logo {{msg}}
       div.form
-        div.logo
         el-form.loginForm(v-bind:model="loginForm" v-bind:rules="rules" ref="loginForm"
         v-bind:show-message="false")
           div.error-message(v-if="error.flag") {{error.message}}
           el-form-item.kalix-form-item(prop="name")
-            el-input(v-model="loginForm.name" placeholder="账号" ref="loginFormName")
-              i.icon-user(slot="prefix")
+            div.text 用户名:
+            el-input(v-model="loginForm.name" ref="loginFormName")
           el-form-item.kalix-form-item(prop="pass")
-            el-input(type="password" v-model="loginForm.pass" ref="loginFormPass" placeholder="密码" auto-complete="off")
-              i.icon-lock(slot="prefix")
+            div.text.text1 密 码:
+            el-input(type="password" v-model="loginForm.pass" ref="loginFormPass"  auto-complete="off")
           el-form-item(label="")
-            el-button.btn-submit(type="primary" v-on:click="onSubmit()" size="large") 登录
+            el-button.btn-submit( v-on:click="onSubmit()" size="large") 登 录
+            el-button.btn-submit.btn-reset( v-on:click="reset" size="large") 重 置
 </template>
 
 <script type="text/ecmascript-6">
@@ -34,6 +35,8 @@
     name: 'LoginForm',
     data() {
       return {
+        msg: '吉林大学第一医院骨关节外科临床资料登记系统',
+        radio: '',
         loginForm: {
           name: '',
           pass: ''
@@ -69,6 +72,11 @@
         if (this._validateForm()) {
           this.login()
         }
+      },
+      reset() {
+        this.loginForm.name = ''
+        this.loginForm.pass = ''
+        this.radio = ''
       },
       login() {
         //  登录
@@ -148,10 +156,17 @@
   // .el-form-item.is-error .el-input__inner
   .login[data-logig]
     .btn-submit
-      background url("./button-bg.png") 50% 50% no-repeat;
-      border none
-      color #5c4611
+      /*background url("./button-bg.png") 50% 50% no-repeat;*/
+      border 1px solid #093046
+      color white
       height 42px
+      width 100px
+      margin-left 5%
+      margin-top 15px
+      font-size 1vw
+      background-color #1c6086
+    .btn-reset
+      margin-left 40%
     .icon-user,
     .icon-lock
       display block
@@ -169,9 +184,24 @@
     .kalix-form-item
       & + .kalix-form-item
         margin-top 13px
+      .text
+        position absolute
+        color white
+        font-size 1.2vw
+      .tit
+        color white
+        font-size 1.2vw
+        margin-left 80px
+
+      .text1
+        letter-spacing 3px
       .el-input__inner
         height 46px
-        border-color #d8dce5 !important
+        width 300px
+        margin-left 80px
+        box-shadow 0px 0px 6px rgba(188, 168, 120, 0.46)
+        /*border-color #d8dce5 !important*/
+        border 2px solid #535353
       &.is-success
         .el-input__inner
           border-color #d8dce5 !important
