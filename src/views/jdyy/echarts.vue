@@ -8,8 +8,7 @@
           div.left_zx
           div.left_xx
           div.left_xr
-          div.block
-            input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+          input.input_time(v-model="datevalue1"  type="date" )
           div.left_block
             ul(v-for="item in items")
               li.block_box
@@ -36,14 +35,13 @@
       div.lefttwo
         div.left_box
           div.left_line
-            div.text_box.text 今日数据指标
+            div.text_box.text 月份数据获取
             div.left_sx
             div.left_zx
             div.left_xx
             div.left_xr
-            div.block
-              input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
-            div( id="zhuzhuang" style="width: 90%;height: 260px;left:5%;")
+            input.input_time(v-model="datevalue2"  type="date" )
+            div( id="zhuzhuang" style="width: 90%;height: 300px;left:5%;")
     div.right
       div.left_box
         div.left_line
@@ -53,7 +51,7 @@
           div.left_xx
           div.left_xr
           div.block
-            input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+            input.input_time(v-model="datevalue3"  type="date" )
             span  年龄段
             input.block_input
             span ~
@@ -79,7 +77,7 @@
             div.left_xx
             div.left_xr
             div.block
-              input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+              input.input_time(v-model="datevalue4"  type="date" )
               span  年龄段
               input.block_input
               span ~
@@ -101,7 +99,10 @@
     name: '',
     data () {
       return {
-        datevalue: '',
+        datevalue1: '',
+        datevalue2: '',
+        datevalue3: '',
+        datevalue4: '',
         radio: '',
         charts: '',
         charts2: '',
@@ -153,16 +154,22 @@
       zhuzhuang(id) {
         this.charts2 = echarts.init(document.getElementById(id))
         this.charts2.setOption({
+          tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+              type: 'shadow'
+            }
+          },
           legend: {
-            data: ['数据一'],
+            data: ['手术人数'],
             textStyle: {
               color: '#ffffff'
             }
           },
           grid: {
             left: '3%',
-            right: '5%',
-            bottom: '3%',
+            right: '3%',
+            bottom: '2%',
             containLabel: true
           },
           xAxis: [
@@ -190,7 +197,7 @@
           ],
           series: [
             {
-              name: '数据一',
+              name: '手术人数',
               type: 'bar',
               barWidth: '30%',
               data: [2000, 2500, 1800, 2000, 2500, 1800, 1800, 1500, 1800, 1800, 1500, 500],
@@ -202,6 +209,9 @@
       diagram (id) {
         this.charts3 = echarts.init(document.getElementById(id))
         this.charts3.setOption({
+          tooltip: {
+            trigger: 'axis'
+          },
           legend: {
             data: ['2018', '2017', '2016', '2015', '2014'],
             textStyle: {
@@ -245,35 +255,35 @@
               type: 'line',
               stack: '总量',
               smooth: true,
-              data: [120, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210]
+              data: [210, 132, 101, 134, 90, 230, 210, 120, 132, 101, 134, 90, 230, 210]
             },
             {
               name: '2017',
               type: 'line',
               stack: '总量',
               smooth: true,
-              data: [220, 182, 191, 234, 290, 330, 310, 120, 132, 101, 134, 90, 230, 210]
+              data: [0, 182, 191, 234, 290, 330, 310, 120, 132, 101, 134, 90, 230, 210]
             },
             {
               name: '2016',
               type: 'line',
               stack: '总量',
               smooth: true,
-              data: [150, 232, 201, 154, 190, 330, 410, 120, 132, 101, 134, 90, 230, 210]
+              data: [210, 232, 201, 154, 190, 330, 410, 120, 132, 101, 134, 90, 230, 210]
             },
             {
               name: '2015',
               type: 'line',
               stack: '总量',
               smooth: true,
-              data: [320, 332, 301, 334, 390, 330, 320, 120, 132, 101, 134, 90, 230, 210]
+              data: [210, 332, 301, 334, 390, 330, 320, 120, 132, 101, 134, 90, 230, 210]
             },
             {
               name: '2014',
               type: 'line',
               stack: '总量',
               smooth: true,
-              data: [820, 932, 901, 934, 1290, 1330, 1320, 120, 132, 101, 134, 90, 230, 210]
+              data: [210, 932, 901, 934, 1290, 1330, 1320, 120, 132, 101, 134, 90, 230, 210]
             }
           ]
         })
@@ -352,13 +362,10 @@
             background-color #3ac8f3
             float right
             margin 423px -12px 0 0
-          .block
-            width 10%
-            float right
-            margin-right 60px
           .input_time
             width 120px
             margin-top 15px
+            margin-left 80%
             border 2px solid #23769a
             color #23769a
             background-color black
@@ -366,7 +373,7 @@
             width 90%
             margin auto
             position relative
-            margin-top 90px
+            margin-top 20px
             height 300px
             .block_box
               width 90%
