@@ -240,21 +240,22 @@
     z-index 9
     background-color #ffffff
     .bd
-      height 263px
+      height 200px
       .logo
         width 100%
-        height 263px
+        height 200px
         overflow hidden
         transition width .2s
         background url('/static/images/logo.png') no-repeat center
       .text
-          font-size 3.5vw
+          font-size 3vw
           width 80%
-          margin 100px 0 0 100px
+          margin-top 50px
+          margin-left 5%
           color white
           float left
         &.small
-          width 65px
+          width 20%
       .s-check__label
         display block
         cursor pointer
@@ -350,7 +351,7 @@
                 margin-top 10px
             .el-dropdown-link
               align-items center
-              margin-top 200px
+              margin-top 140px
               color #ffffff
             .el-select
               margin-top 10px
@@ -360,6 +361,7 @@
     .avatar-wrapper
       height 36px
       line-height 36px
+      width 120px
       .avatar
         float left
         width 36px
@@ -369,7 +371,7 @@
         margin-right 10px
         box-sizing border-box
       .user-name
-        float left
+        /*float left*/
         font-size 16px
         margin-right 7px
         color #ffffff
