@@ -5,3 +5,7 @@ JdyyDictsTypesListURL = "/camel/rest/jdyy/dicts/types/list"
 JdyyimgURL = "/camel/rest/jdyy/imgs"
 #统计录入
 JdyystatURL = "/camel/rest/jdyy/stats"
+#病员信息
+JdyypatientsURL = "/camel/rest/jdyy/patientss"
+#术式
+JdyysurURL = "/camel/rest/jdyy/surgicals"
