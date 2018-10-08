@@ -7,6 +7,7 @@ import Jdyyman from './patients/Jdyyman' // 病员资料管理
 import Jdyyque from './patients/Jdyyque' // 病员资料查询
 import Jdyysur from './zsg/Jdyysur' // 术式
 import Jdyydia from './zsg/Jdyydia' // 诊断
+import Jdyypos from './investigation/Jdyypos' // 术后调查
 
 Jdyytentry.install(Vue)
 Jdyyanalyse.install(Vue)
@@ -15,3 +16,4 @@ Jdyyman.install(Vue)
 Jdyyque.install(Vue)
 Jdyysur.install(Vue)
 Jdyydia.install(Vue)
+Jdyypos.install(Vue)

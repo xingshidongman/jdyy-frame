@@ -1,15 +1,9 @@
-import JdyyMan from './jdyyPos.vue'
-import JdyyManAdd from './jdyyManAdd.vue'
-import JdyyManEdit from './jdyyPosEdit.vue'
-import JdyyManSearch from './jdyyManSearch.vue'
-import JdyyManView from './jdyyManView.vue'
+import JdyyPos from './jdyyPos.vue'
+import JdyyPosSearch from './JdyyPosSearch.vue'
 
 const components = [
-  JdyyMan,
-  JdyyManAdd,
-  JdyyManEdit,
-  JdyyManSearch,
-  JdyyManView
+  JdyyPos,
+  JdyyPosSearch
 ]
 
 const main = {
