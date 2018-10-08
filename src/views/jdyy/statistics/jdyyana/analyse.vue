@@ -42,7 +42,7 @@
             div.left_xx
             div.left_xr
             div.block
-              input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+              input.input_time(v-model="datevalue2"  type="date"  placeholder="2018")
             div( id="zhuzhuang" style="width: 90%;height: 260px;left:5%;")
     div.right
       div.left_box
@@ -53,7 +53,7 @@
           div.left_xx
           div.left_xr
           div.block
-            input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+            input.input_time(v-model="datevalue3"  type="date"  placeholder="2018")
             span  年龄段
             input.block_input
             span ~
@@ -79,7 +79,7 @@
             div.left_xx
             div.left_xr
             div.block
-              input.input_time(v-model="datevalue"  type="date"  placeholder="2018")
+              input.input_time(v-model="datevalue4"  type="date"  placeholder="2018")
               span  年龄段
               input.block_input
               span ~
@@ -101,7 +101,10 @@
     name: 'kalix-jdyy-jdyyana',
     data () {
       return {
-        datevalue: '',
+        datevalue1: '',
+        datevalue2: '',
+        datevalue3: '',
+        datevalue4: '',
         radio: '',
         charts: '',
         charts2: '',
@@ -163,6 +166,9 @@
       zhuzhuang(id) {
         this.charts2 = echarts.init(document.getElementById(id))
         this.charts2.setOption({
+          tooltip: {
+            trigger: 'axis'
+          },
           legend: {
             data: ['手术人数'],
             textStyle: {
@@ -212,6 +218,9 @@
       diagram (id) {
         this.charts3 = echarts.init(document.getElementById(id))
         this.charts3.setOption({
+          tooltip: {
+            trigger: 'axis'
+          },
           legend: {
             data: [this.firstYear, this.secondYear, this.threeYear, this.fourYear, this.fiveYear],
             textStyle: {
@@ -253,35 +262,30 @@
             {
               name: this.firstYear,
               type: 'line',
-              stack: '总量',
               smooth: true,
               data: this.firstLine
             },
             {
               name: this.secondYear,
               type: 'line',
-              stack: '总量',
               smooth: true,
               data: this.secondLine
             },
             {
               name: this.threeYear,
               type: 'line',
-              stack: '总量',
               smooth: true,
               data: this.threeLine
             },
             {
               name: this.fourYear,
               type: 'line',
-              stack: '总量',
               smooth: true,
               data: this.fourLine
             },
             {
               name: this.fiveYear,
               type: 'line',
-              stack: '总量',
               smooth: true,
               data: this.fiveLine
             }

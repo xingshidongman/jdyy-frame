@@ -8,9 +8,6 @@
 
 <template lang="pug">
   div.kalix-search
-    div.kalix-search-hd
-      i.iconfont.icon-query
-      | {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true")
         slot(name="searchFormSlot")

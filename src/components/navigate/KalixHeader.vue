@@ -222,10 +222,10 @@
       },
       // 计算 ulMenu 高度，决定 menu 是否带有展开功能
       _setAsideBtn() {
-        setTimeout(() => {
-          console.log(' ===== this.$refs.ulMenu.clientHeight ===== ', this.$refs.ulMenu.clientHeight)
-          this.isShowAsideBtn = (this.$refs.ulMenu.clientHeight > 64)
-        }, 20)
+        // setTimeout(() => {
+        //   console.log(' ===== this.$refs.ulMenu.clientHeight ===== ', this.$refs.ulMenu.clientHeight)
+        //   this.isShowAsideBtn = (this.$refs.ulMenu.clientHeight > 64)
+        // }, 20)
       }
     }
   }
