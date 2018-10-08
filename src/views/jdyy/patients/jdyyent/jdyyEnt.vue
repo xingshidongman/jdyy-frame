@@ -43,12 +43,20 @@
         el-input(v-model="formModel.telephonePerson")
       el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
         el-input(v-model="formModel.familyPhone")
-      el-form-item(label="省" prop="province" v-bind:label-width="labelWidth" v-bind:rules="rules.province")
-        el-input(v-model="formModel.province")
-      el-form-item(label="市" prop="city" v-bind:label-width="labelWidth" v-bind:rules="rules.city")
-        el-input(v-model="formModel.city")
-      el-form-item(label="区" prop="district" v-bind:label-width="labelWidth" v-bind:rules="rules.district")
-        el-input(v-model="formModel.district")
+      <!--el-form-item(label="省" prop="province" v-bind:label-width="labelWidth" v-bind:rules="rules.province")-->
+        <!--el-select(v-model="formModel.province" placeholder="请选择省")-->
+          <!--el-option(label="区域一" value="shanghai")-->
+          <!--el-option(label="区域二" value="beijing")-->
+      <!--el-form-item(label="市" prop="city" v-bind:label-width="labelWidth" v-bind:rules="rules.city")-->
+        <!--el-select(v-model="formModel.city" placeholder="请选择市")-->
+          <!--el-option(label="区域一" value="shanghai")-->
+          <!--el-option(label="区域二" value="beijing")-->
+      <!--el-form-item(label="区" prop="district" v-bind:label-width="labelWidth" v-bind:rules="rules.district")-->
+        <!--el-select(v-model="formModel.district" placeholder="请选择区")-->
+          <!--el-option(label="区域一" value="shanghai")-->
+          <!--el-option(label="区域二" value="beijing")-->
+      el-form-item(label="省市县" prop="province" v-bind:label-width="labelWidth" v-bind:rules="rules.province")
+        kalix-font-cascader(v-model="formModel.province" v-on:getModelInfo="getModel" cascader-type="address")
       el-form-item(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
         el-input(v-model="formModel.completeAddress")
       el-form-item(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
@@ -58,7 +66,6 @@
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
         el-input(v-model="formModel.hss")
       div(type="primary" size="large" v-on:click="submitForm") 保存
-
 </template>
 
 <script type="text/ecmascript-6">
@@ -66,9 +73,10 @@
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
+  import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   export default {
     name: 'kalix-jdyy-jdyyent',
-    components: {KalixClansmanUpload},
+    components: {KalixFontCascader, KalixClansmanUpload},
     data() {
       return {
         downloadURL: JdyypatientsURL,
@@ -123,6 +131,12 @@
       // setGroup(val) {
       //   this.formModel.downlosd = val
       // },
+      getModel(val, flag) { // 三级联动地区参数区分
+        if (flag === 'address') {
+          this.address_disabled = false
+          this.formModel.province = val.toString()
+        }
+      },
       submitForm() {
         this.$refs['formModel'].validate((valid) => {
           if (valid) {
@@ -140,7 +154,6 @@
           }
         })
       }
-
     }
   }
 </script>
