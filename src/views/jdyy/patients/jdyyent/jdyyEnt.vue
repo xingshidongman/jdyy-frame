@@ -19,8 +19,8 @@
         el-input(v-model="formModel.directorDoctor")
       el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth" v-bind:rules="rules.dateAdmission")
         kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-      el-form-item(label="出院日期" prop="dateAischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.dateAischarge")
-        kalix-datepicker-simple(v-model="formModel.dateAischarge" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
+      el-form-item(label="出院日期" prop="dateDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.dateDischarge")
+        kalix-datepicker-simple(v-model="formModel.dateDischarge" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
         el-input(v-model="formModel.stature")
       el-form-item(label="体重" prop="weight" v-bind:label-width="labelWidth" v-bind:rules="rules.weight")
@@ -43,20 +43,8 @@
         el-input(v-model="formModel.telephonePerson")
       el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
         el-input(v-model="formModel.familyPhone")
-      <!--el-form-item(label="省" prop="province" v-bind:label-width="labelWidth" v-bind:rules="rules.province")-->
-        <!--el-select(v-model="formModel.province" placeholder="请选择省")-->
-          <!--el-option(label="区域一" value="shanghai")-->
-          <!--el-option(label="区域二" value="beijing")-->
-      <!--el-form-item(label="市" prop="city" v-bind:label-width="labelWidth" v-bind:rules="rules.city")-->
-        <!--el-select(v-model="formModel.city" placeholder="请选择市")-->
-          <!--el-option(label="区域一" value="shanghai")-->
-          <!--el-option(label="区域二" value="beijing")-->
-      <!--el-form-item(label="区" prop="district" v-bind:label-width="labelWidth" v-bind:rules="rules.district")-->
-        <!--el-select(v-model="formModel.district" placeholder="请选择区")-->
-          <!--el-option(label="区域一" value="shanghai")-->
-          <!--el-option(label="区域二" value="beijing")-->
-      el-form-item(label="省市县" prop="province" v-bind:label-width="labelWidth" v-bind:rules="rules.province")
-        kalix-font-cascader(v-model="formModel.province" v-on:getModelInfo="getModel" cascader-type="address")
+      el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
+        kalix-font-cascader(v-model="formModel.address" v-on:getModelInfo="getModel" cascader-type="address")
       el-form-item(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
         el-input(v-model="formModel.completeAddress")
       el-form-item(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
@@ -95,7 +83,7 @@
           hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
           directorDoctor: [{required: true, message: '请输入主管医生', trigger: 'change'}],
           dateAdmission: [{required: true, message: '请输入入院日期', trigger: 'change'}],
-          dateAischarge: [{required: true, message: '请输入出院日期', trigger: 'change'}],
+          dateDischarge: [{required: true, message: '请输入出院日期', trigger: 'change'}],
           stature: [{required: true, message: '请输入身高', trigger: 'change'}],
           weight: [{required: true, message: '请输入体重', trigger: 'change'}],
           bmi: [{required: true, message: '请输入BMI', trigger: 'change'}],
@@ -107,7 +95,7 @@
           WhetherDischarge: [{required: true, message: '请输入是否出院', trigger: 'change'}],
           telephonePerson: [{required: true, message: '请输入本人联系方式', trigger: 'change'}],
           familyPhone: [{required: true, message: '请输入家属联系方式', trigger: 'change'}],
-          address: [{required: true, message: '请输入省市县', trigger: 'change'}],
+          address: [{required: true, message: '请输入省市区', trigger: 'change'}],
           completeAddress: [{required: true, message: '请输入家详细地址', trigger: 'change'}],
           remarks: [{required: true, message: '请输入备注', trigger: 'change'}],
           harris: [{required: true, message: '请输入Harris评分', trigger: 'change'}],
