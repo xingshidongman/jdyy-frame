@@ -7,7 +7,7 @@
 <template lang="pug">
   div.kalix-article
     keep-alive
-      kalix-tree-grid-1.duty-wrapper(bizKey="jdyySur" title="术式录入"
+      kalix-tree-grid-1.duty-wrapper(bizKey="jdyyDia" title="诊断录入"
       style="padding-top:0"
       ref="kalixTreeGrid"
       v-bind:targetURL="treeUrl"
@@ -35,17 +35,17 @@
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {jdyySurConfigBtnList} from './config'
+  import {jdyyDiaConfigBtnList} from './config'
   import Message from '../../../../common/message'
   import {JdyysurURL} from '../../config.toml'
   // import KalixReplyTree from '../../../../components/cascader/replyTree'
   import KalixTreeGrid from '../../../../components/forum/treeGrid'
 
   export default {
-    name: 'kalix-jdyy-jdyysur',
+    name: 'kalix-jdyy-jdyydia',
     data() {
       return {
-        btnList: jdyySurConfigBtnList,
+        btnList: jdyyDiaConfigBtnList,
         name: '',
         noSearchParam: true,
         // toolbarBtnList: [
@@ -73,8 +73,8 @@
         isIconSelf: true,
         jsonStr: '',
         bizDialog: [
-          {id: 'add', dialog: 'jdyySurAdd'},
-          {id: 'edit', dialog: 'jdyySurEdit'}
+          {id: 'add', dialog: 'jdyyDiaAdd'},
+          {id: 'edit', dialog: 'jdyyDiaEdit'}
         ],
         optActions: {
           title: '操作',

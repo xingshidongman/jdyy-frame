@@ -1,11 +1,11 @@
-import jdyySur from './jdyySur.vue'
-import jdyySurAdd from './jdyySurAdd.vue'
-import jdyySurEdit from './jdyySurEdit.vue'
+import jdyyDia from './jdyyDia.vue'
+import jdyyDiaAdd from './jdyyDiaAdd.vue'
+import jdyyDiaEdit from './jdyyDiaEdit.vue'
 
 const components = [
-  jdyySur,
-  jdyySurAdd,
-  jdyySurEdit
+  jdyyDia,
+  jdyyDiaAdd,
+  jdyyDiaEdit
 ]
 
 const main = {

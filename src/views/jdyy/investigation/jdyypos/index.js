@@ -1,11 +1,9 @@
-import jdyySur from './jdyySur.vue'
-import jdyySurAdd from './jdyySurAdd.vue'
-import jdyySurEdit from './jdyySurEdit.vue'
+import JdyyPos from './jdyyPos.vue'
+import JdyyPosSearch from './JdyyPosSearch.vue'
 
 const components = [
-  jdyySur,
-  jdyySurAdd,
-  jdyySurEdit
+  JdyyPos,
+  JdyyPosSearch
 ]
 
 const main = {
@@ -15,4 +13,5 @@ const main = {
     })
   }
 }
+
 export default main
