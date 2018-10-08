@@ -9,7 +9,7 @@
     keep-alive
       el-row.function-row(:gutter="0")
         el-col.function-col(:span="4" style="padding:8px 0 8px 8px;")
-          kalix-nav-menu(title="应用列表" selfIconCls="tit_icon iconfont icon-application-management"
+          kalix-nav-menu(title="应用列表" selfIconCls="tit_icon iconfont icon-application-jdyyman"
           v-bind:basePath="itemBasePath" v-bind:toolbarBtnList="toolbarBtnList"
           v-bind:menuUrl="targetUrl" v-bind:menuItems="menuItems" v-bind:isIconSelf="isIconSelf"
           v-on:menuItems="getMenuItems" v-on:menuItem="getMenuItem")

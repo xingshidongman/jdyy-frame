@@ -1,7 +1,11 @@
-import JdyyAdm from './JdyyAdm.vue'
+import jdyyDia from './jdyyDia.vue'
+import jdyyDiaAdd from './jdyyDiaAdd.vue'
+import jdyyDiaEdit from './jdyyDiaEdit.vue'
 
 const components = [
-  JdyyAdm
+  jdyyDia,
+  jdyyDiaAdd,
+  jdyyDiaEdit
 ]
 
 const main = {
