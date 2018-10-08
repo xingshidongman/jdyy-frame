@@ -1,21 +1,11 @@
-// import User from './user.vue'
-// import userSearch from './userSearch.vue'
-// import userAdd from './userAdd.vue'
-// import userEdit from './userEdit.vue'
-// import userView from './userView.vue'
-// import userResetpwd from './userResetpwd.vue'
-// import userEditpwd from './userEditpwd.vue'
 import jdyySur from './jdyySur.vue'
+import jdyySurAdd from './jdyySurAdd.vue'
+import jdyySurEdit from './jdyySurEdit.vue'
 
 const components = [
-  // User,
-  // userSearch,
-  // userAdd,
-  // userEdit,
-  // userView,
-  // userResetpwd,
-  // userEditpwd,
-  jdyySur
+  jdyySur,
+  jdyySurAdd,
+  jdyySurEdit
 ]
 
 const main = {
