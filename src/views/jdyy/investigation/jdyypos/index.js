@@ -1,7 +1,9 @@
-import JdyyAdm from './JdyyAdm.vue'
+import JdyyPos from './jdyyPos.vue'
+import JdyyPosSearch from './JdyyPosSearch.vue'
 
 const components = [
-  JdyyAdm
+  JdyyPos,
+  JdyyPosSearch
 ]
 
 const main = {
@@ -11,4 +13,5 @@ const main = {
     })
   }
 }
+
 export default main
