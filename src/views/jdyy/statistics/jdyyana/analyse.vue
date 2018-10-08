@@ -9,7 +9,7 @@
           div.left_xx
           div.left_xr
           div.block
-            input.input_time(v-model="chooseDate" v-on:click="getDataByDate" type="date"  placeholder="2018")
+            input.input_time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
           div.left_block
             ul(v-for="item in items")
               li.block_box
@@ -187,6 +187,7 @@
               data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
               axisLabel: {
                 show: true,
+                interval: 0,
                 textStyle: {
                   color: '#2d8ac7'
                 }
@@ -197,7 +198,7 @@
             {
               type: 'value',
               axisLabel: {
-                show: true,
+                interval: 0,
                 textStyle: {
                   color: '#2d8ac7'
                 }
@@ -244,6 +245,7 @@
             data: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
             axisLabel: {
               show: true,
+              interval: 0,
               textStyle: {
                 color: '#2d8ac7'
               }
@@ -325,7 +327,11 @@
       getDataByDate() { // 获取当前时间，并根据获取的时间查询今日数据指标
         let selectDate = this.chooseDate
         console.log("selectDate============", selectDate)
-        this.getData(selectDate)// 根据当前时间查找相应数据
+        if (selectDate === null || selectDate === "") {
+          this.getDate()// 当选择的时间为空时，自动显示当前时间的数据
+        }else {
+          this.getData(selectDate)// 根据当前时间查找相应数据
+        }
       },
       getColumnar() { // 获取当前年份，并获取柱状图月份数据对比数据
         /* eslint-disable */
