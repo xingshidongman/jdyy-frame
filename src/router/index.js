@@ -4,6 +4,7 @@ import Cache from '@/components/corelib/common/cache'
 import Home from '@/components/home/Home'
 import Login from '@/components/login/login'
 import Echarts from '@/views/jdyy/echarts'
+import jdyyInv from '@/views/jdyy/investigation/jdyypos/jdyyInv'
 Vue.use(Router)
 
 const router = new Router({
@@ -18,6 +19,11 @@ const router = new Router({
       path: '/admin/echarts',
       name: 'Echarts',
       component: Echarts
+    },
+    {
+      path: '/admin/jdyyInv',
+      name: 'jdyyInv',
+      component: jdyyInv
     },
     {
       path: '/',
