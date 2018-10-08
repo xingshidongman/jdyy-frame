@@ -6,7 +6,7 @@
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex")
         el-input(v-model="formModel.sex" )
       el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
-        el-input(v-model="formModel.brith" )
+        kalix-datepicker-simple(v-model="formModel.brith" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
         el-input(v-model="formModel.age")
       el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
@@ -107,9 +107,7 @@
           WhetherDischarge: [{required: true, message: '请输入是否出院', trigger: 'change'}],
           telephonePerson: [{required: true, message: '请输入本人联系方式', trigger: 'change'}],
           familyPhone: [{required: true, message: '请输入家属联系方式', trigger: 'change'}],
-          province: [{required: true, message: '请输入省', trigger: 'change'}],
-          city: [{required: true, message: '请输入市', trigger: 'change'}],
-          district: [{required: true, message: '请输入区', trigger: 'change'}],
+          address: [{required: true, message: '请输入省市县', trigger: 'change'}],
           completeAddress: [{required: true, message: '请输入家详细地址', trigger: 'change'}],
           remarks: [{required: true, message: '请输入备注', trigger: 'change'}],
           harris: [{required: true, message: '请输入Harris评分', trigger: 'change'}],
