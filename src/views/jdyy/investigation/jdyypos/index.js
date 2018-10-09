@@ -1,11 +1,11 @@
 import JdyyPos from './jdyyPos.vue'
 import JdyyPosSearch from './JdyyPosSearch.vue'
-import Inv from './jdyyInv.vue'
+import JdyyInv from './jdyyInv.vue'
 
 const components = [
   JdyyPos,
   JdyyPosSearch,
-  Inv
+  JdyyInv
 ]
 
 const main = {
