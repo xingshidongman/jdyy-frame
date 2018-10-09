@@ -11,6 +11,7 @@
       v-bind:class="searchCls"
       v-on:onSearchBtnClick="onSearchClick")
     div.kalix-wrapper(v-bind:style="wrapperTop")
+      div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
         v-bind:toolbarBtnList="toolbarBtnListClone" v-bind:bizKey="bizKey"
         v-on:onToolBarClick="onToolBarClick"
