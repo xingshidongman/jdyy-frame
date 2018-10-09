@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    name: 'kalix-jdyy-jdyyInv',
+    name: 'jdyyInv',
     data() {
       return {}
     }
