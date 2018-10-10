@@ -311,7 +311,7 @@
         console.log('nowDate==================', nowDate)
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByDate',
+          url: '/camel/rest/jdyy/statisticss/getAllByDate',
           params: {
             date: nowDate
           }
@@ -338,7 +338,7 @@
         let year = new Date().getFullYear()
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: year
           }
@@ -352,7 +352,7 @@
       getLine() { // 获取近五年比手术量数据
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: this.firstYear
           }
@@ -363,7 +363,7 @@
         })
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: this.secondYear
           }
@@ -373,7 +373,7 @@
         })
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: this.threeYear
           }
@@ -383,7 +383,7 @@
         })
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: this.fourYear
           }
@@ -393,7 +393,7 @@
         })
         this.$http.request({// 向后台发送请求
           method: 'get',
-          url: '/camel/rest/jdyy/stats/getAllByYear',
+          url: '/camel/rest/jdyy/statisticss/getAllByYear',
           params: {
             date: this.fiveYear
           }

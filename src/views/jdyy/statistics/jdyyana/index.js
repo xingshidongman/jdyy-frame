@@ -1,7 +1,7 @@
-import Analyse from './analyse.vue'
+import JdyyAnalyse from './jdyyAnalyse.vue'
 
 const components = [
-  Analyse
+  JdyyAnalyse
 ]
 
 const main = {
