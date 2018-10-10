@@ -28,7 +28,7 @@
         buttonPermissionPrefix: roleBtnPermissionPrefix,
         targetURL: rolesURL,
         tableFields: [
-          {prop: 'app', label: '所属应用'},
+          // {prop: 'app', label: '所属应用'},
           {prop: 'name', label: '角色名称'},
           {prop: 'remark', label: '备注'},
           {prop: 'createBy', label: '创建人'},
