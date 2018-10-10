@@ -16,7 +16,7 @@
 <script type="text/ecmascript-6">
   import FormModel from './model'
   // import Dialog from '../../../components/custom/baseDialog.vue'
-  import {JdyysurURL} from '../../config.toml'
+  import {JdyydiaURL} from '../../config.toml'
   export default {
     name: 'jdyyDiaAdd',
     data() {
@@ -28,7 +28,7 @@
           // username: [{required: true, message: '请输入回复人姓名', trigger: 'blur'}],
           content: [{required: true, message: '请输入回复内容', trigger: 'blur'}]
         },
-        targetURL: JdyysurURL,
+        targetURL: JdyydiaURL,
         // username: this.$KalixCatch.get('user_name'),
         labelWidth: '110px'
       }

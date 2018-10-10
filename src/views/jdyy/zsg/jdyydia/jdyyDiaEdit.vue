@@ -21,7 +21,7 @@
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {JdyysurURL} from '../../config.toml'
+  import {JdyydiaURL} from '../../config.toml'
 
   export default {
     name: 'jdyyDiaEdit',
@@ -35,7 +35,7 @@
           // parentContent: [{message: '请输入回复人姓名'}],
           content: [{required: true, message: '请输入回复内容', trigger: 'blur'}]
         },
-        targetURL: JdyysurURL,
+        targetURL: JdyydiaURL,
         labelWidth: '110px',
         tempParent: undefined,
         tempChildren: undefined

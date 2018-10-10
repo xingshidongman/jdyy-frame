@@ -24,7 +24,7 @@
   import {JdyysurURL} from '../../config.toml'
 
   export default {
-    name: 'jdyyDiaEdit',
+    name: 'jdyySurEdit',
     data() {
       return {
         // forumTitle: '',
