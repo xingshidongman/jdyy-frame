@@ -60,9 +60,9 @@
                     div(v-else)
                       label(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
-                          i(v-html='item.spaceHtml')
                           i.el-icon(v-if="item.children&&item.children.length>0"
                           v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
+                            i(style="padding: 0 10px;" class="iconfont icon-2")
                           i(v-else class="kailx-ms-tree-space")
                         | {{renderBody(item, column)}}
       component(:is="whichBizDialog" ref="kalixDialog"
@@ -682,7 +682,8 @@
     right 20px
     background-color #ffffff
   .kalix-wrapper-hd
-    margin-top 20px
+    width 80%
+    margin 20px auto
     padding-bottom 10px
     border-bottom #283dff solid 2px
     font-size 24px
@@ -694,7 +695,7 @@
     margin-top 5px
   .tree-icon
     margin-right 8px
-    color #dd9e4a
+    color  #3465cb
     font-weight bold
     cursor pointer
 
@@ -705,7 +706,7 @@
   table {
     width: 300px;
     text-align: left;
-    margin-left: 420px;
+    margin 20px auto
     border: #2d8ac7 1px solid;
     border-spacing: 0;
     border-collapse: collapse;
@@ -727,6 +728,9 @@
     line-height: 23px;
   }
 
+  .table > tbody > tr:active {
+    background-color #7ACAFF
+  }
   /*.table > tbody > tr > td .base-teble-operation*/
   .operation-btn
     font-size 13px
