@@ -99,7 +99,7 @@
           key: 'parentId',
           width: '0'
         }, {
-          title: '回复内容',
+          title: '术式名称',
           key: 'content',
           width: '120'
         }]
@@ -126,7 +126,7 @@
       //   }
       // },
       showCheckText(_data) {
-        this.showCheck(_data)
+        // this.showCheck(_data)
       },
       // showCheck(_data) {
       //   if (_data) {
