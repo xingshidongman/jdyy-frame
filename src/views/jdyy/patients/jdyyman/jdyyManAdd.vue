@@ -26,9 +26,10 @@
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
+  import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   export default {
     name: 'JdyyManAdd',
-    components: {KalixClansmanUpload},
+    components: {KalixDatepickerSimple, KalixClansmanUpload},
     data() {
       return {
         downloadURL: JdyypatientsURL,
