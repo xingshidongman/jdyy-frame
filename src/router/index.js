@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Cache from '@/components/corelib/common/cache'
 import Home from '@/components/home/Home'
 import Login from '@/components/login/login'
-import Inv from '@/views/jdyy/investigation/jdyypos/jdyyInv'
+// import Inv from '@/views/jdyy/investigation/jdyypos/jdyyInv'
 Vue.use(Router)
 
 const router = new Router({
@@ -14,11 +14,11 @@ const router = new Router({
       name: 'login',
       component: Login
     },
-    {
-      path: '/admin/jdyyInv',
-      name: 'Inv',
-      component: Inv
-    },
+    // {
+    //   path: '/admin/jdyyInv',
+    //   name: 'Inv',
+    //   component: Inv
+    // },
     {
       path: '/',
       name: 'Home',
