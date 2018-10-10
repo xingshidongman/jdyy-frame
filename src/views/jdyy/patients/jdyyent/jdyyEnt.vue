@@ -60,8 +60,8 @@
           el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
             el-input(v-model="formModel.hss")
         div.block-boxs
-          el-table(:data="gridData" border="1px solid #3465cb" style="width: 100%;")
-            el-table-column( fixed="left" prop="" label="" width="50" class="el-icon-caret-right" align="center" type="expand")
+          el-table(:data="gridData" border="1px solid #3465cb" style="width: 100%;" cell-style=" color: #3465cb")
+            el-table-column( fixed="left" prop="" label="" width="50" class="el-icon-caret-right" align="center")
             el-table-column(prop="diagnosis" label="诊断" width="250" align="center"  )
             el-table-column(prop="name" label="术式" width="250" align="center")
             el-table-column(prop="date" label="日期" width="250" align="center")
@@ -72,7 +72,7 @@
               li.right_li
                 button( size="large" v-on:click="submitForm") 保存
               li.right_li
-                button.el-icon-search 退出
+                button.el-icon-search(@click="reset") 重置
       div.box
         ul.right_ul
           li.right_li
@@ -197,8 +197,10 @@
             return false
           }
         })
+      },
+      reset() {
+        this.$refs['formModel'].resetFields()
       }
-
     }
   }
 </script>
@@ -217,8 +219,10 @@
         margin-bottom:50px
         margin-right -2%
         .el-form-item
-          width 50%
-          display inline-block
+            width 50%
+            display inline-block
+          .el-input
+            border 1px solid #3465cb
         .address
           width 100%
       .block-boxs

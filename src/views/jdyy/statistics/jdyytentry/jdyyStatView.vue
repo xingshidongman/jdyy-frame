@@ -1,4 +1,3 @@
-
 <template lang="pug">
   kalix-dialog.user-add(title='查看' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
