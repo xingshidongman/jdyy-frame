@@ -243,19 +243,42 @@
     .kalix-search-hd
       background-color $plank-title-background-color
       color $plank-title-color
-      line-height 44px
-      padding 0 15px
+      line-height 5%
+      padding 0 2%
       text-align left
+      width 100%
     .kalix-search-bd
       border-top 1px solid border-color_1
       font-size 0
-      padding 8px 12px
+      padding 1% 2%
       text-align left
+      width 100%
       .search-container
         margin-bottom -12px
     .el-form-item
-      margin-right 12px
       margin-bottom 12px
+      width 19%
+      .el-form-item__label
+          float: left;
+          text-align: center
+          font-size: 14px;
+          color:  #3465cb
+          -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+          width 30%
+      .el-input__inner
+        border-radius: 4px;
+        border: 1px solid #3465cb;
+        -webkit-box-sizing: border-box;
+        display: inline-block;
+        font-size: inherit;
+        height: 40px;
+        line-height: 40px;
+        outline: 0;
+        padding: 0 15px;
+        -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        width: 80%;
     .el-button
       .iconfont
         font-size 14px

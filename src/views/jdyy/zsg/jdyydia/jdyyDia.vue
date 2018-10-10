@@ -99,7 +99,7 @@
           key: 'parentId',
           width: '0'
         }, {
-          title: '回复内容',
+          title: '诊断名称',
           key: 'content',
           width: '120'
         }]
@@ -119,14 +119,14 @@
       //   this.forumTitle = data.label
       //   this.parentContent = data.content
       //   this.jsonStr = `{'%username%': ''}`
-      //   this.treeUrl = JdyysurURL + '/getReplyByPostId?postId=' + data.value
+      //   this.treeUrl = JdyydiaURL + '/getReplyByPostId?postId=' + data.value
       //   this.dialogOptions = {
       //     postId: data.value,
       //     forumTitle: data.label
       //   }
       // },
       showCheckText(_data) {
-        this.showCheck(_data)
+        // this.showCheck(_data)
       },
       // showCheck(_data) {
       //   if (_data) {
@@ -229,7 +229,7 @@
           Message.error('请选择要操作的记录！')
           return
         }
-        this.$confirm('确定要删除此术式以及术式下的所有术式吗?', '提示', {
+        this.$confirm('确定要删除此诊断以及诊断下的所有诊断吗?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'

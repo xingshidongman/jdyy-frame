@@ -6,8 +6,8 @@
 <template lang="pug">
   kalix-dialog.user-add(bizKey="user" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
-      el-form-item(label="所属应用" prop="app" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.app" readonly="readonly")
+      <!--el-form-item(label="所属应用" prop="app" v-bind:label-width="labelWidth")-->
+        <!--el-input(v-model="formModel.app" readonly="readonly")-->
       el-form-item(label="角色名称" prop="name" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.name" readonly="readonly")
       el-form-item(label="备注" prop="remark" v-bind:label-width="labelWidth")
