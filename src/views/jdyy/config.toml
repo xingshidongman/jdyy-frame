@@ -9,3 +9,5 @@ JdyystatURL = "/camel/rest/jdyy/statisticss"
 JdyypatientsURL = "/camel/rest/jdyy/patientss"
 #术式
 JdyysurURL = "/camel/rest/jdyy/surgicals"
+#诊断
+JdyydiaURL = "/camel/rest/jdyy/diagnosiss"

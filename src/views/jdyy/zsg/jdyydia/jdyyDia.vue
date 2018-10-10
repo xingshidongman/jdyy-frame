@@ -37,7 +37,7 @@
   import FormModel from './model'
   import {jdyyDiaConfigBtnList} from './config'
   import Message from '../../../../common/message'
-  import {JdyysurURL} from '../../config.toml'
+  import {JdyydiaURL} from '../../config.toml'
   // import KalixReplyTree from '../../../../components/cascader/replyTree'
   import KalixTreeGrid from '../../../../components/forum/treeGrid'
 
@@ -59,7 +59,7 @@
           {id: 'delete', isShow: true, icon: 'icon-delete', title: '删除'}
         ],
         // targetUrl: replyMenuURL,
-        treeUrl: JdyysurURL + '/getAllByParentId?parentId=-1',
+        treeUrl: JdyydiaURL + '/getAllByParentId?parentId=-1',
         // QiaoReplyURL: QiaoReplyURL,
         menuItems: [],
         addFormModel: Object.assign({}, FormModel),
@@ -236,7 +236,7 @@
         }).then(() => {
           return this.axios.request({
             method: 'DELETE',
-            url: JdyysurURL + '/' + this.currentRow.id,
+            url: JdyydiaURL + '/' + this.currentRow.id,
             params: {},
             data: {
               id: this.currentRow.id

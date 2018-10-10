@@ -9,7 +9,7 @@
     div.el-form(slot="dialogFormSlot")
       input(v-model="formModel.parentId" type="hidden")
       input(v-model="formModel.isLeaf" type="hidden")
-      el-form-item(label="回复内容" prop="content" label-width="120px" v-bind:rules="rules.content")
+      el-form-item(label="添加术式名称" prop="content" label-width="120px" v-bind:rules="rules.content")
         el-input(v-model="formModel.content")
 </template>
 
@@ -41,10 +41,10 @@
     created() {
     },
     methods: {
-      init(dialogOption) {
-        // this.forumTitle = dialogOption.forumTitle
-        // this.formModel.postId = dialogOption.postId
-      }
+      // init(dialogOption) {
+      //  this.forumTitle = dialogOption.forumTitle
+      //  this.formModel.postId = dialogOption.postId
+      // }
       // submitBefore(baseDialog, callBack) {
       //   let code = baseDialog.formModel.code
       //   baseDialog.formModel.permission = baseDialog.formModel.permission + code

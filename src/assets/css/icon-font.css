@@ -87,6 +87,7 @@
 .icon-category:before { content: "\e615"; }
 
 /*public*/
+.icon-2:before { content: "\e602"; }
 .icon-user:before { content: "\e600"; }
 .icon-exit:before { content: "\e602"; }
 
