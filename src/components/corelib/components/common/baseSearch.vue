@@ -9,9 +9,9 @@
 <template lang="pug">
   div.kalix-search
     div.kalix-search-bd
-      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true")
+      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="80px")
         slot(name="searchFormSlot")
-          el-form-item(v-for="item in searchFields" v-bind:label="item.label" v-bind:prop="item.prop" v-bind:key="item.prop")
+          el-form-item.short(v-for="item in searchFields" v-bind:label="item.label" v-bind:prop="item.prop" v-bind:key="item.prop")
             el-select(v-if="item.type==='select'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType" v-bind:clearable="item.clearable")
               el-option(v-for="option in item.options" v-bind:key="option.value" v-bind:label="option.label" v-bind:value="option.value")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
@@ -24,13 +24,13 @@
               v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
             input(v-else-if="item.type==='inputHidden'" v-model="form[item.prop]" type="hidden")
             el-input(v-else v-model="form[item.prop]")
-        el-form-item
-          el-button(type="primary" v-on:click="onSubmitClick")
-            i.iconfont.icon-query
-            | 查询
-          el-button(type="success" v-on:click="onResetClick")
-            i.iconfont.icon-reset
-            | 重置
+          el-form-item.right
+            el-button(type="primary" v-on:click="onSubmitClick")
+              i.iconfont.icon-query
+              | 查询
+            el-button(type="success" v-on:click="onResetClick")
+              i.iconfont.icon-reset
+              | 重置
 </template>
 
 <script>
@@ -238,7 +238,8 @@
   @import "../../assets/stylus/color.styl"
   @import "../../assets/stylus/kalix-color.styl"
   .kalix-search
-    margin 10px
+    padding  10px
+    width 100%
     background-color $background-color-1
     .kalix-search-hd
       background-color $plank-title-background-color
@@ -247,17 +248,20 @@
       padding 0 2%
       text-align left
       width 100%
+      height 500px
     .kalix-search-bd
-      border-top 1px solid border-color_1
+      /*border-top 1px solid border-color_1*/
       font-size 0
-      padding 1% 2%
+      /*padding 1% 2%*/
       text-align left
       width 100%
       .search-container
         margin-bottom -12px
+        /*width 100%*/
     .el-form-item
       margin-bottom 12px
-      width 19%
+      /*width 18%*/
+      display inline-block
       .el-form-item__label
           float: left;
           text-align: center
@@ -265,21 +269,32 @@
           color:  #3465cb
           -webkit-box-sizing: border-box;
           box-sizing: border-box;
-          width 30%
-      .el-input__inner
-        border-radius: 4px;
-        border: 1px solid #3465cb;
-        -webkit-box-sizing: border-box;
-        display: inline-block;
-        font-size: inherit;
-        height: 40px;
-        line-height: 40px;
-        outline: 0;
-        padding: 0 15px;
-        -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        width: 80%;
+          /*width 30%*/
+      .el-form-item__content
+          display: inline-block;
+          vertical-align: top;
+          /*width: 70%;*/
+          /*float right*/
+        .el-input__inner
+            border-radius: 4px;
+            border: 1px solid #3465cb;
+            -webkit-box-sizing: border-box;
+            display: inline-block;
+            font-size: inherit;
+            height: 40px;
+            line-height: 40px;
+            outline: 0;
+            padding: 0 15px;
+            -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+            width: 100%;
     .el-button
       .iconfont
         font-size 14px
+  .short
+    /*width 32%*/
+    display inline-block
+  .right
+    margin-left 80px
+    display block
 </style>
