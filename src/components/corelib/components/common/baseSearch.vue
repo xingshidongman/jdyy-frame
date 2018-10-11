@@ -9,7 +9,7 @@
 <template lang="pug">
   div.kalix-search
     div.kalix-search-bd
-      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="80px")
+      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
         slot(name="searchFormSlot")
           el-form-item.short(v-for="item in searchFields" v-bind:label="item.label" v-bind:prop="item.prop" v-bind:key="item.prop")
             el-select(v-if="item.type==='select'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType" v-bind:clearable="item.clearable")
