@@ -9,7 +9,6 @@
     v-bind:bizSearch="bizSearch"
     v-bind:btnList="btnList"
     v-bind:customTableTool="customTableTool"
-    v-bind:isFixedColumn="isFixedColumn"
     v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
     v-bind:dictDefine="dictDefine"
     ref="userTable")
@@ -20,19 +19,19 @@
             <!--img(v-else src="/static/images/default_user.png" width="32" height="32" alt="")-->
         <!--el-table-column(prop="userTypeName" label="用户类型" align="center" width="100px")-->
         <!--el-table-column(prop="code" label="工号/学号/企业组织机构代码" align="center" width="200px")-->
-        el-table-column(prop="loginName" label="登录名" align="center" width="100px")
-        el-table-column(prop="name" label="姓名" align="center" width="200px")
-        el-table-column(prop="auditName" label="审核状态" align="center" width="150px")
-        el-table-column(prop="sex" label="性别" align="center" width="100px")
-        el-table-column(prop="birthdate" label="出生日期" align="center" width="100px")
-        el-table-column(prop="idNumber" label="身份证号" align="center" width="100px")
-        el-table-column(prop="idCard" label="别名" align="center" width="100px")
-        el-table-column(prop="email" label="邮箱" align="center" width="150px")
-        el-table-column(prop="phone" label="固定电话" align="center" width="150px")
-        el-table-column(prop="mobile" label="手机" align="center" width="150px")
-        el-table-column(prop="address" label="地址" align="center" width="150px")
-        el-table-column(prop="apanage" label="谱属地" align="center" width="150px")
-        el-table-column(prop="ancestralhome" label="祖籍" align="center" width="150px")
+        <!--el-table-column(prop="loginName" label="登录名" align="center" width="100px")-->
+        el-table-column(prop="name" label="姓名" align="center")
+        el-table-column(prop="age" label="年龄" align="center")
+        el-table-column(prop="position" label="职位" align="center")
+        <!--el-table-column(prop="birthdate" label="出生日期" align="center" width="100px")-->
+        <!--el-table-column(prop="idNumber" label="身份证号" align="center" width="100px")-->
+        <!--el-table-column(prop="idCard" label="别名" align="center" width="100px")-->
+        <!--el-table-column(prop="email" label="邮箱" align="center" width="150px")-->
+        <!--el-table-column(prop="phone" label="固定电话" align="center" width="150px")-->
+        el-table-column(prop="mobile" label="联系电话" align="center")
+        el-table-column(prop="doctor" label="所属主管医生" align="center")
+        <!--el-table-column(prop="apanage" label="谱属地" align="center" width="150px")-->
+        <!--el-table-column(prop="ancestralhome" label="祖籍" align="center" width="150px")-->
 </template>
 <script type="text/ecmascript-6">
   import {usersURL, userBtnPermissionPrefix} from '../../config.toml'
@@ -53,10 +52,6 @@
       bizSearch: {
         type: String,
         default: 'AdminUserSearch'
-      },
-      isFixedColumn: {
-        type: Boolean,
-        default: true
       }
     },
     data() {
@@ -72,13 +67,11 @@
         // targetURL: usersURL,
         tableFields: [
           // {prop: 'userTypeName', label: '用户类型'},
-          {prop: 'code', label: '用户代码'},
-          {prop: 'loginName', label: '登录名'},
-          {prop: 'name', label: '名称'},
-          {prop: 'sex', label: '性别'},
-          {prop: 'email', label: '邮箱'},
-          {prop: 'phone', label: '固定电话'},
-          {prop: 'mobile', label: '手机'}
+          {prop: 'name', label: '姓名'},
+          {prop: 'age', label: '年龄'},
+          {prop: 'sex', label: '职位'},
+          {prop: 'position', label: '联系电话'},
+          {prop: 'doctor', label: '所属主管医生'}
         ],
         bizDialog: [
           {id: 'view', dialog: 'AdminUserView'},
