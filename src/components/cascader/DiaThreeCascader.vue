@@ -4,17 +4,17 @@
 <script type="text/ecmascript-6">
   import Cache from '../../common/cache'
   export default {
-    name: 'kalix-font-surcascader',
+    name: 'kalix-font-diacascader',
     props: {
       requestUrl: { // 查全部请求路径
-        type: String, default: '/camel/rest/jdyy/surgicals/getAllSurByParentId'
+        type: String, default: '/camel/rest/jdyy/diagnosis/getAllDiaByParentId'
       },
       queryOneUrl: { // 默认选中查询
         type: String, default: ''
       },
       value: null, // 默认选中子菜单id
       appName: { // 缓存name
-        type: String, default: 'surgical'
+        type: String, default: 'diagnosis'
       },
       disabled: { // 是否可用
         type: Boolean, default: false
