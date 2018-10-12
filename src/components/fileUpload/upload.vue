@@ -29,7 +29,7 @@
         type: String
       },
       btnText: {
-        type: String, default: '点击上传'
+        type: String, default: '保存图片'
       },
       tipText: {
         type: String, default: ''

@@ -1,7 +1,7 @@
 <template lang="pug">
   kalix-dialog.user-add(title='编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="form" v-bind:targetURL="targetURL")
     div.back(slot="dialogFormSlot")
-      el-form(ref="form" :model="form" label-width="90px" :label-position="labelPosition" )
+      el-form(ref="form" :model="form" label-width="100px" :label-position="labelPosition" )
         div.art1
           h1.title 全髋关节置换术
           div.con1
@@ -12,6 +12,8 @@
                 el-radio-group(v-model="form.sex")
                   el-radio(label="男")
                   el-radio(label="女")
+              el-form-item.toleft(label="年龄")
+                el-input(v-model="form.age" clearable)
               el-form-item.toleft(label="电话")
                 el-input(v-model="form.tel" clearable)
               el-form-item.toleft(label="地址")
@@ -79,7 +81,7 @@
                         el-option(label="陈旧性结核" value="陈旧性结核")
                         el-option(label="急性骨折" value="急性骨折")
                         el-option(label="发育不良" value="发育不良")
-                    el-form-item.short(label="其他")
+                    el-form-item.other(label="其他")
                       el-input(v-model="form.other1" clearable)
               tr
                 td.short-td
@@ -101,7 +103,7 @@
                         el-option(label="无" value="无")
                         el-option(label="一期感染" value="一期感染")
                         el-option(label="二期感染" value="二期感染")
-                    el-form-item.short(label="其他")
+                    el-form-item.other(label="其他")
                       el-input(v-model="form.other2" clearable)
               tr
                 td.short-td
@@ -137,7 +139,7 @@
                         el-option(label="已经置换" value="已经置换")
                         el-option(label="准备置换" value="准备置换")
                         el-option(label="不想置换" value="不想置换")
-                    el-form-item.short(label="其他")
+                    el-form-item.other(label="其他")
                       el-input(v-model="form.other4" clearable)
               tr
                 td.short-td
@@ -271,13 +273,231 @@
                       el-input(v-model="form.cModel" clearable)
                         template(slot="prepend") 号=
                     el-form-item.short(label="包容")
-                      el-input(v-model="form.aModel" clearable)
+                      el-input(v-model="form.Inclusiveness" clearable)
                     el-form-item.short(label="稳定性")
-                      el-select(v-model="form.material" placeholder="请选择")
+                      el-select(v-model="form.stable1" placeholder="请选择")
                         el-option(label="差" value="差")
                         el-option(label="交界" value="交界")
                         el-option(label="好" value="好")
                         el-option(label="优" value="优")
+                    div.mark
+                      div.sta 摆放角度
+                      div.stb
+                        el-form-item.mini.toleft(label="外翻")
+                          el-input(v-model="form.ectropion" clearable)
+                            template(slot="append") °
+                        el-form-item.mini(label="前倾")
+                          el-input(v-model="form.forward " clearable)
+                            template(slot="append") °
+                    div.mark
+                      div.sta 聚乙烯衬垫植入角度
+                      div.stb
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.ectropion" clearable)
+                            template(slot="append") °
+                        el-form-item.mini(label="防脱缘 在")
+                          el-input(v-model="form.forward " clearable)
+                            template(slot="append") 点钟
+              tr
+                td.short-td
+                  div.con2-left 股骨
+                td.long-td
+                  div.con2-right
+                    el-form-item.short(label="髓腔锉型号")
+                      el-input(v-model="form.medullaryCavity" clearable)
+                    el-form-item.short(label="假体型号")
+                      el-input(v-model="form.prosthesisType " clearable)
+                    el-form-item.short(label="假体长度")
+                      el-input(v-model="form.prosthesisLength" clearable)
+                    el-form-item.short(label="远端骨水泥塞")
+                      el-select(v-model="form.cement" placeholder="请选择")
+                        el-option(label="骨" value="骨")
+                        el-option(label="骨水泥" value="骨水泥")
+                        el-option(label="伞" value="伞")
+                        el-option(label="未应用" value="未应用")
+                    el-form-item.short(label="稳定性")
+                      el-select(v-model="form.stable2" placeholder="请选择")
+                        el-option(label="差" value="差")
+                        el-option(label="交界" value="交界")
+                        el-option(label="好" value="好")
+                        el-option(label="优" value="优")
+                    el-form-item.short(label="捆绑线")
+                      el-select(v-model="form.binding" placeholder="请选择")
+                        el-option(label="无" value="无")
+                        el-option(label="预防性" value="预防性")
+                        el-option(label="术中存在骨折" value="术中存在骨折")
+                    el-form-item.short(label="假体术中力线")
+                      el-input(v-model="form.forceLine" clearable)
+                        template(slot="append") °前倾
+              tr
+                td.short-td
+                  div.con2-left 翻修手术
+                td.long-td
+                  div.con2-right
+                    el-form-item.short(label="皮质骨开窗")
+                      el-input(v-model="form.windowOpen" clearable)
+                    el-form-item.short(label="股骨端截骨")
+                      el-radio-group(v-model="form.Osteotomy")
+                        el-radio(label="有")
+                        el-radio(label="无")
+                    el-form-item.short(label="并发症")
+                      el-select(v-model="form.Complication" placeholder="请选择")
+                        el-option(label="无" value="无")
+                        el-option(label="股骨穿透" value="股骨穿透")
+                        el-option(label="股骨骨折" value="股骨骨折")
+                        el-option(label="血管损伤" value="血管损伤")
+                        el-option(label="神经损伤" value="神经损伤")
+                        el-option(label="其他" value="其他")
+                    el-form-item.short(label="股骨缺陷")
+                      el-select(v-model="form.defect1" placeholder="请选择")
+                        el-option(label="无" value="无")
+                        el-option(label="干后端" value="干后端")
+                        el-option(label="皮质" value="皮质")
+                        el-option(label="联合" value="联合")
+                    div.mark
+                      div.sta 髋臼缺陷
+                      div.stb
+                        el-form-item.long.toleft(label="中心型")
+                          el-input(v-model="form.centerType" clearable)
+                        el-form-item.long.toleft(label="髋臼周边")
+                          el-input(v-model="form.periphery " clearable)
+                    div.mark
+                      div.sta 髋臼植骨
+                      div.stb
+                        el-form-item.mini(label="结构性植骨")
+                          el-radio-group(v-model="form.structuralBone1")
+                            el-radio(label="有")
+                            el-radio(label="无")
+                        el-form-item.mini(label="螺钉固定")
+                          el-radio-group(v-model="form.screw")
+                            el-radio(label="有")
+                            el-radio(label="无")
+                        el-form-item.mini(label="打压植骨")
+                          el-radio-group(v-model="form.suppress1")
+                            el-radio(label="有")
+                            el-radio(label="无")
+                    div.mark
+                      div.sta 股骨端植骨
+                      div.stb
+                        el-form-item.short(label="结构性植骨")
+                          el-radio-group(v-model="form.structuralBone2")
+                            el-radio(label="有")
+                            el-radio(label="无")
+                        el-form-item.short(label="打压植骨")
+                          el-radio-group(v-model="form.suppress2")
+                            el-radio(label="有")
+                            el-radio(label="无")
+              tr
+                td.short-td
+                  div.con2-left 术后稳定性
+                td.long-td
+                  div.con2-right
+                    div.mark
+                      div.sta 后方稳定性
+                      div.stb
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.frontA" clearable)
+                            template(slot="append") °屈曲
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.frontB " clearable)
+                            template(slot="append") °内收
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.frontC " clearable)
+                            template(slot="append") °内收
+                    div.mark
+                      div.sta 前方稳定性
+                      div.stb
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.afterA" clearable)
+                            template(slot="append") °伸展
+                        el-form-item.mini.toleft
+                          el-input(v-model="form.afterB " clearable)
+                            template(slot="append") °外旋
+                    div.mark
+                      div.sta 内收肌肌腱切除
+                      div.stb
+                        el-form-item.toleft
+                          el-radio-group(v-model="form.resection")
+                            el-radio(label="有")
+                            el-radio(label="无")
+                        template(v-if="form.resection === '无'")
+                          el-form-item.mini(label="外展" )
+                            el-input(v-model="form.resectionAbduction" clearable)
+                              template(slot="append") °
+                          el-form-item.mini(label="增加角度" )
+                            el-input(v-model="form.resectionaAngle" clearable)
+                              template(slot="append") °
+              tr
+                td.short-td
+                  div.con2-left 术后期
+                td.long-td
+                  div.con2-right
+                    el-form-item.short(label="术后总引流量")
+                      el-input(v-model="form.flow" clearable)
+                        template(slot="append") ml
+                    div.mark
+                      div.sta 单拐行走
+                      div.stb
+                        el-form-item.toleft.elin
+                          el-radio-group(v-model="form.singleAbduction")
+                            el-radio(label="无法使用")
+                            el-radio(label="可以使用")
+                        template(v-if="form.singleAbduction === '可以使用'")
+                          el-form-item.mini(label="术后" )
+                            el-input(v-model="form.singleDay" clearable)
+                              template(slot="append") 天
+                    div.mark
+                      div.sta 出院
+                      div.stb
+                        el-form-item.mini.toleft(label="术后" )
+                          el-input(v-model="form.leaveHospital" clearable)
+                            template(slot="append") 天
+                    div.mark
+                      div.sta 出院时关节活动角度
+                      div.stb
+                        el-form-item.mini.toleft(label="屈曲")
+                          el-input(v-model="form.angleA" clearable)
+                            template(slot="append") °
+                        el-form-item.mini.toleft(label="外展")
+                          el-input(v-model="form.angleB " clearable)
+                            template(slot="append") °
+                        el-form-item.mini.toleft(label="内旋")
+                          el-input(v-model="form.angleC " clearable)
+                            template(slot="append") °
+                        el-form-item.mini.toleft(label="过伸")
+                          el-input(v-model="form.angleD " clearable)
+                            template(slot="append") °
+                        el-form-item.mini.toleft(label="内收")
+                          el-input(v-model="form.angleE " clearable)
+                            template(slot="append") °
+                        el-form-item.mini.toleft(label="外旋")
+                          el-input(v-model="form.angleF " clearable)
+                            template(slot="append") °
+        div.art3
+          h1.title 术后影像学检查
+          div.con3
+            table
+              tr
+                td.a-td
+                  div.con3-left 术后骨盆正位
+                td.b-td
+                  div.con3-mid
+                    el-form-item.short(label="日期" style="float:left")
+                      el-col(:span="20")
+                        el-date-picker(type="date" placeholder="选择日期" v-model="form.date3" style="width: 100%;")
+                    el-form-item.mini(label="术后第")
+                      el-input(v-model="form.weekDay" clearable)
+                        template(slot="append") 周
+                td.c-td
+              tr
+                td.a-td
+                  div.con3-left 术后骨盆正位
+                td.b-td
+                  div.con3-mid 高&外侧（1）/高（2）/外侧（3）/无上述表现（4）
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.weekDay" clearable)
         <!--div.btn-box-->
           <!--div.btn-->
             <!--el-form-item-->
@@ -294,7 +514,8 @@
         labelPosition: 'right',
         form: {
           name: '',
-          sex: [],
+          sex: '',
+          age: '',
           tel: '',
           address: '',
           inpatientNumber: '',
@@ -338,7 +559,50 @@
           femoralstemType: '',
           ballDiameter: '',
           diameterLength: '',
-          material: ''
+          material: '',
+          aModel: '',
+          bModel: '',
+          cModel: '',
+          Inclusiveness: '',
+          stable1: '',
+          ectropion: '',
+          forward: '',
+          medullaryCavity: '',
+          prosthesisType: '',
+          prosthesisLength: '',
+          cement: '',
+          stable2: '',
+          binding: '',
+          forceLine: '',
+          windowOpen: '',
+          Osteotomy: '',
+          Complication: '',
+          centerType: '',
+          periphery: '',
+          defect1: '',
+          structuralBone1: '',
+          screw: '',
+          suppress1: '',
+          structuralBone2: '',
+          suppress2: '',
+          frontA: '',
+          frontB: '',
+          frontC: '',
+          afterA: '',
+          afterB: '',
+          resection: '',
+          resectionAbduction: '',
+          resectionaAngle: '',
+          flow: '',
+          singleAbduction: '',
+          singleDay: '',
+          leaveHospital: '',
+          angleA: '',
+          angleB: '',
+          angleC: '',
+          angleD: '',
+          angleE: '',
+          angleF: ''
         }
       }
     },
@@ -369,7 +633,7 @@
         border 1px solid black
         flex 4
         margin-right 10px
-        padding 30px 10px
+        padding 10px 10px
       .con1-right
         border 1px solid black
         flex 6
@@ -400,11 +664,47 @@
         margin-top 15px
       .con2-right
         padding-left -80px
+  .art3
+    /*width 1160px*/
+    .con3
+      table
+        border 1px solid black
+        border-top 0
+        width 100%
+        margin-bottom 20px
+      tr
+        border-top 1px solid black
+        width 100%
+        display flex
+      .a-td
+        padding 10px
+        width 20%
+        text-align center
+        word-break break-all
+      .b-td
+        padding 10px
+        width 65%
+        border-left 1px solid black
+        text-align center
+        word-break break-all
+      .c-td
+        padding 10px
+        width 15%
+        border-left 1px solid black
+        text-align center
+        word-break break-all
+      .con3-left
+        margin-top 15px
+      .con3-right
+        padding-left -80px
   .btn-box
     width 1160px
     .btn
       margin-left 38%
       margin-top 20px
+  .mini
+    width 250px
+    display inline-block
   .short
     width 50%
     display inline-block
@@ -413,4 +713,28 @@
   .toleft
     margin-left -40px
     /*margin-bottom 0*/
+  .totoleft
+    margin-left -80px
+  .mark
+    margin-left 30px
+    display flex
+    .sta
+      /*width 140px*/
+      /*height 40px*/
+      /*display inline-block*/
+      flex 1.5
+      padding-top 10px
+    .stb
+      flex 8.5
+  .else
+    width 120px
+    display inline-block
+  .elin
+    width 55%
+    display inline-block
+  .other
+    width 315px
+    display inline-block
+  .input-with-select .el-input-group__prepend
+    background-color: #fff
 </style>

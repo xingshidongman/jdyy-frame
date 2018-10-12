@@ -1,89 +1,89 @@
 <template lang="pug">
   div.start
     div.left
-      div.left_box
-        div.left_line
-          div.text_box.text 今日数据指标
-          div.left_sx
-          div.left_zx
-          div.left_xx
-          div.left_xr
+      div.left-box
+        div.left-line
+          div.text-box.text 今日数据指标
+          div.left-sx
+          div.left-zx
+          div.left-xx
+          div.left-xr
           div.block
             input.input_time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
-          div.left_block
+          div.left-block
             ul(v-for="item in items")
-              li.block_box
-                span.block_span 原住院人数
-                span.block_spantwo {{item.protoNum}}人
-              li.block_box
-                span.block_span 出院人数
-                span.block_spantwo {{item.outNum}}人
-              li.block_box
-                span.block_span 入院（转）入人数
-                span.block_spantwo {{item.inNum}}人
-              li.block_box
-                span.block_span 手术人数
-                span.block_spantwo {{item.surgeryNum}}人
-              li.block_box
-                span.block_span 死亡人数
-                span.block_spantwo {{item.deathNum}}人
-              li.block_box
-                span.block_span 现住院人数
-                span.block_spantwo {{item.nowNum}}人
-              li.block_box
-                span.block_span 重病人数
-                span.block_spantwo {{item.illNum}}人
+              li.block-box
+                span.block-span 原住院人数
+                span.block-spantwo {{item.protoNum}}人
+              li.block-box
+                span.block-span 出院人数
+                span.block-spantwo {{item.outNum}}人
+              li.block-box
+                span.block-span 入院（转）入人数
+                span.block-spantwo {{item.inNum}}人
+              li.block-box
+                span.block-span 手术人数
+                span.block-spantwo {{item.surgeryNum}}人
+              li.block-box
+                span.block-span 死亡人数
+                span.block-spantwo {{item.deathNum}}人
+              li.block-box
+                span.block-span 现住院人数
+                span.block-spantwo {{item.nowNum}}人
+              li.block-box
+                span.block-span 重病人数
+                span.block-spantwo {{item.illNum}}人
       div.lefttwo
-        div.left_box
-          div.left_line
-            div.text_box.text 月份数据对比
-            div.left_sx
-            div.left_zx
-            div.left_xx
-            div.left_xr
+        div.left-box
+          div.left-line
+            div.text-box.text 月份数据对比
+            div.left-sx
+            div.left-zx
+            div.left-xx
+            div.left-xr
             div.block
-              input.input_time(v-model="datevalue2"  type="date"  placeholder="2018")
-            div( id="zhuzhuang" style="width: 90%;height: 260px;left:5%;")
+              input.input-time(v-model="datevalue2"  type="date"  placeholder="2018")
+            div( id="histogram" style="width: 90%;height: 260px;left:5%;pointer-events: none;")
     div.right
-      div.left_box
-        div.left_line
-          div.text_box.text 术式分析
-          div.left_sx
-          div.left_zx
-          div.left_xx
-          div.left_xr
+      div.left-box
+        div.left-line
+          div.text-box.text 术式分析
+          div.left-sx
+          div.left-zx
+          div.left-xx
+          div.left-xr
           div.block
-            input.input_time(v-model="datevalue3"  type="date"  placeholder="2018")
+            input.input-time(v-model="datevalue3"  type="date"  placeholder="2018")
             span  年龄段
-            input.block_input
+            input.block-input
             span ~
-            input.block_input
+            input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
           div(id="main" style="width: 90%;height: 260px;left:5%;")
       div.lefttwo
-        div.left_box
-          div.left_line
-            div.text_box.text 五年比手术量
-            div.left_sx
-            div.left_zx
-            div.left_xx
-            div.left_xr
+        div.left-box
+          div.left-line
+            div.text-box.text 五年比手术量
+            div.left-sx
+            div.left-zx
+            div.left-xx
+            div.left-xr
             div(id="diagram" style="width: 90%;height: 260px;left:5%;")
       div.lefttwo
-        div.left_box
-          div.left_line
-            div.text_box.text 诊断分析
-            div.left_sx
-            div.left_zx
-            div.left_xx
-            div.left_xr
+        div.left-box
+          div.left-line
+            div.text-box.text 诊断分析
+            div.left-sx
+            div.left-zx
+            div.left-xx
+            div.left-xr
             div.block
-              input.input_time(v-model="datevalue4"  type="date"  placeholder="2018")
+              input.input-time(v-model="datevalue4"  type="date"  placeholder="2018")
               span  年龄段
-              input.block_input
+              input.block-input
               span ~
-              input.block_input
+              input.block-input
               el-radio(v-model="radio"  label="1") 男
               el-radio(v-model="radio"  label="2") 女
             div(id="main1" style="width: 90%;height: 260px;left:5%;")
@@ -163,7 +163,7 @@
           ]
         })
       },
-      zhuzhuang(id) {
+      histogram(id) {
         this.charts2 = echarts.init(document.getElementById(id))
         this.charts2.setOption({
           tooltip: {
@@ -346,7 +346,7 @@
           console.log('getColumnar:response.data=================', response.data)
           this.columnar = response.data
           console.log('9999999999999999999999999999', this.columnar)
-          this.zhuzhuang('zhuzhuang')
+          this.histogram('histogram')
         })
       },
       getLine() { // 获取近五年比手术量数据
@@ -435,19 +435,19 @@
     .left
       width 49%
       float left
-      .left_box
+      .left-box
           width 98%
           margin auto
           height 440px
           border 2px solid #23769a
-        .left_line
+        .left-line
             width 98%
             height 420px
             margin 10px auto
             border 0.3px solid #23769a
             border-radius 5px
             box-shadow 0px 0px  10px 5px #23769a inset
-          .text_box
+          .text-box
               width 30%
               position relative
               background-color rgba(1,14,45,0.8)
@@ -457,25 +457,25 @@
               color #3ac8f3
               font-weight bold
               padding 5px 0
-          .left_sx
+          .left-sx
             width 30px
             height 5px
             background-color #3ac8f3
             position absolute
             margin -23px 0 0 -14px
-          .left_zx
+          .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
             margin -18px 0 0 -14px
-          .left_xr
+          .left-xr
             width 5px
             height 30px
             background-color #3ac8f3
             float right
             margin 398px -33px 0 0
-          .left_xx
+          .left-xx
             width 30px
             height 5px
             background-color #3ac8f3
@@ -485,31 +485,33 @@
             width 10%
             float right
             margin-right 60px
-          .input_time
+            background-color black
+          .input-time
             width 120px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
-          .left_block
+            float right
+          .left-block
             width 90%
             margin auto
             position relative
             margin-top 90px
             height 300px
-            .block_box
+            .block-box
               width 90%
               height 30px
               line-height 30px
               background-color #373641
               margin  10px auto
               font-size 1vw
-              .block_span
+              .block-span
                 width 90%
                 color #23769a
                 padding-left 5px
                 float left
-              .block_spantwo
+              .block-spantwo
                   width 8%
                   color #23769a
                   float right
@@ -518,19 +520,19 @@
     .right
       width 49%
       float right
-      .left_box
+      .left-box
         width 90%
         margin auto
         height 320px
         border 2px solid #23769a
-        .left_line
+        .left-line
           width 98%
           height 300px
           margin 10px auto
           border 0.3px solid #23769a
           border-radius 5px
           box-shadow 0px 0px  10px 5px #23769a inset
-          .text_box
+          .text-box
             width 30%
             position relative
             background-color rgba(1,14,45,0.8)
@@ -540,25 +542,25 @@
             color #3ac8f3
             font-weight bold
             padding 5px 0
-          .left_sx
+          .left-sx
             width 30px
             height 5px
             background-color #3ac8f3
             position absolute
             margin -22px 0 0 -12px
-          .left_zx
+          .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
             margin -18px 0 0 -12px
-          .left_xr
+          .left-xr
             width 5px
             height 30px
             background-color #3ac8f3
             float right
             margin 278px -31px 0 0
-          .left_xx
+          .left-xx
             width 30px
             height 5px
             background-color #3ac8f3
@@ -567,13 +569,13 @@
           .block
             margin-left 30%
             width 70%
-          .input_time
+          .input-time
             width 120px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
-          .block_input
+          .block-input
             width 60px
             margin-top 15px
             border 2px solid #23769a
