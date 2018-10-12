@@ -685,7 +685,7 @@
         return (1 + ((this.pager.currentPage - 1) * this.pager.limit)) // 返回当前行号
       },
       tableContainerStyle() {
-        return {'top': (this.isShowToolBarB ? '102px' : '56px')}
+        return {'top': (this.isShowToolBarB ? '102px' : '16px')}
       },
       pageCount() {
         return Math.floor((this.pager.totalCount + this.pager.limit - 1) / this.pager.limit)
