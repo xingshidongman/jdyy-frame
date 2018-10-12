@@ -277,7 +277,7 @@
       // 获取表格数据
       getData() {
         this.axios.request({
-          method: 'post',
+          method: 'get',
           url: this.targetURL,
           params: {}
         }).then(res => {

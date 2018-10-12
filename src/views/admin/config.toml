@@ -7,6 +7,7 @@ usersURL = "/camel/rest/users"
 rolesURL = "/camel/rest/roles"
 dutyURL = "/camel/rest/dutys"
 orgURL = "/camel/rest/orgs"
+orgBtnPermissionPrefix = "admin:constructModule:organizationMenu:"
 appsURL = "/camel/rest/system/applications"
 applicationsURL = "/camel/rest/applications/extend/config" #系统应用
 appsStartURL = "/camel/rest/osgi/bundle/start" #系统应用-启动
@@ -17,15 +18,24 @@ addusersURL = "/camel/rest//dataauths/[id]/users"
 functionMenuURL = "camel/rest/applications/extend/tree" # 功能管理菜单
 functionItemBaseURL = "/camel/rest/functions/application/" # 功能管理点击菜单节点
 functionURL = "/camel/rest/functions" # 功能管理树表
+functionTreeBtnPermissionPrefix = "admin:sysModule:functionMenu:"
 templateURL = "/camel/rest/admin/templates" # 模板管理
 templateConfigURL = "/camel/rest/templateconfigs" # 模板配置
 templateContentURL = "/camel/rest/templatecontents" # 模板内容
 auditURL = "/camel/rest/audits" # 审计管理
 auditConfigURL = "/camel/rest/auditconfigs" # 审计配置管理
+
+# 按钮权限
 userBtnPermissionPrefix = "admin:permissionModule:userMenu:"
 roleBtnPermissionPrefix = "admin:permissionModule:roleMenu:"
 workGroupBtnPermissionPrefix = "admin:permissionModule:workGroupMenu:"
-dataAuthBtnPermissionPrefix = "admin:permissionModule:dataAuthMenu:"
+dataauthBtnPermissionPrefix = "admin:permissionModule:dataAuthMenu:"
+
+dutyBtnPermissionPrefix = "admin:constructModule:dutyMenu:"
+applicationBtnPermissionPrefix = "admin:sysModule:applicationMenu:"
+auditBtnPermissionPrefix = "admin:sysModule:auditMenu:"
+auditConfigBtnPermissionPrefix = "admin:sysModule:auditconfigMenu:"
+
 AdminCacheKey = "ADMIN-DICT-KEY"
 #配置管理
 configAdminURL= "/camel/rest/system/config"

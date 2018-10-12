@@ -29,6 +29,10 @@
         el-input(v-model="formModel.position")
       el-form-item(label="所属主管医生" prop="doctor" v-bind:rules="rules.doctor" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.doctor")
+      el-form-item(label="所属主管医生" prop="doctor" v-bind:rules="rules.doctor" v-bind:label-width="labelWidth")
+        <!--kalix-select(v-model="formModel.doctor" v-bind:requestUrl="appURL" label="text" appName="user" placeholder="请选择主管医生")-->
+        el-select(v-model="formModel.doctor" filterable placeholder="请选择")
+          el-option(v-for="item in options" :key="item.index" :label="item.label" :value="item.label")
       <!--el-form-item(label="祖籍" prop="ancestralhome" v-bind:rules="rules.ancestralhome" v-bind:label-width="labelWidth")-->
         <!--el-input(v-model="formModel.ancestralhome")-->
       <!--el-form-item(label="审核状态" prop="audit" v-bind:rules="rules.audit" v-bind:label-width="labelWidth")-->
@@ -77,14 +81,29 @@
           ]
         },
         targetURL: usersURL,
-        labelWidth: '140px'
+        labelWidth: '140px',
+        appURL: usersURL,
+        options: []
       }
     },
     created() {
     },
+    mounted() {
+      this.findAllDrictor()
+    },
     methods: {
       change(event) {
         this.$refs.kalixBizDialog.$refs.dialogForm.clearValidate()
+      },
+      findAllDrictor() {
+        console.log('findAllDrictor======================')
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/doctors'
+        }).then(res => {
+          console.log('success==========================', res.data.data)
+          this.options = res.data.data
+        })
       }
     }
   }

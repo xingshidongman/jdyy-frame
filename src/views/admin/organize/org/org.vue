@@ -19,19 +19,24 @@
     v-on:selectedRow="selectedRow"
     v-bind:isSearchAfterHandle="true"
     v-on:handleAfterSearch="handleAfterSearch"
-    v-bind:isLimitLayer="false")
+    v-bind:isLimitLayer="false"
+    v-bind:toolbarBtnList="toolBarBtnList"
+    v-bind:buttonPermissionPrefix="buttonPermissionPrefix")
 </template>
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {orgBtnList} from '../org/config'
-  import {orgURL} from '../../config.toml'
+  import {orgBtnList} from './config'
+  import {orgURL, orgBtnPermissionPrefix} from '../../config.toml'
 
   export default {
     name: 'kalix-admin-org',
     data() {
       return {
         btnList: orgBtnList,
+        toolBarBtnList: [
+          {id: 'add', isShow: true, title: '添加', isPermission: true}
+        ],
         targetURL: orgURL,
         formModel: Object.assign({}, FormModel),
         columns: [{
@@ -83,7 +88,8 @@
           {id: 'add', dialog: 'AdminOrgAdd'},
           {id: 'addUser', dialog: 'AdminOrgAddUser'}
         ],
-        dialogOptions: {}
+        dialogOptions: {},
+        buttonPermissionPrefix: orgBtnPermissionPrefix
       }
     },
     created() {
