@@ -25,11 +25,11 @@
           let minutes = nv.getMinutes()
           let seconds = nv.getSeconds()
           val = nv.getFullYear() + '-' +
-            (month > 10 ? month : '0' + month) + '-' +
-            (date > 10 ? date : '0' + date) + ' ' +
-            (hours > 10 ? hours : '0' + hours) + ':' +
-            (minutes > 10 ? minutes : '0' + minutes) + ':' +
-            (seconds > 10 ? seconds : '0' + seconds)
+            (month > 9 ? month : '0' + month) + '-' +
+            (date > 9 ? date : '0' + date) + ' ' +
+            (hours > 9 ? hours : '0' + hours) + ':' +
+            (minutes > 9 ? minutes : '0' + minutes) + ':' +
+            (seconds > 9 ? seconds : '0' + seconds)
         }
         this.$emit('input', val)
       }

@@ -67,7 +67,6 @@ input:-webkit-autofill
 
   th
     font-weight bold
-
   /*
   表单表格样式
   */
@@ -83,6 +82,7 @@ input:-webkit-autofill
       font-size 18px
       font-weight bold
       padding 10px 0px
+      color #3465cb
     .el-form-item
       margin-bottom 0
       .el-form-item__label
@@ -105,13 +105,13 @@ input:-webkit-autofill
     .el-form-item__error
       padding 3px 6px
       top 30px
-      border-radius 3px
+      border-radius none
       margin-left 10px
       z-index 9
       background-color #fff
       border 1px solid #3465cb
-      color #FF0033
-      box-shadow 1px 1px 1px rgba(0, 0, 0, 0.26)
+      //color #FF0033
+      //box-shadow 1px 1px 1px rgba(0, 0, 0, 0.26)
       &:before
         content ''
         width 6px
@@ -166,7 +166,7 @@ input:-webkit-autofill
           .el-input__inner
             color #3465cb
             border-radius 0
-            border-color #c1b9af
+            //border-color #c1b9af
       .el-pagination__sizes
         margin-right 0
       .el-pagination__total
@@ -174,14 +174,18 @@ input:-webkit-autofill
       .el-pagination__jump
         margin-left 20px
         color #3465cb
-        .el-input
-          width 25px
+        .el-pagination__editor
+          line-height: 26px;
+          height 28px
+          border-radius: 3px;
+          .el-input
+            width 25px
           .el-input__inner
-            height 21px
-            border-radius 0
-            border-color #c1b9af
-            background-color #fff6e8
-            color #3465cb
+              height 26px
+              width 100%
+              border-radius none
+              background-color #fff6e8
+              color #3465cb
       .btn-prev,
       .btn-next
         padding 0
@@ -223,3 +227,12 @@ input:-webkit-autofill
     .container
       .article
         overflow-y scroll
+.el-form-item__label
+  text-align: right;
+  float: left;
+  font-size: 14px;
+  color: #3465cb;
+  line-height: 40px;
+  padding: 0 12px 0 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;

@@ -276,7 +276,7 @@
           /*width: 70%;*/
           /*float right*/
         .el-input__inner
-            border-radius: 4px;
+            border-radius: 1px;
             border: 1px solid #3465cb;
             -webkit-box-sizing: border-box;
             display: inline-block;

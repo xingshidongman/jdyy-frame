@@ -45,10 +45,10 @@
         type: String,
         default: 'user'
       },
-      targetURL: {
-        type: String,
-        default: usersURL
-      },
+      // targetURL: {
+      //   type: String,
+      //   default: usersURL
+      // },
       bizSearch: {
         type: String,
         default: 'AdminUserSearch'
@@ -64,7 +64,7 @@
         }],
         btnList: userBtnList,
         buttonPermissionPrefix: userBtnPermissionPrefix,
-        // targetURL: usersURL,
+        targetURL: usersURL,
         tableFields: [
           // {prop: 'userTypeName', label: '用户类型'},
           {prop: 'name', label: '姓名'},

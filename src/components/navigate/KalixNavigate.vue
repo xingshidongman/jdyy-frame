@@ -1,6 +1,6 @@
 <template lang="pug">
   div.kalix-navigate()
-    ul.column
+    ul.column(v-if="columnList.length>0")
       li.column-item(v-for="columnItem in columnList")
         div.tit.column-item-tt(v-on:click="columnClick(columnItem)" v-bind:class="{'active':columnItem.isActive}")
           i.tit_icon(:class="bindClass(columnItem.iconCls)")
@@ -77,7 +77,9 @@
     },
     mounted() {
       console.log('+++++++++++++= mounted =++++++++++++++++')
-      this.initColumn()
+      setTimeout(() => {
+        this.initColumn()
+      }, 5000)
       this.fetchData()
     },
     watch: {
@@ -100,7 +102,6 @@
         if (this.$KalixCatch.get('toolListData')) {
           toolListData = JSON.parse(this.$KalixCatch.get('toolListData'))
         }
-        console.log('KalixSecondPage toolListData', toolListData)
         if (!this.$M_IsEmptyObject(toolListData)) {
           this.columnList = toolListData
           this._urlTransmit(toolListData)
@@ -110,7 +111,7 @@
               params: this.params
             }).then(response => {
               if (response && response.data) {
-                console.log('[toolListData] data:', response.data)
+                console.log('== [toolListData] data:', response.data)
                 this.columnList = response.data
                 this.columnList.map(e => {
                   this.$set(e, 'isActive', false)
@@ -182,6 +183,7 @@
                 this.flag = true
                 let nowDate = new Date()
                 if (response.data && response.data.code !== 401) {
+                  console.log('[response.data]:', response.data)
                   this.treeData = response.data
                   if (this.treeData.length) {
                     this.treeData.forEach(e => {

@@ -9,7 +9,7 @@
           div.left-xx
           div.left-xr
           div.block
-            input.input_time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
+            input.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
           div.left-block
             ul(v-for="item in items")
               li.block-box
