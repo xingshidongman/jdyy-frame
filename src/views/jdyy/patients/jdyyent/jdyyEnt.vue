@@ -49,7 +49,7 @@
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
             el-input(v-model="formModel.familyPhone")
           el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
-            kalix-font-cascader(v-model="formModel.address" v-on:getModelInfo="getModel" cascader-type="address")
+            kalix-font-cascader(v-model="formModel.address" v-on:change="getModel")
           el-form-item.address(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
             el-input(v-model="formModel.completeAddress")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
@@ -61,56 +61,53 @@
           el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis")
             el-input(v-model="formModel.diagnosis")
           el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical")
-            el-cascader(v-bind:options="options" v-bind:show-all-levels="false" v-model="formModel.surgical" )
-            <!--el-input(v-model="formModel.surgical")-->
+            kalix-font-surcascader(v-model="formModel.surgical" v-on:change="getModelSur")
           el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
             kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
           el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
             el-select(v-model="formModel.periodization")
-        <!--div.block-boxs-->
-          <!--el-table(:data="gridData" border="1px solid #3465cb" style="width: 100%;" cell-style=" color: #3465cb")-->
-            <!--el-table-column( fixed="left" prop="" label="" width="50" class="el-icon-caret-right" align="center")-->
-            <!--el-table-column(prop="diagnosis" label="诊断" width="250" align="center"  )-->
-            <!--el-table-column(prop="name" label="术式" width="250" align="center")-->
-            <!--el-table-column(prop="date" label="日期" width="250" align="center")-->
-            <!--el-table-column( prop="installment" label="分期" align="center")-->
+          <!--el-form-item(label="增加图片" prop="photo" v-bind:label-width="labelWidth" )-->
+            <!--kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img"-->
+            <!--tipText="只能上传jpg/png文件，且不超过2MB" v-bind:submitBefore="submitBefore" )-->
         div.bottom
           div.bottom-box
             ul.right_ul
               li.right_li
-                <!--div(type="primary" size="large" v-on:click="submitForm") 保存-->
                 el-button( size="large" v-on:click="submitForm") 保存
               li.right_li
                 el-button( size="large" v-on:click="resetForm") 重置
-      <!--div.box-->
-        <!--ul.right_ul-->
-          <!--li.right_li-->
-            <!--button(v-on:onItemClick="onChild1_AItemClick") 增加照片-->
-          <!--li.right_li-->
-            <!--button(v-on:onItemClick="onChild1_AItemClick") 删除照片-->
-        <!--ul.right_ul-->
-          <!--li.right_li(v-for="photo in photos")-->
-            <!--img.right_img(v-bind:src="photo.url")-->
+      div.box
+        ul.right-ul
+          li.right-li
+            kalix-clansman-upload(:action="action" v-on:filePath="getFilePath"
+            v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB"
+            v-bind:submitBefore="submitBefore" )
+
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
+  import {JdyypatientsURL, JdyysurURL} from '../../config.toml'
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
+  import KalixFontSurcascader from '../../../../components/cascader/SurThreeCascader'
   export default {
     name: 'kalix-jdyy-jdyyent',
-    components: {KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
+    components: {KalixFontSurcascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
     data() {
       return {
         downloadURL: JdyypatientsURL,
         formModel: Object.assign({}, FormModel),
         labelWidth: '120px',
+        fileList: [],
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
-        options: ['/camel/rest/jdyy/surgicals'],
+        albumname: '',
+        options: [],
+        filePathArr: [],
+        fileNameArr: [],
         rules: {
           // name: [{required: true, message: '请输入姓名', trigger: 'change'}],
           // sex: [{required: true, message: '请输入性别', trigger: 'change'}],
@@ -142,62 +139,62 @@
           // dateOperation: [{required: true, message: '请输入手术日期', trigger: 'change'}],
           // periodization: [{required: true, message: '请输入分期', trigger: 'change'}]
         },
-        // gridData: [{
-        //   imgurl: '/static/images/arrow.png',
-        //   diagnosis: '病理性骨科',
-        //   name: '术式',
-        //   date: '2018-08-04',
-        //   installment: '内科'
-        // }, {
-        //   diagnosis: '病理性骨科',
-        //   name: '术式',
-        //   date: '2018-08-04',
-        //   installment: '内科'
-        // }, {
-        //   diagnosis: '病理性骨科',
-        //   name: '术式',
-        //   date: '2018-08-04',
-        //   installment: '内科'
-        // }, {
-        //   diagnosis: '病理性骨科',
-        //   name: '术式',
-        //   date: '2018-08-04',
-        //   installment: '内科'
-        // }],
-        // photos: [{
-        //   url: '/static/images/logo.png'
-        // },
-        // {
-        //   url: '/static/images/logo.png'
-        // },
-        // {
-        //   url: '/static/images/logo.png'
-        // },
-        // {
-        //   url: '/static/images/logo.png'
-        // }
-        // ],
         targetURL: JdyypatientsURL
       }
     },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
+        console.log('qqqqqqq-===ddddddddddddddddd======')
       },
-      // getFilePath(filePath, fileName) {
-      //   console.log('--getFilePath---', filePath)
-      //   console.log('--fileName---', fileName)
-      //   this.formModel.photo = filePath
-      //   this.formModel.imgName = fileName
-      // },
-      // setGroup(val) {
-      //   this.formModel.downlosd = val
-      // },
-      getModel(val, flag) { // 三级联动地区参数区分
-        if (flag === 'address') {
-          this.address_disabled = false
-          this.formModel.province = val.toString()
+      open() {
+        this.$alert(JdyysurURL, '术式', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action:`
+            })
+          }
+        })
+      },
+      getFilePath(filePath, fileName) {
+        console.log('--getFilePath---', filePath)
+        console.log('--fileName---', fileName)
+        this.filePathArr.push(filePath)
+        this.fileNameArr.push(fileName)
+      },
+      submitBefore(baseDialog, callBack) {
+        console.log('===FilePath=================', this.filePathArr)
+        let filePath = ''
+        if (this.filePathArr.length) {
+          this.filePathArr.forEach(e => {
+            filePath += e + ','
+          })
+          filePath = filePath.substr(0, filePath.length - 1)
         }
+        let fileName = ''
+        if (this.fileNameArr.length) {
+          this.fileNameArr.forEach(e => {
+            fileName += e + ','
+          })
+          fileName = fileName.substr(0, fileName.length - 1)
+        }
+
+        baseDialog.formModel.photo = filePath
+        baseDialog.formModel.imgName = fileName
+        callBack()
+      },
+      setGroup(item) {
+        this.formModel.downlosd = item.albumname
+      },
+      getModel(val) { // 三级联动地区参数区分
+        this.formModel.address = val.toString()
+        console.log('address=========', this.formModel.address)
+      },
+      getModelSur(val) { // 术式
+        this.formModel.surgical = val.toString()
+        console.log('surgical=========', this.formModel.surgical)
       },
       submitForm() {
         this.$refs['formModel'].validate((valid) => {
@@ -218,7 +215,7 @@
         })
       },
       resetForm() {
-        this.$refs['formModel'].resetFields()
+        this.$refs['formModel'].resetFields() // 重置信息
       }
     }
   }

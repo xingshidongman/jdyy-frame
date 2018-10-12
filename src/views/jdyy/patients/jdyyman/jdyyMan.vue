@@ -5,9 +5,9 @@
     v-bind:targetURL="jdyypatientsURL"
     v-bind:bizDialog="jdyyManDialog"
     v-bind:btnList="jdyyManBtnList"
-    v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyManSearch")
+    // v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
 </template>
 
 <script type="text/ecmascript-6">
