@@ -222,4 +222,7 @@
   .down-in-enter, .down-in-leave-active
     opacity 0
     transform scale(0.8)
+  .el-form
+    width 60%
+    margin auto
 </style>
