@@ -491,13 +491,238 @@
                 td.c-td
               tr
                 td.a-td
-                  div.con3-left 术后骨盆正位
+                  div.con3-left 臼杯位置
                 td.b-td
                   div.con3-mid 高&外侧（1）/高（2）/外侧（3）/无上述表现（4）
                 td.c-td
                   div.con3-right
                     el-form-item.totoleft
-                      el-input(v-model="form.weekDay" clearable)
+                      el-input(v-model="form.cupPosition" clearable)
+              tr
+                td.a-td
+                  div.con3-left 内壁
+                td.b-td
+                  div.con3-mid 臼杯/骨水泥 （从髂耻线计算），+= 外侧，-= 内侧
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.wall" clearable)
+              tr
+                td.a-td
+                  div.con3-left 臼杯外翻
+                td.b-td
+                  div.con3-mid 0°= 向下，90°= 面向外侧
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.ectropion2" clearable)
+              tr
+                td.a-td
+                  div.con3-left 假体柄力线
+                td.b-td
+                  div.con3-mid 内翻（1）/外翻（20）/中立位（3）
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.forceLine2" clearable)
+              tr
+                td.a-td
+                  div.con3-left 水泥接合
+                td.b-td
+                  div.con3-mid 不充分不均匀（1）/未达完美（2）/完美（3）
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.joint" clearable)
+        div.art3
+          h1.title 术后并发症
+          div.con3
+            table
+              tr
+                td.a-td
+                  div.con3-left 骨科部分
+                td.b-td
+                  div.con3-mid 骨折（1）/脱位（2）/组件早期发生移位（3）/深部感染（4）/切口微小问题（5）/无（6）
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.orthopedics" clearable)
+              tr
+                td.a-td
+                  div.con3-left 综合部分
+                td.b-td
+                  div.con3-mid 血栓（1）/褥疮（2）/胸腔感染（3）/泌尿系感染（4）/无（5）
+                td.c-td
+                  div.con3-right
+                    el-form-item.totoleft
+                      el-input(v-model="form.comprehensive" clearable)
+        div.art2
+          h1.title 临床评价——Harris评分
+          div.con2
+            table
+              tr
+                td.short-td
+                  div.con2-left 疼痛（4）
+                td.long-td
+                  div.con2-right
+                    p 无或者可被忽略（44）
+                    p 轻微 — 偶尔疼痛或轻微疼痛，仍可活动（40）
+                    p 轻度 — 活动无受限，大量活动后偶有中等疼痛，可服止痛药（30）
+                    p 中度 — 疼痛可以忍受，可以日常活动，但其他活动受限，需偶尔服用强效止痛药（20）
+                    p 中度 — 偶尔重度疼痛，可以步行；活动严重受限，需偶尔服用强效止痛药（20）
+                    p 更重 — 偶尔重度疼痛，可以走动；活动严重受限，需经常服用强效止痛药（10）
+                    p 失去活动能力 —卧床仍感剧烈疼痛；因疼痛无法活动；卧床（0）
+              tr
+                td.short-td
+                  div.con2-left 上下楼梯（4）
+                td.long-td
+                  div.con2-right
+                    p 一步一阶，不需扶手（4）
+                    p 一步一阶，需扶手（2）
+                    p 以任何一种方式上楼梯（1）
+                    p 无法上下楼（0）
+              tr
+                td.short-td
+                  div.con2-left 坐（5）
+                td.long-td
+                  div.con2-right
+                    p 可以在任意椅子上舒适的坐一小时（5）
+                    p 可以在高椅子上坐半小时（3）
+                    p 无法舒适的坐任何椅子（0）
+              tr
+                td.short-td
+                  div.con2-left 穿鞋袜（4）
+                td.long-td
+                  div.con2-right
+                    p 轻松（4）
+                    p 困难（2）
+                    p 不能完成（0）
+              tr
+                td.short-td
+                  div.con2-left 上公交车（1）
+                td.long-td
+                  div.con2-right
+                    p 可以自行步上公交车（1）
+                    p 不能（0）
+              tr
+                td.short-td
+                  div.con2-left 跛行（11）
+                td.long-td
+                  div.con2-right
+                    p 无跛行（11）
+                    p 轻度跛行（8）
+                    p 中度跛行（5）
+                    p 重度跛行（0）
+              tr
+                td.short-td
+                  div.con2-left 行走辅助（11）
+                td.long-td
+                  div.con2-right
+                    p 无（11）
+                    p 长距离行走时单手拐杖辅助（7）
+                    p 大多数时间使用单手杖（5）
+                    p 单拐（3）
+                    p 2个单手杖（2）
+                    p 双拐或根本不能行走（0）
+              tr
+                td.short-td
+                  div.con2-left 行走距离（11）
+                td.long-td
+                  div.con2-right
+                    p 行走无受限（11）
+                    p 6条街（8）
+                    p 2-3条街（5）
+                    p 室内（3）
+                    p 卧床（0）
+              tr
+                td.short-td
+                  div.con2-left 无畸形（4）
+                td.long-td
+                  div.con2-right
+                    p <30°过伸（1）
+                    p <10°内收固定位（1）
+                    p <10°内外旋固定位（1）
+                    p 双下肢不等长小于3.2厘米（1）
+              tr
+                td.short-td
+                  div.con2-left 关节活动度（5）
+                td.long-td
+                  div.con2-right
+                    p 活动度总和 = 无过伸，屈曲>110°，外展>20°，内收>15°，外旋>15°（5）
+                    p 每10°过伸（-0.5）/屈曲<90°（-0.5）/无外展<（-0.7）/无外旋（-0.3）
+        div.art2
+          h1.title 临床评价——Harris评分
+          div.con2
+            el-table(:data="tableData1" style="width: 100%" height="250")
+              el-table-column(fixed prop="harDate" label="日期" width="100")
+              el-table-column(prop="har1" label="术后第（）月" width="120")
+              el-table-column(prop="har2" label="疼痛" width="60")
+              el-table-column(prop="har3" label="上下楼梯" width="120")
+              el-table-column(prop="har4" label="坐" width="60")
+              el-table-column(prop="har5" label="穿鞋袜" width="120")
+              el-table-column(prop="har6" label="上公交车" width="120")
+              el-table-column(prop="har7" label="跛行" width="60")
+              el-table-column(prop="har8" label="行走辅助" width="120")
+              el-table-column(prop="har9" label="行走距离" width="120")
+              el-table-column(prop="har10" label="无畸形" width="120")
+              el-table-column(prop="har11" label="关节活动度" width="120")
+              el-table-column(prop="har12" label="总分（100）" width="120")
+          div.con2
+            el-form-item.mini(label="日期")
+              el-input(v-model="form.harDate" clearable)
+            el-form-item.mini(label="术后第（）月")
+              el-input(v-model="form.har1" clearable)
+            el-form-item.mini(label="疼痛")
+              el-input(v-model="form.har2" clearable)
+            el-form-item.mini(label="上下楼梯")
+              el-input(v-model="form.har3" clearable)
+            el-form-item.mini(label="坐")
+              el-input(v-model="form.har4" clearable)
+            el-form-item.mini(label="穿鞋袜")
+              el-input(v-model="form.har5" clearable)
+            el-form-item.mini(label="上公交车")
+              el-input(v-model="form.har6" clearable)
+            el-form-item.mini(label="跛行")
+              el-input(v-model="form.har7" clearable)
+            el-form-item.mini(label="行走辅助")
+              el-input(v-model="form.har8" clearable)
+            el-form-item.mini(label="行走距离")
+              el-input(v-model="form.har9" clearable)
+            el-form-item.mini(label="无畸形")
+              el-input(v-model="form.har10" clearable)
+            el-form-item.mini(label="关节活动度")
+              el-input(v-model="form.har11" clearable)
+            el-form-item.mini(label="总分")
+              el-input(v-model="form.har12" clearable :disabled="true")
+            <!--table-->
+              <!--tr()-->
+                <!--td.har 记录日期-->
+                <!--td.harris 术后第( )月-->
+                <!--td.harris 疼痛-->
+                <!--td.harris 上下楼梯-->
+                <!--td.harris 坐-->
+                <!--td.harris 穿鞋袜-->
+                <!--td.harris 上公交车-->
+                <!--td.harris 跛行-->
+                <!--td.harris 行走辅助-->
+                <!--td.harris 行走距离-->
+                <!--td.harris 无畸形-->
+                <!--td.harris 关节活动度-->
+                <!--td.harris 总分-->
+              <!--tr-->
+                <!--td.har 2018-10-12-->
+                <!--td.harris 术前-->
+                <!--td.harris 40-->
+                <!--td.harris 3-->
+                <!--td.harris 3-->
+                <!--td.harris 2-->
+                <!--td.harris 0-->
+                <!--td.harris 5-->
+                <!--td.harris 3-->
+                <!--td.harris 2-->
+                <!--td.harris 1-->
+                <!--td.harris -2-->
+                <!--td.harris 56-->
         <!--div.btn-box-->
           <!--div.btn-->
             <!--el-form-item-->
@@ -602,10 +827,44 @@
           angleC: '',
           angleD: '',
           angleE: '',
-          angleF: ''
-        }
+          angleF: '',
+          date3: '',
+          weekDay: '',
+          cupPosition: '',
+          wall: '',
+          ectropion2: '',
+          forceLine2: '',
+          joint: '',
+          orthopedics: '',
+          comprehensive: '',
+          herDate: '',
+          her1: '',
+          her2: '',
+          her3: '',
+          her4: '',
+          her5: '',
+          her6: '',
+          her7: '',
+          her8: '',
+          her9: '',
+          her10: '',
+          her11: '',
+          her12: ''
+        },
+        tableData1: [
+          {harDate: '2016-05-03', har1: '术前', har2: '40', har3: '3', har4: '3', har5: '2', har6: '0', har7: '5', har8: '3', har9: '2', har10: '1', har11: '-2', har12: '56'},
+          {harDate: '2016-05-03', har1: '术前', har2: '40', har3: '3', har4: '3', har5: '2', har6: '0', har7: '5', har8: '3', har9: '2', har10: '1', har11: '-2', har12: '56'},
+          {harDate: '2016-05-03', har1: '术前', har2: '40', har3: '3', har4: '3', har5: '2', har6: '0', har7: '5', har8: '3', har9: '2', har10: '1', har11: '-2', har12: '56'}
+        ]
       }
     },
+    // computed: {
+    //   har12: function () {
+    //     var a = this.form.har12
+    //     a = a + 1
+    //     return a
+    //   }
+    // },
     methods: {
       onSubmit() {
         console.log('submit!')
@@ -642,6 +901,7 @@
   .art2
     /*width 1160px*/
     .con2
+      margin-bottom 20px
       table
         border 1px solid black
         border-top 0
@@ -664,6 +924,8 @@
         margin-top 15px
       .con2-right
         padding-left -80px
+        p
+          line-height 25px
   .art3
     /*width 1160px*/
     .con3
@@ -683,13 +945,15 @@
         word-break break-all
       .b-td
         padding 10px
-        width 65%
+        padding-top 30px
+        width 67%
         border-left 1px solid black
         text-align center
         word-break break-all
       .c-td
         padding 10px
-        width 15%
+        padding-top 20px
+        width 13%
         border-left 1px solid black
         text-align center
         word-break break-all
@@ -737,4 +1001,11 @@
     display inline-block
   .input-with-select .el-input-group__prepend
     background-color: #fff
+  .harris
+    border-left 1px solid black
+    padding 10px
+  .har
+    padding:10px
+    width:95px
+    text-align:center
 </style>
