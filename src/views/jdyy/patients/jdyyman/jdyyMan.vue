@@ -5,9 +5,9 @@
     v-bind:targetURL="jdyypatientsURL"
     v-bind:bizDialog="jdyyManDialog"
     v-bind:btnList="jdyyManBtnList"
-    v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyManSearch")
+    // v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
 </template>
 
 <script type="text/ecmascript-6">
@@ -38,7 +38,7 @@
         ],
         jdyyManBtnList: jdyyManConfigBtnList,
         toolbarBtnList: [
-          {id: 'add', isShow: true, title: '添加', isPermission: true}
+          {id: 'add', isShow: false, title: '添加', isPermission: true}
         ]
       }
     }

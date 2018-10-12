@@ -37,7 +37,7 @@
         ],
         btnList: jdyyQueConfigBtnList,
         toolbarBtnList: [
-          {id: 'add', isShow: true, title: '添加', isPermission: true}
+          {id: 'add', isShow: false, title: '添加', isPermission: true}
         ]
       }
     }
