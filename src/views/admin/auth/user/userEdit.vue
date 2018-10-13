@@ -27,9 +27,9 @@
       el-form-item(label="年龄" prop="age" v-bind:rules="rules.age" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.age")
       el-form-item(label="职位" prop="position" v-bind:rules="rules.position" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.position")
+        kalix-select(v-model="formModel.position" v-bind:requestUrl="rolesURL" id="name" placeholder="请选择职位")
       el-form-item(label="所属主管医生" prop="doctor" v-bind:rules="rules.doctor" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.doctor")
+        kalix-select(v-model="formModel.doctor" v-bind:requestUrl="targetURL" id="name" positionName="主任医生" placeholder="请选择医生")
       <!--el-form-item(label="祖籍" prop="ancestralhome" v-bind:rules="rules.ancestralhome" v-bind:label-width="labelWidth")-->
         <!--el-input(v-model="formModel.ancestralhome")-->
       <!--el-form-item(label="审核状态" prop="audit" v-bind:rules="rules.audit" v-bind:label-width="labelWidth")-->
@@ -38,7 +38,7 @@
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {usersURL} from '../../config.toml'
+  import {usersURL, rolesURL} from '../../config.toml'
 
   export default {
     name: 'AdminUserEdit',
@@ -54,6 +54,7 @@
           ]
         },
         targetURL: usersURL,
+        rolesURL: rolesURL,
         labelWidth: '140px'
       }
     },
