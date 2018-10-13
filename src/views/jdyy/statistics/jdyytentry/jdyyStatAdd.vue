@@ -1,7 +1,6 @@
 <template lang="pug">
   kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
-<<<<<<< HEAD
       el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
         <!--el-select(v-model="formModel.doctor" filterable placeholder="请选择")-->
         <!--el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")-->
