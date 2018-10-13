@@ -2,6 +2,7 @@
 描述：el-dialog组件的二次封装
 开发人：sunlf
 开发日期：2017年8月17日
+智信（2018-10-13）修改el-form属性
 -->
 
 <template lang="pug">
@@ -10,7 +11,7 @@
     v-bind:before-close="close"
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
-      el-form(ref="dialogForm" v-bind:model="formModel" label-width="80px")
+      el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
@@ -48,6 +49,12 @@
       formModel: { // dialog中的form的数据模型，由父组件传递
         type: Object,
         required: true
+      },
+      labelWidth: {
+        type: String
+      },
+      labelPosition: {
+        type: String
       },
       rules: {
         type: Object
@@ -222,7 +229,5 @@
   .down-in-enter, .down-in-leave-active
     opacity 0
     transform scale(0.8)
-  .el-form
-    width 60%
-    margin auto
+
 </style>
