@@ -26,9 +26,11 @@
       el-form-item(label="年龄" prop="age" v-bind:rules="rules.age" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.age")
       el-form-item(label="职位" prop="position" v-bind:rules="rules.position" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.position" v-bind:requestUrl="rolesURL" id="name" placeholder="请选择职位")
+        kalix-select(v-model="formModel.position" v-bind:requestUrl="rolesURL" appName="position" id="name" placeholder="请选择职位")
       el-form-item(label="所属主管医生" prop="doctor" v-bind:rules="rules.doctor" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.doctor" v-bind:requestUrl="targetURL" id="name" positionName="主任医生" placeholder="请选择医生")
+        <!--kalix-select(v-model="formModel.doctor" v-bind:requestUrl="targetURL" appName="doctor" id="name" position="主任医生" placeholder="请选择医生")-->
+        el-select(v-model="formModel.doctor" filterable placeholder="请选择主管医生")
+          el-option(v-for="item in items" :key="items.index" :label="item.label" :value="item.value")
       <!--el-form-item(label="祖籍" prop="ancestralhome" v-bind:rules="rules.ancestralhome" v-bind:label-width="labelWidth")-->
         <!--el-input(v-model="formModel.ancestralhome")-->
       <!--el-form-item(label="审核状态" prop="audit" v-bind:rules="rules.audit" v-bind:label-width="labelWidth")-->
@@ -79,14 +81,30 @@
         targetURL: usersURL,
         rolesURL: rolesURL,
         labelWidth: '140px',
-        options: []
+        items: []
       }
     },
     created() {
     },
+    mounted() {
+      this.findByPosition()
+    },
     methods: {
       change(event) {
         this.$refs.kalixBizDialog.$refs.dialogForm.clearValidate()
+      },
+      findByPosition() {
+        console.log('findByPosition=================active')
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/findByPosition',
+          params: {
+            position: '主任医生'
+          }
+        }).then(res => {
+          console.log('findByPosition-res.data.data======================', res.data.data)
+          this.items = res.data.data
+        })
       }
     }
   }

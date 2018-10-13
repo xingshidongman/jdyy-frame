@@ -2,7 +2,9 @@
   kalix-dialog.user-add(title='修改' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
-        kalix-select(v-model="formModel.doctor" v-bind:requestUrl="userURL" id="name" positionName="坐班医生" placeholder="请选择医生")
+        <!--kalix-select(v-model="formModel.doctor" v-bind:requestUrl="userURL" id="name" positionName="坐班医生" placeholder="请选择医生")-->
+        el-select.border(v-model="formModel.doctor" filterable placeholder="请选择")
+          el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")
       el-form-item(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
         kalix-datepicker-simple(v-model="formModel.date" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
@@ -49,8 +51,12 @@
           date: [{required: true, message: '请输入坐班日期', trigger: 'change'}]
         },
         targetURL: JdyystatURL,
-        userURL: usersURL
+        userURL: usersURL,
+        items: []
       }
+    },
+    mounted() {
+      this.findByPosition()
     },
     methods: {
       init(dialogOption) {
@@ -58,6 +64,19 @@
       },
       setGroup(val) {
         this.formModel.downlosd = val
+      },
+      findByPosition() {
+        console.log('findByPosition=================active')
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/findByPosition',
+          params: {
+            position: '坐班医生'
+          }
+        }).then(res => {
+          console.log('findByPosition-res.data.data======================', res.data.data)
+          this.items = res.data.data
+        })
       }
     }
   }
