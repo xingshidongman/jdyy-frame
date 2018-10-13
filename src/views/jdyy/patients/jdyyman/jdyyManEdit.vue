@@ -4,18 +4,20 @@
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" )
         el-input(v-model="formModel.name")
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" )
-        el-input(v-model="formModel.sex")
+        el-radio-group(v-model="formModel.sex")
+          el-radio(label="男")
+          el-radio(label="女")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.age")
       el-form-item(label="病历号" prop="bedNumber" v-bind:label-width="labelWidth" )
         el-input(v-model="formModel.bedNumber")
       el-form-item(label="住院日期" prop="dateAdmission" v-bind:label-width="labelWidth" )
-        kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
+        kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")
         <!--el-input(v-model="formModel.date_admission" )-->
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.diagnosis")
       el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" )
-        kalix-datepicker-simple(v-model="formModel.date_operation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
+        kalix-datepicker-simple(v-model="formModel.date_operation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")
         <!--el-input(v-model="formModel.date_operation" )-->
       el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.directorDoctor")
@@ -62,5 +64,7 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-input
+    width 70%
+    border 1px solid #1478f0
 </style>

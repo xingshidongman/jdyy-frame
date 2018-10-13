@@ -59,7 +59,7 @@
           {id: 'delete', isShow: true, icon: 'icon-delete', title: '删除'}
         ],
         // targetUrl: replyMenuURL,
-        treeUrl: JdyydiaURL + '/getAllByParentId?parentId=-1',
+        treeUrl: JdyydiaURL + '/getAllDiaByParentId?parentId=-1',
         // QiaoReplyURL: QiaoReplyURL,
         menuItems: [],
         addFormModel: Object.assign({}, FormModel),

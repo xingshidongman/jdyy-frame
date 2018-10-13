@@ -60,13 +60,18 @@
             el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
               el-input(v-model="formModel.hss")
             el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis")
-              el-input(v-model="formModel.diagnosis")
+              kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")
             el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical")
               kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")
-            el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
+            el-form-item.short(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
               kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-            el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-              el-select(v-model="formModel.periodization")
+            <!--el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")-->
+              <!--el-select(v-model="formModel.periodization")-->
+            el-form-item.short.toleft(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
+              el-select(v-model="formModel.periodization" placeholder="请选择")
+                el-option(label="内科" value="外科")
+                el-option(label="外科" value="外科")
+
       div.box
         div.contions
           kalix-clansman-upload(:action="action" v-on:filePath="getFilePath"
@@ -89,9 +94,10 @@
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontSurcascader from '../../../../components/cascader/SurThreeCascader'
+  import KalixFontDiacascader from '../../../../components/cascader/DiaThreeCascader'
   export default {
     name: 'kalix-jdyy-jdyyent',
-    components: {KalixFontSurcascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
+    components: {KalixFontSurcascader, KalixFontDiacascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
     data() {
       return {
         downloadURL: JdyypatientsURL,
@@ -143,7 +149,7 @@
         console.log('---------dialogOption------------', dialogOption)
         console.log('qqqqqqq-===ddddddddddddddddd======')
       },
-      open() {
+      open() { // 添加术式成功提示
         this.$alert(JdyysurURL, '术式', {
           confirmButtonText: '确定',
           callback: action => {
@@ -154,13 +160,13 @@
           }
         })
       },
-      getFilePath(filePath, fileName) {
+      getFilePath(filePath, fileName) { // 图片上传路径
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
       },
-      submitBefore(baseDialog, callBack) {
+      submitBefore(baseDialog, callBack) { // 多张图片拼路径
         console.log('===FilePath=================', this.filePathArr)
         let filePath = ''
         if (this.filePathArr.length) {
@@ -188,11 +194,15 @@
         this.formModel.address = val.toString()
         console.log('address=========', this.formModel.address)
       },
-      getModelSur(val) { // 术式
+      getModelDia(val) { // 诊断三级联动
+        this.formModel.diagnosis = val.toString()
+        console.log('diagnosis=========', this.formModel.diagnosis)
+      },
+      getModelSur(val) { // 术式三级联动
         this.formModel.surgical = val.toString()
         console.log('surgical=========', this.formModel.surgical)
       },
-      submitForm() {
+      submitForm() { // 保存按钮点击事件
         this.$refs['formModel'].validate((valid) => {
           if (valid) {
             this.$http.request({
@@ -210,7 +220,7 @@
           }
         })
       },
-      resetForm() {
+      resetForm() { // 重置按钮
         this.$refs['formModel'].resetFields() // 重置信息
       }
     }
@@ -282,4 +292,7 @@
           color: #3465cb
         .right_li:last-child button
           color: red
+  .short
+    width 50%
+    display inline-block
 </style>
