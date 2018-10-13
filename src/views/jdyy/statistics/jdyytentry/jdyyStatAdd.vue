@@ -1,10 +1,12 @@
 <template lang="pug">
   kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
-      el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor" style="color #3465cb")
-        el-select.border(v-model="formModel.doctor")
+      el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
+        el-select.border(v-model="formModel.doctor" filterable placeholder="请选择")
+          el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")
+        <!--kalix-select.border(v-model="formModel.doctor" v-bind:requestUrl="userURL" appName="dutyDoctor" id="name" position="坐班医生" placeholder="请选择医生")-->
       el-form-item.short(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
-        kalix-datepicker-simple(v-model="formModel.date" type="date" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;" )
+        kalix-datepicker-simple(v-model="formModel.date" type="date" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
         el-input(v-model="formModel.protoNum" type="number")
       el-form-item(label="出院人数" prop="outNum" v-bind:label-width="labelWidth" v-bind:rules="rules.outNum")
@@ -23,6 +25,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyystatURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   export default {
@@ -46,8 +49,13 @@
           doctor: [{required: true, message: '请输入坐班医生', trigger: 'change'}],
           date: [{required: true, message: '请输入坐班日期', trigger: 'change'}]
         },
-        targetURL: JdyystatURL
+        targetURL: JdyystatURL,
+        items: [],
+        userURL: usersURL
       }
+    },
+    mounted() {
+      this.findByPosition()
     },
     methods: {
       init(dialogOption) {
@@ -55,6 +63,19 @@
       },
       setGroup(val) {
         this.formModel.downlosd = val
+      },
+      findByPosition() {
+        console.log('findByPosition=================active')
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/findByPosition',
+          params: {
+            position: '坐班医生'
+          }
+        }).then(res => {
+          console.log('findByPosition-res.data.data======================', res.data.data)
+          this.items = res.data.data
+        })
       }
 
     }

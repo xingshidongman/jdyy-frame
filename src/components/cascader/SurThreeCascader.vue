@@ -7,7 +7,7 @@
     name: 'kalix-font-surcascader',
     props: {
       requestUrl: { // 查全部请求路径
-        type: String, default: '/camel/rest/jdyy/surgicals/getAllSurByParentId'
+        type: String, default: '/camel/rest/jdyy/surgicals/getSurById'
       },
       queryOneUrl: { // 默认选中查询
         type: String, default: ''

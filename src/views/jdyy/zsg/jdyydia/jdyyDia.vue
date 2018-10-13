@@ -8,21 +8,21 @@
   div.kalix-article
     keep-alive
       kalix-tree-grid-1.duty-wrapper(bizKey="jdyyDia" title="诊断录入"
-      style="padding-top:0"
-      ref="kalixTreeGrid"
-      v-bind:targetURL="treeUrl"
-      v-bind:isToolBarSelf="true"
-      v-bind:toolbarBtnList="treeToolbarBtnList"
-      v-bind:onToolBarSelfClick="onToolBarClick"
-      v-bind:bizDialog="bizDialog"
-      v-bind:columns='columns'
-      v-bind:customRender="showCheckText"
-      v-on:selectedRow="getSelectRow"
-      v-bind:isRowButtonSelf="true"
-      v-bind:jsonStr="jsonStr"
-      v-bind:noSearchParam:sync="noSearchParam"
-      v-bind:isColumnfixed="false"
-      v-bind:btnList="btnList"
+        style="padding-top:0"
+        ref="kalixTreeGrid"
+        v-bind:targetURL="treeUrl"
+        v-bind:isToolBarSelf="true"
+        v-bind:toolbarBtnList="treeToolbarBtnList"
+        v-bind:onToolBarSelfClick="onToolBarClick"
+        v-bind:bizDialog="bizDialog"
+        v-bind:columns='columns'
+        v-bind:customRender="showCheckText"
+        v-on:selectedRow="getSelectRow"
+        v-bind:isRowButtonSelf="true"
+        v-bind:jsonStr="jsonStr"
+        v-bind:noSearchParam:sync="noSearchParam"
+        v-bind:isColumnfixed="false"
+        v-bind:btnList="btnList"
       )
       <!--template(slot="tableColumnSlot") v-bind:btnSelfClick="btnClick"-->
         <!--el-table-column(prop="username"  label="回复人姓名") v-bind:buttonPermissionPrefix="buttonPermissionPrefix"-->

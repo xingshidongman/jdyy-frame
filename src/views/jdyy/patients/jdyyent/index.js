@@ -1,7 +1,9 @@
 import JdyyEnt from './jdyyEnt.vue'
+import JdyyEntAdd from './jdyyEntAdd.vue'
 
 const components = [
-  JdyyEnt
+  JdyyEnt,
+  JdyyEntAdd
 ]
 
 const main = {
