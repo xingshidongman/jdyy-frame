@@ -57,7 +57,7 @@
                           <!--el-tooltip(v-else v-bind:content="action.text" placement="top")-->
                             <!--el-button.base-teble-operation(type="text" v-on:click="btnClick(item,action.type)" style="width:30px" v-bind:key="action.text") {{action.text}}-->
                     input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")
-                    div(v-else)
+                    div(v-else style="margin-left 100px")
                       label(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
                           i.el-icon(v-if="item.children&&item.children.length>0"
@@ -292,7 +292,10 @@
           url: this.targetURL,
           params: _data
         }).then(res => {
+          console.log('res.data================', res.data)
+          // this.items = JSON.parse(res.data.data)
           this.items = res.data.children
+          console.log('this.items================', this.items)
           if (this.customRender) { // 对table的数据进行自定义的修饰
             this.customRender(this.items)
           }
@@ -704,8 +707,7 @@
   }
 
   table {
-    width: 300px;
-    text-align: left;
+    width:400px;
     margin 20px auto
     border: #2d8ac7 1px solid;
     border-spacing: 0;
@@ -716,7 +718,6 @@
   /*.table-bordered {
     border: 0px solid #EBEBEB;
   }*/
-
   .table > tbody > tr > td,
   .table > tbody > tr > th {
     /*border-top: 1px solid #e7eaec;*/
@@ -728,6 +729,7 @@
     line-height: 23px;
   }
 
+
   .table > tbody > tr:active {
     background-color #7ACAFF
   }
@@ -737,7 +739,7 @@
     cursor pointer
     color #dd9e4a
     & + .operation-btn
-      margin-left 8px
+      /*margin-left 8px*/
       .kailx-ms-tree-space {
         display inline-block
         width 1em
@@ -790,7 +792,7 @@
   }
 
   #hl-tree-table > tbody > .child-tr {
-    background-color: #fff;
+    background-color: red;
   }*/
 
   label {

@@ -7,7 +7,7 @@
     name: 'kalix-font-diacascader',
     props: {
       requestUrl: { // 查全部请求路径
-        type: String, default: '/camel/rest/jdyy/diagnosis/getAllDiaByParentId'
+        type: String, default: '/camel/rest/jdyy/diagnosiss/getDiaById'
       },
       queryOneUrl: { // 默认选中查询
         type: String, default: ''
