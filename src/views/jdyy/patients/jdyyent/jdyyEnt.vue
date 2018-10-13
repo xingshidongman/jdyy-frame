@@ -76,7 +76,7 @@
         div.contions
           kalix-clansman-upload(:action="action" v-on:filePath="getFilePath"
             v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB"
-            v-bind:submitBefore="submitBefore" )
+          )
       div.bottom
         div.bottom-box
           ul.right_ul
@@ -203,22 +203,46 @@
         console.log('surgical=========', this.formModel.surgical)
       },
       submitForm() { // 保存按钮点击事件
-        this.$refs['formModel'].validate((valid) => {
-          if (valid) {
-            this.$http.request({
-              method: 'POST',
-              url: '/camel/rest/jdyy/patientss',
-              data: this.formModel
-            }).then(response => {
-              alert('添加成功')
-              console.log(response.data.msg) // 添加成功
-              // this.$refs['formModel'].resetFields() // 重置信息
+        if (this.submitCustom && typeof (this.submitCustom) === 'function') {
+          this.submitCustom(this)
+        } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+          this.submitBefore(this, () => {
+            this.$refs['formModel'].validate((valid) => {
+              if (valid) {
+                this.$http.request({
+                  method: 'POST',
+                  url: '/camel/rest/jdyy/patientss',
+                  data: this.formModel
+                }).then(response => {
+                  alert('添加成功')
+                  console.log(response.data.msg) // 添加成功
+                  // this.$refs['formModel'].resetFields() // 重置信息
+                })
+              } else {
+                console.log('error submit!!')
+                return false
+              }
             })
-          } else {
-            console.log('error submit!!')
-            return false
-          }
-        })
+          })
+        } else {
+          this.submitAction()
+        }
+        // this.$refs['formModel'].validate((valid) => {
+        //   if (valid) {
+        //     this.$http.request({
+        //       method: 'POST',
+        //       url: '/camel/rest/jdyy/patientss',
+        //       data: this.formModel
+        //     }).then(response => {
+        //       alert('添加成功')
+        //       console.log(response.data.msg) // 添加成功
+        //       // this.$refs['formModel'].resetFields() // 重置信息
+        //     })
+        //   } else {
+        //     console.log('error submit!!')
+        //     return false
+        //   }
+        // })
       },
       resetForm() { // 重置按钮
         this.$refs['formModel'].resetFields() // 重置信息

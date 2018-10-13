@@ -292,7 +292,10 @@
           url: this.targetURL,
           params: _data
         }).then(res => {
+          console.log('res.data================', res.data)
+          // this.items = JSON.parse(res.data.data)
           this.items = res.data.children
+          console.log('this.items================', this.items)
           if (this.customRender) { // 对table的数据进行自定义的修饰
             this.customRender(this.items)
           }
