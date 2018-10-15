@@ -22,6 +22,46 @@
 .iconfont-btn-small{
   font-size:16px;
 }
+/*kalixNavigate*/
+.icon-wenjuandiaocha:before { content: "\e6eb"; }
+
+.icon-tongjibaobiao:before { content: "\e61a"; }
+
+.icon-shitifenzu:before { content: "\e68a"; }
+
+.icon-ziliao:before { content: "\e641"; }
+
+.icon-ziliao3:before { content: "\e649"; }
+
+.icon-tongji4:before { content: "\e6cf"; }
+
+.icon-icon5:before { content: "\e604"; }
+
+.icon-yifu:before { content: "\e666"; }
+
+.icon-staff:before { content: "\e668"; }
+
+.icon-yonghuguanli:before { content: "\e612"; }
+
+.icon-tongji:before { content: "\e62d"; }
+
+.icon-jigouguanli:before { content: "\e60e"; }
+
+.icon-chaxun:before { content: "\e60f"; }
+
+.icon-yanjizhushou-shangchuan_xitong:before { content: "\e633"; }
+
+.icon-dengji-:before { content: "\e605"; }
+
+.icon-gerenzhenduan:before { content: "\e68e"; }
+
+.icon-Group-:before { content: "\e6aa"; }
+
+.icon-tiaocha:before { content: "\e669"; }
+
+.icon-shujuquanxianguanli:before { content: "\e67c"; }
+
+.icon-guanli:before { content: "\e627"; }
 
 /*admin-application*/
 .icon-admin:before { content: "\e604"; }
