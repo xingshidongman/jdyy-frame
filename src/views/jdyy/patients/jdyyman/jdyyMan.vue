@@ -27,8 +27,8 @@
           {prop: 'age', label: '年龄'},
           {prop: 'bedNumber', label: '病历号'},
           {prop: 'dateAdmission', type: 'datetime', label: '住院日期'},
-          {prop: 'diagnosis', label: '诊断'},
-          {prop: 'dateOperation', type: 'datetime', label: '手术日期'},
+          // {prop: 'diagnosis', label: '诊断'},
+          // {prop: 'dateOperation', type: 'datetime', label: '手术日期'},
           {prop: 'directorDoctor', label: '主管医生'}
         ],
         jdyyManDialog: [
@@ -38,7 +38,7 @@
         ],
         jdyyManBtnList: jdyyManConfigBtnList,
         toolbarBtnList: [
-          {id: 'add', isShow: false, title: '添加', isPermission: true}
+          {id: 'add', isShow: true, title: '添加', isPermission: true}
         ]
       }
     }

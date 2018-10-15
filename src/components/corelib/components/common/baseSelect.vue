@@ -51,10 +51,6 @@
       clearable: {
         type: Boolean,
         default: true
-      },
-      positionName: {// 设置职位筛选条件：
-        type: String,
-        default: ''
       }
     },
     data() {
@@ -89,16 +85,7 @@
               Cache.save(DictKey, JSON.stringify(this.options))
             })
         } else {
-          if (this.positionName === '') { // 判断职位筛选条件是否为空
-            this.options = JSON.parse(Cache.get(DictKey))
-          } else {
-            let op = JSON.parse(Cache.get(DictKey))
-            for (let i = 0; i < op.length; i++) {
-              if (op[i].position === this.positionName) {
-                this.options.push(op[i])
-              }
-            }
-          }
+          this.options = JSON.parse(Cache.get(DictKey))
           this.defaultSelectVal()
         }
       },
