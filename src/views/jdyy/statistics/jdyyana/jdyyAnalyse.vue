@@ -157,8 +157,8 @@
             {
               name: '',
               type: 'pie',
-              radius: '55%',
-              center: ['50%', '50%'],
+              radius: '50%',
+              center: ['60%', '50%'],
               avoidLabelOverlap: false,
               data: [
                 {value: 351, name: '创伤'},

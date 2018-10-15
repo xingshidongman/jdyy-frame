@@ -653,7 +653,7 @@
         div.art2
           h1.title
           div.con2
-            el-table(:data="tableData1" style="width: 100%" height="250")
+            el-table(:data="tableData1" style="width: 1450px;margin:0 auto" height="250")
               el-table-column(fixed prop="harADate" label="日期" width="100")
               el-table-column(prop="harA1" label="术后第（）月" width="120")
               el-table-column(prop="harA2" label="疼痛" width="60")
@@ -667,6 +667,10 @@
               el-table-column(prop="harA10" label="无畸形" width="120")
               el-table-column(prop="harA11" label="关节活动度" width="120")
               el-table-column(prop="harA12" label="总分（100）" width="120")
+              el-table-column(fixed="right" label="操作" width="50")
+                template(slot-scope="scope")
+                  <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                  el-button(type="text" size="small") 编辑
           div.con2
             el-form-item.mini(label="日期")
               el-input(v-model="formModel.harADate" clearable)
@@ -692,10 +696,11 @@
               el-input(v-model="formModel.harA10" clearable)
             el-form-item.mini(label="关节活动度")
               el-input(v-model="formModel.harA11" clearable)
-            el-form-item.mini(label="总分")
-              el-input(v-model="formModel.harA12" clearable)
-            <!--div.mark-->
-              <!--div.sta 总分：-->
+            div.mark
+              div.sta 总分：{{total1}}
+            <!--el-form-item.mini(label="总分")-->
+              <!--el-input(v-model="formModel.harA12 = total1" clearable)-->
+
         div.art2
           h1.title
           div.con2
@@ -727,8 +732,8 @@
         div.art2
           h1.title
           div.con2
-            el-table(:data="tableData2" style="width: 100%" height="250")
-              el-table-column(fixed prop="harBDate" label="大腿痛" width="100")
+            el-table(:data="tableData2" style="width: 1190px;margin:0 auto" height="250")
+              el-table-column(prop="harBDate" label="大腿痛" width="100")
               el-table-column(prop="harB1" label="Trendelenburg 征" width="150")
               el-table-column(prop="harB2" label="活动度-伸直" width="120")
               el-table-column(prop="harB3" label="活动度-屈曲" width="120")
@@ -737,6 +742,10 @@
               el-table-column(prop="harB6" label="活动度-内旋" width="120")
               el-table-column(prop="harB7" label="活动度-外旋" width="120")
               el-table-column(prop="harB8" label="双下肢不等长" width="120")
+              el-table-column(fixed="right" label="操作" width="50")
+                template(slot-scope="scope")
+                  <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                  el-button(type="text" size="small") 编辑
           div.con2
             el-form-item.mini(label="大腿痛")
               el-input(v-model="formModel.harBDate" clearable)
@@ -766,13 +775,17 @@
                 td.long-td
                   div.con2-right
                     p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-            el-table(:data="tableData3" style="width: 100%" height="250")
+            el-table(:data="tableData3" style="width: 620px;margin:0 auto" height="250")
               el-table-column(fixed prop="harCDate" label="日期" width="100")
               el-table-column(prop="harC1" label="与术前相比" width="120")
               el-table-column(prop="harC2" label="术后第（）月" width="120")
               el-table-column(prop="harC3" label="疼痛" width="60")
               el-table-column(prop="harC4" label="功能" width="60")
               el-table-column(prop="harC5" label="总评" width="60")
+              el-table-column(fixed="right" label="操作" width="50")
+                template(slot-scope="scope")
+                  <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                  el-button(type="text" size="small") 编辑
           div.con2
             el-form-item.mini(label="日期")
               el-input(v-model="formModel.harCDate" clearable)
@@ -880,6 +893,10 @@
               el-table-column(prop="harD11" label="骨水泥金属界面透亮区 *" width="240")
               el-table-column(prop="harD12" label="骨水泥骨折（） *" width="150")
               el-table-column(prop="harD13" label="涂层脱落*" width="120")
+              el-table-column(fixed="right" label="操作" width="50")
+                template(slot-scope="scope")
+                  <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                  el-button(type="text" size="small") 编辑
           div.con2
             el-form-item.mini(label="日期")
               el-input(v-model="formModel.harDDate" clearable)
@@ -948,11 +965,13 @@
         ]
       }
     },
+    mounted() {
+    },
     computed: {
-      // harA12: function () {
-      //   let a = this.form.har10 + this.form.har11
-      //   return a
-      // }
+      total1: function () {
+        let a = 0 + parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
+        return a
+      }
     },
     methods: {
       onSubmit() {

@@ -56,7 +56,7 @@
   }
 </script>
 <style lang="stylus" type="text/stylus">
-  .el-button
-    background-color #3465cb
-    color white
+  /*.el-button*/
+    /*background-color #3465cb*/
+    /*color white*/
 </style>
