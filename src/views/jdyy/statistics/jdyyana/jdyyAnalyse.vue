@@ -154,8 +154,8 @@
             {
               name: '',
               type: 'pie',
-              radius: '55%',
-              center: ['50%', '50%'],
+              radius: '50%',
+              center: ['60%', '50%'],
               avoidLabelOverlap: false,
               data: this.opinionData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF']
