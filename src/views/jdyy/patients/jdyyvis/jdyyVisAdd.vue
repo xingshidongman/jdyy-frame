@@ -11,8 +11,8 @@
         kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical")
         kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")
-      el-form-item.short(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
-        kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
+      el-form-item.short(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
+        kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       <!--el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")-->
         <!--el-select(v-model="formModel.periodization")-->
       el-form-item.short.toleft(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")

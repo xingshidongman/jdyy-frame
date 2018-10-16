@@ -25,7 +25,7 @@
           {prop: 'pid', label: '患者'},
           {prop: 'diagnosis', label: '诊断'},
           {prop: 'surgical', label: '术式'},
-          {prop: 'dateOperation', label: '手术日期'},
+          {prop: 'operationDate', label: '手术日期'},
           {prop: 'periodization', label: '分期'}
         ],
         jdyyVisDialog: [

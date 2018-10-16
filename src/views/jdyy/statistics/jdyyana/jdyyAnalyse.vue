@@ -157,8 +157,8 @@
             {
               name: '',
               type: 'pie',
-              radius: '50%',
-              center: ['60%', '50%'],
+              radius: '45%',
+              center: ['52%', '55%'],
               avoidLabelOverlap: false,
               data: [
                 {value: 351, name: '创伤'},
@@ -172,7 +172,7 @@
                 {value: 119, name: '探查术'},
                 {value: 129, name: '其他'}
               ],
-              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF']
+              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#FFFF00']
             }
           ]
         })
@@ -196,8 +196,8 @@
             {
               name: '',
               type: 'pie',
-              radius: '55%',
-              center: ['50%', '50%'],
+              radius: '45%',
+              center: ['60%', '55%'],
               avoidLabelOverlap: false,
               data: [
                 {value: 351, name: '骨肿瘤'},
@@ -210,7 +210,7 @@
                 {value: 119, name: '神经系统异常'},
                 {value: 129, name: '其他'}
               ],
-              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF']
+              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00']
             }
           ]
         })
@@ -599,13 +599,13 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin -22px 0 0 -12px
+            margin -22px 0 0 -13px
           .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
-            margin -18px 0 0 -12px
+            margin -18px 0 0 -13px
           .left-xr
             width 5px
             height 30px
