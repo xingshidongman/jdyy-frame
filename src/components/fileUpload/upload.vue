@@ -15,7 +15,7 @@
       list-type="picture")
       el-button(size="small" type="primary") {{btnText}}
       div(slot="tip" class="el-upload__tip") {{tipText}}
-    el-dialog( :visible.sync="dialogVisible" modal="false")
+    el-dialog( :visible.sync="dialogVisible" :append-to-body='true')
       img(width="100%" :src="dialogImageUrl" alt="")
 </template>
 <script type="text/ecmascript-6">
