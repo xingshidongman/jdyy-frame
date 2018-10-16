@@ -2,7 +2,7 @@
  * 定义表格列上的按钮
  * add by yangz 2018-1-31
  **/
-const jdyyEntConfigBtnList = [
+const jdyyVisConfigBtnList = [
   {
     id: 'edit',
     title: '编辑',
@@ -19,4 +19,4 @@ const jdyyEntConfigBtnList = [
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }]
-export {jdyyEntConfigBtnList}
+export {jdyyVisConfigBtnList}

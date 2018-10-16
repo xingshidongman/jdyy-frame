@@ -168,7 +168,7 @@
           this.$refs.kalixTreeGrid.getData()
         }
       },
-      onAddClick() {
+      onAddClick() { // 添加按钮点击事件
         console.log('this.currentRow===add================', this.currentRow)
         if (this.currentRow === undefined) {
           let that = this
@@ -202,7 +202,7 @@
           }, 20)
         })
       },
-      onEditClick() {
+      onEditClick() { // 修改按钮点击事件
         console.log('this.currentRow===edit================', this.currentRow)
         if (this.currentRow === undefined) {
           Message.error('请选择要操作的记录！')
@@ -226,7 +226,7 @@
           }, 20)
         })
       },
-      onDeleteClick() {
+      onDeleteClick() { // 删除按钮点击事件
         console.log('this.currentRow===delete================', this.currentRow)
         if (this.currentRow === undefined) {
           Message.error('请选择要操作的记录！')

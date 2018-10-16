@@ -5,9 +5,30 @@ const FormModel = {
   age: null,
   bedNumber: null,
   dateAdmission: null,
-  // diagnosis: null,
-  // dateOperation: null,
-  directorDoctor: null
+  brith: null,
+  idCard: null,
+  hospitalNumber: null,
+  directorDoctor: null,
+  dischargeDate: null,
+  stature: null,
+  weight: null,
+  bmi: null,
+  bloodPressure: null,
+  specialDisorders: null,
+  descriptionSpecialDisease: null,
+  allergicHistory: null,
+  medicalCategory: null,
+  whetherDischarge: null,
+  telephonePerson: null,
+  familyPhone: null,
+  address: null,
+  completeAddress: null,
+  remarks: null,
+  harris: null,
+  hss: null,
+  buckling: null,
+  abduction: null,
+  adduction: null
 
 }
 export default FormModel

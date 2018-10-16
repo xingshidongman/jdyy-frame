@@ -28,8 +28,8 @@
           {prop: 'bedNumber', label: '病历号'},
           {prop: 'dateAdmission', label: '住院日期'},
           {prop: 'DischargeDate', label: '出院日期'},
-          {prop: 'diagnosis', label: '诊断'},
-          {prop: 'dateOperation', label: '手术日期'},
+          // {prop: 'diagnosis', label: '诊断'},
+          // {prop: 'dateOperation', label: '手术日期'},
           {prop: 'directorDoctor', label: '主管医生'}
         ],
         jdyyQueDialog: [

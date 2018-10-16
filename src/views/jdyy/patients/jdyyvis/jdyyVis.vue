@@ -1,38 +1,40 @@
 <template lang="pug">
   keep-alive
-    kalix-table(bizKey="jdyyEnt" title='诊断术式信息' ref="kalixTable"
+    kalix-table(bizKey="jdyyVis" title='诊断术式信息' ref="kalixTable"
     v-bind:tableFields="tableFields"
-    v-bind:targetURL="jdyypatientsURL"
-    v-bind:bizDialog="jdyyEntDialog"
-    v-bind:btnList="jdyyEntBtnList"
+    v-bind:targetURL="jdyyvisitURL"
+    v-bind:bizDialog="jdyyVisDialog"
+    v-bind:btnList="jdyyVisBtnList"
     v-bind:toolbarBtnList="toolbarBtnList"
-    bizSearch="jdyyEntSearch")
+    bizSearch="jdyyVisSearch")
     // v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
-  import {jdyyEntConfigBtnList} from './config'
+  import {JdyyvisitURL} from '../../config.toml'
+  import {jdyyVisConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
   export default {
-    name: 'kalix-jdyy-jdyyent',
+    name: 'kalix-jdyy-jdyyvis',
     components: {KalixTable},
     data() {
       return {
-        jdyypatientsURL: JdyypatientsURL,
+        jdyyvisitURL: JdyyvisitURL,
         tableFields: [
+          {prop: 'pid', label: '患者'},
           {prop: 'diagnosis', label: '诊断'},
           {prop: 'surgical', label: '术式'},
           {prop: 'dateOperation', label: '手术日期'},
           {prop: 'periodization', label: '分期'}
         ],
-        jdyyEntDialog: [
-          {id: 'add', dialog: 'JdyyEntAdd'},
-          {id: 'edit', dialog: 'JdyyEntEdit'},
-          {id: 'delete', dialog: 'JdyyEntDelete'}
+        jdyyVisDialog: [
+          {id: 'add', dialog: 'JdyyVisAdd'},
+          {id: 'edit', dialog: 'JdyyVisEdit'},
+          {id: 'delete', dialog: 'JdyyVisDelete'},
+          {id: 'view', dialog: 'JdyyVisImg'}
         ],
-        jdyyEntBtnList: jdyyEntConfigBtnList,
+        jdyyVisBtnList: jdyyVisConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', isPermission: true}
         ]

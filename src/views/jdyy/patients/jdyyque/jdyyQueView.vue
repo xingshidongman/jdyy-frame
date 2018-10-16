@@ -9,23 +9,23 @@
           el-radio(label="男")
           el-radio(label="女")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.age" readonly)
-      el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.diagnosis" readonly)
-      el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.surgical" readonly)
+        el-input(v-model="formModel.age" type="number" readonly)
+      <!--el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth")-->
+        <!--el-input(v-model="formModel.diagnosis" readonly)-->
+      <!--el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth")-->
+        <!--el-input(v-model="formModel.surgical" readonly)-->
       el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.directorDoctor" readonly)
       el-form-item(label="病历号" prop="bedNumber" v-bind:label-width="labelWidth" )
-        el-input(v-model="formModel.bedNumber" readonly)
+        el-input(v-model="formModel.bedNumber" type="number" readonly)
       el-form-item(label="住院日期" prop="date_admission" v-bind:label-width="labelWidth" )
         kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")
-        <!--el-input(v-model="formModel.dateAdmission" type="textarea" readonly)-->
-      el-form-item(label="手术日期" prop="date_operation" v-bind:label-width="labelWidth" )
-        kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")
+        el-input(v-model="formModel.dateAdmission" type="textarea" readonly)
+      <!--el-form-item(label="手术日期" prop="date_operation" v-bind:label-width="labelWidth" )-->
+        <!--kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")-->
         <!--el-input(v-model="formModel.dateOperation" type="textarea" readonly)-->
       el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" )
-        el-input(v-model="formModel.bedNumber" type="textarea" readonly  style="width:70%;")
+        el-input(v-model="formModel.bedNumber" type="number" readonly  style="width:70%;")
 
 
 
