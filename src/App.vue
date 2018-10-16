@@ -10,7 +10,7 @@
   }
 </script>
 <style lang="stylus" type="text/stylus">
-  @import './assets/css/icon-font.css'
+  @import './assets/css/font-kalix/iconfont.css'
   @import './assets/css/fa-font.css'
   @import "~@/assets/stylus/comm.styl"
   #app
