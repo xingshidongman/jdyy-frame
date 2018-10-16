@@ -106,7 +106,7 @@
                       el-radio-group(v-model="formModel.other1")
                         el-radio(label="是")
                         el-radio(label="否")
-                    el-form-item.long(label="其他")
+                    el-form-item.long(label="其他" v-if="formModel.other1==='是'")
                       el-input(v-model="formModel.other2")
               tr
                 td.short-td
@@ -144,13 +144,15 @@
                     div.left-align
                       p 术前活动度
                     el-form-item.mini.toleft-p(label="伸直")
-                      el-input.long(v-model="formModel.unwind" clearable)
+                      el-input(v-model="formModel.unwind" clearable)
+                        template(slot="append") °
                     el-form-item.mini
                       el-select.long.toleft(v-model="formModel.overextension" placeholder="请选择")
                         el-option(label="屈曲挛缩" value="屈曲挛缩")
                         el-option(label="过伸" value="过伸")
                     el-form-item.mini.toleft(label="屈曲" )
-                      el-input.long(v-model="formModel.buckling" clearable)
+                      el-input(v-model="formModel.buckling" clearable)
+                        template(slot="append") °
                   div
                     div.left-align
                       p 稳定性
@@ -212,7 +214,7 @@
                       el-input(v-model="formModel.angle11" clearable)
                         template(slot="append") °
                     el-form-item.short()
-                      el-radio-group.short(v-model="formModel.around")
+                      el-radio-group.long(v-model="formModel.around")
                         el-radio(label="内翻")
                         el-radio(label="外翻")
               tr
@@ -283,19 +285,19 @@
                   div.con2-right
                     el-form-item.mini(label="脂肪垫")
                       el-select(v-model="formModel.fatPad" placeholder="请选择")
-                        el-option(label="无" value="无")
-                        el-option(label="一般性松解" value="一般性松解")
-                        el-option(label="广泛性松解" value="广泛性松解")
+                        el-option(label="保留" value="保留")
+                        el-option(label="修剪" value="修剪")
+                        el-option(label="切除" value="切除")
                     el-form-item.mini(label="滑膜切除")
                       el-select(v-model="formModel.synovectomy" placeholder="请选择")
-                        el-option(label="无" value="无")
-                        el-option(label="一般性松解" value="一般性松解")
-                        el-option(label="广泛性松解" value="广泛性松解")
+                        el-option(label="少量" value="少量")
+                        el-option(label="中等" value="中等")
+                        el-option(label="完整" value="完整")
                     el-form-item.mini(label="髌韧带")
                       el-select(v-model="formModel.ligament" placeholder="请选择")
-                        el-option(label="无" value="无")
-                        el-option(label="一般性松解" value="一般性松解")
-                        el-option(label="广泛性松解" value="广泛性松解")
+                        el-option(label="完整" value="完整")
+                        el-option(label="轻度撕脱" value="轻度撕脱")
+                        el-option(label="重度撕脱" value="重度撕脱")
               tr
                 td.short-td
                   div.con2-left 翻修手术
@@ -772,14 +774,14 @@
                   el-button(type="text" size="small") 编辑
           div.con2
             div.con2-left
-            el-form-item.mini(label="日期" style="float:left" label-width="150px")
+            el-form-item.mini(label="日期" style="float:left")
               el-col
                 el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4")
             el-form-item.mini(label="术后第（）个月" label-width="120px")
               el-input(v-model="formModel.postoperationMonth2" clearable)
             el-form-item.mini(label="患者满意度" label-width="110px")
               el-input(v-model="formModel.satisfaction" clearable)
-            el-form-item.mini(label="步态" label-width="150px")
+            el-form-item.mini(label="步态" )
               el-input(v-model="formModel.gait" clearable)
             el-form-item.mini(label="髌骨侧问题" label-width="120px")
               el-input(v-model="formModel.problem" clearable)
@@ -791,7 +793,7 @@
               el-input(v-model="formModel.hyperextension2" clearable)
             el-form-item.mini(label="侧方松弛" label-width="110px")
               el-input(v-model="formModel.lateralSlack" clearable)
-            el-form-item.mini(label="前后松弛" label-width="150px")
+            el-form-item.mini(label="前后松弛" )
               el-input(v-model="formModel.frontBackSlack" clearable)
             el-form-item.mini(label="后方松弛" label-width="120px")
               el-input(v-model="formModel.backSlack" clearable)
