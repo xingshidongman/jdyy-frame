@@ -6,8 +6,8 @@ const FormModel = {
   bedNumber: null,
   dateAdmission: null,
   DischargeDate: null,
-  diagnosis: null,
-  dateOperation: null,
+  // diagnosis: null,
+  // dateOperation: null,
   directorDoctor: null
 
 }

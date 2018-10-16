@@ -33,7 +33,7 @@
           {prop: 'directorDoctor', label: '主管医生'}
         ],
         jdyyPosDialog: [
-          {id: 'edit', dialog: 'jdyyInv'},
+          {id: 'edit', dialog: 'jdyyInv2'},
           {id: 'delete', dialog: 'JdyyPosDelete'}
         ],
         jdyyPosBtnList: jdyyPosConfigBtnList,
