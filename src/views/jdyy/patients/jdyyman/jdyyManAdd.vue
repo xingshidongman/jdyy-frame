@@ -10,7 +10,7 @@
       <!--el-date-picker(type="date" placeholder="选择日期" v-model="formModel.brith" style="width: 100%;")-->
       el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
         kalix-datepicker-simple(v-model="formModel.brith" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-      el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
+      el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age" type="number")
         el-input(v-model="formModel.age")
       el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
         el-input(v-model="formModel.idCard")
