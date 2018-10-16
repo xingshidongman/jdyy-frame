@@ -20,7 +20,7 @@
         el-input(v-model="formModel.bedNumber" type="number" readonly)
       el-form-item(label="住院日期" prop="date_admission" v-bind:label-width="labelWidth" )
         kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")
-        el-input(v-model="formModel.dateAdmission" type="textarea" readonly)
+        <!--el-input(v-model="formModel.dateAdmission" type="textarea" readonly)-->
       <!--el-form-item(label="手术日期" prop="date_operation" v-bind:label-width="labelWidth" )-->
         <!--kalix-datepicker-simple(v-model="formModel.dateOperation" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 70%;")-->
         <!--el-input(v-model="formModel.dateOperation" type="textarea" readonly)-->
@@ -38,14 +38,16 @@
     data() {
       return {
         formModel: Object.assign({}, FormModel),
-        labelWidth: '120px'
+        labelWidth: '200px'
       }
     }
   }
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  .el-input
+  .el-form
     width 70%
-    border 1px solid #1478f0
+    margin auto
+    .el-input
+      width 70%
 </style>

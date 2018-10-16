@@ -1,6 +1,6 @@
 <template lang="pug">
   kalix-dialog.user-add(bizKey="user" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style="width:60%;margin:auto;")
       el-form-item(label="姓名" prop="name" v-bind:rules="rules.name" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.name")
       <!--el-form-item(label="别名" prop="idCard" v-bind:rules="rules.idCard" v-bind:label-width="labelWidth")-->
@@ -110,3 +110,4 @@
     }
   }
 </script>
+
