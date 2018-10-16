@@ -7,7 +7,7 @@
   v-bind:submitCustom="submitCustom")
     div.el-form(
     slot="dialogFormSlot"
-    style="{width:100%}")
+    style="{width:80%}")
       kalix-transfer.userAdd(v-if="formModel.id>0"
       ref="kalixTransfer"
       v-bind:targetURL="targetURL"

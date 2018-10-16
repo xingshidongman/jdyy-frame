@@ -1,24 +1,28 @@
 <template lang="pug">
-  el-upload(
-    :action="action"
-    :headers="headers"
-    :multiple="true"
-    :on-success="handleSuccess"
-    :on-preview="handlePreview"
-    :on-remove="handleRemove"
-    :before-remove="beforeRemove"
-    :before-upload="beforeUpload"
-    :limit="10"
-    :on-exceed="handleExceed"
-    :file-list="fileListData"
-    list-type="picture")
-    el-button(size="small" type="primary") {{btnText}}
-    div(slot="tip" class="el-upload__tip") {{tipText}}
+  div
+    el-upload(
+      :action="action"
+      :headers="headers"
+      :multiple="true"
+      :on-success="handleSuccess"
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      :before-upload="beforeUpload"
+      :limit="10"
+      :on-exceed="handleExceed"
+      :file-list="fileListData"
+      list-type="picture")
+      el-button(size="small" type="primary") {{btnText}}
+      div(slot="tip" class="el-upload__tip") {{tipText}}
+    el-dialog( :visible.sync="dialogVisible" :append-to-body='true')
+      img(width="100%" :src="dialogImageUrl" alt="")
 </template>
 <script type="text/ecmascript-6">
   import Cache from '../../../src/common/cache.js'
   import Vue from 'vue'
   import Message from '../../../src/common/message'
+  import login from '../../api/login'
   export default {
     name: 'kalix-clansman-upload',
     props: {
@@ -47,12 +51,14 @@
         file: null,
         headers: {'access_token': Cache.get('access_token'), 'jsessionid': Cache.get('user_token')},
         fileListData: this.fileList,
-        isUpload: true
+        isUpload: true,
+        dialogVisible: false,
+        dialogImageUrl: ''
       }
     },
     methods: {
       handleRemove(file, fileList) {
-        console.log(file, fileList)
+        console.log(123)
         if (file.status === 'success') {
           let attachmentId = ''
           let rev = ''
@@ -127,6 +133,8 @@
         this.$emit('filePath', response.attachmentPath, response.attachmentName)
       },
       handlePreview(file) {
+        this.dialogVisible = true
+        this.dialogImageUrl = file.url
         console.log(file)
       },
       handleExceed(files, fileList) {

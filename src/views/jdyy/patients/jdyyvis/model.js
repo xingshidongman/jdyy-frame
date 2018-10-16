@@ -3,7 +3,7 @@ const FormModel = {
   pid: null,
   diagnosis: null,
   surgical: null,
-  dateOperation: null,
+  operationDate: null,
   periodization: null
 }
 export default FormModel

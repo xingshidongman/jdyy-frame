@@ -65,10 +65,11 @@
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixSelect from '../../../../components/corelib/components/common/baseSelect'
+  import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
 
   export default {
     name: 'JdyyManEdit',
-    components: {KalixSelect, KalixClansmanUpload},
+    components: {KalixSelect, KalixClansmanUpload, KalixFontCascader},
     data() {
       return {
         downloadURL: JdyypatientsURL,
@@ -94,13 +95,32 @@
       },
       setGroup(val) {
         this.formModel.downlosd = val
+      },
+      getModel(val) { // 三级联动地区参数区分
+        this.formModel.address = val.toString()
+        console.log('address=========', this.formModel.address)
       }
     }
   }
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-  .el-input
-    width 70%
-    border 1px solid #1478f0
+  .el-form
+    width 60%
+    margin auto
+    .el-form-item
+      width 49%
+      display inline-block
+    .address
+      width 98%
+    .Border
+      width 49%
+      height 40px
+      line-height 40px
+    .el-form-item__content
+      position: relative;
+      font-size: 14px;
+      padding: 12px 10px;
+    .el-input__inner
+      border-radius 1px
 </style>

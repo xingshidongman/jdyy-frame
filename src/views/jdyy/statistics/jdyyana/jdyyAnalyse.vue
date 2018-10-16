@@ -43,7 +43,7 @@
             div.left-xr
             div.block
               input.input-time(v-model="datevalue2"  type="date"  placeholder="2018")
-            div( id="histogram" style="width: 90%;height: 260px;left:5%;pointer-events: none;")
+            div( id="histogram" style="width: 88%;height: 260px;pointer-events: none;")
     div.right
       div.left-box
         div.left-line
@@ -60,7 +60,7 @@
             input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
-          div(id="main" style="width: 90%;height: 260px;left:5%;")
+          div(id="main" style="width: 88%;height: 260px; left:2%")
       div.lefttwo
         div.left-box
           div.left-line
@@ -69,7 +69,7 @@
             div.left-zx
             div.left-xx
             div.left-xr
-            div(id="diagram" style="width: 90%;height: 260px;left:5%;")
+            div(id="diagram" style="width: 88%;height: 260px;")
       div.lefttwo
         div.left-box
           div.left-line
@@ -86,7 +86,7 @@
               input.block-input
               el-radio(v-model="radio"  label="1") 男
               el-radio(v-model="radio"  label="2") 女
-            div(id="main1" style="width: 90%;height: 260px;left:5%;")
+            div(id="main1" style="width: 88%;height: 260px;left:2%")
 </template>
 
 <script>

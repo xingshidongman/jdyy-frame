@@ -3,7 +3,7 @@
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
         el-input(v-model="formModel.name")
-      el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex")
+      el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" style="")
         el-radio-group(v-model="formModel.sex" )
           el-radio(label="男")
           el-radio(label="女")
@@ -130,5 +130,22 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-form
+    width 60%
+    margin auto
+    .el-form-item
+      width 49%
+      display inline-block
+    .address
+      width 98%
+    .Border
+      width 49%
+      height 40px
+      line-height 40px
+    .el-form-item__content
+      position: relative;
+      font-size: 14px;
+      padding: 12px 10px;
+    .el-input__inner
+      border-radius 1px
 </style>

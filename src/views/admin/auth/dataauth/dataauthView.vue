@@ -1,6 +1,6 @@
 <template lang="pug">
   kalix-dialog.dataauth-view(bizKey="dataauth" ref="kalixBizDialog" v-bind:form-model.sync="formModel" isView)
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style="width:60%;margin:auto;")
       el-form-item(label="应用名称" prop="appName" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.appName" readonly)
       el-form-item(label="菜单名称" prop="menuName" v-bind:label-width="labelWidth")
