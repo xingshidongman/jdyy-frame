@@ -109,16 +109,19 @@
         charts: '',
         charts2: '',
         charts3: '',
-        opinion: ['骨关节置换', 'MR', 'CR', '髋关节置换', 'CS', 'US', 'ES'],
-        opinionData: [
-          {value: 351, name: '骨关节置换'},
-          {value: 139, name: 'MR'},
-          {value: 122, name: 'CR'},
-          {value: 122, name: '髋关节置换'},
-          {value: 58, name: 'CS'},
-          {value: 281, name: 'US'},
-          {value: 19, name: 'ES'}
-        ],
+        // opinion: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
+        // opinionData: [
+        //   {value: 351, name: '创伤'},
+        //   {value: 139, name: '先天发育或其他原因造成的畸形'},
+        //   {value: 122, name: '关节'},
+        //   {value: 122, name: '肿瘤'},
+        //   {value: 58, name: '炎症'},
+        //   {value: 281, name: '脊柱'},
+        //   {value: 219, name: '截肢术'},
+        //   {value: 119, name: '保守治疗'},
+        //   {value: 119, name: '探查术'},
+        //   {value: 129, name: '其他'}
+        // ],
         chooseDate: '',
         items: [],
         columnar: [],
@@ -135,7 +138,7 @@
       }
     },
     methods: {
-      drawPie (id) {
+      surPie (id) {
         this.charts = echarts.init(document.getElementById(id))
         this.charts.setOption({
           tooltip: {
@@ -145,7 +148,46 @@
           legend: {
             orient: 'vertical',
             x: 'left',
-            data: this.opinion,
+            data: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
+            textStyle: {
+              color: '#ffffff'
+            }
+          },
+          series: [
+            {
+              name: '',
+              type: 'pie',
+              radius: '50%',
+              center: ['60%', '50%'],
+              avoidLabelOverlap: false,
+              data: [
+                {value: 351, name: '创伤'},
+                {value: 139, name: '先天发育或其他原因造成的畸形'},
+                {value: 122, name: '关节'},
+                {value: 122, name: '肿瘤'},
+                {value: 58, name: '炎症'},
+                {value: 281, name: '脊柱'},
+                {value: 219, name: '截肢术'},
+                {value: 119, name: '保守治疗'},
+                {value: 119, name: '探查术'},
+                {value: 129, name: '其他'}
+              ],
+              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF']
+            }
+          ]
+        })
+      },
+      diaPie (id) {
+        this.charts = echarts.init(document.getElementById(id))
+        this.charts.setOption({
+          tooltip: {
+            trigger: 'item',
+            formatter: '{a}<br/>{b}:{c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            x: 'left',
+            data: ['骨肿瘤', '非创伤性骨和关节疾患', '先天（发育）畸形', '四肢创伤', '脊柱', '运动损伤（肌腱  半月板）', '足部疾患', '神经系统异常', '其他'],
             textStyle: {
               color: '#ffffff'
             }
@@ -157,7 +199,17 @@
               radius: '55%',
               center: ['50%', '50%'],
               avoidLabelOverlap: false,
-              data: this.opinionData,
+              data: [
+                {value: 351, name: '骨肿瘤'},
+                {value: 139, name: '非创伤性骨和关节疾患'},
+                {value: 122, name: '先天（发育）畸形'},
+                {value: 122, name: '四肢创伤'},
+                {value: 58, name: '脊柱'},
+                {value: 281, name: '运动损伤（肌腱  半月板）'},
+                {value: 219, name: '足部疾患'},
+                {value: 119, name: '神经系统异常'},
+                {value: 129, name: '其他'}
+              ],
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF']
             }
           ]
@@ -410,8 +462,8 @@
     // 调用
     mounted () {
       this.$nextTick(function() {
-        this.drawPie('main')
-        this.drawPie('main1')
+        this.surPie('main')
+        this.diaPie('main1')
       })
       this.getDate()
       this.getColumnar()

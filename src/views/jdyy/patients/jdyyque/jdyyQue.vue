@@ -5,7 +5,6 @@
     v-bind:targetURL="jdyypatientsURL"
     v-bind:bizDialog="jdyyQueDialog"
     v-bind:btnList="btnList"
-    v-bind:buttonPermissionPrefix="buttonjdyyQuePrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyQueSearch")
 </template>

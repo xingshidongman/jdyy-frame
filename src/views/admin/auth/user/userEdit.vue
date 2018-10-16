@@ -27,7 +27,8 @@
       el-form-item(label="年龄" prop="age" v-bind:rules="rules.age" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.age")
       el-form-item(label="职位" prop="position" v-bind:rules="rules.position" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.position" v-bind:requestUrl="rolesURL" id="name" placeholder="请选择职位")
+        <!--kalix-select(v-model="formModel.position" v-bind:requestUrl="rolesURL" id="name" placeholder="请选择职位")-->
+        el-input(v-model="formModel.position")
       el-form-item(label="所属主管医生" prop="doctor" v-bind:rules="rules.doctor" v-bind:label-width="labelWidth")
         <!--kalix-select(v-model="formModel.doctor" v-bind:requestUrl="targetURL" id="name" positionName="主任医生" placeholder="请选择医生")-->
         el-select(v-model="formModel.doctor" filterable placeholder="请选择主管医生")
