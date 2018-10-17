@@ -9,7 +9,7 @@
           div.left-xx
           div.left-xr
           div.block
-            input.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -42,9 +42,9 @@
             div.left-xx
             div.left-xr
             div.block
-              input.input-time(v-model="datevalue2"  type="date"  placeholder="2018")
+              el-date-picker.input-time(v-model="datevalue2"  type="year"  placeholder="选择年份")
             div( id="histogram" style="width: 88%;height: 260px;pointer-events: none;")
-    div.right
+    div.rights
       div.left-box
         div.left-line
           div.text-box.text 术式分析
@@ -53,7 +53,7 @@
           div.left-xx
           div.left-xr
           div.block
-            input.input-time(v-model="datevalue3"  type="date"  placeholder="2018")
+            el-date-picker.input-time(v-model="datevalue3"  type="year"  placeholder="选择年份")
             span  年龄段
             input.block-input
             span ~
@@ -79,7 +79,7 @@
             div.left-xx
             div.left-xr
             div.block
-              input.input-time(v-model="datevalue4"  type="date"  placeholder="2018")
+              el-date-picker.input-time(v-model="datevalue4"  type="year"  placeholder="选择年份")
               span  年龄段
               input.block-input
               span ~
@@ -479,16 +479,16 @@
     list-style: none;
   }
   .start
-    width 98%
+    width 100%
     height 1000px
-    padding 40px 10px
+    padding 40px 5px
     color #2d8ac7
     background-color #02010f
     .left
-      width 49%
+      width 50%
       float left
       .left-box
-          width 98%
+          width 96%
           margin auto
           height 440px
           border 2px solid #23769a
@@ -534,17 +534,21 @@
             float right
             margin 423px -12px 0 0
           .block
-            width 10%
+            width 20%
             float right
-            margin-right 60px
-            background-color black
+            margin-right 150px
+            margin-top 5px
           .input-time
-            width 120px
+            width 150px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
-            float right
+            .el-input__inner
+              padding-left: 30px;
+              background-color: black;
+              border 1px solid black
+              height 30px
           .left-block
             width 90%
             margin auto
@@ -569,8 +573,8 @@
                   float right
       .lefttwo
         margin-top 120px
-    .right
-      width 49%
+    .rights
+      width 50%
       float right
       .left-box
         width 90%
@@ -619,10 +623,10 @@
             float right
             margin 304px -12px 0 0
           .block
-            margin-left 30%
-            width 70%
+            margin-left 25%
+            width 80%
           .input-time
-            width 120px
+            width 150px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
