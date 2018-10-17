@@ -83,12 +83,12 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
+  .el-form
+    width 70%
+    margin auto
     .short
        width 45%
        display inline-block
-      .border
-        border 1px solid #1478f0
     .el-input
       width 70%
-      border 1px solid #1478f0
 </style>

@@ -45,24 +45,21 @@
                           <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
               tbody
                 tr(v-for="(item,index) in initItems" v-bind:key="item.id" v-show="show(item)" v-bind:class="{'child-tr':item.parent,'active':item.id === checkId}" v-on:click="toSelect(item)")
-                  td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")
+                  <!--td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")-->
+                  td(v-for="(column,snum) in columns" v-bind:key="column.key")
                     <!--div(v-if="column.type === 'action'")-->
-                      <!--template(v-for="action in optActions.actions")-->
-                        <!--template(v-if="isRowButtonSelf")-->
-                          <!--el-tooltip(v-bind:content="action.text" placement="top")-->
-                            <!--el-button.base-teble-operation(type="text" v-on:click="btnSelfClick(item,action.type)" v-show="actionShow(item,action)" style="width:30px" v-bind:key="action.text") {{action.text}}-->
+                      <!--slot(name="treeGridToolSlot" slot-scope="item")-->
+                        <!--template(v-if="btnSelfClick !== undefined")-->
+                          <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnSelfClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                         <!--template(v-else)-->
-                          <!--el-tooltip(v-if="action.toolTipTitle" v-bind:content="action.toolTipTitle" placement="top")-->
-                            <!--el-button.base-teble-operation(type="text" v-on:click="btnClick(item,action.type)" style="width:30px" v-bind:key="action.text") {{action.text}}-->
-                          <!--el-tooltip(v-else v-bind:content="action.text" placement="top")-->
-                            <!--el-button.base-teble-operation(type="text" v-on:click="btnClick(item,action.type)" style="width:30px" v-bind:key="action.text") {{action.text}}-->
-                    input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")
-                    div(v-else style="margin-left 100px")
+                          <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
+                    <!--input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")-->
+                    <!--div.lefts(v-else)-->
                       label(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
                           i.el-icon(v-if="item.children&&item.children.length>0"
                           v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
-                            i(style="padding: 0 10px;" class="iconfont icon-2")
+                            <!--i.iconfont.icon-2(style="padding: 0 10px;")-->
                           i(v-else class="kailx-ms-tree-space")
                         | {{renderBody(item, column)}}
       component(:is="whichBizDialog" ref="kalixDialog"
@@ -709,12 +706,11 @@
   table {
     width:400px;
     margin 20px auto
-    border: #2d8ac7 1px solid;
+    /*border: #2d8ac7 1px solid;*/
     border-spacing: 0;
     border-collapse: collapse;
     line-height: 23px;
   }
-
   /*.table-bordered {
     border: 0px solid #EBEBEB;
   }*/
@@ -722,42 +718,42 @@
   .table > tbody > tr > th {
     /*border-top: 1px solid #e7eaec;*/
     line-height: 1.42857;
-    margin-left 200px
-    padding: 5px;
-    vertical-align: middle;
+    /*margin-left 200px*/
+    /*padding: 5px;*/
+    /*vertical-align: middle;*/
     font-size: 16px;
     line-height: 23px;
   }
 
 
   .table > tbody > tr:active {
-    background-color #7ACAFF
+    background-color rgba(255, 239, 187, 0.21)
   }
   /*.table > tbody > tr > td .base-teble-operation*/
   .operation-btn
     font-size 13px
     cursor pointer
-    color #dd9e4a
+    color #7ACAFF
     & + .operation-btn
-      /*margin-left 8px*/
+      margin-left 8px
       .kailx-ms-tree-space {
         display inline-block
         width 1em
       }
 
- /* .table > tbody > tr .focus {
+  .table > tbody > tr .focus {
     background-color: #eee;
   }
 
   .table > thead > tr > td,
   .table > thead > tr > th {
-    !*border-top: 1px solid #e7eaec;*!
+    /*border-top: 1px solid #e7eaec;*/
     border: 0;
     line-height: 1.42857;
-    padding: 8px;
+    /*padding: 8px;*/
     vertical-align: middle;
     font-family: Arial;
-    color: #b18e60;
+    color: #7ACAFF;
     font-size: 14px;
     line-height: 23px;
     font-family: inherit;
@@ -769,34 +765,38 @@
   .table-bordered > tfoot > tr > th,
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    border-bottom: 1px solid #e7e7e7;
-    border-top: 1px solid #e7e7e7;
+    border-bottom: 1px solid #FFFFFF;
+    border-top: 1px solid #FFFFFF;
   }
 
   .table > thead > tr > th {
-    border-bottom: 1px solid #DDD;
+    border-bottom: 1px solid #ffffff;
   }
 
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    background-color: #F5F5F6;
+    background-color: #7ACAFF;
   }
 
   #hl-tree-table > tbody > tr {
-    background-color: #fbfbfb;
+    background-color: #ffffff;
   }
 
   #hl-tree-table > tbody > tr.active {
-    !*background-color #ffefbb*!
-    background-color rgba(255, 239, 187, 0.21)
+    background-color #9E9E9E
   }
 
   #hl-tree-table > tbody > .child-tr {
-    background-color: red;
-  }*/
+    background-color: #fff;
+  }
 
   label {
     margin: 0 8px;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
   }
 
   .ms-tree-space {
@@ -815,7 +815,7 @@
   }
 
   #hl-tree-table th > label {
-    margin: 0;
+    margin: 50px;
   }
 
 </style>
