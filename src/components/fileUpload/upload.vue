@@ -22,7 +22,6 @@
   import Cache from '../../../src/common/cache.js'
   import Vue from 'vue'
   import Message from '../../../src/common/message'
-
   // import login from '../../api/login'
   export default {
     name: 'kalix-clansman-upload',
