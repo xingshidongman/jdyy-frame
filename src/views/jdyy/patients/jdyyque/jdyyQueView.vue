@@ -6,8 +6,8 @@
         el-input(v-model="formModel.name" readonly)
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" )
         el-radio-group(v-model="formModel.sex")
-          el-radio(label="男")
-          el-radio(label="女")
+          el-radio(label="男" :disabled="true")
+          el-radio(label="女" :disabled="true")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.age" type="number" readonly)
       <!--el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth")-->
