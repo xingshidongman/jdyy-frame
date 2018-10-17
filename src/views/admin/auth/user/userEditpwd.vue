@@ -1,7 +1,7 @@
 <template lang="pug">
   div.user-add
     kalix-dialog(ref="kalixBizDialog" v-bind:form-model.sync="formModel" v-bind:targetURL="targetURL" title='修改密码')
-      div(slot="dialogFormSlot")
+      div(slot="dialogFormSlot" style="width:60%;margin:auto;")
         el-form-item(label="原密码" prop="oldPassword" v-bind:rules="rules.oldPassword")
           el-input(v-model="formModel.oldPassword" type="password" )
         el-form-item(label="新密码" prop="password" v-bind:rules="rules.password")

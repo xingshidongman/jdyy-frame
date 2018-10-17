@@ -1,6 +1,6 @@
 <template lang="pug">
   kalix-dialog.user-add(bizKey="role" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style="width:50%;margin:auto;")
       <!--el-form-item(label="所属应用" prop="app" v-bind:rules="rules.app" v-bind:label-width="labelWidth")-->
         <!--kalix-select(placeholder="请选择应用" style="width:100%" appName="applications"-->
         <!--v-bind:requestUrl="requestUrl" label="text" v-model="formModel.app" v-on:selectChange="selectChange")-->

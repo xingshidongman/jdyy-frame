@@ -1,6 +1,6 @@
 <template lang="pug">
   kalix-dialog.dataauth-add(bizKey="dataauth" ref="kalixBizDialog" v-bind:form-model.sync="formModel" v-bind:targetURL="targetURL")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style="width:60%;margin:auto;")
       template(v-if="isEdit")
         el-form-item(label="应用名称" prop="appId" v-bind:label-width="labelWidth")
           kalix-select(v-model="formModel.appId" v-bind:requestUrl="appURL" label="text" appName="applications" placeholder="请选择应用" disabled)
@@ -63,3 +63,11 @@
     }
   }
 </script>
+<style scoped lang="stylus" type="text/stylus">
+  .el-dialog__body
+    padding: 30px 20px;
+    color: #606266;
+    font-size: 14px;
+    width: 60%;
+    margin: auto;
+</style>
