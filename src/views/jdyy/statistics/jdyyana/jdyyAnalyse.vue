@@ -69,7 +69,7 @@
             div.left-zx
             div.left-xx
             div.left-xr
-            div(id="diagram" style="width: 88%;height: 260px;")
+            div(id="diagram" style="width: 88%;height: 260px;top:2%")
       div.lefttwo
         div.left-box
           div.left-line
@@ -197,7 +197,7 @@
               name: '',
               type: 'pie',
               radius: '45%',
-              center: ['60%', '55%'],
+              center: ['60%', '50%'],
               avoidLabelOverlap: false,
               data: [
                 {value: 351, name: '骨肿瘤'},
@@ -514,13 +514,13 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin -23px 0 0 -14px
+            margin: -1.5% 0 0 -0.8%
           .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
-            margin -18px 0 0 -14px
+            margin: -1.2% 0 0 -0.8%
           .left-xr
             width 5px
             height 30px
@@ -534,12 +534,9 @@
             float right
             margin 423px -12px 0 0
           .block
-            width 20%
             float right
-            margin-right 150px
-            margin-top 5px
           .input-time
-            width 150px
+            width 80%
             margin-top 15px
             border 2px solid #23769a
             color #23769a
@@ -563,14 +560,15 @@
               margin  10px auto
               font-size 1vw
               .block-span
-                width 90%
+                width 75%
                 color #23769a
                 padding-left 5px
                 float left
               .block-spantwo
-                  width 8%
+                  width 20%
                   color #23769a
                   float right
+                  text-align center
       .lefttwo
         margin-top 120px
     .rights
@@ -603,13 +601,13 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin -22px 0 0 -13px
+            margin: -1.5% 0 0 -0.8%
           .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
-            margin -18px 0 0 -13px
+            margin: -1.2% 0 0 -0.8%
           .left-xr
             width 5px
             height 30px
@@ -621,18 +619,19 @@
             height 5px
             background-color #3ac8f3
             float right
-            margin 304px -12px 0 0
+            margin 304px -11px 0 0
           .block
-            margin-left 25%
+            margin-left 20%
             width 80%
           .input-time
-            width 150px
+            width 30%
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
           .block-input
-            width 60px
+            width 10%
+            height 30px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
