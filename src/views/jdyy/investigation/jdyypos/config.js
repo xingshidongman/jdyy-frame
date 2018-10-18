@@ -5,7 +5,12 @@
 const jdyyPosConfigBtnList = [
   {
     id: 'edit',
-    title: '编辑',
+    title: '全髋术后编辑',
+    isShow: true, // 是否显示
+    isPermission: true // 是否进行权限认证
+  }, {
+    id: 'view',
+    title: '全膝术后编辑',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {

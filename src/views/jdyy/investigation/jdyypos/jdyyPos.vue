@@ -5,9 +5,9 @@
     v-bind:targetURL="jdyypatientsURL"
     v-bind:bizDialog="jdyyPosDialog"
     v-bind:btnList="jdyyPosBtnList"
-    v-bind:buttonPermissionPrefix="buttonjdyyPosPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyPosSearch")
+  // v-bind:buttonPermissionPrefix="buttonjdyyPosPrefix"
 </template>
 
 <script type="text/ecmascript-6">
@@ -26,14 +26,15 @@
           {prop: 'sex', label: '性别'},
           {prop: 'age', label: '年龄'},
           {prop: 'telephonePerson', label: '联系方式'},
-          {prop: 'buckling', label: '屈曲'},
-          {prop: 'abduction', label: '外展'},
-          {prop: 'adduction', label: '内收'},
-          {prop: 'dateOperation', type: 'datetime', label: '手术日期'},
+          // {prop: 'buckling', label: '屈曲'},
+          // {prop: 'abduction', label: '外展'},
+          // {prop: 'adduction', label: '内收'},
+          // {prop: 'dateOperation', type: 'datetime', label: '手术日期'},
           {prop: 'directorDoctor', label: '主管医生'}
         ],
         jdyyPosDialog: [
-          {id: 'edit', dialog: 'jdyyInv2'},
+          {id: 'edit', dialog: 'jdyyInv'},
+          {id: 'view', dialog: 'jdyyInv2'},
           {id: 'delete', dialog: 'JdyyPosDelete'}
         ],
         jdyyPosBtnList: jdyyPosConfigBtnList,

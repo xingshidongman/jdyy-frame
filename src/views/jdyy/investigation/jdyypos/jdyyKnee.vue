@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
+  kalix-dialog.user-add(title='全膝术后编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
     div.back(slot="dialogFormSlot")
       <!--el-form(ref="form" :model="form" label-width="90px" :label-position="labelPosition" )-->
         div.art1
@@ -7,20 +7,20 @@
           div.con1
             div.con1-left
               el-form-item.toleft(label="姓名")
-                el-input(v-model="formModel.name" clearable)
+                el-input(v-model="formModel.name" readonly clearable)
               el-form-item.toleft(label="性别")
-                el-radio-group(v-model="formModel.sex")
+                el-radio-group(v-model="formModel.sex" readonly)
                   el-radio(label="男")
                   el-radio(label="女")
               el-form-item.toleft(label="年龄")
-                el-input(v-model="formModel.age" clearable)
+                el-input(v-model="formModel.age" readonly clearable)
               el-form-item.toleft(label="电话")
-                el-input(v-model="formModel.tel" clearable)
+                el-input(v-model="formModel.telephonePerson" readonly clearable)
               el-form-item.toleft(label="地址")
-                el-input(v-model="formModel.address" clearable)
+                el-input(v-model="formModel.address" readonly clearable)
             div.con1-right
               el-form-item.short.toleft(label="住院号")
-                el-input(v-model="formModel.inpatientNumber" clearable)
+                el-input(v-model="formModel.hospitalNumber" readonly clearable)
               el-form-item.short(label="研究序号")
                 el-input(v-model="formModel.orderNumber" clearable)
               el-form-item.toleft(label="日期")
@@ -961,7 +961,7 @@
               el-table-column(prop="boneGraft" label="植骨吸收" min-width="90")
               el-table-column(prop="loose" label="松动（股骨/胫骨/髌骨）" min-width="190")
               el-table-column(prop="polyethyleneLiner" label="聚乙烯内衬" min-width="90")
-              el-table-column(prop="osteolysis" label="骨溶解" min-width="90")
+              el-table-column(prop="osteolysis" label="  " min-width="90")
               el-table-column(label="操作" min-width="60" fixed="right")
                 template(slot-scope="scope")
                   el-button(type="text" size="small") 编辑
@@ -998,11 +998,13 @@
 </template>
 
 <script>
-  import FormModel2 from './model2'
+  import FormModel2 from './model'
+  import {JdyykneeURL} from '../../config.toml'
   export default {
     name: 'jdyyInv2',
     data() {
       return {
+        targetURL: JdyykneeURL,
         width: '80%',
         labelWidth: '90px',
         labelPosition: 'right',

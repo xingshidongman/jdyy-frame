@@ -13,3 +13,8 @@ JdyyvisitURL = "/camel/rest/jdyy/visits"
 JdyysurURL = "/camel/rest/jdyy/surgicals"
 #诊断
 JdyydiaURL = "/camel/rest/jdyy/diagnosiss"
+#全髋
+JdyyhipURL = "/camel/rest/jdyy/hips"
+#全膝
+JdyykneeURL = "/camel/rest/jdyy/knees"
+

@@ -17,7 +17,7 @@
         <!--el-select(v-model="formModel.periodization")-->
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
         el-select(v-model="formModel.periodization" placeholder="请选择")
-          el-option(label="内科" value="外科")
+          el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
 
       <!--div.box-->
