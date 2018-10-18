@@ -70,19 +70,43 @@
   import FormModel from './model'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  import {JdyyVisURL} from '../../config.toml'
+  import KalixTable from '../../../../components/corelib/components/common/baseTable'
   export default {
     name: 'JdyyQueView',
-    components: {KalixFontCascader, KalixDatepickerSimple},
+    components: {KalixTable, KalixFontCascader, KalixDatepickerSimple},
     data() {
       return {
+        jdyyvisURL: JdyyVisURL,
+        tableFields: [
+          {prop: 'pid', label: '患者'},
+          {prop: 'diagnosis', label: '诊断'},
+          {prop: 'surgical', label: '术式'},
+          {prop: 'operationDate', label: '手术日期'},
+          {prop: 'periodization', label: '分期'}
+        ],
         formModel: Object.assign({}, FormModel),
-        labelWidth: '200px'
+        labelWidth: '200px',
+        items: []
       }
+    },
+    mounted() {
+      this.getVisQuery()
     },
     methods: {
       getModel(val) { // 三级联动地区参数区分
         this.formModel.address = val.toString()
         console.log('address=========', this.formModel.address)
+      },
+      getVisQuery() { // 查询所有信息
+        console.log('getVisQuery========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyyVisURL
+        }).then(res => {
+          console.log('Request-getVisQuery-Success==============', res.data.data)
+          this.options = res.data.data
+        })
       }
     }
   }
@@ -90,8 +114,21 @@
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 70%
+    width 60%
     margin auto
-    .el-input
-      width 70%
+    .el-form-item
+      width 49%
+      display inline-block
+    .address
+      width 98%
+    .Border
+      width 49%
+      height 40px
+      line-height 40px
+    .el-form-item__content
+      position: relative;
+      font-size: 14px;
+      padding: 12px 10px;
+    .el-input__inner
+      border-radius 1px
 </style>

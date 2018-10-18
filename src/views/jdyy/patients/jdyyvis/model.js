@@ -4,6 +4,7 @@ const FormModel = {
   diagnosis: null,
   surgical: null,
   operationDate: null,
-  periodization: null
+  periodization: null,
+  photo: null
 }
 export default FormModel
