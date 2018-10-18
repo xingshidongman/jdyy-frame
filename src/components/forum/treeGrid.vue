@@ -13,7 +13,7 @@
       v-on:onSearchBtnClick="onSearchClick")
     div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="bottom:8px;")
       div.kalix-wrapper-hd
-        i(v-bind:class="iconCls")
+        <!--i(v-bind:class="iconCls")-->
         | {{title}}
       div.kalix-wrapper-bd
         template(v-if="isToolBarSelf")
@@ -45,20 +45,21 @@
                           <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
               tbody
                 tr(v-for="(item,index) in initItems" v-bind:key="item.id" v-show="show(item)" v-bind:class="{'child-tr':item.parent,'active':item.id === checkId}" v-on:click="toSelect(item)")
-                  td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")
+                  <!--td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")-->
+                  td(v-for="(column,snum) in columns" v-bind:key="column.key")
                     <!--div(v-if="column.type === 'action'")-->
                       <!--slot(name="treeGridToolSlot" slot-scope="item")-->
                         <!--template(v-if="btnSelfClick !== undefined")-->
                           <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnSelfClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                         <!--template(v-else)-->
                           <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
-                    input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")
-                    div.lefts(v-else)
+                    <!--input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")-->
+                    <!--div.lefts(v-else)-->
                       label(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
                           i.el-icon(v-if="item.children&&item.children.length>0"
                           v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
-                            i.iconfont.icon-2(style="padding: 0 10px;")
+                            <!--i.iconfont.icon-2(style="padding: 0 10px;")-->
                           i(v-else class="kailx-ms-tree-space")
                         | {{renderBody(item, column)}}
       component(:is="whichBizDialog" ref="kalixDialog"
@@ -699,7 +700,8 @@
     cursor pointer
 
   .autoTbale {
-    overflow: auto;
+    height: 500px;
+    overflow-y: scroll;
   }
 
   table {
@@ -717,9 +719,9 @@
   .table > tbody > tr > th {
     /*border-top: 1px solid #e7eaec;*/
     line-height: 1.42857;
-    margin-left 200px
-    padding: 5px;
-    vertical-align: middle;
+    /*margin-left 200px*/
+    /*padding: 5px;*/
+    /*vertical-align: middle;*/
     font-size: 16px;
     line-height: 23px;
   }
@@ -749,7 +751,7 @@
     /*border-top: 1px solid #e7eaec;*/
     border: 0;
     line-height: 1.42857;
-    padding: 8px;
+    /*padding: 8px;*/
     vertical-align: middle;
     font-family: Arial;
     color: #7ACAFF;

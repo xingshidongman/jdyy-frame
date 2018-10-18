@@ -403,7 +403,7 @@
                             template(slot="append") °内收
                         el-form-item.mini.toleft
                           el-input(v-model="formModel.frontC " clearable)
-                            template(slot="append") °内收
+                            template(slot="append") °内旋
                     div.mark
                       div.sta 前方稳定性
                       div.stb
@@ -969,7 +969,7 @@
     },
     computed: {
       total1: function () {
-        let a = 0 + parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
+        let a = parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
         return a
       }
     },
