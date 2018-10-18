@@ -9,7 +9,7 @@
           div.left-xx
           div.left-xr
           div.block
-            input.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="2018")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -42,9 +42,9 @@
             div.left-xx
             div.left-xr
             div.block
-              input.input-time(v-model="datevalue2"  type="date"  placeholder="2018")
+              el-date-picker.input-time(v-model="datevalue2"  type="year"  placeholder="选择年份")
             div( id="histogram" style="width: 88%;height: 260px;pointer-events: none;")
-    div.right
+    div.rights
       div.left-box
         div.left-line
           div.text-box.text 术式分析
@@ -53,7 +53,7 @@
           div.left-xx
           div.left-xr
           div.block
-            input.input-time(v-model="datevalue3"  type="date"  placeholder="2018")
+            el-date-picker.input-time(v-model="datevalue3"  type="year"  placeholder="选择年份")
             span  年龄段
             input.block-input
             span ~
@@ -69,7 +69,7 @@
             div.left-zx
             div.left-xx
             div.left-xr
-            div(id="diagram" style="width: 88%;height: 260px;")
+            div(id="diagram" style="width: 88%;height: 260px;top:2%")
       div.lefttwo
         div.left-box
           div.left-line
@@ -79,7 +79,7 @@
             div.left-xx
             div.left-xr
             div.block
-              input.input-time(v-model="datevalue4"  type="date"  placeholder="2018")
+              el-date-picker.input-time(v-model="datevalue4"  type="year"  placeholder="选择年份")
               span  年龄段
               input.block-input
               span ~
@@ -199,7 +199,7 @@
               name: '',
               type: 'pie',
               radius: '45%',
-              center: ['60%', '55%'],
+              center: ['60%', '50%'],
               avoidLabelOverlap: false,
               data: [
                 {value: 351, name: '骨肿瘤'},
@@ -514,16 +514,16 @@
     list-style: none;
   }
   .start
-    width 98%
+    width 100%
     height 1000px
-    padding 40px 10px
+    padding 40px 5px
     color #2d8ac7
     background-color #02010f
     .left
-      width 49%
+      width 50%
       float left
       .left-box
-          width 98%
+          width 96%
           margin auto
           height 440px
           border 2px solid #23769a
@@ -549,13 +549,13 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin -23px 0 0 -14px
+            margin: -1.5% 0 0 -0.8%
           .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
-            margin -18px 0 0 -14px
+            margin: -1.2% 0 0 -0.8%
           .left-xr
             width 5px
             height 30px
@@ -569,17 +569,18 @@
             float right
             margin 423px -12px 0 0
           .block
-            width 10%
             float right
-            margin-right 60px
-            background-color black
           .input-time
-            width 120px
+            width 80%
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
-            float right
+            .el-input__inner
+              padding-left: 30px;
+              background-color: black;
+              border 1px solid black
+              height 30px
           .left-block
             width 90%
             margin auto
@@ -594,18 +595,19 @@
               margin  10px auto
               font-size 1vw
               .block-span
-                width 90%
+                width 75%
                 color #23769a
                 padding-left 5px
                 float left
               .block-spantwo
-                  width 8%
+                  width 20%
                   color #23769a
                   float right
+                  text-align center
       .lefttwo
         margin-top 120px
-    .right
-      width 49%
+    .rights
+      width 50%
       float right
       .left-box
         width 90%
@@ -634,13 +636,13 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin -22px 0 0 -13px
+            margin: -1.5% 0 0 -0.8%
           .left-zx
             width 5px
             height 30px
             background-color #3ac8f3
             position absolute
-            margin -18px 0 0 -13px
+            margin: -1.2% 0 0 -0.8%
           .left-xr
             width 5px
             height 30px
@@ -652,18 +654,19 @@
             height 5px
             background-color #3ac8f3
             float right
-            margin 304px -12px 0 0
+            margin 304px -11px 0 0
           .block
-            margin-left 30%
-            width 70%
+            margin-left 20%
+            width 80%
           .input-time
-            width 120px
+            width 30%
             margin-top 15px
             border 2px solid #23769a
             color #23769a
             background-color black
           .block-input
-            width 60px
+            width 10%
+            height 30px
             margin-top 15px
             border 2px solid #23769a
             color #23769a
