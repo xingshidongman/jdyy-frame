@@ -6,6 +6,7 @@
     v-bind:bizDialog="jdyyVisDialog"
     v-bind:btnList="jdyyVisBtnList"
     v-bind:toolbarBtnList="toolbarBtnList"
+    v-bind:customTableTool="customTableTool"
     bizSearch="jdyyVisSearch")
     // v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
 </template>
@@ -32,12 +33,30 @@
           {id: 'add', dialog: 'JdyyVisAdd'},
           {id: 'edit', dialog: 'JdyyVisEdit'},
           {id: 'delete', dialog: 'JdyyVisDelete'},
-          {id: 'view', dialog: 'JdyyVisImg'}
+          {id: 'editImg', dialog: 'JdyyVisImg'}
         ],
         jdyyVisBtnList: jdyyVisConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', isPermission: true}
         ]
+      }
+    },
+    methods: {
+      customTableTool(row, btnId, that) {
+        switch (btnId) {
+          case 'editImg' : { // 图片上传
+            that.whichBizDialog = ''
+            let dig =
+              that.bizDialog.filter((item) => {
+                return item.id === 'editImg'
+              })
+            that.whichBizDialog = dig[0].dialog
+            setTimeout(() => {
+              that.$refs.kalixDialog.$refs.kalixBizDialog.open('图片', false, row)
+            }, 20)
+            break
+          }
+        }
       }
     }
   }
