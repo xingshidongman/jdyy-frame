@@ -11,7 +11,7 @@
         kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item.short.toleft(label="分期" prop="periodization" v-bind:label-width="labelWidth" )
         el-select(v-model="formModel.periodization" placeholder="请选择")
-          el-option(label="内科" value="外科")
+          el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
 </template>
 

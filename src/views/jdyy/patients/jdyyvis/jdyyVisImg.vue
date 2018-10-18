@@ -1,13 +1,15 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='添加' bizKey="jdyyVisImg" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
+  kalix-dialog.user-add(title='添加' bizKey="jdyyVisImg" ref="kalixBizDialog" v-bind:formModel.sync="formModel"
+  v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
     div.el-form(slot="dialogFormSlot")
       <!--el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth")-->
         <!--kalix-select(v-model="formModel.photo" v-bind:requestUrl="photoURL" appName="photoColumn"  placeholder="请选择相册"-->
         <!--v-bind:paramObj="photoParam" v-bind:defaultSelect="true" v-on:selectChange="setGroup" label="text")-->
       <!--el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
         <!--el-input(v-model="formModel.photo")-->
-      kalix-clansman-upload(:action="action" v-on:filePath="getFilePath"
-        v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+      el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
+        kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+        kalix-img-upload(v-model="formModel.photo" v-bind:isImage="isImage" style="width:100%" readonly)
       <!--div.bottom-->
         <!--div.bottom-box-->
           <!--ul.right_ul-->
@@ -26,15 +28,18 @@
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontSurcascader from '../../../../components/cascader/SurThreeCascader'
   import KalixFontDiacascader from '../../../../components/cascader/DiaThreeCascader'
+  import KalixImgUpload from '../../../../components/corelib/components/common/imgUpload'
   export default {
     name: 'JdyyVisImg',
-    components: {KalixFontSurcascader, KalixFontDiacascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
+    components: {
+      KalixImgUpload, KalixFontSurcascader, KalixFontDiacascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
     data() {
       return {
         downloadURL: JdyyvisitURL,
         formModel: Object.assign({}, FormModel),
         labelWidth: '120px',
         fileList: [],
+        isImage: true,
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
         albumname: '',

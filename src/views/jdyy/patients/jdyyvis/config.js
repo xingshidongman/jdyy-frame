@@ -14,7 +14,7 @@ const jdyyVisConfigBtnList = [
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {
-    id: 'view',
+    id: 'editImg',
     title: '图片',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
