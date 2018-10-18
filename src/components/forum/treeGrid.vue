@@ -700,7 +700,8 @@
     cursor pointer
 
   .autoTbale {
-    overflow: auto;
+    height: 500px;
+    overflow-y: scroll;
   }
 
   table {
