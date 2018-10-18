@@ -937,7 +937,7 @@
   import FormModel from './model'
   import {JdyyhipURL} from '../../config.toml'
   export default {
-    name: 'jdyyInv',
+    name: 'jdyyHip',
     data() {
       return {
         targetURL: JdyyhipURL,

@@ -1805,11 +1805,12 @@
 
 <script>
   import FormModel2 from './model2'
-
+  import {JdyyKneeURL} from '../../config.toml'
   export default {
-    name: 'jdyyInv2',
+    name: 'jdyyKnee',
     data() {
       return {
+        targetURL: JdyyKneeURL,
         width: '80%',
         labelWidth: '90px',
         labelPosition: 'right',
