@@ -60,7 +60,7 @@
             input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
-          div(id="main" style="width: 88%;height: 260px; left:2%")
+          div(id="sur" style="width: 88%;height: 260px; left:2%")
       div.lefttwo
         div.left-box
           div.left-line
@@ -86,7 +86,7 @@
               input.block-input
               el-radio(v-model="radio"  label="1") 男
               el-radio(v-model="radio"  label="2") 女
-            div(id="main1" style="width: 88%;height: 260px;left:2%")
+            div(id="dia" style="width: 88%;height: 260px;left:2%")
 </template>
 
 <script>
@@ -109,34 +109,23 @@
         charts: '',
         charts2: '',
         charts3: '',
-        // opinion: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
-        // opinionData: [
-        //   {value: 351, name: '创伤'},
-        //   {value: 139, name: '先天发育或其他原因造成的畸形'},
-        //   {value: 122, name: '关节'},
-        //   {value: 122, name: '肿瘤'},
-        //   {value: 58, name: '炎症'},
-        //   {value: 281, name: '脊柱'},
-        //   {value: 219, name: '截肢术'},
-        //   {value: 119, name: '保守治疗'},
-        //   {value: 119, name: '探查术'},
-        //   {value: 129, name: '其他'}
-        // ],
-        chooseDate: '',
-        items: [],
-        columnar: [],
-        firstYear: new Date().getFullYear() + '',
-        secondYear: new Date().getFullYear() - 1 + '',
-        threeYear: new Date().getFullYear() - 2 + '',
-        fourYear: new Date().getFullYear() - 3 + '',
-        fiveYear: new Date().getFullYear() - 4 + '',
-        firstLine: [],
-        secondLine: [],
-        threeLine: [],
-        fourLine: [],
-        fiveLine: [],
+        chooseDate: '', // 定义今日数据指标时间插件时间
+        items: [], // 定义今日数据指标数据集合
+        columnar: [], // 定义柱状图数据
+        firstYear: new Date().getFullYear() + '', // 获取今年年份
+        secondYear: new Date().getFullYear() - 1 + '', // 获取近两年年份
+        threeYear: new Date().getFullYear() - 2 + '', // 获取近三年年份
+        fourYear: new Date().getFullYear() - 3 + '', // 获取进四年年份
+        fiveYear: new Date().getFullYear() - 4 + '', // 获取近五年年份
+        firstLine: [], // 定义线性图Y轴数据（今年）
+        secondLine: [], // 定义线性图Y轴数据（近两年）
+        threeLine: [], // 定义线性图Y轴数据（近三年）
+        fourLine: [], // 定义线性图Y轴数据（近四年）
+        fiveLine: [], // 定义线性图Y轴数据（近五年）
         diaColumn: [], // 诊断饼状图数据列表
-        surColumn: [] // 术式饼状图数据列表
+        surColumn: [], // 术式饼状图数据列表
+        diaData: [], // 诊断饼状图数据
+        surData: [] // 术式饼状图数据
       }
     },
     methods: {
@@ -150,7 +139,7 @@
           legend: {
             orient: 'vertical',
             x: 'left',
-            data: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
+            data: this.surColumn,
             textStyle: {
               color: '#ffffff'
             }
@@ -162,18 +151,7 @@
               radius: '45%',
               center: ['52%', '55%'],
               avoidLabelOverlap: false,
-              data: [
-                {value: 351, name: '创伤'},
-                {value: 139, name: '先天发育或其他原因造成的畸形'},
-                {value: 122, name: '关节'},
-                {value: 122, name: '肿瘤'},
-                {value: 58, name: '炎症'},
-                {value: 281, name: '脊柱'},
-                {value: 219, name: '截肢术'},
-                {value: 119, name: '保守治疗'},
-                {value: 119, name: '探查术'},
-                {value: 129, name: '其他'}
-              ],
+              data: this.surData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#FFFF00']
             }
           ]
@@ -189,7 +167,7 @@
           legend: {
             orient: 'vertical',
             x: 'left',
-            data: ['骨肿瘤', '非创伤性骨和关节疾患', '先天（发育）畸形', '四肢创伤', '脊柱', '运动损伤（肌腱  半月板）', '足部疾患', '神经系统异常', '其他'],
+            data: this.diaColumn,
             textStyle: {
               color: '#ffffff'
             }
@@ -201,17 +179,7 @@
               radius: '45%',
               center: ['60%', '50%'],
               avoidLabelOverlap: false,
-              data: [
-                {value: 351, name: '骨肿瘤'},
-                {value: 139, name: '非创伤性骨和关节疾患'},
-                {value: 122, name: '先天（发育）畸形'},
-                {value: 122, name: '四肢创伤'},
-                {value: 58, name: '脊柱'},
-                {value: 281, name: '运动损伤（肌腱  半月板）'},
-                {value: 219, name: '足部疾患'},
-                {value: 119, name: '神经系统异常'},
-                {value: 129, name: '其他'}
-              ],
+              data: this.diaData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00']
             }
           ]
@@ -462,22 +430,23 @@
           method: 'GET',
           url: '/camel/rest/jdyy/diagnosiss/getDiaColumn'
         }).then(res => {
-          console.log('getDiaColumn.success=====================', res.data.toString())
+          console.log('getDiaColumn.success=====================', res.data)
           this.diaColumn = res.data
           this.getDiaData(this.diaColumn)
         })
       },
       getDiaData (diaColumn) { // 获取诊断统计数据
         console.log('getDiaData=========================')
-        let year = new Date().getFullYear()
         this.axios.request({
           method: 'GET',
-          url: '/camel/rest/jdyy/visits/getPieData',
+          url: '/camel/rest/jdyy/visits/getDiaData',
           params: {
             diaColumn: diaColumn.toString()
           }
         }).then(res => {
           console.log('getDiaData.success=====================', res.data.data)
+          this.diaData = res.data.data
+          this.diaPie('dia')
         })
       },
       getSurColumn () { // 获取术式列表数据
@@ -488,18 +457,31 @@
         }).then(res => {
           console.log('getSurColumn.success=====================', res.data)
           this.surColumn = res.data
+          this.getSurData(this.surColumn)
+        })
+      },
+      getSurData(surColumn) { // 获取术式统计数据
+        console.log('getSurData=========================')
+        this.axios.request({
+          method: 'GET',
+          url: '/camel/rest/jdyy/visits/getSurData',
+          params: {
+            surColumn: surColumn.toString()
+          }
+        }).then(res => {
+          console.log('getSurData.success=====================', res.data.data)
+          this.surData = res.data.data
+          this.surPie('sur')
         })
       }
     },
     // 调用
     mounted () {
       this.$nextTick(function() {
-        this.surPie('main')
-        this.diaPie('main1')
+        // this.diaPie('main1')
         this.getDate()
         this.getColumnar()
         this.getLine()
-        // this.getDiaData()
         this.getDiaColumn()
         this.getSurColumn()
       })
