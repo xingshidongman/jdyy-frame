@@ -13,7 +13,7 @@
       v-on:onSearchBtnClick="onSearchClick")
     div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="bottom:8px;")
       div.kalix-wrapper-hd
-        i(v-bind:class="iconCls")
+        <!--i(v-bind:class="iconCls")-->
         | {{title}}
       div.kalix-wrapper-bd
         template(v-if="isToolBarSelf")
@@ -700,7 +700,8 @@
     cursor pointer
 
   .autoTbale {
-    overflow: auto;
+    height: 500px;
+    overflow-y: scroll;
   }
 
   table {
