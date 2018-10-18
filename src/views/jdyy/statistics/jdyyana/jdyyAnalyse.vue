@@ -9,7 +9,7 @@
           div.left-xx
           div.left-xr
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy-MM-dd"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -42,7 +42,7 @@
             div.left-xx
             div.left-xr
             div.block
-              el-date-picker.input-time(v-model="datevalue2"  type="year"  placeholder="选择年份")
+              el-date-picker.input-time(v-model="chooseYear" v-on:change="getDataByMonth" type="year" value-format="yyyy" placeholder="选择月份")
             div( id="histogram" style="width: 88%;height: 260px;pointer-events: none;")
     div.rights
       div.left-box
@@ -111,6 +111,7 @@
         charts3: '',
         chooseDate: '', // 定义今日数据指标时间插件时间
         items: [], // 定义今日数据指标数据集合
+        chooseYear: '', // 定义月份数据对比柱状图时间插件时间
         columnar: [], // 定义柱状图数据
         firstYear: new Date().getFullYear() + '', // 获取今年年份
         secondYear: new Date().getFullYear() - 1 + '', // 获取近两年年份
@@ -327,7 +328,8 @@
         }
         let nowDate = year + '-' + month + '-' + day
         console.log('date .toLocaleDateString()==================', date .toLocaleDateString())
-        this.getData(nowDate)// 根据当前时间查找相应数据
+        this.getData(nowDate)// 根据当前时间查找今日数据指标相应数据
+        this.getColumnar(year) // 获取月份数据对比柱状图数据方法
       },
       getData(nowDate) {// 根据时间查找今日数据指标
         console.log('nowDate==================', nowDate)
@@ -347,6 +349,7 @@
         })
       },
       getDataByDate() { // 获取当前时间，并根据获取的时间查询今日数据指标
+        console.log('getDataByDate========================', this.chooseDate)
         let selectDate = this.chooseDate
         console.log("selectDate============", selectDate)
         if (selectDate === null || selectDate === "") {
@@ -355,9 +358,16 @@
           this.getData(selectDate)// 根据当前时间查找相应数据
         }
       },
-      getColumnar() { // 获取当前年份，并获取柱状图月份数据对比数据
-        /* eslint-disable */
-        let year = new Date().getFullYear()
+      getDataByMonth() {
+        console.log('getDataByMonth================', this.chooseYear)
+        let year = this.chooseYear
+        if (year === null || year ==="") {
+          this.getColumnar(new Date().getFullYear())
+        }else {
+          this.getColumnar(year)
+        }
+      },
+      getColumnar(year) { // 根据获取柱状图月份数据对比数据
         this.$http.request({// 向后台发送请求
           method: 'get',
           url: '/camel/rest/jdyy/statisticss/getAllByYear',
@@ -479,11 +489,11 @@
     mounted () {
       this.$nextTick(function() {
         // this.diaPie('main1')
-        this.getDate()
-        this.getColumnar()
-        this.getLine()
-        this.getDiaColumn()
-        this.getSurColumn()
+        this.getDate() // 获取系统当前日期方法
+        this.getDataByMonth() // 获取月份数据对比柱状图数据方法
+        this.getLine() // 获取五年比手术量线性图数据方法
+        this.getDiaColumn() // 获取诊断饼状图数据方法
+        this.getSurColumn() // 获取术式饼状图数据方法
       })
     }
   }
