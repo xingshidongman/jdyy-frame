@@ -12,11 +12,12 @@
           img.avatar(v-if="imageUrl" v-bind:src="imageUrl")
           img.avatar(v-else src="/static/images/default_attachment.png")
       template(v-else)
-        template(v-if="this.value")
-          a(v-bind:href="this.value") {{this.fileName}}
-        template(v-else) 空
+        template 空
+        <!--template(v-if="this.value")-->
+          <!--a(v-bind:href="this.value") {{this.fileName}}-->
+        <!--template(v-else) 空-->
     template(v-else)
-      el-upload(v-bind:class="{'avatar-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action" v-bind:headers="headers"
+      el-upload(v-bind:class="{'avatar-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action"
       v-bind:multiple="false" v-bind:show-file-list="true" v-bind:file-list="fileList"
       v-bind:on-change="handleChange" v-bind:before-upload="handleBeforeUpload"
       v-bind:on-success="handleSuccess" v-bind:on-error="handleError"
@@ -26,11 +27,21 @@
           i.el-icon-plus.avatar-uploader-icon(v-else)
         template(v-else)
           el-button(size="small" type="primary") 点击上传
+      <!--el-upload(v-bind:class="{'avatar-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action" v-bind:headers="headers"-->
+      <!--v-bind:multiple="false" v-bind:show-file-list="true" v-bind:file-list="fileList"-->
+      <!--v-bind:on-change="handleChange" v-bind:before-upload="handleBeforeUpload"-->
+      <!--v-bind:on-success="handleSuccess" v-bind:on-error="handleError"-->
+      <!--v-bind:on-preview="handlePreview" v-bind:on-remove="handleRemove")-->
+        <!--template(v-if="isImage")-->
+          <!--img.avatar(v-if="imageUrl" v-bind:src="imageUrl")-->
+          <!--i.el-icon-plus.avatar-uploader-icon(v-else)-->
+        <!--template(v-else)-->
+          <!--el-button(size="small" type="primary") 点击上传-->
 </template>
 
 <script type="text/ecmascript-6">
   import {baseURL, uploadURL, couchdbDelURL} from '../../config/global.toml'
-  import Cache from '../../common/cache.js'
+  // import Cache from '../../common/cache.js'
   // import Vue from 'vue'
   import Message from '../../common/message'
 
@@ -53,7 +64,7 @@
     data() {
       return {
         action: baseURL + uploadURL,
-        headers: {'access_token': Cache.get('access_token'), 'jsessionid': Cache.get('user_token')},
+        // headers: {'access_token': Cache.get('access_token'), 'jsessionid': Cache.get('user_token')},
         fileList: [],
         fileName: '',
         imageUrl: ''
@@ -72,9 +83,9 @@
           // let obj = {'name': this.fileName, 'url': this.value}
           // this.fileList.push(obj)
           this.fileList = this.value.split(',')
-          // if (this.isImage) {
-          //   this.imageUrl = this.value
-          // }
+          if (this.isImage) {
+            this.imageUrl = this.value
+          }
         }
       },
       handleChange(file, fileList) {
