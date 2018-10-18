@@ -134,7 +134,9 @@
         secondLine: [],
         threeLine: [],
         fourLine: [],
-        fiveLine: []
+        fiveLine: [],
+        diaColumn: [], // 诊断饼状图数据列表
+        surColumn: [] // 术式饼状图数据列表
       }
     },
     methods: {
@@ -450,12 +452,42 @@
             date: this.fiveYear
           }
         }).then(response => {
-          // this.firstLine = response.data
-          // this.secondLine = response.data
-          // this.threeLine = response.data
-          // this.fourLine = response.data
           this.fiveLine = response.data
           this.diagram('diagram')
+        })
+      },
+      getDiaColumn () { // 获取诊断列表数据
+        console.log('getDiaColumn============================')
+        this.axios.request({
+          method: 'GET',
+          url: '/camel/rest/jdyy/diagnosiss/getDiaColumn'
+        }).then(res => {
+          console.log('getDiaColumn.success=====================', res.data.toString())
+          this.diaColumn = res.data
+          this.getDiaData(this.diaColumn)
+        })
+      },
+      getDiaData (diaColumn) { // 获取诊断统计数据
+        console.log('getDiaData=========================')
+        let year = new Date().getFullYear()
+        this.axios.request({
+          method: 'GET',
+          url: '/camel/rest/jdyy/visits/getPieData',
+          params: {
+            diaColumn: diaColumn.toString()
+          }
+        }).then(res => {
+          console.log('getDiaData.success=====================', res.data.data)
+        })
+      },
+      getSurColumn () { // 获取术式列表数据
+        console.log('getSurColumn============================')
+        this.axios.request({
+          method: 'GET',
+          url: '/camel/rest/jdyy/surgicals/getSurColumn'
+        }).then(res => {
+          console.log('getSurColumn.success=====================', res.data)
+          this.surColumn = res.data
         })
       }
     },
@@ -464,10 +496,13 @@
       this.$nextTick(function() {
         this.surPie('main')
         this.diaPie('main1')
+        this.getDate()
+        this.getColumnar()
+        this.getLine()
+        // this.getDiaData()
+        this.getDiaColumn()
+        this.getSurColumn()
       })
-      this.getDate()
-      this.getColumnar()
-      this.getLine()
     }
   }
 </script>
