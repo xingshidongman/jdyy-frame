@@ -4,53 +4,33 @@
       el-form-item(label="患者" prop="pid" v-bind:label-width="labelWidth")
         kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly)
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
-        kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")
+        el-cascader(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
-        kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")
+        el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
       el-form-item.short(label="手术日期" prop="operationdate" v-bind:label-width="labelWidth" )
-        kalix-datepicker-simple(v-model="formModel.operationdate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-      <!--el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")-->
-        <!--el-select(v-model="formModel.periodization")-->
+        kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item.short.toleft(label="分期" prop="periodization" v-bind:label-width="labelWidth" )
         el-select(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="外科")
           el-option(label="外科" value="外科")
-      <!--div.box-->
-        <!--div.contions-->
-          <!--kalix-clansman-upload(:action="action" v-on:filePath="getFilePath"-->
-            <!--v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB"-->
-          <!--)-->
-      <!--div.bottom-->
-        <!--div.bottom-box-->
-          <!--ul.right_ul-->
-            <!--li.right_li-->
-              <!--el-button.button-save( size="large" v-on:click="submitForm") 保存-->
-            <!--li.right_li-->
-              <!--el-button.button-save( size="large" v-on:click="resetForm") 重置-->
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyyvisitURL, JdyysurURL} from '../../config.toml'
+  import {JdyyvisitURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
   import FormModel from './model'
-  import {baseURL} from '../../../../config/global.toml'
-  import KalixClansmanUpload from '../../../../components/fileUpload/upload'
-  import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
-  import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
-  import KalixFontSurcascader from '../../../../components/cascader/SurThreeCascader'
-  import KalixFontDiacascader from '../../../../components/cascader/DiaThreeCascader'
   export default {
     name: 'JdyyVisEdit',
-    components: {KalixFontSurcascader, KalixFontDiacascader, KalixDatepickerSimple, KalixFontCascader, KalixClansmanUpload},
+    components: {},
     data() {
       return {
         downloadURL: JdyyvisitURL,
         formModel: Object.assign({}, FormModel),
         labelWidth: '120px',
         fileList: [],
-        action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
         albumname: '',
         options: [],
+        items: [],
         filePathArr: [],
         fileNameArr: [],
         rules: {
@@ -62,88 +42,43 @@
         targetURL: JdyyvisitURL
       }
     },
+    mounted () {
+      this.getDiaCascader()
+      this.getSurCascader()
+    },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
-        console.log('qqqqqqq-===ddddddddddddddddd======')
       },
-      open() { // 添加术式成功提示
-        this.$alert(JdyysurURL, '术式', {
-          confirmButtonText: '确定',
-          callback: action => {
-            this.$message({
-              type: 'info',
-              message: `action:`
-            })
-          }
-        })
-      },
-      // getFilePath(filePath, fileName) { // 图片上传路径
-      //   console.log('--getFilePath---', filePath)
-      //   console.log('--fileName---', fileName)
-      //   this.filePathArr.push(filePath)
-      //   this.fileNameArr.push(fileName)
-      // },
-      // submitBefore(baseDialog, callBack) { // 多张图片拼路径
-      //   console.log('===FilePath=================', this.filePathArr)
-      //   let filePath = ''
-      //   if (this.filePathArr.length) {
-      //     this.filePathArr.forEach(e => {
-      //       filePath += e + ','
-      //     })
-      //     filePath = filePath.substr(0, filePath.length - 1)
-      //   }
-      //   let fileName = ''
-      //   if (this.fileNameArr.length) {
-      //     this.fileNameArr.forEach(e => {
-      //       fileName += e + ','
-      //     })
-      //     fileName = fileName.substr(0, fileName.length - 1)
-      //   }
-      //
-      //   baseDialog.formModel.photo = filePath
-      //   baseDialog.formModel.imgName = fileName
-      //   callBack()
-      // },
       setGroup(item) {
         this.formModel.downlosd = item.albumname
       },
-      getModelDia(val) { // 诊断三级联动
+      getDiaCascader() { // 获取诊断信息并以级联形式显示
+        console.log('getDiaCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getDiaCascader'
+        }).then(res => {
+          console.log('Request-Cascader-Success==============', res.data.data)
+          this.options = res.data.data
+        })
+      },
+      getSurCascader() { // 获取术式信息并以级联形式显示
+        console.log('getSurCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getSurCascader'
+        }).then(res => {
+          console.log('Request-getSurCascader-Success==============', res.data.data)
+          this.items = res.data.data
+        })
+      },
+      getDia(val) { // 通过级联获取数据后转成字符串
+        console.log('val===========================', val)
         this.formModel.diagnosis = val.toString()
-        console.log('diagnosis=========', this.formModel.diagnosis)
       },
-      getModelSur(val) { // 术式三级联动
+      getSur(val) { // 通过级联获取数据后转成字符串
         this.formModel.surgical = val.toString()
-        console.log('surgical=========', this.formModel.surgical)
-      },
-      submitForm() { // 保存按钮点击事件
-        if (this.submitCustom && typeof (this.submitCustom) === 'function') {
-          this.submitCustom(this)
-        } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
-          this.submitBefore(this, () => {
-            this.$refs['formModel'].validate((valid) => {
-              if (valid) {
-                this.$http.request({
-                  method: 'POST',
-                  url: '/camel/rest/jdyy/patientss',
-                  data: this.formModel
-                }).then(response => {
-                  alert('添加成功')
-                  console.log(response.data.msg) // 添加成功
-                  // this.$refs['formModel'].resetFields() // 重置信息
-                })
-              } else {
-                console.log('error submit!!')
-                return false
-              }
-            })
-          })
-        } else {
-          this.submitAction()
-        }
-      },
-      resetForm() { // 重置按钮
-        this.$refs['formModel'].resetFields() // 重置信息
       }
     }
   }
