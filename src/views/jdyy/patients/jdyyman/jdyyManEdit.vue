@@ -66,10 +66,11 @@
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixSelect from '../../../../components/corelib/components/common/baseSelect'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
 
   export default {
     name: 'JdyyManEdit',
-    components: {KalixSelect, KalixClansmanUpload, KalixFontCascader},
+    components: {KalixDatepickerSimple, KalixSelect, KalixClansmanUpload, KalixFontCascader},
     data() {
       return {
         downloadURL: JdyypatientsURL,

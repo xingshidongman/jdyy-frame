@@ -9,7 +9,7 @@
           div.left-xx
           div.left-xr
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy-MM-dd"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -42,7 +42,7 @@
             div.left-xx
             div.left-xr
             div.block
-              el-date-picker.input-time(v-model="datevalue2"  type="year"  placeholder="选择年份")
+              el-date-picker.input-time(v-model="chooseYear" v-on:change="getDataByMonth" type="year" value-format="yyyy" placeholder="选择月份")
             div( id="histogram" style="width: 88%;height: 260px;pointer-events: none;")
     div.rights
       div.left-box
@@ -60,7 +60,7 @@
             input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
-          div(id="main" style="width: 88%;height: 260px; left:2%")
+          div(id="sur" style="width: 88%;height: 260px; left:2%")
       div.lefttwo
         div.left-box
           div.left-line
@@ -86,7 +86,7 @@
               input.block-input
               el-radio(v-model="radio"  label="1") 男
               el-radio(v-model="radio"  label="2") 女
-            div(id="main1" style="width: 88%;height: 260px;left:2%")
+            div(id="dia" style="width: 88%;height: 260px;left:2%")
 </template>
 
 <script>
@@ -109,34 +109,24 @@
         charts: '',
         charts2: '',
         charts3: '',
-        // opinion: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
-        // opinionData: [
-        //   {value: 351, name: '创伤'},
-        //   {value: 139, name: '先天发育或其他原因造成的畸形'},
-        //   {value: 122, name: '关节'},
-        //   {value: 122, name: '肿瘤'},
-        //   {value: 58, name: '炎症'},
-        //   {value: 281, name: '脊柱'},
-        //   {value: 219, name: '截肢术'},
-        //   {value: 119, name: '保守治疗'},
-        //   {value: 119, name: '探查术'},
-        //   {value: 129, name: '其他'}
-        // ],
-        chooseDate: '',
-        items: [],
-        columnar: [],
-        firstYear: new Date().getFullYear() + '',
-        secondYear: new Date().getFullYear() - 1 + '',
-        threeYear: new Date().getFullYear() - 2 + '',
-        fourYear: new Date().getFullYear() - 3 + '',
-        fiveYear: new Date().getFullYear() - 4 + '',
-        firstLine: [],
-        secondLine: [],
-        threeLine: [],
-        fourLine: [],
-        fiveLine: [],
+        chooseDate: '', // 定义今日数据指标时间插件时间
+        items: [], // 定义今日数据指标数据集合
+        chooseYear: '', // 定义月份数据对比柱状图时间插件时间
+        columnar: [], // 定义柱状图数据
+        firstYear: new Date().getFullYear() + '', // 获取今年年份
+        secondYear: new Date().getFullYear() - 1 + '', // 获取近两年年份
+        threeYear: new Date().getFullYear() - 2 + '', // 获取近三年年份
+        fourYear: new Date().getFullYear() - 3 + '', // 获取进四年年份
+        fiveYear: new Date().getFullYear() - 4 + '', // 获取近五年年份
+        firstLine: [], // 定义线性图Y轴数据（今年）
+        secondLine: [], // 定义线性图Y轴数据（近两年）
+        threeLine: [], // 定义线性图Y轴数据（近三年）
+        fourLine: [], // 定义线性图Y轴数据（近四年）
+        fiveLine: [], // 定义线性图Y轴数据（近五年）
         diaColumn: [], // 诊断饼状图数据列表
-        surColumn: [] // 术式饼状图数据列表
+        surColumn: [], // 术式饼状图数据列表
+        diaData: [], // 诊断饼状图数据
+        surData: [] // 术式饼状图数据
       }
     },
     methods: {
@@ -150,7 +140,7 @@
           legend: {
             orient: 'vertical',
             x: 'left',
-            data: ['创伤', '先天发育或其他原因造成的畸形', '关节', '肿瘤', '炎症', '脊柱', '截肢术', '保守治疗', '探查术', '其他'],
+            data: this.surColumn,
             textStyle: {
               color: '#ffffff'
             }
@@ -162,18 +152,7 @@
               radius: '45%',
               center: ['52%', '55%'],
               avoidLabelOverlap: false,
-              data: [
-                {value: 351, name: '创伤'},
-                {value: 139, name: '先天发育或其他原因造成的畸形'},
-                {value: 122, name: '关节'},
-                {value: 122, name: '肿瘤'},
-                {value: 58, name: '炎症'},
-                {value: 281, name: '脊柱'},
-                {value: 219, name: '截肢术'},
-                {value: 119, name: '保守治疗'},
-                {value: 119, name: '探查术'},
-                {value: 129, name: '其他'}
-              ],
+              data: this.surData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#FFFF00']
             }
           ]
@@ -189,7 +168,7 @@
           legend: {
             orient: 'vertical',
             x: 'left',
-            data: ['骨肿瘤', '非创伤性骨和关节疾患', '先天（发育）畸形', '四肢创伤', '脊柱', '运动损伤（肌腱  半月板）', '足部疾患', '神经系统异常', '其他'],
+            data: this.diaColumn,
             textStyle: {
               color: '#ffffff'
             }
@@ -201,17 +180,7 @@
               radius: '45%',
               center: ['60%', '50%'],
               avoidLabelOverlap: false,
-              data: [
-                {value: 351, name: '骨肿瘤'},
-                {value: 139, name: '非创伤性骨和关节疾患'},
-                {value: 122, name: '先天（发育）畸形'},
-                {value: 122, name: '四肢创伤'},
-                {value: 58, name: '脊柱'},
-                {value: 281, name: '运动损伤（肌腱  半月板）'},
-                {value: 219, name: '足部疾患'},
-                {value: 119, name: '神经系统异常'},
-                {value: 129, name: '其他'}
-              ],
+              data: this.diaData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00']
             }
           ]
@@ -359,7 +328,8 @@
         }
         let nowDate = year + '-' + month + '-' + day
         console.log('date .toLocaleDateString()==================', date .toLocaleDateString())
-        this.getData(nowDate)// 根据当前时间查找相应数据
+        this.getData(nowDate)// 根据当前时间查找今日数据指标相应数据
+        this.getColumnar(year) // 获取月份数据对比柱状图数据方法
       },
       getData(nowDate) {// 根据时间查找今日数据指标
         console.log('nowDate==================', nowDate)
@@ -379,6 +349,7 @@
         })
       },
       getDataByDate() { // 获取当前时间，并根据获取的时间查询今日数据指标
+        console.log('getDataByDate========================', this.chooseDate)
         let selectDate = this.chooseDate
         console.log("selectDate============", selectDate)
         if (selectDate === null || selectDate === "") {
@@ -387,9 +358,16 @@
           this.getData(selectDate)// 根据当前时间查找相应数据
         }
       },
-      getColumnar() { // 获取当前年份，并获取柱状图月份数据对比数据
-        /* eslint-disable */
-        let year = new Date().getFullYear()
+      getDataByMonth() {
+        console.log('getDataByMonth================', this.chooseYear)
+        let year = this.chooseYear
+        if (year === null || year ==="") {
+          this.getColumnar(new Date().getFullYear())
+        }else {
+          this.getColumnar(year)
+        }
+      },
+      getColumnar(year) { // 根据获取柱状图月份数据对比数据
         this.$http.request({// 向后台发送请求
           method: 'get',
           url: '/camel/rest/jdyy/statisticss/getAllByYear',
@@ -462,22 +440,23 @@
           method: 'GET',
           url: '/camel/rest/jdyy/diagnosiss/getDiaColumn'
         }).then(res => {
-          console.log('getDiaColumn.success=====================', res.data.toString())
+          console.log('getDiaColumn.success=====================', res.data)
           this.diaColumn = res.data
           this.getDiaData(this.diaColumn)
         })
       },
       getDiaData (diaColumn) { // 获取诊断统计数据
         console.log('getDiaData=========================')
-        let year = new Date().getFullYear()
         this.axios.request({
           method: 'GET',
-          url: '/camel/rest/jdyy/visits/getPieData',
+          url: '/camel/rest/jdyy/visits/getDiaData',
           params: {
             diaColumn: diaColumn.toString()
           }
         }).then(res => {
           console.log('getDiaData.success=====================', res.data.data)
+          this.diaData = res.data.data
+          this.diaPie('dia')
         })
       },
       getSurColumn () { // 获取术式列表数据
@@ -488,20 +467,33 @@
         }).then(res => {
           console.log('getSurColumn.success=====================', res.data)
           this.surColumn = res.data
+          this.getSurData(this.surColumn)
+        })
+      },
+      getSurData(surColumn) { // 获取术式统计数据
+        console.log('getSurData=========================')
+        this.axios.request({
+          method: 'GET',
+          url: '/camel/rest/jdyy/visits/getSurData',
+          params: {
+            surColumn: surColumn.toString()
+          }
+        }).then(res => {
+          console.log('getSurData.success=====================', res.data.data)
+          this.surData = res.data.data
+          this.surPie('sur')
         })
       }
     },
     // 调用
     mounted () {
       this.$nextTick(function() {
-        this.surPie('main')
-        this.diaPie('main1')
-        this.getDate()
-        this.getColumnar()
-        this.getLine()
-        // this.getDiaData()
-        this.getDiaColumn()
-        this.getSurColumn()
+        // this.diaPie('main1')
+        this.getDate() // 获取系统当前日期方法
+        this.getDataByMonth() // 获取月份数据对比柱状图数据方法
+        this.getLine() // 获取五年比手术量线性图数据方法
+        this.getDiaColumn() // 获取诊断饼状图数据方法
+        this.getSurColumn() // 获取术式饼状图数据方法
       })
     }
   }

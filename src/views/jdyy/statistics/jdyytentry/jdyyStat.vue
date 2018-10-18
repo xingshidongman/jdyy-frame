@@ -5,7 +5,6 @@
     v-bind:targetURL="jdyystatURL"
     v-bind:bizDialog="jdyyStatDialog"
     v-bind:btnList="jdyyStatBtnList"
-    v-bind:buttonPermissionPrefix="buttonjdyyStatPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyStatSearch")
 </template>

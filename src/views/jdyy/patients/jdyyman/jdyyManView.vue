@@ -25,8 +25,10 @@
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
+  import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   export default {
     name: 'JdyyManView',
+    components: {KalixDatepickerSimple},
     data() {
       return {
         formModel: Object.assign({}, FormModel),

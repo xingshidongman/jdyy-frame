@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
+  kalix-dialog.user-add(title='全髋术后编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" )
     div.back(slot="dialogFormSlot")
       <!--el-form(ref="form" :model="form" label-width="100px" :label-position="labelPosition" )-->
         div.art1
@@ -7,22 +7,22 @@
           div.con1
             div.con1-left
               el-form-item.toleft(label="姓名")
-                el-input(v-model="formModel.name" clearable)
+                el-input(v-model="formModel.name" readonly clearable)
               el-form-item.toleft(label="性别")
-                el-radio-group(v-model="formModel.sex")
+                el-radio-group(v-model="formModel.sex" readonly)
                   el-radio(label="男")
                   el-radio(label="女")
               el-form-item.toleft(label="年龄")
-                el-input(v-model="formModel.age" clearable)
+                el-input(v-model="formModel.age" readonly clearable)
               el-form-item.toleft(label="电话")
-                el-input(v-model="formModel.tel" clearable)
+                el-input(v-model="formModel.telephonePerson" readonly clearable)
               el-form-item.toleft(label="地址")
-                el-input(v-model="formModel.address" clearable)
+                el-input(v-model="formModel.address" readonly clearable)
             div.con1-right
               el-form-item.short.toleft(label="住院号")
-                el-input(v-model="formModel.inpatientNumber" clearable)
+                el-input(v-model="formModel.hospitalNumber" readonly clearable)
               el-form-item.short(label="研究序号")
-                el-input(v-model="formModel.inpatientNumber2" clearable)
+                el-input(v-model="formModel.orderNumber" clearable)
               el-form-item.toleft(label="日期")
                 el-col(:span="22")
                   el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;")
@@ -935,10 +935,12 @@
 
 <script>
   import FormModel from './model'
+  import {JdyyhipURL} from '../../config.toml'
   export default {
-    name: 'jdyyInv',
+    name: 'jdyyHip',
     data() {
       return {
+        targetURL: JdyyhipURL,
         labelWidth: '100px',
         width: '80%',
         labelPosition: 'right',
@@ -965,8 +967,6 @@
         ]
       }
     },
-    mounted() {
-    },
     computed: {
       total1: function () {
         let a = parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
@@ -974,9 +974,26 @@
       }
     },
     methods: {
+      // getData() {
+      //   this.axios.request({
+      //     method: 'post',
+      //     url: `/camel/rest/jdyy/hips`,
+      //     date: this.formModel
+      //   }).then(res => {
+      //     alert('success=-======================')
+      //     console.log('success=-======================', res.data.data)
+      //   })
+      // },
+      init(dialogOption) {
+        console.log('---------dialogOption------------', dialogOption)
+      },
+      setGroup(val) {
+        this.formModel.downlosd = val
+      },
       onSubmit() {
         console.log('submit!')
-        alert('天啦噜')
+        // this.getData()
+        alert('success')
       }
     }
   }

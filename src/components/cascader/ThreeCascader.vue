@@ -8,7 +8,7 @@
     name: 'kalix-font-cascader',
     props: {
       requestUrl: { // 查全部请求路径
-        type: String, default: '/camel/rest/districts/getDistrictForCascader'
+        type: String, default: '/camel/rest/jdyy/districts/getDistrictForCascader'
       },
       queryOneUrl: { // 默认选中查询
         type: String, default: ''

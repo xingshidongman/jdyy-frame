@@ -1,10 +1,12 @@
 import JdyyPos from './jdyyPos.vue'
 import JdyyPosSearch from './JdyyPosSearch.vue'
-import JdyyInv2 from './jdyyInv2.vue'
+import JdyyHip from './jdyyHip.vue'
+import JdyyKnee from './jdyyKnee.vue'
 const components = [
   JdyyPos,
   JdyyPosSearch,
-  JdyyInv2
+  JdyyHip,
+  JdyyKnee
 ]
 
 const main = {
