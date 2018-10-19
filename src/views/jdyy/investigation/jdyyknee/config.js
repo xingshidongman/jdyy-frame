@@ -2,15 +2,15 @@
  * 定义表格列上的按钮
  * add by yangz 2018-1-31
  **/
-const jdyyPosConfigBtnList = [
+const jdyyKneeConfigBtnList = [
   {
     id: 'edit',
-    title: '全髋术后编辑',
+    title: '编辑',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {
     id: 'view',
-    title: '全膝术后编辑',
+    title: '查看',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {
@@ -19,4 +19,4 @@ const jdyyPosConfigBtnList = [
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }]
-export {jdyyPosConfigBtnList}
+export {jdyyKneeConfigBtnList}

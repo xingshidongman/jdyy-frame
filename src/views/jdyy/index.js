@@ -7,7 +7,8 @@ import Jdyyman from './patients/Jdyyman' // 病员资料管理
 import Jdyyque from './patients/Jdyyque' // 病员资料查询
 import Jdyysur from './diasur/Jdyysur' // 术式
 import Jdyydia from './diasur/Jdyydia' // 诊断
-import Jdyypos from './investigation/Jdyypos' // 术后调查
+import Jdyyhip from './investigation/Jdyyhip' // 全髋术后调查
+import Jdyyknee from './investigation/Jdyyknee' // 全髋术后调查
 
 Jdyytentry.install(Vue)
 Jdyyana.install(Vue)
@@ -16,4 +17,5 @@ Jdyyman.install(Vue)
 Jdyyque.install(Vue)
 Jdyysur.install(Vue)
 Jdyydia.install(Vue)
-Jdyypos.install(Vue)
+Jdyyhip.install(Vue)
+Jdyyknee.install(Vue)
