@@ -1,16 +1,15 @@
 <template lang="pug">
-  kalix-search(:searchFields="searchFields" title="姓名" bizKey="jdyyPos")
+  kalix-search(:searchFields="searchFields" title="姓名" bizKey="jdyyHip")
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'JdyyPosSearch',
+    name: 'JdyyHipSearch',
     data() {
       return {
         searchFields: [
           {label: '姓名', prop: 'name'},
-          {label: '手术日期', prop: 'dateOperation'},
-          {label: '联系方式', prop: 'telephonePerson'}
+          {label: '住院号', prop: 'hospitalNumber'}
         ]
       }
     }

@@ -58,7 +58,7 @@
             input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
-          div(id="sur" style="width: 98%;height: 260px; left:2%")
+          div(id="sur" style="width: 98%;min-height: 260px; left:2%")
         div.left-xx
         div.left-xr
       div.lefttwo

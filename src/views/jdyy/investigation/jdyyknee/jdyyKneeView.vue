@@ -1,49 +1,48 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='全膝术后编辑' bizKey="jdyyPos" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
+  kalix-dialog.user-add(title='全膝术后编辑' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" isView)
     div.back(slot="dialogFormSlot")
-      <!--el-form(ref="form" :model="form" label-width="90px" :label-position="labelPosition" )-->
       div.art1
         h1.title 全膝关节置换术
         div.con1
           div.con1-left
             el-form-item.toleft(label="姓名")
-              el-input(v-model="formModel.name" clearable)
+              el-input(v-model="formModel.name" readonly)
             el-form-item.toleft(label="性别")
-              el-radio-group(v-model="formModel.sex")
+              el-radio-group(v-model="formModel.sex" disabled)
                 el-radio(label="男")
                 el-radio(label="女")
             el-form-item.toleft(label="年龄")
-              el-input(v-model="formModel.age" clearable)
+              el-input(v-model="formModel.age" readonly)
             el-form-item.toleft(label="电话")
-              el-input(v-model="formModel.tel" clearable)
+              el-input(v-model="formModel.telephonePerson" readonly)
             el-form-item.toleft(label="地址")
-              el-input(v-model="formModel.address" clearable)
+              el-input(v-model="formModel.address" readonly)
           div.con1-right
             el-form-item.short.toleft(label="住院号")
-              el-input(v-model="formModel.inpatientNumber" clearable)
+              el-input(v-model="formModel.hospitalNumber" readonly)
             el-form-item.short(label="研究序号")
-              el-input(v-model="formModel.orderNumber" clearable)
+              el-input(v-model="formModel.orderNumber" readonly)
             el-form-item.toleft(label="日期")
               el-col(:span="22")
-                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;")
+                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;" readonly)
             el-form-item.toleft(label="部位")
-              el-radio-group(v-model="formModel.position")
+              el-radio-group(v-model="formModel.position" readonly)
                 el-radio(label="左")
                 el-radio(label="右")
             el-form-item.short.toleft(label="诊断")
-              el-select(v-model="formModel.disease" placeholder="请选择")
+              el-select(v-model="formModel.disease" placeholder="请选择" readonly)
                 el-option(label="骨性关节炎" value="骨性关节炎")
                 el-option(label="类风湿性关节炎" value="类风湿性关节炎")
                 el-option(label="其他" value="其他")
             el-form-item.short(label="手术类型")
-              el-select(v-model="formModel.operationType" placeholder="请选择")
+              el-select(v-model="formModel.operationType" placeholder="请选择" readonly)
                 el-option(label="初次" value="初次")
                 el-option(label="翻修" value="翻修")
                 el-option(label="更换部分组件" value="更换部分组件")
             el-form-item.short.toleft(label="假体")
-              el-input(v-model="formModel.prosthesis" clearable)
+              el-input(v-model="formModel.prosthesis" readonly)
             el-form-item.short(label="医生")
-              el-input(v-model="formModel.doctor" clearable)
+              el-input(v-model="formModel.doctor" readonly)
       div.art2
         h1.title 术前及围手术期手术资料
         div.con2
@@ -54,7 +53,7 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="诊断结果")
-                    el-select(v-model="formModel.disease2" placeholder="请选择")
+                    el-select(v-model="formModel.disease2" placeholder="请选择" disabled)
                       el-option(label="骨性关节炎" value="骨性关节炎")
                       el-option(label="类风湿性关节炎" value="类风湿性关节炎")
                       el-option(label="幼年特发性关节炎" value="幼年特发性关节炎")
@@ -70,11 +69,11 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="部位")
-                    el-select(v-model="formModel.position2" placeholder="请选择")
+                    el-select(v-model="formModel.position2" placeholder="请选择" disabled)
                       el-option(label="左" value="左")
                       el-option(label="右" value="右")
                   el-form-item.short(label="方式")
-                    el-select(v-model="formModel.mode" placeholder="请选择")
+                    el-select(v-model="formModel.mode" placeholder="请选择" disabled)
                       el-option(label="单侧置换" value="单侧置换")
                       el-option(label="一期双侧置换（两膝假体型号不一致）" value="一期双侧置换（两膝假体型号不一致）")
             tr
@@ -83,52 +82,52 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="骨折")
-                    el-radio-group(v-model="formModel.fracture")
+                    el-radio-group(v-model="formModel.fracture" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
                   el-form-item.short(label="感染")
-                    el-radio-group(v-model="formModel.infected")
+                    el-radio-group(v-model="formModel.infected" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
                   el-form-item.short(label="关节镜")
-                    el-radio-group(v-model="formModel.arthroscope")
+                    el-radio-group(v-model="formModel.arthroscope" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
                   el-form-item.short(label="截骨")
-                    el-radio-group(v-model="formModel.osteotomy")
+                    el-radio-group(v-model="formModel.osteotomy" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
                   el-form-item.short(label="置换")
-                    el-radio-group(v-model="formModel.substitution")
+                    el-radio-group(v-model="formModel.substitution" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
                   el-form-item.short(label="其他")
-                    el-radio-group(v-model="formModel.other1")
+                    el-radio-group(v-model="formModel.other1" disabled)
                       el-radio(label="是")
                       el-radio(label="否")
-                  el-form-item.long(label="其他" v-if="formModel.other1==='是'")
-                    el-input(v-model="formModel.other2")
+                  el-form-item.long(label="其他" v-if="formModel.other1==='是'" disabled)
+                    el-input(v-model="formModel.other2" disabled)
             tr
               td.short-td
                 div.con2-left 其他关节
               td.long-td
                 div.con2-right
                   el-form-item.short(label="对侧膝关节")
-                    el-select(v-model="formModel.contralateral" placeholder="请选择")
+                    el-select(v-model="formModel.contralateral" placeholder="请选择" disabled)
                       el-option(label="无症状" value="无症状")
                       el-option(label="有症状" value="有症状")
                       el-option(label="已经置换" value="已经置换")
                       el-option(label="将要置换" value="将要置换")
                       el-option(label="不想置换" value="不想置换")
                   el-form-item.short(label="其他")
-                    el-input(v-model="formModel.other3" clearable)
+                    el-input(v-model="formModel.other3" readonly)
             tr
               td.short-td
                 div.con2-left 病人分类
               td.long-td
                 div.con2-right
                   el-form-item.short(label="分类")
-                    el-select(v-model="formModel.classification" placeholder="请选择")
+                    el-select(v-model="formModel.classification" placeholder="请选择" disabled)
                       el-option(label="单侧或双侧（对侧膝关节已成功置换）" value="单侧或双侧（对侧膝关节已成功置换）")
                       el-option(label="单侧，对侧膝关节有症状" value="单侧，对侧膝关节有症状")
                       el-option(label="多发关节炎或其他疾病" value="多发关节炎或其他疾病")
@@ -138,40 +137,40 @@
               td.long-td
                 div.con2-right
                   el-form-item(label="疼痛")
-                    el-select.long(v-model="formModel.pain" placeholder="请选择")
+                    el-select.long(v-model="formModel.pain" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr1" :key="index" :value="a.id" :label="a.name")
                 div
                   div.left-align
                     p 术前活动度
                   el-form-item.mini.toleft-p(label="伸直")
-                    el-input(v-model="formModel.unwind" clearable)
+                    el-input(v-model="formModel.unwind" readonly)
                       template(slot="append") °
                   el-form-item.mini
-                    el-select.long.toleft(v-model="formModel.overextension" placeholder="请选择")
+                    el-select.long.toleft(v-model="formModel.overextension" placeholder="请选择" disabled)
                       el-option(label="屈曲挛缩" value="屈曲挛缩")
                       el-option(label="过伸" value="过伸")
                   el-form-item.mini.toleft(label="屈曲" )
-                    el-input(v-model="formModel.buckling" clearable)
+                    el-input(v-model="formModel.buckling" readonly)
                       template(slot="append") °
                 div
                   div.left-align
                     p 稳定性
                   el-form-item.short.toleft(label="前后位")
-                    el-select.long(v-model="formModel.apPosition" placeholder="请选择")
+                    el-select.long(v-model="formModel.apPosition" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr2" :key="index" :value="a.id" :label="a.name")
 
                   el-form-item.short.toleft-p(label="侧位" label-width="120px")
-                    el-select.long(v-model="formModel.lateralPosition" placeholder="请选择")
+                    el-select.long(v-model="formModel.lateralPosition" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr3" :key="index" :value="a.id" :label="a.name")
                 el-form-item.short(label="过伸")
-                  el-select.long(v-model="formModel.hyperextension" placeholder="请选择")
+                  el-select.long(v-model="formModel.hyperextension" placeholder="请选择" disabled)
                     el-option(v-for="(a,index) in arr4" :key="index" :value="a.id" :label="a.name")
 
                 el-form-item.short.linecenter(label="固定屈曲挛缩(FFC)" label-width="150px")
-                  el-select.long(v-model="formModel.fixedFlexionContracture" placeholder="请选择" )
+                  el-select.long(v-model="formModel.fixedFlexionContracture" placeholder="请选择" disabled)
                     el-option(v-for="(a,index) in arr5" :key="index" :value="a.id" :label="a.name")
                 el-form-item.short(label="力线")
-                  el-select.long(v-model="formModel.forceLine" placeholder="请选择")
+                  el-select.long(v-model="formModel.forceLine" placeholder="请选择" disabled)
                     el-option(v-for="(a,index) in arr6" :key="index" :value="a.id" :label="a.name")
                 div
                   div.left-align
@@ -183,13 +182,13 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="行走")
-                    el-select.long(v-model="formModel.hoof" placeholder="请选择")
+                    el-select.long(v-model="formModel.hoof" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr7" :key="index" :value="a.id" :label="a.name")
                   el-form-item.short(label="上下楼梯")
-                    el-select.long(v-model="formModel.stairActivity" placeholder="请选择")
+                    el-select.long(v-model="formModel.stairActivity" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr8" :key="index" :value="a.id" :label="a.name")
                   el-form-item.short(label="行走辅助")
-                    el-select.long(v-model="formModel.walkingAid" placeholder="请选择")
+                    el-select.long(v-model="formModel.walkingAid" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr9" :key="index" :value="a.id" :label="a.name")
                   div
                     div.left-align
@@ -201,20 +200,20 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="身高")
-                    el-input(v-model="formModel.height" clearable)
+                    el-input(v-model="formModel.height" readonly)
                       template(slot="append") cm
                   el-form-item.short(label="股四头肌肌力" label-width="50%")
-                    el-input(v-model="formModel.muscle" clearable)
+                    el-input(v-model="formModel.muscle" readonly)
                   el-form-item.short(label="体重")
-                    el-input(v-model="formModel.weight" clearable)
+                    el-input(v-model="formModel.weight" readonly)
                       template(slot="append") kg
                   el-form-item.short(label="机械轴（前后位X线片）" label-width="50%")
-                    el-input(v-model="formModel.machine" clearable)
+                    el-input(v-model="formModel.machine" readonly)
                   el-form-item.short()
-                    el-input(v-model="formModel.angle11" clearable)
+                    el-input(v-model="formModel.angle11" readonly)
                       template(slot="append") °
                   el-form-item.short()
-                    el-radio-group.long(v-model="formModel.around")
+                    el-radio-group.long(v-model="formModel.around" disabled)
                       el-radio(label="内翻")
                       el-radio(label="外翻")
             tr
@@ -223,22 +222,22 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="日期")
-                    el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2")
+                    el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2" disabled)
                   el-form-item.short(label="手术医生")
-                    el-input(v-model="formModel.doctor2" clearable)
+                    el-input(v-model="formModel.doctor2" readonly)
             tr
               td.short-td
                 div.con2-left 电动驱血带
               td.long-td
                 div.con2-right
                   el-form-item.unit-width(label="第一次充气")
-                    el-input(v-model="formModel.firstInflation" clearable)
+                    el-input(v-model="formModel.firstInflation" readonly)
                       template(slot="append") 分
                   el-form-item.unit-width(label="放气" )
-                    el-input(v-model="formModel.deFlation" clearable)
+                    el-input(v-model="formModel.deFlation" readonly)
                       template(slot="append") 分
                   el-form-item.unit-width(label="第二次充气")
-                    el-input(v-model="formModel.secondInflation" clearable)
+                    el-input(v-model="formModel.secondInflation" readonly)
                       template(slot="append") 分
             tr
               td.short-td
@@ -246,35 +245,35 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="入路")
-                    el-select(v-model="formModel.approach" placeholder="请选择")
+                    el-select(v-model="formModel.approach" placeholder="请选择" disabled)
                       el-option(label="Install" value="Install")
                       el-option(label="髌旁内侧入路" value="髌旁内侧入路")
                       el-option(label="胫骨结节截骨术" value="胫骨结节截骨术")
                       el-option(label="外侧入路" value="前侧")
                   el-form-item.short(label="其他")
-                    el-input(v-model="formModel.other4" clearable)
+                    el-input(v-model="formModel.other4" readonly)
             tr
               td.short-td
                 div.con2-left 松解
               td.long-td
                 div.con2-right
                   el-form-item.short(label="内侧")
-                    el-select(v-model="formModel.inside" placeholder="请选择")
+                    el-select(v-model="formModel.inside" placeholder="请选择" disabled)
                       el-option(label="无" value="无")
                       el-option(label="一般性松解" value="一般性松解")
                       el-option(label="广泛性松解" value="广泛性松解")
                   el-form-item.short(label="后方")
-                    el-select(v-model="formModel.rear" placeholder="请选择")
+                    el-select(v-model="formModel.rear" placeholder="请选择" disabled)
                       el-option(label="无" value="无")
                       el-option(label="一般性松解" value="一般性松解")
                       el-option(label="广泛性松解" value="广泛性松解")
                   el-form-item.short(label="外侧")
-                    el-select(v-model="formModel.outBoard" placeholder="请选择")
+                    el-select(v-model="formModel.outBoard" placeholder="请选择" disabled)
                       el-option(label="无" value="无")
                       el-option(label="一般性松解" value="一般性松解")
                       el-option(label="广泛性松解" value="广泛性松解")
                   el-form-item.short(label="外侧支持带")
-                    el-select(v-model="formModel.retinaculum" placeholder="请选择")
+                    el-select(v-model="formModel.retinaculum" placeholder="请选择" disabled)
                       el-option(label="无" value="无")
                       el-option(label="一般性松解" value="一般性松解")
                       el-option(label="广泛性松解" value="广泛性松解")
@@ -284,17 +283,17 @@
               td.long-td
                 div.con2-right
                   el-form-item.mini(label="脂肪垫")
-                    el-select(v-model="formModel.fatPad" placeholder="请选择")
+                    el-select(v-model="formModel.fatPad" placeholder="请选择" disabled)
                       el-option(label="保留" value="保留")
                       el-option(label="修剪" value="修剪")
                       el-option(label="切除" value="切除")
                   el-form-item.mini(label="滑膜切除")
-                    el-select(v-model="formModel.synovectomy" placeholder="请选择")
+                    el-select(v-model="formModel.synovectomy" placeholder="请选择" disabled)
                       el-option(label="少量" value="少量")
                       el-option(label="中等" value="中等")
                       el-option(label="完整" value="完整")
                   el-form-item.mini(label="髌韧带")
-                    el-select(v-model="formModel.ligament" placeholder="请选择")
+                    el-select(v-model="formModel.ligament" placeholder="请选择" disabled)
                       el-option(label="完整" value="完整")
                       el-option(label="轻度撕脱" value="轻度撕脱")
                       el-option(label="重度撕脱" value="重度撕脱")
@@ -304,21 +303,21 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="股骨")
-                    el-select(v-model="formModel.femur" placeholder="请选择")
+                    el-select(v-model="formModel.femur" placeholder="请选择" disabled)
                       el-option(label="完整" value="完整")
                       el-option(label="松动" value="松动")
                   el-form-item.short(label="胫骨")
-                    el-select(v-model="formModel.tibia" placeholder="请选择")
+                    el-select(v-model="formModel.tibia" placeholder="请选择" disabled)
                       el-option(label="完整" value="完整")
                       el-option(label="聚乙烯磨损" value="聚乙烯磨损")
                       el-option(label="松动" value="松动")
                   el-form-item.short(label="髌骨")
-                    el-select(v-model="formModel.patella" placeholder="请选择")
+                    el-select(v-model="formModel.patella" placeholder="请选择" disabled)
                       el-option(label="完整" value="完整")
                       el-option(label="聚乙烯磨损" value="聚乙烯磨损")
                       el-option(label="松动" value="松动")
                   el-form-item.short(label="更换组件")
-                    el-select(v-model="formModel.renewal" placeholder="请选择")
+                    el-select(v-model="formModel.renewal" placeholder="请选择" disabled)
                       el-option(label="股骨侧" value="股骨侧")
                       el-option(label="胫骨托" value="胫骨托")
                       el-option(label="胫骨侧" value="胫骨侧")
@@ -329,9 +328,9 @@
               td.long-td
                 div.con2-right
                   el-form-item(label="名称")
-                    el-input.short(v-model="formModel.name2")
+                    el-input.short(v-model="formModel.name2" readonly)
                   el-form-item(label="类型")
-                    el-select.short(v-model="formModel.genre" placeholder="请选择")
+                    el-select.short(v-model="formModel.genre" placeholder="请选择" disabled)
                       el-option(label="交叉韧带保留型" value="交叉韧带保留型")
                       el-option(label="后稳定型" value="后稳定型")
                       el-option(label="内外翻限制型" value="内外翻限制型")
@@ -343,40 +342,40 @@
                   div.left-align
                     p 组件
                   el-form-item.medium.toleft-p(label="型号")
-                    el-input.long(v-model="formModel.genre2" clearable)
+                    el-input.long(v-model="formModel.genre2" readonly)
                   el-form-item.medium(label="水泥型")
-                    el-select.long(v-model="formModel.genre3" placeholder="请选择")
+                    el-select.long(v-model="formModel.genre3" placeholder="请选择" disabled)
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
                 div.con2-right
                   el-form-item.short(label="旋转")
-                    el-select(v-model="formModel.spin" placeholder="请选择")
+                    el-select(v-model="formModel.spin" placeholder="请选择" disabled)
                       el-option(label="内旋" value="内旋")
                       el-option(label="外旋" value="外旋")
                       el-option(label="中立" value="中立")
                   el-form-item.short.toleft-more
-                    el-input(v-model="formModel.angle" v-if="formModel.spin!=='中立'" clearable)
+                    el-input(v-model="formModel.angle" v-if="formModel.spin!=='中立'" readonly)
                       template(slot="append") °
                 div.con2-right
                   el-form-item.short.toleft(label="股骨前方截骨" label-width="130px")
-                    el-select(v-model="formModel.thighbone" placeholder="请选择")
+                    el-select(v-model="formModel.thighbone" placeholder="请选择" disabled)
                       el-option(label="正确" value="正确")
                       el-option(label="截骨不足" value="截骨不足")
                       el-option(label="过度截骨" value="过度截骨")
                 div.con2-right
                   el-form-item.mini(label="长柄" )
-                    el-select(v-model="formModel.longHandle" placeholder="请选择")
+                    el-select(v-model="formModel.longHandle" placeholder="请选择" disabled)
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
-                  el-form-item.unit-width.toleft(label="长度"  v-if="formModel.longHandle==='是'")
-                    el-input(v-model="formModel.longness" clearable)
+                  el-form-item.unit-width.toleft(label="长度"  v-if="formModel.longHandle==='是'" disabled)
+                    el-input(v-model="formModel.longness" readonly)
                       template(slot="append") mm
-                  el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'")
-                    el-input(v-model="formModel.diameter" clearable)
+                  el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'" disabled)
+                    el-input(v-model="formModel.diameter" readonly)
                       template(slot="append") mm
                 div.con2-right
                   el-form-item.short(label="髓内导向器" )
-                    el-select(v-model="formModel.guider" placeholder="请选择")
+                    el-select(v-model="formModel.guider" placeholder="请选择" disabled)
                       el-option(label="被骨头堵住" value="被骨头堵住")
                       el-option(label="被骨水泥堵住" value="被骨水泥堵住")
                       el-option(label="没被堵" value="没被堵")
@@ -388,29 +387,29 @@
                   div.left-align
                     p 金属底托
                   el-form-item.medium.toleft-p(label="型号")
-                    el-input.long(v-model="formModel.genre4" clearable)
+                    el-input.long(v-model="formModel.genre4" readonly)
                   el-form-item.medium(label="水泥型")
-                    el-select.long(v-model="formModel.genre5" placeholder="请选择")
+                    el-select.long(v-model="formModel.genre5" placeholder="请选择" disabled)
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
                 div.con2-right
                   el-form-item.short(label="旋转")
-                    el-select(v-model="formModel.spin2" placeholder="请选择")
+                    el-select(v-model="formModel.spin2" placeholder="请选择" disabled)
                       el-option(label="内旋" value="内旋")
                       el-option(label="外旋" value="外旋")
                       el-option(label="中立" value="中立")
                   el-form-item.short.toleft-more
-                    el-input(v-model="formModel.angle2" v-if="formModel.spin2!=='中立'" clearable)
+                    el-input(v-model="formModel.angle2" v-if="formModel.spin2!=='中立'" readonly)
                       template(slot="append") °
                 div.con2-right
                   el-form-item.short(label="侧位")
-                    el-select(v-model="formModel.lateralPosition1" placeholder="请选择")
+                    el-select(v-model="formModel.lateralPosition1" placeholder="请选择" disabled)
                       el-option(label="准确" value="准确")
                       el-option(label="内侧移位" value="内侧移位")
                       el-option(label="外侧移位" value="中立")
                 div.con2-right
                   el-form-item.short(label="正位")
-                    el-select(v-model="formModel.normotopia" placeholder="请选择")
+                    el-select(v-model="formModel.normotopia" placeholder="请选择" disabled)
                       el-option(label="准确" value="准确")
                       el-option(label="内侧移位" value="内侧移位")
                       el-option(label="外侧移位" value="中立")
@@ -418,20 +417,20 @@
                   div.left-align
                     p 植入
                   el-form-item.medium.toleft-p(label="尺寸")
-                    el-input(v-model="formModel.dimension" clearable)
+                    el-input(v-model="formModel.dimension" readonly)
                   el-form-item.medium(label="厚度")
-                    el-input(v-model="formModel.thickness" clearable)
+                    el-input(v-model="formModel.thickness" readonly)
                       template(slot="append") mm
                 div.con2-right
                   el-form-item.mini(label="长柄" )
-                    el-select(v-model="formModel.longHandle2" placeholder="请选择")
+                    el-select(v-model="formModel.longHandle2" placeholder="请选择" disabled)
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
                   el-form-item.unit-width.toleft(label="长度" v-if="formModel.longHandle2==='是'")
-                    el-input(v-model="formModel.longness2" clearable)
+                    el-input(v-model="formModel.longness2" readonly)
                       template(slot="append") mm
                   el-form-item.unit-width(label="直径" v-if="formModel.longHandle2==='是'")
-                    el-input(v-model="formModel.diameter2" clearable)
+                    el-input(v-model="formModel.diameter2" readonly)
                       template(slot="append") mm
             tr
               td.short-td
@@ -441,15 +440,15 @@
                   div.left-align
                     p 尺寸
                   el-form-item.medium.toleft-p(label="水泥")
-                    el-select(v-model="formModel.cement" placeholder="请选择")
+                    el-select(v-model="formModel.cement" placeholder="请选择" disabled)
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
-                  el-form-item.medium(label="总厚度" v-if="formModel.cement==='是'")
-                    el-input(v-model="formModel.thickness2" clearable)
+                  el-form-item.medium(label="总厚度" v-if="formModel.cement==='是'" disabled)
+                    el-input(v-model="formModel.thickness2" readonly)
                       template(slot="append") mm
-                div.con2-right(v-if="formModel.cement==='是'")
+                div.con2-right(v-if="formModel.cement==='是'" disabled)
                   el-form-item.short(label="位置" )
-                    el-select(v-model="formModel.location" placeholder="请选择")
+                    el-select(v-model="formModel.location" placeholder="请选择" disabled)
                       el-option(label="内侧" value="内侧")
                       el-option(label="中心" value="中心")
                       el-option(label="外上" value="外上")
@@ -461,16 +460,16 @@
               td.long-td
                 div.con2-right
                   el-form-item.short.toleft
-                    el-select.long(v-model="formModel.vitium" placeholder="请选择")
+                    el-select.long(v-model="formModel.vitium" placeholder="请选择" disabled)
                       el-option(label="有" value="有")
                       el-option(label="无" value="无")
                 div.con2-right(v-if="formModel.vitium==='有'")
                   el-form-item.short(label="位置" )
-                    el-select(v-model="formModel.location2" placeholder="请选择")
+                    el-select(v-model="formModel.location2" placeholder="请选择" disabled)
                       el-option(label="内侧" value="内侧")
                       el-option(label="外侧" value="中心")
                   el-form-item.short
-                    el-select(v-model="formModel.location3" placeholder="请选择")
+                    el-select(v-model="formModel.location3" placeholder="请选择" disabled)
                       el-option(label="前方" value="前方")
                       el-option(label="远端" value="远端")
                       el-option(label="后方" value="后方")
@@ -478,13 +477,13 @@
                   div.left-align
                     p 区域
                   el-form-item.unit-width.toleft-p
-                    el-input.toleft(v-model="formModel.length" clearable)
+                    el-input.toleft(v-model="formModel.length" readonly)
                       template(slot="append") mm
                   el-form-item.unit-width.toleft-more(label="x")
-                    el-input(v-model="formModel.wide" clearable)
+                    el-input(v-model="formModel.wide" readonly)
                       template(slot="append") mm
                   el-form-item.unit-width.toleft(label="深度")
-                    el-input(v-model="formModel.depth" clearable)
+                    el-input(v-model="formModel.depth" readonly)
                       template(slot="append") mm
             tr
               td.short-td
@@ -492,16 +491,16 @@
               td.long-td
                 div.con2-right
                   el-form-item.short.toleft
-                    el-select.long(v-model="formModel.vitium2" placeholder="请选择")
+                    el-select.long(v-model="formModel.vitium2" placeholder="请选择" disabled)
                       el-option(label="有" value="有")
                       el-option(label="无" value="无")
                 div.con2-right(v-if="formModel.vitium2==='有'")
                   el-form-item.short(label="位置" )
-                    el-select(v-model="formModel.location4" placeholder="请选择")
+                    el-select(v-model="formModel.location4" placeholder="请选择" disabled)
                       el-option(label="内侧" value="内侧")
                       el-option(label="外侧" value="中心")
                   el-form-item.short
-                    el-select(v-model="formModel.location5" placeholder="请选择")
+                    el-select(v-model="formModel.location5" placeholder="请选择" disabled)
                       el-option(label="前方" value="前方")
                       el-option(label="远端" value="远端")
                       el-option(label="后方" value="后方")
@@ -509,17 +508,17 @@
                   div.left-align
                     p 区域
                   el-form-item.unit-width.toleft-p
-                    el-input.toleft(v-model="formModel.length2" clearable)
+                    el-input.toleft(v-model="formModel.length2" readonly)
                       template(slot="append") mm
                   el-form-item.unit-width.toleft-more(label="x")
-                    el-input(v-model="formModel.wide2" clearable)
+                    el-input(v-model="formModel.wide2" readonly)
                       template(slot="append") mm
                   el-form-item.unit-width.toleft(label="深度")
-                    el-input(v-model="formModel.depth2" clearable)
+                    el-input(v-model="formModel.depth2" readonly)
                       template(slot="append") mm
                 div.con2-right(v-if="formModel.vitium2==='有'")
                   el-form-item.short(label="处理方案" )
-                    el-select(v-model="formModel.processingScheme" placeholder="请选择")
+                    el-select(v-model="formModel.processingScheme" placeholder="请选择" disabled)
                       el-option(label="打压植骨" value="打压植骨")
                       el-option(label="植骨内固定" value="植骨内固定")
                       el-option(label="楔形植骨" value="楔形植骨")
@@ -531,91 +530,91 @@
               td.long-td
                 div.con2-right
                   el-form-item(label="髌骨轨迹")
-                    el-select(v-model="formModel.patellaTrajectory" placeholder="请选择")
+                    el-select(v-model="formModel.patellaTrajectory" placeholder="请选择" disabled)
                       el-option(label="完美" value="完美")
                       el-option(label="满意" value="满意")
                       el-option(label="不满意" value="不满意")
                 div.con2-right
                   el-form-item.short(label="完全伸直")
-                    el-input(v-model="formModel.completelyStraight")
+                    el-input(v-model="formModel.completelyStraight" disabled)
                       template(slot="append") °
                   el-form-item.short
-                    el-select(v-model="formModel.overextension2" placeholder="屈曲挛缩")
+                    el-select(v-model="formModel.overextension2" placeholder="屈曲挛缩" disabled)
                       el-option(label="屈曲挛缩" value="屈曲挛缩")
                       el-option(label="过伸" value="过伸")
                 div.con2-right
                   el-form-item.short(label="全屈")
-                    el-input(v-model="formModel.allBends")
+                    el-input(v-model="formModel.allBends" readonly)
                       template(slot="append") °
                 div.con2-right
                   el-form-item.unit-width(label="力线")
-                    el-select(v-model="formModel.normal" placeholder="正常")
+                    el-select(v-model="formModel.normal" placeholder="正常" disabled)
                       el-option(label="正常（5-10°）" value="正常")
                       el-option(label="不正常" value="不正常")
-                  el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'")
-                    el-input(v-model="formModel.forceLine2")
+                  el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'" readonly)
+                    el-input(v-model="formModel.forceLine2" readonly)
                       template(slot="append") °
-                  el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'")
-                    el-select(v-model="formModel.reversal" placeholder="内翻")
+                  el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'" readonly)
+                    el-select(v-model="formModel.reversal" placeholder="内翻" disabled)
                       el-option(label="内翻" value="内翻")
                       el-option(label="外翻" value="外翻")
                 div.con2-right
                   el-form-item.unit-width(label="内侧松弛")
-                    el-select(v-model="formModel.exist" placeholder="无")
+                    el-select(v-model="formModel.exist" placeholder="无" disabled)
                       el-option(label="有" value="有")
                       el-option(label="无" value="无")
-                  el-form-item.unit-width.toleft-p(v-if="formModel.exist==='有'")
-                    el-input(v-model="formModel.angle3")
+                  el-form-item.unit-width.toleft-p(v-if="formModel.exist==='有'" readonly)
+                    el-input(v-model="formModel.angle3" readonly)
                       template(slot="append") °
-                  el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist==='有'")
-                    el-input(v-model="formModel.angle4")
+                  el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist==='有'" readonly)
+                    el-input(v-model="formModel.angle4" readonly)
                       template(slot="append") °
-                  span.p-left(v-if="formModel.exist==='有'") 屈曲时
+                  span.p-left(v-if="formModel.exist==='有'" readonly) 屈曲时
                 div.con2-right
                   el-form-item.unit-width(label="外侧松弛")
-                    el-select(v-model="formModel.exist1" placeholder="无")
+                    el-select(v-model="formModel.exist1" placeholder="无" disabled)
                       el-option(label="有" value="有")
                       el-option(label="无" value="无")
-                  el-form-item.unit-width.toleft-p(v-if="formModel.exist1==='有'")
-                    el-input(v-model="formModel.angle5")
+                  el-form-item.unit-width.toleft-p(v-if="formModel.exist1==='有'" disabled)
+                    el-input(v-model="formModel.angle5" readonly)
                       template(slot="append") °
-                  el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist1==='有'")
-                    el-input(v-model="formModel.angle6")
+                  el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist1==='有'" readonly)
+                    el-input(v-model="formModel.angle6" readonly)
                       template(slot="append") °
-                  span(v-if="formModel.exist1==='有'").p-left 屈曲时
+                  span(v-if="formModel.exist1==='有'" readonly).p-left 屈曲时
             tr
               td.short-td
                 div.con2-left 术后
               td.long-td
                 div.con2-right.short
                   el-form-item(label="总引流")
-                    el-input(v-model="formModel.drainage")
+                    el-input(v-model="formModel.drainage" readonly)
                       template(slot="append") ml
                 div
                   div.left-align
                     p 屈曲达到90°
                   el-form-item.short.toleft-p(label="术后")
-                    el-input.mini(v-model="formModel.postoperationDay" clearable)
+                    el-input.mini(v-model="formModel.postoperationDay" readonly)
                     span.p-left 天
                 div.flex
                   div.left-align.top-align
                     p 术后两周活动度
                   div.mini.toleft-p
                     el-form-item(label="伸直")
-                      el-input(v-model="formModel.unwind2" clearable)
+                      el-input(v-model="formModel.unwind2" readonly)
                         template(slot="append") °
                   div.mini.toleft
                     el-form-item(label="屈曲")
-                      el-input(v-model="formModel.buckling2" clearable)
+                      el-input(v-model="formModel.buckling2" readonly)
                         template(slot="append") °
                   div.mini.toleft
                     el-form-item
-                      el-select(v-model="formModel.debonding" placeholder="麻醉下松解")
+                      el-select(v-model="formModel.debonding" placeholder="麻醉下松解" disabled)
                         el-option(label="麻醉下松解" value="麻醉下松解")
                         el-option(label="无麻醉下松解" value="无麻醉下松解")
                 div.con2-right
                   el-form-item.short(label="切口愈合")
-                    el-select(v-model="formModel.woundHealing" placeholder="请选择")
+                    el-select(v-model="formModel.woundHealing" placeholder="请选择" disabled)
                       el-option(label="容易" value="容易")
                       el-option(label="边缘坏死" value="边缘坏死")
                       el-option(label="感染" value="感染")
@@ -623,13 +622,13 @@
                   div.left-align.big-width
                     p 用单手杖行走
                   el-form-item.short.toleft-p(label="术后")
-                    el-input(v-model="formModel.postoperationDay2" clearable)
+                    el-input(v-model="formModel.postoperationDay2" readonly)
                   span.p-left 天
                 div
                   div.left-align
                     p 独立行走
                   el-form-item.short.toleft-p(label="术后")
-                    el-input(v-model="formModel.postoperationDay3" clearable)
+                    el-input(v-model="formModel.postoperationDay3" readonly)
                   span.p-left 天
       div.art2
         h1.title 膝关节功能评分
@@ -686,21 +685,21 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" disabled)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth" clearable)
+            el-input(v-model="formModel.postoperationMonth" readonly)
           el-form-item.mini(label="疼痛" label-width="160px")
-            el-input(v-model="formModel.pain2" clearable)
+            el-input(v-model="formModel.pain2" readonly)
           el-form-item.mini(label="活动度")
-            el-input(v-model="formModel.activity" clearable)
+            el-input(v-model="formModel.activity" readonly)
           el-form-item.mini(label="稳定性"  label-width="120px")
-            el-input(v-model="formModel.stability" clearable)
+            el-input(v-model="formModel.stability" readonly)
           el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
-            el-input(v-model="formModel.fixedFlexionContracture2" clearable)
+            el-input(v-model="formModel.fixedFlexionContracture2" readonly)
           el-form-item.mini(label="伸直位松弛")
-            el-input(v-model="formModel.extensionRelaxation" clearable)
+            el-input(v-model="formModel.extensionRelaxation" readonly)
           el-form-item.mini(label="力线"  label-width="120px")
-            el-input(v-model="formModel.forceLine3" clearable)
+            el-input(v-model="formModel.forceLine3" readonly)
           div
             div.left-align
               p 总计
@@ -776,27 +775,27 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" readonly)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth2" clearable)
+            el-input(v-model="formModel.postoperationMonth2" readonly)
           el-form-item.mini(label="患者满意度" label-width="110px")
-            el-input(v-model="formModel.satisfaction" clearable)
+            el-input(v-model="formModel.satisfaction" readonly)
           el-form-item.mini(label="步态" )
-            el-input(v-model="formModel.gait" clearable)
+            el-input(v-model="formModel.gait" readonly)
           el-form-item.mini(label="髌骨侧问题" label-width="120px")
-            el-input(v-model="formModel.problem" clearable)
+            el-input(v-model="formModel.problem" readonly)
           el-form-item.mini(label="股四头肌肌力" label-width="110px")
-            el-input(v-model="formModel.muscleStrength" clearable)
+            el-input(v-model="formModel.muscleStrength" readonly)
           el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
-            el-input(v-model="formModel.fixedFlexionContracture3" clearable)
+            el-input(v-model="formModel.fixedFlexionContracture3" readonly)
           el-form-item.mini(label="过伸" label-width="120px")
-            el-input(v-model="formModel.hyperextension2" clearable)
+            el-input(v-model="formModel.hyperextension2" readonly)
           el-form-item.mini(label="侧方松弛" label-width="110px")
-            el-input(v-model="formModel.lateralSlack" clearable)
+            el-input(v-model="formModel.lateralSlack" readonly)
           el-form-item.mini(label="前后松弛" )
-            el-input(v-model="formModel.frontBackSlack" clearable)
+            el-input(v-model="formModel.frontBackSlack" readonly)
           el-form-item.mini(label="后方松弛" label-width="120px")
-            el-input(v-model="formModel.backSlack" clearable)
+            el-input(v-model="formModel.backSlack" readonly)
       div.art2
         h1.title 膝关节协会功能评估
         div.con2
@@ -833,15 +832,15 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" readonly)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth3" clearable)
+            el-input(v-model="formModel.postoperationMonth3" readonly)
           el-form-item.mini(label="步行")
-            el-input(v-model="formModel.walk1" clearable)
+            el-input(v-model="formModel.walk1" readonly)
           el-form-item.mini(label="上下楼梯")
-            el-input(v-model="formModel.stairActivity1" clearable)
+            el-input(v-model="formModel.stairActivity1" readonly)
           el-form-item.mini(label="辅助行走" label-width="120px")
-            el-input(v-model="formModel.walkingAid1" clearable)
+            el-input(v-model="formModel.walkingAid1" readonly)
           div
             div.left-align
               p 总计
@@ -856,9 +855,9 @@
               td(colspan="2").right-td
                 el-form-item.short.bottom-align(label="日期" style="float:left")
                   el-col(:span="20")
-                    el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;")
+                    el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;" readonly)
                 el-form-item.short.bottom-align(label="术后第")
-                  el-input(v-model="formModel.postoperationWeek" clearable)
+                  el-input(v-model="formModel.postoperationWeek" readonly)
                     template(slot="append") 周
             tr
               td.short-td
@@ -866,7 +865,7 @@
               td.mid-td 内翻=负值，外翻=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.mechanicalAxis")
+                  el-input(v-model="formModel.mechanicalAxis" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -874,7 +873,7 @@
               td.mid-td 内翻=负值，外翻=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.dissectionAxis")
+                  el-input(v-model="formModel.dissectionAxis" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -882,7 +881,7 @@
               td.mid-td 测量角度a-90°；内翻=负值，外翻=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.angle7")
+                  el-input(v-model="formModel.angle7" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -890,7 +889,7 @@
               td.mid-td 测量角度b-90°；内翻=负值，外翻=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.angle8")
+                  el-input(v-model="formModel.angle8" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -898,7 +897,7 @@
               td.mid-td 测量角度c；e过伸=负值/屈曲=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.angle9")
+                  el-input(v-model="formModel.angle9" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -906,7 +905,7 @@
               td.mid-td 90°-测量角度d；前倾=负值，后倾=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.angle10")
+                  el-input(v-model="formModel.angle10" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -914,7 +913,7 @@
               td.mid-td 相对于胫骨轴线；内翻=负值，外翻=正值
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.ankle")
+                  el-input(v-model="formModel.ankle" readonly)
                     template(slot="append") °
             tr
               td.short-td
@@ -922,7 +921,7 @@
               td.mid-td 前后位胫骨覆盖率
               td.right-td
                 el-form-item.bottom-align.toleft-p
-                  el-input(v-model="formModel.tibiaFraction")
+                  el-input(v-model="formModel.tibiaFraction" readonly)
                     template(slot="append") %
       div.art2
         h1.title
@@ -952,32 +951,32 @@
           div.con2-left
             el-form-item.short(label="日期" style="float:left" label-width="180px")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" readonly)
             el-form-item.short(label="术后第（）个月" label-width="180px")
-              el-input(v-model="formModel.postoperationMonth4" clearable)
+              el-input(v-model="formModel.postoperationMonth4" readonly)
             el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.thighboneSide" clearable)
+              el-input(v-model="formModel.thighboneSide" readonly)
             el-form-item.short(label="胫骨骨水泥透亮区-前后位" label-width="180px")
-              el-input(v-model="formModel.tibiaFab" clearable)
+              el-input(v-model="formModel.tibiaFab" readonly)
             el-form-item.short(label="胫骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.tibiaSide" clearable)
+              el-input(v-model="formModel.tibiaSide" readonly)
             el-form-item.short(label="髌骨骨水泥透亮区-切位" label-width="180px")
-              el-input(v-model="formModel.thighboneCut" clearable)
+              el-input(v-model="formModel.thighboneCut" readonly)
             el-form-item.short(label="髌骨半脱位" label-width="180px")
-              el-input(v-model="formModel.thighboneSubluxation" clearable)
+              el-input(v-model="formModel.thighboneSubluxation" readonly)
             el-form-item.short(label="植骨吸收" label-width="180px")
-              el-input(v-model="formModel.boneGraft" clearable)
+              el-input(v-model="formModel.boneGraft" readonly)
             el-form-item.short(label="松动（股骨/胫骨/髌骨）" label-width="180px")
-              el-input(v-model="formModel.loose" clearable)
+              el-input(v-model="formModel.loose" readonly)
             el-form-item.short(label="聚乙烯内衬" label-width="180px")
-              el-input(v-model="formModel.polyethyleneLiner" clearable)
+              el-input(v-model="formModel.polyethyleneLiner" readonly)
             el-form-item.short(label="骨溶解" label-width="180px")
-              el-input(v-model="formModel.osteolysis" clearable)
+              el-input(v-model="formModel.osteolysis" readonly)
                   el-form-item.short.linecenter(label="固定屈曲挛缩(FFC)" label-width="150px")
-                    el-select.long(v-model="formModel.fixedFlexionContracture" placeholder="请选择" )
+                    el-select.long(v-model="formModel.fixedFlexionContracture" placeholder="请选择"  disabled)
                       el-option(v-for="(a,index) in arr5" :key="index" :value="a.id" :label="a.name")
                   el-form-item.short(label="力线")
-                    el-select.long(v-model="formModel.forceLine" placeholder="请选择")
+                    el-select.long(v-model="formModel.forceLine" placeholder="请选择" disabled)
                       el-option(v-for="(a,index) in arr6" :key="index" :value="a.id" :label="a.name")
                   div
                     div.left-align
@@ -989,13 +988,13 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="行走")
-                      el-select.long(v-model="formModel.hoof" placeholder="请选择")
+                      el-select.long(v-model="formModel.hoof" placeholder="请选择" disabled)
                         el-option(v-for="(a,index) in arr7" :key="index" :value="a.id" :label="a.name")
                     el-form-item.short(label="上下楼梯")
-                      el-select.long(v-model="formModel.stairActivity" placeholder="请选择")
+                      el-select.long(v-model="formModel.stairActivity" placeholder="请选择" disabled)
                         el-option(v-for="(a,index) in arr8" :key="index" :value="a.id" :label="a.name")
                     el-form-item.short(label="行走辅助")
-                      el-select.long(v-model="formModel.walkingAid" placeholder="请选择")
+                      el-select.long(v-model="formModel.walkingAid" placeholder="请选择" disabled)
                         el-option(v-for="(a,index) in arr9" :key="index" :value="a.id" :label="a.name")
                     div
                       div.left-align
@@ -1007,20 +1006,20 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="身高")
-                      el-input(v-model="formModel.height" clearable)
+                      el-input(v-model="formModel.height" readonly)
                         template(slot="append") cm
                     el-form-item.short(label="股四头肌肌力" label-width="50%")
-                      el-input(v-model="formModel.muscle" clearable)
+                      el-input(v-model="formModel.muscle" readonly)
                     el-form-item.short(label="体重")
-                      el-input(v-model="formModel.weight" clearable)
+                      el-input(v-model="formModel.weight" readonly)
                         template(slot="append") kg
                     el-form-item.short(label="机械轴（前后位X线片）" label-width="50%")
-                      el-input(v-model="formModel.machine" clearable)
+                      el-input(v-model="formModel.machine" readonly)
                     el-form-item.short()
-                      el-input(v-model="formModel.angle11" clearable)
+                      el-input(v-model="formModel.angle11" readonly)
                         template(slot="append") °
                     el-form-item.short()
-                      el-radio-group.long(v-model="formModel.around")
+                      el-radio-group.long(v-model="formModel.around" disabled)
                         el-radio(label="内翻")
                         el-radio(label="外翻")
               tr
@@ -1029,22 +1028,22 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="日期")
-                      el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2")
+                      el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2" readonly)
                     el-form-item.short(label="手术医生")
-                      el-input(v-model="formModel.doctor2" clearable)
+                      el-input(v-model="formModel.doctor2" readonly)
               tr
                 td.short-td
                   div.con2-left 电动驱血带
                 td.long-td
                   div.con2-right
                     el-form-item.unit-width(label="第一次充气")
-                      el-input(v-model="formModel.firstInflation" clearable)
+                      el-input(v-model="formModel.firstInflation" readonly)
                         template(slot="append") 分
                     el-form-item.unit-width(label="放气" )
-                      el-input(v-model="formModel.deFlation" clearable)
+                      el-input(v-model="formModel.deFlation" readonly)
                         template(slot="append") 分
                     el-form-item.unit-width(label="第二次充气")
-                      el-input(v-model="formModel.secondInflation" clearable)
+                      el-input(v-model="formModel.secondInflation" readonly)
                         template(slot="append") 分
               tr
                 td.short-td
@@ -1052,35 +1051,35 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="入路")
-                      el-select(v-model="formModel.approach" placeholder="请选择")
+                      el-select(v-model="formModel.approach" placeholder="请选择" disabled)
                         el-option(label="Install" value="Install")
                         el-option(label="髌旁内侧入路" value="髌旁内侧入路")
                         el-option(label="胫骨结节截骨术" value="胫骨结节截骨术")
                         el-option(label="外侧入路" value="前侧")
                     el-form-item.short(label="其他")
-                      el-input(v-model="formModel.other4" clearable)
+                      el-input(v-model="formModel.other4" readonly)
               tr
                 td.short-td
                   div.con2-left 松解
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="内侧")
-                      el-select(v-model="formModel.inside" placeholder="请选择")
+                      el-select(v-model="formModel.inside" placeholder="请选择" disabled)
                         el-option(label="无" value="无")
                         el-option(label="一般性松解" value="一般性松解")
                         el-option(label="广泛性松解" value="广泛性松解")
                     el-form-item.short(label="后方")
-                      el-select(v-model="formModel.rear" placeholder="请选择")
+                      el-select(v-model="formModel.rear" placeholder="请选择" disabled)
                         el-option(label="无" value="无")
                         el-option(label="一般性松解" value="一般性松解")
                         el-option(label="广泛性松解" value="广泛性松解")
                     el-form-item.short(label="外侧")
-                      el-select(v-model="formModel.outBoard" placeholder="请选择")
+                      el-select(v-model="formModel.outBoard" placeholder="请选择" disabled)
                         el-option(label="无" value="无")
                         el-option(label="一般性松解" value="一般性松解")
                         el-option(label="广泛性松解" value="广泛性松解")
                     el-form-item.short(label="外侧支持带")
-                      el-select(v-model="formModel.retinaculum" placeholder="请选择")
+                      el-select(v-model="formModel.retinaculum" placeholder="请选择" disabled)
                         el-option(label="无" value="无")
                         el-option(label="一般性松解" value="一般性松解")
                         el-option(label="广泛性松解" value="广泛性松解")
@@ -1090,17 +1089,17 @@
                 td.long-td
                   div.con2-right
                     el-form-item.mini(label="脂肪垫")
-                      el-select(v-model="formModel.fatPad" placeholder="请选择")
+                      el-select(v-model="formModel.fatPad" placeholder="请选择" disabled)
                         el-option(label="保留" value="保留")
                         el-option(label="修剪" value="修剪")
                         el-option(label="切除" value="切除")
                     el-form-item.mini(label="滑膜切除")
-                      el-select(v-model="formModel.synovectomy" placeholder="请选择")
+                      el-select(v-model="formModel.synovectomy" placeholder="请选择" disabled)
                         el-option(label="少量" value="少量")
                         el-option(label="中等" value="中等")
                         el-option(label="完整" value="完整")
                     el-form-item.mini(label="髌韧带")
-                      el-select(v-model="formModel.ligament" placeholder="请选择")
+                      el-select(v-model="formModel.ligament" placeholder="请选择" disabled)
                         el-option(label="完整" value="完整")
                         el-option(label="轻度撕脱" value="轻度撕脱")
                         el-option(label="重度撕脱" value="重度撕脱")
@@ -1110,21 +1109,21 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short(label="股骨")
-                      el-select(v-model="formModel.femur" placeholder="请选择")
+                      el-select(v-model="formModel.femur" placeholder="请选择" disabled)
                         el-option(label="完整" value="完整")
                         el-option(label="松动" value="松动")
                     el-form-item.short(label="胫骨")
-                      el-select(v-model="formModel.tibia" placeholder="请选择")
+                      el-select(v-model="formModel.tibia" placeholder="请选择" disabled)
                         el-option(label="完整" value="完整")
                         el-option(label="聚乙烯磨损" value="聚乙烯磨损")
                         el-option(label="松动" value="松动")
                     el-form-item.short(label="髌骨")
-                      el-select(v-model="formModel.patella" placeholder="请选择")
+                      el-select(v-model="formModel.patella" placeholder="请选择" disabled)
                         el-option(label="完整" value="完整")
                         el-option(label="聚乙烯磨损" value="聚乙烯磨损")
                         el-option(label="松动" value="松动")
                     el-form-item.short(label="更换组件")
-                      el-select(v-model="formModel.renewal" placeholder="请选择")
+                      el-select(v-model="formModel.renewal" placeholder="请选择" disabled)
                         el-option(label="股骨侧" value="股骨侧")
                         el-option(label="胫骨托" value="胫骨托")
                         el-option(label="胫骨侧" value="胫骨侧")
@@ -1135,9 +1134,9 @@
                 td.long-td
                   div.con2-right
                     el-form-item(label="名称")
-                      el-input.short(v-model="formModel.name2")
+                      el-input.short(v-model="formModel.name2" readonly)
                     el-form-item(label="类型")
-                      el-select.short(v-model="formModel.genre" placeholder="请选择")
+                      el-select.short(v-model="formModel.genre" placeholder="请选择" disabled)
                         el-option(label="交叉韧带保留型" value="交叉韧带保留型")
                         el-option(label="后稳定型" value="后稳定型")
                         el-option(label="内外翻限制型" value="内外翻限制型")
@@ -1149,40 +1148,40 @@
                     div.left-align
                       p 组件
                     el-form-item.medium.toleft-p(label="型号")
-                      el-input.long(v-model="formModel.genre2" clearable)
+                      el-input.long(v-model="formModel.genre2" readonly)
                     el-form-item.medium(label="水泥型")
-                      el-select.long(v-model="formModel.genre3" placeholder="请选择")
+                      el-select.long(v-model="formModel.genre3" placeholder="请选择" disabled)
                         el-option(label="是" value="是")
                         el-option(label="否" value="否")
                   div.con2-right
                     el-form-item.short(label="旋转")
-                      el-select(v-model="formModel.spin" placeholder="请选择")
+                      el-select(v-model="formModel.spin" placeholder="请选择" disabled)
                         el-option(label="内旋" value="内旋")
                         el-option(label="外旋" value="外旋")
                         el-option(label="中立" value="中立")
                     el-form-item.short.toleft-more
-                      el-input(v-model="formModel.angle" v-if="formModel.spin!=='中立'" clearable)
+                      el-input(v-model="formModel.angle" v-if="formModel.spin!=='中立'" readonly)
                         template(slot="append") °
                   div.con2-right
                     el-form-item.short.toleft(label="股骨前方截骨" label-width="130px")
-                      el-select(v-model="formModel.thighbone" placeholder="请选择")
+                      el-select(v-model="formModel.thighbone" placeholder="请选择" disabled)
                         el-option(label="正确" value="正确")
                         el-option(label="截骨不足" value="截骨不足")
                         el-option(label="过度截骨" value="过度截骨")
                   div.con2-right
                     el-form-item.mini(label="长柄" )
-                      el-select(v-model="formModel.longHandle" placeholder="请选择")
+                      el-select(v-model="formModel.longHandle" placeholder="请选择" disabled)
                         el-option(label="是" value="是")
                         el-option(label="否" value="否")
                     el-form-item.unit-width.toleft(label="长度"  v-if="formModel.longHandle==='是'")
-                      el-input(v-model="formModel.longness" clearable)
+                      el-input(v-model="formModel.longness" readonly)
                         template(slot="append") mm
-                    el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'")
-                      el-input(v-model="formModel.diameter" clearable)
+                    el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'" disabled)
+                      el-input(v-model="formModel.diameter" readonly)
                         template(slot="append") mm
                   div.con2-right
                     el-form-item.short(label="髓内导向器" )
-                      el-select(v-model="formModel.guider" placeholder="请选择")
+                      el-select(v-model="formModel.guider" placeholder="请选择" disabled)
                         el-option(label="被骨头堵住" value="被骨头堵住")
                         el-option(label="被骨水泥堵住" value="被骨水泥堵住")
                         el-option(label="没被堵" value="没被堵")
@@ -1194,29 +1193,29 @@
                     div.left-align
                       p 金属底托
                     el-form-item.medium.toleft-p(label="型号")
-                      el-input.long(v-model="formModel.genre4" clearable)
+                      el-input.long(v-model="formModel.genre4" readonly)
                     el-form-item.medium(label="水泥型")
-                      el-select.long(v-model="formModel.genre5" placeholder="请选择")
+                      el-select.long(v-model="formModel.genre5" placeholder="请选择" disabled)
                         el-option(label="是" value="是")
                         el-option(label="否" value="否")
                   div.con2-right
                     el-form-item.short(label="旋转")
-                      el-select(v-model="formModel.spin2" placeholder="请选择")
+                      el-select(v-model="formModel.spin2" placeholder="请选择" disabled)
                         el-option(label="内旋" value="内旋")
                         el-option(label="外旋" value="外旋")
                         el-option(label="中立" value="中立")
                     el-form-item.short.toleft-more
-                      el-input(v-model="formModel.angle2" v-if="formModel.spin2!=='中立'" clearable)
+                      el-input(v-model="formModel.angle2" v-if="formModel.spin2!=='中立'" readonly)
                         template(slot="append") °
                   div.con2-right
                     el-form-item.short(label="侧位")
-                      el-select(v-model="formModel.lateralPosition1" placeholder="请选择")
+                      el-select(v-model="formModel.lateralPosition1" placeholder="请选择" disabled)
                         el-option(label="准确" value="准确")
                         el-option(label="内侧移位" value="内侧移位")
                         el-option(label="外侧移位" value="中立")
                   div.con2-right
                     el-form-item.short(label="正位")
-                      el-select(v-model="formModel.normotopia" placeholder="请选择")
+                      el-select(v-model="formModel.normotopia" placeholder="请选择" disabled)
                         el-option(label="准确" value="准确")
                         el-option(label="内侧移位" value="内侧移位")
                         el-option(label="外侧移位" value="中立")
@@ -1224,20 +1223,20 @@
                     div.left-align
                       p 植入
                     el-form-item.medium.toleft-p(label="尺寸")
-                      el-input(v-model="formModel.dimension" clearable)
+                      el-input(v-model="formModel.dimension" readonly)
                     el-form-item.medium(label="厚度")
-                      el-input(v-model="formModel.thickness" clearable)
+                      el-input(v-model="formModel.thickness" readonly)
                         template(slot="append") mm
                   div.con2-right
                     el-form-item.mini(label="长柄" )
-                      el-select(v-model="formModel.longHandle2" placeholder="请选择")
+                      el-select(v-model="formModel.longHandle2" placeholder="请选择" disabled)
                         el-option(label="是" value="是")
                         el-option(label="否" value="否")
                     el-form-item.unit-width.toleft(label="长度" v-if="formModel.longHandle2==='是'")
-                      el-input(v-model="formModel.longness2" clearable)
+                      el-input(v-model="formModel.longness2" readonly)
                         template(slot="append") mm
-                    el-form-item.unit-width(label="直径" v-if="formModel.longHandle2==='是'")
-                      el-input(v-model="formModel.diameter2" clearable)
+                    el-form-item.unit-width(label="直径" v-if="formModel.longHandle2==='是'" disabled)
+                      el-input(v-model="formModel.diameter2" readonly)
                         template(slot="append") mm
               tr
                 td.short-td
@@ -1247,15 +1246,15 @@
                     div.left-align
                       p 尺寸
                     el-form-item.medium.toleft-p(label="水泥")
-                      el-select(v-model="formModel.cement" placeholder="请选择")
+                      el-select(v-model="formModel.cement" placeholder="请选择" disabled)
                         el-option(label="是" value="是")
                         el-option(label="否" value="否")
-                    el-form-item.medium(label="总厚度" v-if="formModel.cement==='是'")
-                      el-input(v-model="formModel.thickness2" clearable)
+                    el-form-item.medium(label="总厚度" v-if="formModel.cement==='是'" disabled)
+                      el-input(v-model="formModel.thickness2" readonly)
                         template(slot="append") mm
                   div.con2-right(v-if="formModel.cement==='是'")
                     el-form-item.short(label="位置" )
-                      el-select(v-model="formModel.location" placeholder="请选择")
+                      el-select(v-model="formModel.location" placeholder="请选择" disabled)
                         el-option(label="内侧" value="内侧")
                         el-option(label="中心" value="中心")
                         el-option(label="外上" value="外上")
@@ -1267,30 +1266,30 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short.toleft
-                      el-select.long(v-model="formModel.vitium" placeholder="请选择")
+                      el-select.long(v-model="formModel.vitium" placeholder="请选择" disabled)
                         el-option(label="有" value="有")
                         el-option(label="无" value="无")
-                  div.con2-right(v-if="formModel.vitium==='有'")
+                  div.con2-right(v-if="formModel.vitium==='有'" disabled)
                     el-form-item.short(label="位置" )
-                      el-select(v-model="formModel.location2" placeholder="请选择")
+                      el-select(v-model="formModel.location2" placeholder="请选择" disabled)
                         el-option(label="内侧" value="内侧")
                         el-option(label="外侧" value="中心")
                     el-form-item.short
-                      el-select(v-model="formModel.location3" placeholder="请选择")
+                      el-select(v-model="formModel.location3" placeholder="请选择" disabled)
                         el-option(label="前方" value="前方")
                         el-option(label="远端" value="远端")
                         el-option(label="后方" value="后方")
-                  div(v-if="formModel.vitium==='有'")
+                  div(v-if="formModel.vitium==='有'" disabled)
                     div.left-align
                       p 区域
                     el-form-item.unit-width.toleft-p
-                      el-input.toleft(v-model="formModel.length" clearable)
+                      el-input.toleft(v-model="formModel.length" readonly)
                         template(slot="append") mm
                     el-form-item.unit-width.toleft-more(label="x")
-                      el-input(v-model="formModel.wide" clearable)
+                      el-input(v-model="formModel.wide" readonly)
                         template(slot="append") mm
                     el-form-item.unit-width.toleft(label="深度")
-                      el-input(v-model="formModel.depth" clearable)
+                      el-input(v-model="formModel.depth" readonly)
                         template(slot="append") mm
               tr
                 td.short-td
@@ -1298,34 +1297,34 @@
                 td.long-td
                   div.con2-right
                     el-form-item.short.toleft
-                      el-select.long(v-model="formModel.vitium2" placeholder="请选择")
+                      el-select.long(v-model="formModel.vitium2" placeholder="请选择" disabled)
                         el-option(label="有" value="有")
                         el-option(label="无" value="无")
-                  div.con2-right(v-if="formModel.vitium2==='有'")
+                  div.con2-right(v-if="formModel.vitium2==='有'" disabled)
                     el-form-item.short(label="位置" )
-                      el-select(v-model="formModel.location4" placeholder="请选择")
+                      el-select(v-model="formModel.location4" placeholder="请选择" disabled)
                         el-option(label="内侧" value="内侧")
                         el-option(label="外侧" value="中心")
                     el-form-item.short
-                      el-select(v-model="formModel.location5" placeholder="请选择")
+                      el-select(v-model="formModel.location5" placeholder="请选择" disabled)
                         el-option(label="前方" value="前方")
                         el-option(label="远端" value="远端")
                         el-option(label="后方" value="后方")
-                  div(v-if="formModel.vitium2==='有'")
+                  div(v-if="formModel.vitium2==='有'" disabled)
                     div.left-align
                       p 区域
                     el-form-item.unit-width.toleft-p
-                      el-input.toleft(v-model="formModel.length2" clearable)
+                      el-input.toleft(v-model="formModel.length2" readonly)
                         template(slot="append") mm
                     el-form-item.unit-width.toleft-more(label="x")
-                      el-input(v-model="formModel.wide2" clearable)
+                      el-input(v-model="formModel.wide2" readonly)
                         template(slot="append") mm
                     el-form-item.unit-width.toleft(label="深度")
-                      el-input(v-model="formModel.depth2" clearable)
+                      el-input(v-model="formModel.depth2" readonly)
                         template(slot="append") mm
-                  div.con2-right(v-if="formModel.vitium2==='有'")
+                  div.con2-right(v-if="formModel.vitium2==='有'" disabled)
                     el-form-item.short(label="处理方案" )
-                      el-select(v-model="formModel.processingScheme" placeholder="请选择")
+                      el-select(v-model="formModel.processingScheme" placeholder="请选择" disabled)
                         el-option(label="打压植骨" value="打压植骨")
                         el-option(label="植骨内固定" value="植骨内固定")
                         el-option(label="楔形植骨" value="楔形植骨")
@@ -1337,91 +1336,91 @@
                 td.long-td
                   div.con2-right
                     el-form-item(label="髌骨轨迹")
-                      el-select(v-model="formModel.patellaTrajectory" placeholder="请选择")
+                      el-select(v-model="formModel.patellaTrajectory" placeholder="请选择" disabled)
                         el-option(label="完美" value="完美")
                         el-option(label="满意" value="满意")
                         el-option(label="不满意" value="不满意")
                   div.con2-right
                     el-form-item.short(label="完全伸直")
-                      el-input(v-model="formModel.completelyStraight")
+                      el-input(v-model="formModel.completelyStraight" disabled)
                         template(slot="append") °
                     el-form-item.short
-                      el-select(v-model="formModel.overextension2" placeholder="屈曲挛缩")
+                      el-select(v-model="formModel.overextension2" placeholder="屈曲挛缩" disabled)
                         el-option(label="屈曲挛缩" value="屈曲挛缩")
                         el-option(label="过伸" value="过伸")
                   div.con2-right
                     el-form-item.short(label="全屈")
-                      el-input(v-model="formModel.allBends")
+                      el-input(v-model="formModel.allBends" disabled)
                         template(slot="append") °
                   div.con2-right
                     el-form-item.unit-width(label="力线")
-                      el-select(v-model="formModel.normal" placeholder="正常")
+                      el-select(v-model="formModel.normal" placeholder="正常" disabled)
                         el-option(label="正常（5-10°）" value="正常")
                         el-option(label="不正常" value="不正常")
-                    el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'")
-                      el-input(v-model="formModel.forceLine2")
+                    el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'" disabled)
+                      el-input(v-model="formModel.forceLine2" disabled)
                         template(slot="append") °
-                    el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'")
-                      el-select(v-model="formModel.reversal" placeholder="内翻")
+                    el-form-item.unit-width.toleft-p(v-if="formModel.normal==='不正常'" disabled)
+                      el-select(v-model="formModel.reversal" placeholder="内翻" disabled)
                         el-option(label="内翻" value="内翻")
                         el-option(label="外翻" value="外翻")
                   div.con2-right
                     el-form-item.unit-width(label="内侧松弛")
-                      el-select(v-model="formModel.exist" placeholder="无")
+                      el-select(v-model="formModel.exist" placeholder="无" disabled)
                         el-option(label="有" value="有")
                         el-option(label="无" value="无")
-                    el-form-item.unit-width.toleft-p(v-if="formModel.exist==='有'")
+                    el-form-item.unit-width.toleft-p(v-if="formModel.exist==='有'" disabled)
                       el-input(v-model="formModel.angle3")
                         template(slot="append") °
-                    el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist==='有'")
+                    el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist==='有'" disabled)
                       el-input(v-model="formModel.angle4")
                         template(slot="append") °
-                    span.p-left(v-if="formModel.exist==='有'") 屈曲时
+                    span.p-left(v-if="formModel.exist==='有'" disabled) 屈曲时
                   div.con2-right
                     el-form-item.unit-width(label="外侧松弛")
-                      el-select(v-model="formModel.exist1" placeholder="无")
+                      el-select(v-model="formModel.exist1" placeholder="无" disabled)
                         el-option(label="有" value="有")
                         el-option(label="无" value="无")
-                    el-form-item.unit-width.toleft-p(v-if="formModel.exist1==='有'")
-                      el-input(v-model="formModel.angle5")
+                    el-form-item.unit-width.toleft-p(v-if="formModel.exist1==='有'" disabled)
+                      el-input(v-model="formModel.angle5" readonly)
                         template(slot="append") °
-                    el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist1==='有'")
-                      el-input(v-model="formModel.angle6")
+                    el-form-item.unit-width.toleft-p(label="在" v-if="formModel.exist1==='有'" disabled)
+                      el-input(v-model="formModel.angle6" readonly)
                         template(slot="append") °
-                    span(v-if="formModel.exist1==='有'").p-left 屈曲时
+                    span(v-if="formModel.exist1==='有'" disabled).p-left 屈曲时
               tr
                 td.short-td
                   div.con2-left 术后
                 td.long-td
                   div.con2-right.short
                     el-form-item(label="总引流")
-                      el-input(v-model="formModel.drainage")
+                      el-input(v-model="formModel.drainage" readonly)
                         template(slot="append") ml
                   div
                     div.left-align
                       p 屈曲达到90°
                     el-form-item.short.toleft-p(label="术后")
-                      el-input.mini(v-model="formModel.postoperationDay" clearable)
+                      el-input.mini(v-model="formModel.postoperationDay" readonly)
                       span.p-left 天
                   div.flex
                     div.left-align.top-align
                       p 术后两周活动度
                     div.mini
                       el-form-item.toleft-p(label="伸直")
-                        el-input(v-model="formModel.unwind2" clearable)
+                        el-input(v-model="formModel.unwind2" readonly)
                           template(slot="append") °
                     div.mini
                       el-form-item.toleft(label="屈曲")
-                        el-input(v-model="formModel.buckling2" clearable)
+                        el-input(v-model="formModel.buckling2" readonly)
                           template(slot="append") °
                     div.mini
                       el-form-item.toleft
-                        el-select(v-model="formModel.debonding" placeholder="麻醉下松解")
+                        el-select(v-model="formModel.debonding" placeholder="麻醉下松解" disabled)
                           el-option(label="麻醉下松解" value="麻醉下松解")
                           el-option(label="无麻醉下松解" value="无麻醉下松解")
                   div.con2-right
                     el-form-item.short(label="切口愈合")
-                      el-select(v-model="formModel.woundHealing" placeholder="请选择")
+                      el-select(v-model="formModel.woundHealing" placeholder="请选择" disabled)
                         el-option(label="容易" value="容易")
                         el-option(label="边缘坏死" value="边缘坏死")
                         el-option(label="感染" value="感染")
@@ -1429,13 +1428,13 @@
                     div.left-align.big-width
                       p 用单手杖行走
                     el-form-item.short.toleft-p(label="术后")
-                      el-input(v-model="formModel.postoperationDay2" clearable)
+                      el-input(v-model="formModel.postoperationDay2" readonly)
                     span.p-left 天
                   div
                     div.left-align
                       p 独立行走
                     el-form-item.short.toleft-p(label="术后")
-                      el-input(v-model="formModel.postoperationDay3" clearable)
+                      el-input(v-model="formModel.postoperationDay3" readonly)
                     span.p-left 天
         div.art2
           h1.title 膝关节功能评分
@@ -1492,21 +1491,21 @@
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" disabled)
             el-form-item.mini(label="术后第（）个月" label-width="120px")
-              el-input(v-model="formModel.postoperationMonth" clearable)
+              el-input(v-model="formModel.postoperationMonth" readonly)
             el-form-item.mini(label="疼痛" label-width="160px")
-              el-input(v-model="formModel.pain2" clearable)
+              el-input(v-model="formModel.pain2" readonly)
             el-form-item.mini(label="活动度")
-              el-input(v-model="formModel.activity" clearable)
+              el-input(v-model="formModel.activity" readonly)
             el-form-item.mini(label="稳定性"  label-width="120px")
-              el-input(v-model="formModel.stability" clearable)
+              el-input(v-model="formModel.stability" readonly)
             el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
-              el-input(v-model="formModel.fixedFlexionContracture2" clearable)
+              el-input(v-model="formModel.fixedFlexionContracture2" readonly)
             el-form-item.mini(label="伸直位松弛")
-              el-input(v-model="formModel.extensionRelaxation" clearable)
+              el-input(v-model="formModel.extensionRelaxation" readonly)
             el-form-item.mini(label="力线"  label-width="120px")
-              el-input(v-model="formModel.forceLine3" clearable)
+              el-input(v-model="formModel.forceLine3" readonly)
             div
               div.left-align
                 p 总计
@@ -1582,27 +1581,27 @@
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" disabled)
             el-form-item.mini(label="术后第（）个月" label-width="120px")
-              el-input(v-model="formModel.postoperationMonth2" clearable)
+              el-input(v-model="formModel.postoperationMonth2" readonly)
             el-form-item.mini(label="患者满意度" label-width="110px")
-              el-input(v-model="formModel.satisfaction" clearable)
+              el-input(v-model="formModel.satisfaction" readonly)
             el-form-item.mini(label="步态" )
-              el-input(v-model="formModel.gait" clearable)
+              el-input(v-model="formModel.gait" readonly)
             el-form-item.mini(label="髌骨侧问题" label-width="120px")
-              el-input(v-model="formModel.problem" clearable)
+              el-input(v-model="formModel.problem" readonly)
             el-form-item.mini(label="股四头肌肌力" label-width="110px")
-              el-input(v-model="formModel.muscleStrength" clearable)
+              el-input(v-model="formModel.muscleStrength" readonly)
             el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
-              el-input(v-model="formModel.fixedFlexionContracture3" clearable)
+              el-input(v-model="formModel.fixedFlexionContracture3" readonly)
             el-form-item.mini(label="过伸" label-width="120px")
-              el-input(v-model="formModel.hyperextension2" clearable)
+              el-input(v-model="formModel.hyperextension2" readonly)
             el-form-item.mini(label="侧方松弛" label-width="110px")
-              el-input(v-model="formModel.lateralSlack" clearable)
+              el-input(v-model="formModel.lateralSlack" readonly)
             el-form-item.mini(label="前后松弛" )
-              el-input(v-model="formModel.frontBackSlack" clearable)
+              el-input(v-model="formModel.frontBackSlack" readonly)
             el-form-item.mini(label="后方松弛" label-width="120px")
-              el-input(v-model="formModel.backSlack" clearable)
+              el-input(v-model="formModel.backSlack" readonly)
         div.art2
           h1.title 膝关节协会功能评估
           div.con2
@@ -1639,15 +1638,15 @@
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" disabled)
             el-form-item.mini(label="术后第（）个月" label-width="120px")
-              el-input(v-model="formModel.postoperationMonth3" clearable)
+              el-input(v-model="formModel.postoperationMonth3" readonly)
             el-form-item.mini(label="步行")
-              el-input(v-model="formModel.walk1" clearable)
+              el-input(v-model="formModel.walk1" readonly)
             el-form-item.mini(label="上下楼梯")
-              el-input(v-model="formModel.stairActivity1" clearable)
+              el-input(v-model="formModel.stairActivity1" readonly)
             el-form-item.mini(label="辅助行走" label-width="120px")
-              el-input(v-model="formModel.walkingAid1" clearable)
+              el-input(v-model="formModel.walkingAid1" readonly)
             div
               div.left-align
                 p 总计
@@ -1663,9 +1662,9 @@
                   div.right-td
                     el-form-item.short.bottom-align(label="日期" style="float:left")
                       el-col(:span="20")
-                        el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;")
+                        el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;" disabled)
                     el-form-item.mini.bottom-align(label="术后第")
-                      el-input(v-model="formModel.postoperationWeek" clearable)
+                      el-input(v-model="formModel.postoperationWeek" readonly)
                         template(slot="append") 周
               tr
                 td.short-td
@@ -1675,7 +1674,7 @@
                     div.left-box 内翻=负值，外翻=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.mechanicalAxis")
+                        el-input(v-model="formModel.mechanicalAxis" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1685,7 +1684,7 @@
                     div.left-box 内翻=负值，外翻=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.dissectionAxis")
+                        el-input(v-model="formModel.dissectionAxis" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1695,7 +1694,7 @@
                     div.left-box 测量角度a-90°；内翻=负值，外翻=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.angle7")
+                        el-input(v-model="formModel.angle7" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1705,7 +1704,7 @@
                     div.left-box 测量角度b-90°；内翻=负值，外翻=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.angle8")
+                        el-input(v-model="formModel.angle8" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1715,7 +1714,7 @@
                     div.left-box 测量角度c；e过伸=负值/屈曲=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.angle9")
+                        el-input(v-model="formModel.angle9" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1725,7 +1724,7 @@
                     div.left-box 90°-测量角度d；前倾=负值，后倾=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.angle10")
+                        el-input(v-model="formModel.angle10" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1735,7 +1734,7 @@
                     div.left-box 相对于胫骨轴线；内翻=负值，外翻=正值
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.ankle")
+                        el-input(v-model="formModel.ankle" readonly)
                           template(slot="append") °
               tr
                 td.short-td
@@ -1745,7 +1744,7 @@
                     div.left-box 前后位胫骨覆盖率
                     div.right-box
                       el-form-item.bottom-align
-                        el-input(v-model="formModel.tibiaFraction")
+                        el-input(v-model="formModel.tibiaFraction" readonly)
                           template(slot="append") %
         div.art2
           h1.title
@@ -1775,46 +1774,39 @@
             div.con2-left
               el-form-item.short(label="日期" style="float:left" label-width="180px")
                 el-col
-                  el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7")
+                  el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" disabled)
               el-form-item.short(label="术后第（）个月" label-width="180px")
-                el-input(v-model="formModel.postoperationMonth4" clearable)
+                el-input(v-model="formModel.postoperationMonth4" readonly)
               el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
-                el-input(v-model="formModel.thighboneSide" clearable)
+                el-input(v-model="formModel.thighboneSide" readonly)
               el-form-item.short(label="胫骨骨水泥透亮区-前后位" label-width="180px")
-                el-input(v-model="formModel.tibiaFab" clearable)
+                el-input(v-model="formModel.tibiaFab" readonly)
               el-form-item.short(label="胫骨骨水泥透亮区-侧位" label-width="180px")
-                el-input(v-model="formModel.tibiaSide" clearable)
+                el-input(v-model="formModel.tibiaSide" readonly)
               el-form-item.short(label="髌骨骨水泥透亮区-切位" label-width="180px")
-                el-input(v-model="formModel.thighboneCut" clearable)
+                el-input(v-model="formModel.thighboneCut" readonly)
               el-form-item.short(label="髌骨半脱位" label-width="180px")
-                el-input(v-model="formModel.thighboneSubluxation" clearable)
+                el-input(v-model="formModel.thighboneSubluxation" readonly)
               el-form-item.short(label="植骨吸收" label-width="180px")
-                el-input(v-model="formModel.boneGraft" clearable)
+                el-input(v-model="formModel.boneGraft" readonly)
               el-form-item.short(label="松动（股骨/胫骨/髌骨）" label-width="180px")
-                el-input(v-model="formModel.loose" clearable)
+                el-input(v-model="formModel.loose" readonly)
               el-form-item.short(label="聚乙烯内衬" label-width="180px")
-                el-input(v-model="formModel.polyethyleneLiner" clearable)
+                el-input(v-model="formModel.polyethyleneLiner" readonly)
               el-form-item.short(label="骨溶解" label-width="180px")
-                el-input(v-model="formModel.osteolysis" clearable)
-      <!--div.btn-box-->
-      <!--div.btn-->
-      <!--el-form-item-->
-      <!--el-button(type="primary" @click="onSubmit") 保存-->
-      <!--el-button 取消-->
+                el-input(v-model="formModel.osteolysis" readonly)
 </template>
 
 <script>
-  import FormModel2 from './model2'
-  import {JdyyKneeURL} from '../../config.toml'
+  import FormModel from './model'
   export default {
-    name: 'jdyyKnee',
+    name: 'jdyyKneeView',
     data() {
       return {
-        targetURL: JdyyKneeURL,
         width: '80%',
         labelWidth: '90px',
         labelPosition: 'right',
-        formModel: Object.assign({}, FormModel2),
+        formModel: Object.assign({}, FormModel),
         tableData1: [{
           date3: '2018-03-12',
           postoperationMonth: '术前',
@@ -1918,12 +1910,6 @@
           {name: '腋杖，助步器', id: '20'}
         ]
 
-      }
-    },
-    methods: {
-      onSubmit() {
-        console.log('submit!')
-        alert('天啦噜')
       }
     },
     computed: {

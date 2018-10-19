@@ -6,11 +6,11 @@
 <template lang="pug">
   kalix-dialog.user-add(bizKey="jdyyDia" ref="kalixBizDialog"
     v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style=" width:60%;margin:auto;")
       input(v-model="formModel.parentId" type="hidden")
       input(v-model="formModel.isLeaf" type="hidden")
-      el-form-item(label="添加术式名称" prop="content" label-width="120px" v-bind:rules="rules.content")
-        el-input(v-model="formModel.content")
+      el-form-item(label="添加诊断名称" prop="content" label-width="120px" v-bind:rules="rules.content")
+        el-input(v-model="formModel.content" style="width:80%")
 </template>
 
 <script type="text/ecmascript-6">
@@ -54,6 +54,5 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="stylus" type="text/stylus">
 </style>
