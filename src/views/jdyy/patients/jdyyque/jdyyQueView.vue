@@ -69,65 +69,31 @@
   import FormModel from './model'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
-  import {JdyyVisURL} from '../../config.toml'
-  import KalixTable from '../../../../components/corelib/components/common/baseTable'
   export default {
     name: 'JdyyQueView',
-    components: {KalixTable, KalixFontCascader, KalixDatepickerSimple},
+    components: {KalixFontCascader, KalixDatepickerSimple},
     data() {
       return {
-        jdyyvisURL: JdyyVisURL,
-        // tableFields: [
-        //   {prop: 'diagnosis', label: '诊断'},
-        //   {prop: 'surgical', label: '术式'},
-        //   {prop: 'operationDate', label: '手术日期'},
-        //   {prop: 'periodization', label: '分期'}
-        // ],
         formModel: Object.assign({}, FormModel),
-        labelWidth: '120px',
-        items: []
+        labelWidth: '200px'
       }
-    },
-    mounted() {
-      // this.getVisQuery()
     },
     methods: {
       getModel(val) { // 三级联动地区参数区分
         this.formModel.address = val.toString()
         console.log('address=========', this.formModel.address)
-      },
-      handleClick(row) {
-        console.log('row=====================', row)
-        this.axios.request({
-          method: 'GET',
-          url: JdyyVisURL
-        }).then(res => {
-          console.log('Request-handleClick-Success==============', res.data.data)
-          this.options = res.data.data
-        })
       }
-      // getVisQuery() { // 查询所有信息
-      //   console.log('getVisQuery========================')
-      //   this.axios.request({
-      //     method: 'GET',
-      //     url: JdyyVisURL
-      //   }).then(res => {
-      //     console.log('Request-getVisQuery-Success==============', res.data.data)
-      //     this.options = res.data.data
-      //   })
-      // }
     }
   }
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 95%
+    width 60%
     margin auto
     .el-form-item
-      width 33%
+      width 49%
       display inline-block
-      text-align left
     .address
       width 98%
     .Border

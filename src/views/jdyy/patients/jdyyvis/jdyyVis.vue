@@ -51,6 +51,7 @@
                 return item.id === 'editImg'
               })
             that.whichBizDialog = dig[0].dialog
+            console.log('dig[0].dialog------------', dig[0].dialog)
             setTimeout(() => {
               that.$refs.kalixDialog.$refs.kalixBizDialog.open('图片', false, row)
             }, 20)

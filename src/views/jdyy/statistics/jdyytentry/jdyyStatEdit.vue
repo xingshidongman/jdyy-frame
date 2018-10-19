@@ -36,7 +36,7 @@
     data() {
       return {
         downloadURL: JdyystatURL,
-        labelWidth: '120px',
+        labelWidth: '150px',
         columnParam: undefined,
         formModel: Object.assign({}, FormModel),
         rules: {
@@ -83,5 +83,7 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-form
+    width 50%
+    margin auto
 </style>

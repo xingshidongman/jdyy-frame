@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='添加' bizKey="jdyyVisImg" ref="kalixBizDialog" v-bind:formModel.sync="formModel"
+  kalix-dialog.user-add(title='添加' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel"
   v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
     div.el-form(slot="dialogFormSlot")
       <!--el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth")-->
@@ -9,7 +9,7 @@
         <!--el-input(v-model="formModel.photo")-->
       el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
         kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
-        kalix-img-upload(v-model="formModel.photo" v-bind:isImage="isImage" style="width:100%" readonly)
+        kalix-img-upload(v-model="formModel.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
       <!--div.bottom-->
         <!--div.bottom-box-->
           <!--ul.right_ul-->
@@ -94,7 +94,8 @@
           fileName = fileName.substr(0, fileName.length - 1)
         }
 
-        baseDialog.formModel.photo = filePath
+        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+        baseDialog.formModel.photo = photoStr + filePath
         baseDialog.formModel.imgName = fileName
         callBack()
       },
