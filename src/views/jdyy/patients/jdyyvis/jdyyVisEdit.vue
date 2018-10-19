@@ -2,15 +2,15 @@
   kalix-dialog.user-add(title='修改' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="患者" prop="pid" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly)
+        kalix-select.tests(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly style="width: 60%;")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
-        el-cascader(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
+        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
-        el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
-      el-form-item.short(label="手术日期" prop="operationdate" v-bind:label-width="labelWidth" )
-        kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-      el-form-item.short.toleft(label="分期" prop="periodization" v-bind:label-width="labelWidth" )
-        el-select(v-model="formModel.periodization" placeholder="请选择")
+        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
+      el-form-item(label="手术日期" prop="operationdate" v-bind:label-width="labelWidth" )
+        kalix-datepicker-simple.tests(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 60%;")
+      el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" )
+        el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
 </template>
@@ -84,72 +84,14 @@
   }
 </script>
 <style scoped lang="stylus" type="text/stylus">
-  .container_box
-    width 100%
-    display inline-block
-    margin 20px 0
-    .el-form
-      width 70%
-      float left
-      .start
-        width: 100%
-        height:600px
-        overflow-y:scroll
-        margin-bottom:50px
-        margin-right -2
-        .start1
-          width 96%
-          margin auto
-          .el-form-item
-              width 50%
-              display inline-block
-            .el-input
-              border 1px solid #3465cb
-            .el-select
-              border 1px solid #3465cb
-            .Border
-              border 1px solid #3465cb
-          .address
-            width 100%
-      .block-boxs
-        width: 98%
-        margin-top: 30px
-        height: 200px
-        overflow: scroll
-        margin-left 10px
-    .box
-      width 28%
-      float right
-      border 1px solid #3465cb
-      height 600px
-      .contions
-        width:80%;
-        margin: 20px 10% 0 10%;
-  .bottom
-    width 60%;
-    .bottom-box
-      width: 50%;
-      float: right;
-      .right_ul
-        width:80%;
-        margin: 10px 10% 0 10%;
-        .right_li
-          width: 48%
-          display: inline-block
-          text-align: center
-          .button-save
-            width: 100px
-            padding 10px 0
-            border-radius: 5px
-            border: none
-            font-size: 16px
-            outline:none
-            background-color #9E9E9E
-        .right_li:first-child button
-          color: #3465cb
-        .right_li:last-child button
-          color: red
-  .short
-    width 50%
-    display inline-block
+  .el-form
+    width 60%
+    margin auto
+    .el-form-item
+      width 100%
+      display inline-block
+    .tests
+      display: inline-block;
+      position: relative;
+      width: 60%;
 </style>

@@ -1,6 +1,6 @@
-const FormModel2 = {
+const FormModel = {
   name: null,
-  sex: [],
+  sex: null,
   age: null,
   telephonePerson: null,
   address: null,
@@ -169,4 +169,4 @@ const FormModel2 = {
   osteolysis: null,
   angle11: null
 }
-export default FormModel2
+export default FormModel
