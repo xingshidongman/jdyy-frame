@@ -2,7 +2,7 @@
   kalix-dialog.user-add(title='添加' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="患者" prop="pid" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" style="width: 50%;")
+        kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" placeholder="请选择患者" style="width: 50%;")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis")
         <!--kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")-->
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")

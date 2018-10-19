@@ -64,17 +64,25 @@
         el-input(v-model="formModel.harris" type="number" readonly)
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.hss" type="number" readonly)
+      view-table(v-bind:targetURL="targetURL" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
+      div.mark(ref="mark")
+        div(v-for="img in imgs" @click="markclose")
+          img(src="img" width="120px" height="120px")
 </template>
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
+  import {JdyyvisitURL} from '../../config.toml'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  import ViewTable from '../../../../components/view/viewtable'
   export default {
     name: 'JdyyQueView',
-    components: {KalixFontCascader, KalixDatepickerSimple},
+    components: {ViewTable, KalixFontCascader, KalixDatepickerSimple},
     data() {
       return {
+        targetURL: JdyyvisitURL,
+        imgs: [],
         formModel: Object.assign({}, FormModel),
         labelWidth: '200px'
       }
@@ -83,6 +91,23 @@
       getModel(val) { // 三级联动地区参数区分
         this.formModel.address = val.toString()
         console.log('address=========', this.formModel.address)
+      },
+      handleClick(data) {
+        console.log('handleClick---data----', data)
+        console.log('handleClick---data。photo----', data.photo)
+        if (data.photo !== null) {
+          if (data.photo.indexOf(',')) {
+            this.imgs = data.photo.split(',')
+          } else {
+            this.imgs = data.photo
+          }
+        } else {
+          alert('无图片')
+        }
+        this.$refs.mark.style.display = 'block'
+      },
+      markclose() {
+        this.$refs.mark.style.display = 'none'
       }
     }
   }
@@ -90,7 +115,7 @@
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 60%
+    width 80%
     margin auto
     .el-form-item
       width 49%
@@ -107,4 +132,13 @@
       padding: 12px 10px;
     .el-input__inner
       border-radius 1px
+  .mark
+    position:fixed
+    z-index:9
+    background:black
+    opacity:0.5
+    top:20%
+    width:60%
+    text-align:center
+    display none
 </style>
