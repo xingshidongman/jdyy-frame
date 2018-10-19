@@ -5,10 +5,9 @@
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.name" readonly)
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.sex" readonly)
-        <!--el-radio-group(v-model="formModel.sex" readonly )-->
-          <!--el-radio(label="男")-->
-          <!--el-radio(label="女")-->
+        el-radio-group(v-model="formModel.sex" disabled )
+          el-radio(label="男")
+          el-radio(label="女")
       el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.brith" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.brith" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
@@ -56,14 +55,14 @@
       el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.address" readonly)
         <!--kalix-font-cascader.Border(v-model="formModel.address" v-on:change="getModel" readonly)-->
-      el-form-item.address(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.completeAddress" readonly)
-      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.remarks" readonly)
       el-form-item(label="Harris评分" prop="harris" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.harris" type="number" readonly)
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.hss" type="number" readonly)
+      el-form-item.address(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.completeAddress" readonly)
+      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.remarks" readonly)
 </template>
 
 <script type="text/ecmascript-6">
@@ -78,47 +77,57 @@
     data() {
       return {
         jdyyvisURL: JdyyVisURL,
-        tableFields: [
-          {prop: 'pid', label: '患者'},
-          {prop: 'diagnosis', label: '诊断'},
-          {prop: 'surgical', label: '术式'},
-          {prop: 'operationDate', label: '手术日期'},
-          {prop: 'periodization', label: '分期'}
-        ],
+        // tableFields: [
+        //   {prop: 'diagnosis', label: '诊断'},
+        //   {prop: 'surgical', label: '术式'},
+        //   {prop: 'operationDate', label: '手术日期'},
+        //   {prop: 'periodization', label: '分期'}
+        // ],
         formModel: Object.assign({}, FormModel),
-        labelWidth: '200px',
+        labelWidth: '120px',
         items: []
       }
     },
     mounted() {
-      this.getVisQuery()
+      // this.getVisQuery()
     },
     methods: {
       getModel(val) { // 三级联动地区参数区分
         this.formModel.address = val.toString()
         console.log('address=========', this.formModel.address)
       },
-      getVisQuery() { // 查询所有信息
-        console.log('getVisQuery========================')
+      handleClick(row) {
+        console.log('row=====================', row)
         this.axios.request({
           method: 'GET',
           url: JdyyVisURL
         }).then(res => {
-          console.log('Request-getVisQuery-Success==============', res.data.data)
+          console.log('Request-handleClick-Success==============', res.data.data)
           this.options = res.data.data
         })
       }
+      // getVisQuery() { // 查询所有信息
+      //   console.log('getVisQuery========================')
+      //   this.axios.request({
+      //     method: 'GET',
+      //     url: JdyyVisURL
+      //   }).then(res => {
+      //     console.log('Request-getVisQuery-Success==============', res.data.data)
+      //     this.options = res.data.data
+      //   })
+      // }
     }
   }
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 60%
+    width 95%
     margin auto
     .el-form-item
-      width 49%
+      width 33%
       display inline-block
+      text-align left
     .address
       width 98%
     .Border
