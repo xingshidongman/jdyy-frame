@@ -24,8 +24,8 @@
       el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.dateAdmission" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
-      el-form-item(label="出院日期" prop="DischargeDate" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.DischargeDate" readonly)
+      el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.dischargeDate" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.DischargeDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
       el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.stature" type="number" readonly)

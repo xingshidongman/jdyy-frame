@@ -26,7 +26,7 @@
           // forumTitle: [{message: '所属帖子标题不能为空', trigger: 'blur'}],
           // parentName: [{required: true, message: '上级功能不能为空', trigger: 'blur'}],
           // username: [{required: true, message: '请输入回复人姓名', trigger: 'blur'}],
-          content: [{required: true, message: '请输入回复内容', trigger: 'blur'}]
+          content: [{required: true, message: '请输入内容', trigger: 'blur'}]
         },
         targetURL: JdyydiaURL,
         // username: this.$KalixCatch.get('user_name'),

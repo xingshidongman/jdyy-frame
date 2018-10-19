@@ -18,11 +18,12 @@
       el-form-item(label="住院号" prop="hospitalNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.hospitalNumber")
         el-input(v-model="formModel.hospitalNumber" type="number")
       el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-bind:rules="rules.directorDoctor")
+        <!--kalix-select(v-model="formModel.name" v-bind:requestUrl="patientsURL" id="name"  appName="patients" placeholder="请选择病员")-->
         el-input(v-model="formModel.directorDoctor")
       el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth" v-bind:rules="rules.dateAdmission")
         kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
-      el-form-item(label="出院日期" prop="DischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.DischargeDate")
-        kalix-datepicker-simple(v-model="formModel.DischargeDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
+      el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
+        kalix-datepicker-simple(v-model="formModel.dischargeDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
         el-input(v-model="formModel.stature" type="number")
       el-form-item(label="体重" prop="weight" v-bind:label-width="labelWidth" v-bind:rules="rules.weight")
@@ -66,6 +67,7 @@
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  // import KalixSelect from '../../../../components/corelib/components/common/baseSelect'
   export default {
     name: 'JdyyManAdd',
     components: {KalixDatepickerSimple, KalixClansmanUpload, KalixFontCascader},
