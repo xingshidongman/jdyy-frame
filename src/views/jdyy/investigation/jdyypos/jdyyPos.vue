@@ -1,21 +1,22 @@
 <template lang="pug">
   keep-alive
-    kalix-table(bizKey="jdyyQue" title='查询' ref="kalixTable"
+    kalix-table(bizKey="jdyyPos" title='术后调查' ref="kalixTable"
     v-bind:tableFields="tableFields"
     v-bind:targetURL="jdyypatientsURL"
-    v-bind:bizDialog="jdyyQueDialog"
-    v-bind:btnList="btnList"
+    v-bind:bizDialog="jdyyPosDialog"
+    v-bind:btnList="jdyyPosBtnList"
     v-bind:toolbarBtnList="toolbarBtnList"
-    bizSearch="jdyyQueSearch")
+    bizSearch="jdyyPosSearch")
+  // v-bind:buttonPermissionPrefix="buttonjdyyPosPrefix"
 </template>
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL} from '../../config.toml'
-  import {jdyyQueConfigBtnList} from './config'
+  import {jdyyPosConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
   export default {
-    name: 'kalix-jdyy-jdyyque',
+    name: 'kalix-jdyy-jdyypos',
     components: {KalixTable},
     data() {
       return {
@@ -24,17 +25,19 @@
           {prop: 'name', label: '姓名'},
           {prop: 'sex', label: '性别'},
           {prop: 'age', label: '年龄'},
-          {prop: 'bedNumber', label: '病历号'},
-          {prop: 'dateAdmission', label: '住院日期'},
-          {prop: 'dischargeDate', label: '出院日期'},
-          // {prop: 'diagnosis', label: '诊断'},
-          // {prop: 'dateOperation', label: '手术日期'},
+          {prop: 'telephonePerson', label: '联系方式'},
+          // {prop: 'buckling', label: '屈曲'},
+          // {prop: 'abduction', label: '外展'},
+          // {prop: 'adduction', label: '内收'},
+          // {prop: 'dateOperation', type: 'datetime', label: '手术日期'},
           {prop: 'directorDoctor', label: '主管医生'}
         ],
-        jdyyQueDialog: [
-          {id: 'view', dialog: 'JdyyQueView'}
+        jdyyPosDialog: [
+          {id: 'edit', dialog: 'jdyyHip'},
+          {id: 'view', dialog: 'jdyyKnee'},
+          {id: 'delete', dialog: 'JdyyPosDelete'}
         ],
-        btnList: jdyyQueConfigBtnList,
+        jdyyPosBtnList: jdyyPosConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: false, title: '添加', isPermission: true}
         ]
