@@ -510,7 +510,7 @@
         })
       },
       getDiaData(diaColumn) { // 获取诊断统计数据
-        console.log('getDiaData=========================')
+        console.log('diaColumn=========================', diaColumn.toString())
         this.axios.request({
           method: 'GET',
           url: '/camel/rest/jdyy/visits/getDiaData',
@@ -518,17 +518,20 @@
             diaColumn: diaColumn.toString()
           }
         }).then(res => {
+          console.log('getDiaData==============', res.data.data)
           this.diaColumn = diaColumn
           this.diaData = res.data.data
-          this.diaData.map(e => {
-            if (e.value === 0) {
-              this.$set(this.diaColumnSelected, e.name, false)
-              this.$set(e, 'label', {show: false})
-              this.$set(e, 'labelLine', {show: false})
-            } else {
-              this.$set(this.diaColumnSelected, e.name, true)
-            }
-          })
+          if (this.diaData){
+            this.diaData.map(e => {
+              if (e.value == 0) {
+                this.$set(this.diaColumnSelected, e.name, false)
+                this.$set(e, 'label', {show: false})
+                this.$set(e, 'labelLine', {show: false})
+              } else {
+                this.$set(this.diaColumnSelected, e.name, true)
+              }
+            })
+          }
           this.diaPie('dia')
         })
       },
@@ -553,15 +556,17 @@
         }).then(res => {
           this.surColumn = surColumn
           this.surData = res.data.data
-          this.surData.map(e => {
-            if (e.value === 0) {
-            this.$set(this.surColumnSelected, e.name, false)
-            this.$set(e, 'label', {show: false})
-            this.$set(e, 'labelLine', {show: false})
-            } else {
-              this.$set(this.surColumnSelected, e.name, true)
-            }
-          })
+          if (this.surData) {
+            this.surData.map(e => {
+              if (e.value == 0) {
+                this.$set(this.surColumnSelected, e.name, false)
+                this.$set(e, 'label', {show: false})
+                this.$set(e, 'labelLine', {show: false})
+              } else {
+                this.$set(this.surColumnSelected, e.name, true)
+              }
+            })
+          }
           this.surPie('sur')
         })
       }
@@ -569,7 +574,6 @@
     // 调用
     mounted() {
       this.$nextTick(function () {
-        // this.diaPie('main1')
         this.getDate() // 获取系统当前日期方法
         this.getDataByMonth() // 获取月份数据对比柱状图数据方法
         this.getLine() // 获取五年比手术量线性图数据方法
