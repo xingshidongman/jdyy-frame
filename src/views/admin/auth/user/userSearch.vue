@@ -7,12 +7,9 @@
     data() {
       return {
         searchFields: [
-          // {label: '审核状态', prop: 'audit', type: 'dict', appName: 'admin', dictType: '审核标识'},
-          // {label: '登录名', prop: 'loginName'},
-          {label: '姓名 :', prop: 'name'},
-          {label: '年龄 :', prop: 'age'},
-          {label: '联系电话 :', prop: 'mobile'}
-          // {label: '病历号 :', prop: 'medicalRecords'}
+          {label: '审核状态', prop: 'audit', type: 'dict', appName: 'admin', dictType: '审核标识'},
+          {label: '登录名', prop: 'loginName'},
+          {label: '姓名', prop: 'name'}
         ]
       }
     },

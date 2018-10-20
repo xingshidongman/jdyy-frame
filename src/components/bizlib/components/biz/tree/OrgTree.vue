@@ -5,9 +5,9 @@
 -->
 <template lang="pug">
   div.kalix-search.org-tree
-    div.kalix-search-hd
-      i.tit_icon.iconfont.icon-organization
-      | {{treeTitle}}
+    <!--div.kalix-search-hd-->
+      <!--i.tit_icon.iconfont.icon-organization-->
+      <!--| {{treeTitle}}-->
     div.kalix-search-bd.org-tree-bd
       div.ipt-wrapper
         el-input.kalix-search-input(placeholder="输入关键字进行过滤" v-model="filterText")
