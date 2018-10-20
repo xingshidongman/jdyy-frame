@@ -58,7 +58,7 @@
             input.block-input
             el-radio(v-model="radio"  label="1") 男
             el-radio(v-model="radio"  label="2") 女
-          div(id="sur" style="width: 98%;min-height: 260px; left:2%")
+          div(id="sur" style="width: 98%;min-height: 260px; left:2%;margin-top:2%;")
         div.left-xx
         div.left-xr
       div.lefttwo
@@ -67,7 +67,7 @@
             div.text-box.text 五年比手术量
             div.left-sx
             div.left-zx
-            div(id="diagram" style="width: 98%;height: 260px;top:8%")
+            div(id="diagram" style="width: 98%;height: 260px;margin-top:2%;")
           div.left-xx
           div.left-xr
       div.lefttwo
@@ -84,7 +84,7 @@
               input.block-input
               el-radio(v-model="radio"  label="1") 男
               el-radio(v-model="radio"  label="2") 女
-            div(id="dia" style="width: 98%;height: 260px;left:2%")
+            div(id="dia" style="width: 98%;height: 260px;left:2%;margin-top:2%;")
           div.left-xx
           div.left-xr
 </template>
@@ -140,6 +140,7 @@
             formatter: '{a}<br/>{b}:{c} ({d}%)'
           },
           legend: {
+            type: 'scroll',
             orient: 'vertical',
             x: 'left',
             data: this.surColumn,
@@ -198,6 +199,7 @@
             formatter: '{a}<br/>{b}:{c} ({d}%)'
           },
           legend: {
+            type: 'scroll',
             orient: 'vertical',
             x: 'left',
             data: this.diaColumn,
@@ -685,11 +687,11 @@
       .left-box
         width 90%
         margin auto
-        min-height 330px
+        min-height 300px
         border 2px solid #23769a
         .left-line
           width 98%
-          min-height 310px
+          min-height 280px
           margin 10px auto
           border 0.3px solid #23769a
           border-radius 5px
