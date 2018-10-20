@@ -55,6 +55,10 @@
       el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.address" readonly)
         <!--kalix-font-cascader.Border(v-model="formModel.address" v-on:change="getModel" readonly)-->
+      el-form-item.address(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.completeAddress" readonly)
+      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.remarks" readonly)
       el-form-item(label="Harris评分" prop="harris" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.harris" type="number" readonly)
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")
@@ -63,10 +67,7 @@
       div.mark(ref="mark")
         div(v-for="img in imgs" @click="markclose")
           img(src="img" width="120px" height="120px")
-      el-form-item.address(label="详细地址" prop="completeAddress" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.completeAddress" readonly)
-      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.remarks" readonly)
+
 </template>
 
 <script type="text/ecmascript-6">

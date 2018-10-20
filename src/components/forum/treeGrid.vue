@@ -15,12 +15,12 @@
       div.kalix-wrapper-hd
         <!--i(v-bind:class="iconCls")-->
         | {{title}}
-      div.kalix-wrapper-bd
+      div.kalix-wrapper-bd(style="position: absolute;width: 100%;overflow: hidden;top: 20px;left: 0;bottom: 0;")
         template(v-if="isToolBarSelf")
           kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)
           kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
-        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:auto;")
+        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:auto;position: absolute;width: 100%;bottom: 0;top: 60px;")
           div.autoTbale(v-bind:style="{width:tableWidth}")
             table.table.table-bordered(id="hl-tree-table")
               <!--thead-->
@@ -46,19 +46,19 @@
               tbody
                 tr(v-for="(item,index) in initItems" v-bind:key="item.id" v-show="show(item)" v-bind:class="{'child-tr':item.parent,'active':item.id === checkId}" v-on:click="toSelect(item)")
                   <!--td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")-->
-                  td(v-for="(column,snum) in columns" v-bind:key="column.key")
-                    <!--div(v-if="column.type === 'action'")-->
+                  td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")
+                    div(v-if="column.type === 'action'")
                       <!--slot(name="treeGridToolSlot" slot-scope="item")-->
                         <!--template(v-if="btnSelfClick !== undefined")-->
                           <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnSelfClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                         <!--template(v-else)-->
                           <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                     <!--input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")-->
-                    <!--div.lefts(v-else)-->
+                    div.lefts(v-else)
                       label(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
-                          i.el-icon(v-if="item.children&&item.children.length>0"
-                          v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
+                          i(v-html='item.spaceHtml')
+                          i.el-icon(v-if="item.children&&item.children.length>0" v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
                             <!--i.iconfont.icon-2(style="padding: 0 10px;")-->
                           i(v-else class="kailx-ms-tree-space")
                         | {{renderBody(item, column)}}
@@ -672,134 +672,88 @@
 </style>
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
-  .kalix-wrapper
-    margin 0px
-    position absolute
-    bottom 20px
-    top 8px
-    left 20px
-    box-sizing border-box
-    right 20px
-    background-color #ffffff
-  .kalix-wrapper-hd
-    width 80%
-    margin 20px auto
-    padding-bottom 10px
-    border-bottom #283dff solid 2px
-    font-size 24px
-    font-family Helvetica, Microsoft YaHei, Hiragino Sans GB, WenQuanYi Micro Hei, sans-serif
-    font-weight bold
-    text-align center
-  .kalix-wrapper-bd
-    text-align center
-    margin-top 5px
   .tree-icon
     margin-right 8px
-    color  #3465cb
+    color #dd9e4a
     font-weight bold
     cursor pointer
-
   .autoTbale {
-    height: 500px;
-    overflow-y: scroll;
+    overflow: auto;
   }
-
   table {
-    width:400px;
-    margin 20px auto
-    /*border: #2d8ac7 1px solid;*/
+    width: 100%;
     border-spacing: 0;
     border-collapse: collapse;
     line-height: 23px;
   }
-  /*.table-bordered {
+  .table-bordered {
     border: 0px solid #EBEBEB;
-  }*/
+  }
   .table > tbody > tr > td,
   .table > tbody > tr > th {
-    /*border-top: 1px solid #e7eaec;*/
+    border-top: 1px solid #e7eaec;
     line-height: 1.42857;
-    /*margin-left 200px*/
-    /*padding: 5px;*/
-    /*vertical-align: middle;*/
-    font-size: 16px;
+    padding: 5px;
+    vertical-align: middle;
+    font-size: 14px;
     line-height: 23px;
   }
-
-
-  .table > tbody > tr:active {
-    background-color rgba(255, 239, 187, 0.21)
-  }
-  /*.table > tbody > tr > td .base-teble-operation*/
+  .table > tbody > tr > td .base-teble-operation
   .operation-btn
     font-size 13px
     cursor pointer
-    color #7ACAFF
+    color #dd9e4a
     & + .operation-btn
       margin-left 8px
       .kailx-ms-tree-space {
         display inline-block
         width 1em
       }
-
   .table > tbody > tr .focus {
     background-color: #eee;
   }
-
   .table > thead > tr > td,
   .table > thead > tr > th {
     /*border-top: 1px solid #e7eaec;*/
     border: 0;
     line-height: 1.42857;
-    /*padding: 8px;*/
+    padding: 8px;
     vertical-align: middle;
     font-family: Arial;
-    color: #7ACAFF;
+    color: #b18e60;
     font-size: 14px;
     line-height: 23px;
     font-family: inherit;
   }
-
   .table-bordered > tbody > tr > td,
   .table-bordered > tbody > tr > th,
   .table-bordered > tfoot > tr > td,
   .table-bordered > tfoot > tr > th,
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    border-bottom: 1px solid #FFFFFF;
-    border-top: 1px solid #FFFFFF;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
   }
-
   .table > thead > tr > th {
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #DDD;
   }
-
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    background-color: #7ACAFF;
+    background-color: #F5F5F6;
   }
-
   #hl-tree-table > tbody > tr {
-    background-color: #ffffff;
+    background-color: #fbfbfb;
   }
-
   #hl-tree-table > tbody > tr.active {
-    background-color #9E9E9E
+    /*background-color #ffefbb*/
+    background-color rgba(255, 239, 187, 0.21)
   }
-
   #hl-tree-table > tbody > .child-tr {
     background-color: #fff;
   }
-
   label {
     margin: 0 8px;
-    overflow: hidden;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
   }
-
   .ms-tree-space {
     position: relative;
     top: 1px;
@@ -810,13 +764,11 @@
     width: 14px;
     height: 14px;
   }
-
   .ms-tree-space::before {
     content: ""
   }
-
   #hl-tree-table th > label {
-    margin: 50px;
+    margin: 0;
   }
 
 </style>
