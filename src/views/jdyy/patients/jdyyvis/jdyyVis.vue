@@ -12,7 +12,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyyvisitURL} from '../../config.toml'
+  import {JdyyVisitURL} from '../../config.toml'
   import {jdyyVisConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -21,9 +21,9 @@
     components: {KalixTable},
     data() {
       return {
-        jdyyvisitURL: JdyyvisitURL,
+        jdyyvisitURL: JdyyVisitURL,
         tableFields: [
-          {prop: 'pid', label: '患者'},
+          {prop: 'pname', label: '患者'},
           {prop: 'diagnosis', label: '诊断'},
           {prop: 'surgical', label: '术式'},
           {prop: 'operationDate', label: '手术日期'},
