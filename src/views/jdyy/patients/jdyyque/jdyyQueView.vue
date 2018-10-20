@@ -59,7 +59,7 @@
         el-input(v-model="formModel.harris" type="number" readonly)
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.hss" type="number" readonly)
-      view-table(v-bind:targetURL="targetURL" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
+      view-table(v-bind:targetURL="targetURL" v-bind:userId="formModel.pid" v-on:handleClick="handleClick")
       div.mark(ref="mark")
         div(v-for="img in imgs" @click="markclose")
           img(src="img" width="120px" height="120px")
@@ -92,7 +92,6 @@
         console.log('address=========', this.formModel.address)
       },
       handleClick(data) {
-        console.log('handleClick---data----', data)
         console.log('handleClick---data。photo----', data.photo)
         if (data.photo !== null) {
           if (data.photo.indexOf(',')) {
