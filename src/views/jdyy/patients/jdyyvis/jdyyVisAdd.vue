@@ -10,7 +10,7 @@
         <!--kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")-->
         el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
       el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
-        kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 50%;")
+        el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" style="width: 50%;")
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
         el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")

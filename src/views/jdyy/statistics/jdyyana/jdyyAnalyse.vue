@@ -723,30 +723,30 @@
             position absolute
             margin: -1.2% 0 0 -0.8%
           .block
-            margin-left 20%
-            width 80%
-          .input-time
-            width 30%
-            margin-top 15px
-            border 2px solid #23769a
-            color #23769a
-            background-color black
-          .block-input
-            width 12%
-            height 30px
-            margin-top 15px
-            border 2px solid #23769a
-            color #23769a
-            background-color black
-          .el-radio
-            color: #23769a;
-            font-weight: 500;
-            line-height: 1;
-            cursor: pointer;
-            white-space: nowrap;
-            outline: 0
-            margin-left 2%
-            background-color black
+            margin-left 14%
+            width 86%
+            .input-time
+              width 30%
+              margin-top 15px
+              border 2px solid #23769a
+              color #23769a
+              background-color black
+            .block-input
+              width 12%
+              height 30px
+              margin-top 15px
+              border 2px solid #23769a
+              color #23769a
+              background-color black
+            .el-radio
+              color: #23769a;
+              font-weight: 500;
+              line-height: 1;
+              cursor: pointer;
+              white-space: nowrap;
+              outline: 0
+              margin-left 2%
+              background-color black
         .left-xr
           width 5px
           height 30px

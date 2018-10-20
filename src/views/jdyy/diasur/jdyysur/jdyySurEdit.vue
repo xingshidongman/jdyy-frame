@@ -6,7 +6,7 @@
 <template lang="pug">
   kalix-dialog.user-add(bizKey="reply" ref="kalixBizDialog" v-bind:submitBefore="submitBefore"
   v-bind:submitAfter="submitAfter" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" style=" width:60%;margin:auto;")
       input(v-model="formModel.id" type="hidden")
       input(v-model="formModel.postId" type="hidden")
       <!--el-form-item(label="所属帖子标题" prop="postId" label-width="120px" v-bind:rules="rules.forumTitle")-->
@@ -16,7 +16,7 @@
       <!--el-form-item(label="上级回复内容" prop="parentContent" label-width="120px" v-bind:rules="rules.parentContent")-->
         <!--el-input(v-model="formModel.parentContent" readonly)-->
       el-form-item(label="回复内容" prop="content" label-width="120px" v-bind:rules="rules.content")
-        el-input(v-model="formModel.content")
+        el-input(v-model="formModel.content" style="width:80%")
 </template>
 
 <script type="text/ecmascript-6">

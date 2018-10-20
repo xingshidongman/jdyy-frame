@@ -47,6 +47,9 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="stylus" type="text/stylus">
+.el-form-item
+  width 60%
+  margin 15px auto
 
 </style>

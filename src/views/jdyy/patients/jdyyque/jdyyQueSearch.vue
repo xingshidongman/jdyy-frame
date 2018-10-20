@@ -15,7 +15,7 @@
           // {label: '术式', prop: 'surgical'},
           {label: '主管医生', prop: 'directorDoctor'},
           {label: '病历号', prop: 'bedNumber'},
-          {label: '住院日期', type: 'datetime', prop: 'dateAdmission'}
+          {label: '住院日期', type: 'date', prop: 'dateAdmission'}
           // {label: '手术日期', type: 'datetime', prop: 'dateOperation'}
 
         ]
