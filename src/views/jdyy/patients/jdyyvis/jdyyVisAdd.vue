@@ -2,15 +2,17 @@
   kalix-dialog.user-add(title='添加' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="患者" prop="pid" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")
-        kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" placeholder="请选择患者" style="width: 50%;")
-      el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis")
+        <!--kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" style="width: 50%;")-->
+        el-select.border(v-model="formModel.pid" filterable placeholder="请选择" @change="getQue($event)")
+          el-option(v-for="item in option" :key="option.index" :label="item.label" :value="item.value" )
+      el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
         <!--kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")-->
-        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
-      el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical")
+        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia" change-on-select)
+      el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
         <!--kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")-->
-        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
-      el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
-        kalix-datepicker-simple(v-model="formModel.operationDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 50%;")
+        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur" change-on-select)
+      el-form-item(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
+        kalix-datepicker-simple(v-model="formModel.operationDate" type="date" placeholder="选择日期" format="yyyy-MM-dd" style="width: 50%;")
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
         el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")
@@ -33,6 +35,7 @@
         albumname: '',
         options: [],
         items: [],
+        option: [],
         filePathArr: [],
         fileNameArr: [],
         rules: {
@@ -48,6 +51,7 @@
     mounted() {
       this.getDiaCascader()
       this.getSurCascader()
+      this.getQueDate()
     },
     methods: {
       init(dialogOption) {
@@ -82,6 +86,27 @@
       },
       getSur(val) { // 通过级联获取数据后转成字符串
         this.formModel.surgical = val.toString()
+      },
+      getQue(value) { // 将pname存到数据库
+        for (let i = 0; i < this.option.length; i++) {
+          if (this.option[i].value === value) {
+            console.log('4564564564564564================', this.option[i].label)
+            this.formModel.pname = this.option[i].label
+          }
+        }
+      },
+      getQueDate() { // 获取病员信息
+        console.log('getQueDate=================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getDataBySelect',
+          params: {
+            position: '患者'
+          }
+        }).then(res => {
+          console.log('getQueDate-res.data.data======================', res.data.data)
+          this.option = res.data.data
+        })
       }
     }
   }

@@ -6,7 +6,7 @@
         div.con1
           div.con1-left
             el-form-item.toleft(label="姓名")
-              el-select(v-model="formModel.name" @change="getData($event)" filterable placeholder="请选择")
+              el-select(v-model="formModel.pid" @change="getData($event)" filterable placeholder="请选择")
                 el-option(v-for="item in options" :key="item.value" :label="item.label" :value="item.value")
             el-form-item.toleft(label="性别")
               el-radio-group(v-model="formModel.sex" disabled)
@@ -1940,6 +1940,7 @@
           }
         }).then(res => {
           console.log('getData.success======================', res.data)
+          this.formModel.name = res.data.name
           this.formModel.sex = res.data.sex
           this.formModel.age = res.data.age
           this.formModel.telephonePerson = res.data.telephonePerson

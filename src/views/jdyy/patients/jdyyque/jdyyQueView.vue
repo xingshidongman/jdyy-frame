@@ -5,10 +5,9 @@
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.name" readonly)
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.sex" readonly)
-        <!--el-radio-group(v-model="formModel.sex" readonly )-->
-          <!--el-radio(label="男")-->
-          <!--el-radio(label="女")-->
+        el-radio-group(v-model="formModel.sex" disabled )
+          el-radio(label="男")
+          el-radio(label="女")
       el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.brith" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.brith" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
@@ -25,8 +24,8 @@
       el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.dateAdmission" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.dateAdmission" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
-      el-form-item(label="出院日期" prop="DischargeDate" v-bind:label-width="labelWidth")
-        el-input(v-model="formModel.DischargeDate" readonly)
+      el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.dischargeDate" readonly)
         <!--kalix-datepicker-simple(v-model="formModel.DischargeDate" type="datetime" placeholder="选择日期" format="yyyy-MM-dd" style="width: 100%;" readonly)-->
       el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.stature" type="number" readonly)
@@ -68,6 +67,7 @@
       div.mark(ref="mark")
         div(v-for="img in imgs" @click="markclose")
           img(src="img" width="120px" height="120px")
+
 </template>
 
 <script type="text/ecmascript-6">
