@@ -2,7 +2,7 @@
   kalix-dialog.user-add(title='修改' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="患者" prop="pid" v-bind:label-width="labelWidth")
-        kalix-select.tests(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly style="width: 60%;")
+        kalix-select.tests(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="visPat" placeholder="请选择患者" readonly style="width: 60%;")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
@@ -16,7 +16,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyyvisitURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {JdyyvisitURL, JdyysurURL, JdyydiaURL, JdyypatientsURL} from '../../config.toml'
   import FormModel from './model'
   export default {
     name: 'JdyyVisEdit',
@@ -39,6 +39,7 @@
           // dateOperation: [{required: true, message: '请输入手术日期', trigger: 'change'}],
           // periodization: [{required: true, message: '请输入分期', trigger: 'change'}]
         },
+        JdyypatientsURL: JdyypatientsURL,
         targetURL: JdyyvisitURL
       }
     },

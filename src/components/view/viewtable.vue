@@ -35,7 +35,9 @@
         getDate() {
           // this.$http.get(this.targetURL + `/${this.userId}`, {
           this.$http.get(this.targetURL, {
-            params: ''
+            params: {
+              userId: this.userId
+            }
           }).then(res => {
             this.tableData = res.data.data
             console.log('viewtable _res===========', this.tableData)
