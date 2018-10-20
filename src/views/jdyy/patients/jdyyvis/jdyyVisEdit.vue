@@ -1,9 +1,9 @@
 <template lang="pug">
   kalix-dialog.user-add(title='修改' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
-      el-form-item(label="患者" prop="pid" v-bind:label-width="labelWidth")
+      el-form-item(label="患者" prop="pname" v-bind:label-width="labelWidth")
         <!--kalix-select.tests(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly style="width: 60%;")-->
-        el-select.border(v-model="formModel.pid" filterable placeholder="请选择" @change="getQue($event)")
+        el-select.border(v-model="formModel.pname" filterable placeholder="请选择" @change="getQue($event)")
           el-option(v-for="item in option" :key="option.index" :label="item.label" :value="item.value" )
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
@@ -18,7 +18,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyyvisitURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {JdyyvisitURL, JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
   import FormModel from './model'
   export default {
     name: 'JdyyVisEdit',
@@ -91,6 +91,19 @@
             this.formModel.pname = this.option[i].label
           }
         }
+      },
+      getQueDate() { // 获取病员信息
+        console.log('getQueDate=================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getDataBySelect',
+          params: {
+            position: '患者'
+          }
+        }).then(res => {
+          console.log('getQueDate-res.data.data======================', res.data.data)
+          this.option = res.data.data
+        })
       }
     }
   }
