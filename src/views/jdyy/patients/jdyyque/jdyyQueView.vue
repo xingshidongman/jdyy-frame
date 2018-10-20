@@ -1,6 +1,6 @@
 
 <template lang="pug">
-  kalix-dialog.user-add(title='查询详情页' bizKey="jdyyque" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
+  kalix-dialog.user-add(title='查询详情页' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.name" readonly)
@@ -63,16 +63,16 @@
         el-input(v-model="formModel.harris" type="number" readonly)
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.hss" type="number" readonly)
-      view-table(v-bind:targetURL="targetURL" v-bind:userId="formModel.pid" v-on:handleClick="handleClick")
+      view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
       div.mark(ref="mark")
         div(v-for="img in imgs" @click="markclose")
-          img(src="img" width="120px" height="120px")
+          img(v-bind:src="img" style="width:150px; height:150px")
 
 </template>
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {JdyyvisitURL} from '../../config.toml'
+  import {JdyyvisitURL, visPatUrl} from '../../config.toml'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import ViewTable from '../../../../components/view/viewtable'
@@ -81,6 +81,7 @@
     components: {ViewTable, KalixFontCascader, KalixDatepickerSimple},
     data() {
       return {
+        visPatUrl: visPatUrl,
         targetURL: JdyyvisitURL,
         imgs: [],
         formModel: Object.assign({}, FormModel),
@@ -100,10 +101,10 @@
           } else {
             this.imgs = data.photo
           }
+          this.$refs.mark.style.display = 'block'
         } else {
           alert('无图片')
         }
-        this.$refs.mark.style.display = 'block'
       },
       markclose() {
         this.$refs.mark.style.display = 'none'

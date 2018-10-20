@@ -9,6 +9,8 @@ JdyystatURL = "/camel/rest/jdyy/statisticss"
 JdyypatientsURL = "/camel/rest/jdyy/patientss"
 #就诊信息
 JdyyvisitURL = "/camel/rest/jdyy/visits"
+#就诊信息图片
+visPatUrl = "/camel/rest/jdyy/visits/getAllByUserId"
 #术式
 JdyysurURL = "/camel/rest/jdyy/surgicals"
 #诊断

@@ -1,6 +1,5 @@
 <template lang="pug">
   el-table(v-bind:data="tableData" border)
-    // el-table-column(fixed prop="id" label="id" type="hidden")
     el-table-column(prop="diagnosis" label="诊断" width="200")
     el-table-column(prop="surgical" label="术式" width="200")
     el-table-column(prop="operationDate" label="手术日期" width="200")
