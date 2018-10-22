@@ -11,16 +11,16 @@
       ref="bizSearchRef"
       v-if="bizSearch"
       v-on:onSearchBtnClick="onSearchClick")
-    div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="bottom:8px;")
-      div.kalix-wrapper-hd
+    div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="width:90%; margin:auto; border-bottom: 1px solid rgb(52, 101, 203);")
+      div.kalix-wrapper-hd(style="width:10%; margin:auto; font-size:1.2vw;padding: 10px 0;")
         <!--i(v-bind:class="iconCls")-->
         | {{title}}
-      div.kalix-wrapper-bd(style="position: absolute;width: 100%;overflow: hidden;top: 20px;left: 0;bottom: 0;")
+      div.kalix-wrapper-bd(style="position: absolute;width: 100%;overflow: hidden;top: 20px;left: 0;bottom: 0;width: 500px; margin: 25px 35%;")
         template(v-if="isToolBarSelf")
-          kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
+          kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)
           kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
-        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:auto;position: absolute;width: 100%;bottom: 0;top: 60px;")
+        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 80%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
           div.autoTbale(v-bind:style="{width:tableWidth}")
             table.table.table-bordered(id="hl-tree-table")
               <!--thead-->
@@ -672,9 +672,12 @@
 </style>
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
+  .buttom
+    width: 60%;
+    margin: 5px auto;
   .tree-icon
     margin-right 8px
-    color #dd9e4a
+    color #3465cb
     font-weight bold
     cursor pointer
   .autoTbale {
@@ -687,7 +690,7 @@
     line-height: 23px;
   }
   .table-bordered {
-    border: 0px solid #EBEBEB;
+    /*border: 0px solid #EBEBEB;*/
   }
   .table > tbody > tr > td,
   .table > tbody > tr > th {
@@ -731,11 +734,11 @@
   .table-bordered > tfoot > tr > th,
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    border-bottom: 1px solid #e7e7e7;
-    border-top: 1px solid #e7e7e7;
+    border-bottom: none;
+    border-top: none;
   }
   .table > thead > tr > th {
-    border-bottom: 1px solid #DDD;
+    /*border-bottom: 1px solid #DDD;*/
   }
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
@@ -749,7 +752,7 @@
     background-color rgba(255, 239, 187, 0.21)
   }
   #hl-tree-table > tbody > .child-tr {
-    background-color: #fff;
+    /*background-color: #fff;*/
   }
   label {
     margin: 0 8px;
