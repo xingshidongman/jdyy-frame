@@ -7,7 +7,7 @@
 <template lang="pug">
   div.kalix-base-tool-bar
     template(v-for="btn in defaultBtnList")
-      el-button(v-if="btn.isShow" v-on:click="toggle(btn.id)" v-bind:disabled="btn.isDisable")
+      el-button.buttons(v-if="btn.isShow" v-on:click="toggle(btn.id)" v-bind:disabled="btn.isDisable")
         i.iconfont(v-bind:class="btn.icon")
         | {{btn.title}}
 </template>
@@ -56,7 +56,7 @@
   }
 </script>
 <style lang="stylus" type="text/stylus">
-  /*.el-button*/
-    /*background-color #3465cb*/
-    /*color white*/
+  .buttons
+    background-color #3465cb
+    color white
 </style>
