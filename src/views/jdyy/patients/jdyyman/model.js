@@ -1,34 +1,39 @@
 const FormModel = {
   id: null,
-  name: null,
-  sex: null,
-  age: null,
-  bedNumber: null,
-  dateAdmission: null,
-  brith: null,
-  idCard: null,
-  hospitalNumber: null,
-  directorDoctor: null,
-  dischargeDate: null,
-  stature: null,
-  weight: null,
-  bmi: null,
-  bloodPressure: null,
-  specialDisorders: null,
-  descriptionSpecialDisease: null,
-  allergicHistory: null,
-  medicalCategory: null,
-  whetherDischarge: null,
-  telephonePerson: null,
-  familyPhone: null,
-  address: null,
-  completeAddress: null,
-  remarks: null,
-  harris: null,
-  hss: null,
-  buckling: null,
-  abduction: null,
-  adduction: null
+  name: null, // 姓名
+  sex: null, // 性别
+  age: null, // 年龄
+  stature: null, // 身高
+  weight: null, // 体重
+  brith: null, // 出生日期
+  idCard: null, // 身份证号
+  dateAdmission: null, // 入院日期
+  dischargeDate: null, // 出院日期
+  directorDoctor: null, // 主管医生
+  bedNumber: null, // 床位号
+  hospitalNumber: null, // 住院号
+  medicalRecordNumber: null, // 病历号
+  medicalRecords: null, // 病历
+  currentSituation: null, // 现况
+  telephonePerson: null, // 本人联系方式
+  familyPhone: null, // 家属联系方式
+  // address: null,
+  completeAddress: null, // 通讯地址
+  bmi: null, // BMI
+  bloodPressure: null, // 血压
+  specialDisorders: null, // 特殊疾病
+  descriptionSpecialDisease: null, // 特殊疾病描述
+  allergicHistory: null, // 过敏史
+  medicalCategory: null, // 医疗类别
+  whetherDischarge: null, // 是否出院
+  remarks: null, // 备注
+  harris: null, // harris评分
+  hss: null, // hss评分
+  buckling: null, // 屈曲
+  abduction: null, // 外展
+  adduction: null, // 内收
+  modifyStaff: null, // 修改人员
+  heavyTime: null // 重患时间
 
 }
 export default FormModel

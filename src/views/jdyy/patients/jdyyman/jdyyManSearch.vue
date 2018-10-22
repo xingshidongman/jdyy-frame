@@ -10,7 +10,7 @@
         searchFields: [
           {label: '姓名:', prop: 'name'},
           {label: '性别:', prop: 'sex'},
-          {label: '病历号:', prop: 'bedNumber'},
+          {label: '病历号:', prop: 'medicalRecordNumber'},
           {label: '主管医生:', prop: 'directorDoctor'}
         ]
       }
