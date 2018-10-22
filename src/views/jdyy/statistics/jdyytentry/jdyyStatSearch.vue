@@ -9,7 +9,7 @@
       return {
         searchFields: [
           {label: '坐班医生', prop: 'doctor'},
-          {label: '坐班日期', type: 'datetime', prop: 'date'}
+          {label: '坐班日期', type: 'date', prop: 'date'}
         ]
       }
     }

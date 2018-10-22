@@ -284,7 +284,7 @@
             height: 40px;
             line-height: 40px;
             outline: 0;
-            padding: 0 15px;
+            padding: 0 25px;
             -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             transition: border-color .2s cubic-bezier(.645,.045,.355,1);
             width: 100%;
