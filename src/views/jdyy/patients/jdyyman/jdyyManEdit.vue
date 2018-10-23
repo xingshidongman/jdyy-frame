@@ -63,10 +63,11 @@
         el-radio-group(v-model="formModel.WhetherDischarge" )
           el-radio(label="是")
           el-radio(label="否")
+      el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
+        el-input(v-model="formModel.modifyStaff")
       el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
         el-input(v-model="formModel.remarks")
-      el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
-        el-input(v-model="formModel.modifyStaff")
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -85,7 +86,7 @@
       return {
         downloadURL: JdyypatientsURL,
         fileList: [],
-        labelWidth: '120px',
+        labelWidth: '150px',
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
         formModel: Object.assign({}, FormModel),
@@ -117,7 +118,7 @@
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 60%
+    width 80%
     margin auto
     .el-form-item
       width 49%

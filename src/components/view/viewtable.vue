@@ -1,10 +1,10 @@
 <template lang="pug">
   el-table(v-bind:data="tableData" border)
-    el-table-column(prop="diagnosis" label="诊断" width="200")
-    el-table-column(prop="surgical" label="术式" width="200")
-    el-table-column(prop="operationDate" label="手术日期" width="200")
-    el-table-column(prop="periodization" label="分期" width="150")
-    el-table-column(label="操作" width="100")
+    el-table-column(prop="diagnosis" label="诊断" width="250")
+    el-table-column(prop="surgical" label="术式" width="250")
+    el-table-column(prop="operationDate" label="手术日期" width="250")
+    el-table-column(prop="periodization" label="分期" width="200")
+    el-table-column(label="操作" width="115")
       template(slot-scope="scope")
         el-button(@click="handleClick(scope.row)" type="text" size="small") 查看图片
 </template>
@@ -50,5 +50,7 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-table
+    width 90%
+    margin auto
 </style>

@@ -7,9 +7,9 @@
       v-if="bizSearch"
       v-on:onSearchBtnClick="onSearchClick")
       div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="bottom:8px;")
-        div.kalix-wrapper-hd
-          i(v-bind:class="iconCls")
-          | {{title}}
+        <!--div.kalix-wrapper-hd-->
+          <!--i(v-bind:class="iconCls")-->
+          <!--| {{title}}-->
         div.kalix-wrapper-bd
           template(v-if="isToolBarSelf")
             kalix-tool-bar(v-bind:toolbarBtnList="toolbarBtnListClone" v-on:onToolBarClick="onToolBarSelfClick")
@@ -179,7 +179,7 @@
     },
     computed: {
       tableContainerStyle() {
-        return {'top': (!this.isShowToolBar ? '56px' : '')}
+        return {'top': (!this.isShowToolBar ? '80px' : '')}
       },
       tableWidth() {
         return this.tdsWidth > this.screenWidth && this.screenWidth > 0 ? this.screenWidth + 'px' : '100%'
@@ -379,7 +379,7 @@
       setWrapperStyle() {
         // console.log('bizSearch', this.bizSearch)
         if (!this.bizSearch) {
-          return {'top': '8px'}
+          return {'top': '0px'}
         }
         return {}
       },
@@ -892,7 +892,8 @@
 
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    background-color: #F5F5F6;
+    background-color #3465cb
+    color white
   }
 
   #hl-tree-table > tbody > tr {

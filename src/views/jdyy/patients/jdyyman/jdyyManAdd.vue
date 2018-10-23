@@ -65,8 +65,8 @@
           el-radio(label="否")
       el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
         el-input(v-model="formModel.remarks")
-      el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
-        el-input(v-model="formModel.modifyStaff")
+      <!--el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")-->
+        <!--el-input(v-model="formModel.modifyStaff")-->
 
 </template>
 
@@ -84,7 +84,7 @@
       return {
         downloadURL: JdyypatientsURL,
         formModel: Object.assign({}, FormModel),
-        labelWidth: '120px',
+        labelWidth: '160px',
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
         options: [],
@@ -142,7 +142,7 @@
 
 <style scoped lang="stylus" type="text/stylus">
   .el-form
-    width 60%
+    width 80%
     margin auto
     .el-form-item
       width 49%
