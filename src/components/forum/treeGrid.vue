@@ -749,7 +749,7 @@
   }
   #hl-tree-table > tbody > tr.active {
     /*background-color #ffefbb*/
-    background-color rgba(255, 239, 187, 0.21)
+    background-color rgba(255, 239, 187, 0.5)
   }
   #hl-tree-table > tbody > .child-tr {
     /*background-color: #fff;*/
