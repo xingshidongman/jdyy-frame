@@ -5,12 +5,12 @@
         <!--kalix-select(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" style="width: 50%;")-->
         el-select.border(v-model="formModel.pid" filterable placeholder="请选择" @change="getQue($event)")
           el-option(v-for="item in option" :key="option.index" :label="item.label" :value="item.value" )
-      el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
+      el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis")
         <!--kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")-->
-        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia" change-on-select)
+        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
         <!--kalix-font-surcascader.Border(v-model="formModel.surgical" v-on:change="getModelSur")-->
-        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur")
+        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="手术日期" prop="dateOperation" v-bind:label-width="labelWidth" v-bind:rules="rules.dateOperation")
         el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" style="width: 50%;")
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
@@ -39,6 +39,7 @@
         filePathArr: [],
         fileNameArr: [],
         rules: {
+          pid: [{required: true, message: '请输入患者', trigger: 'change'}]
           // diagnosis: [{required: true, message: '请输入诊断', trigger: 'change'}],
           // surgical: [{required: true, message: '请输入术式', trigger: 'change'}],
           // dateOperation: [{required: true, message: '请输入手术日期', trigger: 'change'}],
@@ -81,11 +82,11 @@
         })
       },
       getDia(val) { // 通过级联获取数据后转成字符串
-        console.log('val===========================', val)
-        this.formModel.diagnosis = val.toString()
+        console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
+        this.formModel.diagnosis = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
       },
       getSur(val) { // 通过级联获取数据后转成字符串
-        this.formModel.surgical = val.toString()
+        this.formModel.surgical = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
       },
       getQue(value) { // 将pname存到数据库
         for (let i = 0; i < this.option.length; i++) {
