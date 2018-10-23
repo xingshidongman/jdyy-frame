@@ -5,7 +5,7 @@
 -->
 <template lang="pug">
   kalix-dialog.user-add(bizKey="jdyySur" ref="kalixBizDialog"
-    v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
+    v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:submitBefore="getCodeByPid")
     div.el-form(slot="dialogFormSlot" style=" width:60%;margin:auto;")
       input(v-model="formModel.parentId" type="hidden")
       input(v-model="formModel.isLeaf" type="hidden")
@@ -41,6 +41,19 @@
     created() {
     },
     methods: {
+      getCodeByPid(baseDialog, callBack) { // 获取术式代码（code）并赋值
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getCodeByPid',
+          params: {
+            parentId: this.formModel.parentId
+          }
+        }).then(res => {
+          console.log('res.data.data.data=================', res.data)
+          baseDialog.formModel.code = res.data
+          callBack()
+        })
+      }
       // init(dialogOption) {
       //  this.forumTitle = dialogOption.forumTitle
       //  this.formModel.postId = dialogOption.postId

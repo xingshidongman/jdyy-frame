@@ -5,6 +5,12 @@
         <!--kalix-select.tests(v-model="formModel.pid" v-bind:requestUrl="JdyypatientsURL" appName="pid" id="name" placeholder="请选择患者" readonly style="width: 60%;")-->
         el-select.border(v-model="formModel.pname" filterable placeholder="请选择" @change="getQue($event)")
           el-option(v-for="item in option" :key="option.index" :label="item.label" :value="item.value" )
+      el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex")
+        el-radio-group(v-model="formModel.sex")
+          el-radio(label="男")
+          el-radio(label="女")
+      el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
+        el-input(v-model="formModel.age" type="number")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
@@ -15,6 +21,8 @@
         el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
+      el-form-item(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
+        el-input(v-model="formModel.parting")
 </template>
 
 <script type="text/ecmascript-6">
