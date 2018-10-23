@@ -95,7 +95,7 @@
     },
     methods: {
       getModel(val) { // 三级联动地区参数区分
-        this.formModel.completeAddress = val.toString()
+        this.formModel.completeAddress = val.join('')
         console.log('address=========', this.formModel.completeAddress)
       },
       handleClick(data) {
