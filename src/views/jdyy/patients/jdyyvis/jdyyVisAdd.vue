@@ -10,7 +10,7 @@
           el-radio(label="男")
           el-radio(label="女")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-        el-input(v-model="formModel.age" type="number")
+        el-input.tests(v-model="formModel.age" type="number")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
         <!--kalix-font-diacascader.Border(v-model="formModel.diagnosis" v-on:change="getModelDia")-->
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)

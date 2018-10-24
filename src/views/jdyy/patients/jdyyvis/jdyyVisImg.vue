@@ -8,7 +8,7 @@
       <!--el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
         <!--el-input(v-model="formModel.photo")-->
       el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-        kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+        kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB" title="点击文字图片放大")
         kalix-img-upload(v-model="formModel.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
       <!--div.bottom-->
         <!--div.bottom-box-->
@@ -143,72 +143,7 @@
   }
 </script>
 <style scoped lang="stylus" type="text/stylus">
-  .container_box
-    width 100%
-    display inline-block
-    margin 20px 0
-    .el-form
-      width 70%
-      float left
-      .start
-        width: 100%
-        height:600px
-        overflow-y:scroll
-        margin-bottom:50px
-        margin-right -2
-        .start1
-          width 96%
-          margin auto
-          .el-form-item
-              width 50%
-              display inline-block
-            .el-input
-              border 1px solid #3465cb
-            .el-select
-              border 1px solid #3465cb
-            .Border
-              border 1px solid #3465cb
-          .address
-            width 100%
-      .block-boxs
-        width: 98%
-        margin-top: 30px
-        height: 200px
-        overflow: scroll
-        margin-left 10px
-    .box
-      width 28%
-      float right
-      border 1px solid #3465cb
-      height 600px
-      .contions
-        width:80%;
-        margin: 20px 10% 0 10%;
-  .bottom
-    width 60%;
-    .bottom-box
-      width: 50%;
-      float: right;
-      .right_ul
-        width:80%;
-        margin: 10px 10% 0 10%;
-        .right_li
-          width: 48%
-          display: inline-block
-          text-align: center
-          .button-save
-            width: 100px
-            padding 10px 0
-            border-radius: 5px
-            border: none
-            font-size: 16px
-            outline:none
-            background-color #9E9E9E
-        .right_li:first-child button
-          color: #3465cb
-        .right_li:last-child button
-          color: red
-  .short
-    width 50%
-    display inline-block
+  .el-form
+    width 60%
+    margin auto
 </style>

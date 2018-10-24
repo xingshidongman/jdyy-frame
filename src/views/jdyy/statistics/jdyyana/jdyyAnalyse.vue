@@ -627,7 +627,7 @@
         height 5px
         background-color #3ac8f3
         position absolute
-        margin: -1.5% 0 0 -0.8%
+        margin: -1.3% 0 0 -0.8%
       .left-zx
         width 5px
         height 30px
@@ -715,7 +715,7 @@
             height 5px
             background-color #3ac8f3
             position absolute
-            margin: -1.5% 0 0 -0.8%
+            margin: -1.3% 0 0 -0.8%
           .left-zx
             width 5px
             height 30px
