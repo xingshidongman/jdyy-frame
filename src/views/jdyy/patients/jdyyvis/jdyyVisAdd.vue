@@ -90,9 +90,29 @@
       getDia(val) { // 通过级联获取数据后转成字符串
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
         this.formModel.diagnosis = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getCodeByContent',
+          params: {
+            content: this.formModel.diagnosis
+          }
+        }).then(res => {
+          console.log('formModel.diagnosisCode==============================', res.data.data)
+          this.formModel.diagnosisCode = res.data.data[0].code
+        })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
         this.formModel.surgical = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getCodeByContent',
+          params: {
+            content: this.formModel.surgical
+          }
+        }).then(res => {
+          console.log('formModel.diagnosisCode==============================', res.data.data)
+          this.formModel.surgicalCode = res.data.data[0].code
+        })
       },
       getQue(value) { // 将pname存到数据库
         for (let i = 0; i < this.option.length; i++) {
