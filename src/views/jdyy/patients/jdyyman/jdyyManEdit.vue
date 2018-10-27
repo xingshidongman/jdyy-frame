@@ -59,8 +59,8 @@
         el-input(v-model="formModel.harris" type="number")
       el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
         el-input(v-model="formModel.hss" type="number")
-      el-form-item(label="是否出院" prop="WhetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.WhetherDischarge")
-        el-radio-group(v-model="formModel.WhetherDischarge" )
+      el-form-item(label="是否出院" prop="whetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.whetherDischarge")
+        el-radio-group(v-model="formModel.whetherDischarge" )
           el-radio(label="是")
           el-radio(label="否")
       el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
@@ -91,7 +91,9 @@
         columnParam: undefined,
         formModel: Object.assign({}, FormModel),
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'change'}]
+          name: [{required: true, message: '请输入姓名', trigger: 'change'}],
+          sex: [{required: true, message: '请输入性别', trigger: 'change'}],
+          age: [{required: true, message: '请输入年龄', trigger: 'change'}]
         },
         targetURL: JdyypatientsURL
       }
