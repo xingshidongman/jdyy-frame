@@ -13,7 +13,7 @@ import Admindict from './system/admindict'
 import Audit from './system/audit'
 import Auditconfig from './system/auditconfig'
 import Application from './system/application'
-import Welcome from './welcome'
+import Welcome from '.././jdyy/welcome'
 
 Application.install(Vue)
 Dataauth.install(Vue)
