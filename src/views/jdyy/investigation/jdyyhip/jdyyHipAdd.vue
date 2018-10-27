@@ -356,10 +356,10 @@
                         el-option(label="联合" value="联合")
                     div.mark
                       div.sta 髋臼缺陷
-                      div.stb
-                        el-form-item.long.toleft(label="中心型")
+                      div.stb.toleft
+                        el-form-item.short(label="中心型")
                           el-input(v-model="formModel.centerType" clearable)
-                        el-form-item.long.toleft(label="髋臼周边")
+                        el-form-item.short(label="髋臼周边")
                           el-input(v-model="formModel.periphery " clearable)
                     div.mark
                       div.sta 髋臼植骨
@@ -452,27 +452,27 @@
                         el-form-item.mini.toleft(label="术后" )
                           el-input(v-model="formModel.leaveHospital" clearable)
                             template(slot="append") 天
-                    div.mark
-                      div.sta 出院时关节活动角度
-                      div.stb
-                        el-form-item.mini.toleft(label="屈曲")
-                          el-input(v-model="formModel.angleA" clearable)
-                            template(slot="append") °
-                        el-form-item.mini.toleft(label="外展")
-                          el-input(v-model="formModel.angleB " clearable)
-                            template(slot="append") °
-                        el-form-item.mini.toleft(label="内旋")
-                          el-input(v-model="formModel.angleC " clearable)
-                            template(slot="append") °
-                        el-form-item.mini.toleft(label="过伸")
-                          el-input(v-model="formModel.angleD " clearable)
-                            template(slot="append") °
-                        el-form-item.mini.toleft(label="内收")
-                          el-input(v-model="formModel.angleE " clearable)
-                            template(slot="append") °
-                        el-form-item.mini.toleft(label="外旋")
-                          el-input(v-model="formModel.angleF " clearable)
-                            template(slot="append") °
+
+                    div.sta 出院时关节活动角度
+                    div.stb
+                      el-form-item.mini(label="屈曲")
+                        el-input(v-model="formModel.angleA" clearable)
+                          template(slot="append") °
+                      el-form-item.mini(label="外展")
+                        el-input(v-model="formModel.angleB " clearable)
+                          template(slot="append") °
+                      el-form-item.mini(label="内旋")
+                        el-input(v-model="formModel.angleC " clearable)
+                          template(slot="append") °
+                      el-form-item.mini(label="过伸")
+                        el-input(v-model="formModel.angleD " clearable)
+                          template(slot="append") °
+                      el-form-item.mini(label="内收")
+                        el-input(v-model="formModel.angleE " clearable)
+                          template(slot="append") °
+                      el-form-item.mini(label="外旋")
+                        el-input(v-model="formModel.angleF " clearable)
+                          template(slot="append") °
         div.art3
           h1.title 术后影像学检查
           div.con3
@@ -1035,39 +1035,38 @@
   .art1
     /*width 1160px*/
     .con1
-      display flex
       height 310px
       .con1-left
         border 1px solid black
-        flex 4
-        margin-right 10px
-        padding 10px 10px
+        display inline-block
+        width 40%
+        margin-right 2.5%
+        padding 0.5%
       .con1-right
+        display inline-block
         border 1px solid black
-        flex 6
-        margin-left 10px
-        padding 10px
+        width 55%
+        padding 0.5%
   .art2
     /*width 1160px*/
+    margin-top 25px
     .con2
       margin-bottom 20px
       table
-        border 1px solid black
-        border-top 0
-        width 100%
-        margin-bottom 20px
+          word-break break-all
+          margin-bottom 20px
+          border 1px solid black
+          border-collapse collapse
+          width 100%
       tr
-        border-top 1px solid black
         width 100%
-        display flex
       .short-td
         padding 10px
         width 20%
         text-align center
-        word-break break-all
+        border 1px solid black
       .long-td
-        color #3465cb
-        border-left 1px solid black
+        border 1px solid black
         padding 10px
         width 80%
       .con2-left
@@ -1087,7 +1086,6 @@
       tr
         border-top 1px solid black
         width 100%
-        display flex
       .a-td
         padding 10px
         width 20%
@@ -1124,6 +1122,7 @@
     display inline-block
   .long
     width 100%
+    display inline-block
   .toleft
     margin-left -40px
     /*margin-bottom 0*/
@@ -1131,15 +1130,16 @@
     margin-left -80px
   .mark
     margin-left 30px
-    display flex
-    .sta
-      /*width 140px*/
-      /*height 40px*/
-      /*display inline-block*/
-      flex 1.5
-      padding-top 10px
-    .stb
-      flex 8.5
+  .sta
+    /*width 140px*/
+    /*height 40px*/
+    /*display inline-block*/
+    display inline-block
+    padding-top 10px
+    vertical-align top
+  .stb
+    display inline-block
+    vertical-align top
   .else
     width 120px
     display inline-block
