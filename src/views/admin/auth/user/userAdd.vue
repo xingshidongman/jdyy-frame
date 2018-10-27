@@ -20,7 +20,7 @@
       el-form-item(label="确认密码" prop="confirmPassword" v-bind:rules="rules.confirmPassword" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.confirmPassword" type="password")
       el-form-item(label="出生日期" prop="birthdate" v-bind:label-width="labelWidth")
-        kalix-datepicker-simple(v-model="formModel.birthdate" type="datetime" placeholder="选择出生日期" format="yyyy-MM-dd" style="width: 100%;")
+        el-date-picker(v-model="formModel.birthdate" type="date" placeholder="选择出生日期" value-format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="身份证号" prop="idNumber" v-bind:rules="rules.idNumber" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.idNumber")
       el-form-item(label="地址" prop="address" v-bind:rules="rules.address" v-bind:label-width="labelWidth")

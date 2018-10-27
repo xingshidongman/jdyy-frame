@@ -70,7 +70,7 @@
         console.log('FUN：', fun)
         if (fun !== undefined) {
           /**
-          if (moduleArr.length) {
+           if (moduleArr.length) {
             moduleArr.forEach((item) => {
               if (item.moduleKeyArr) {
                 let keyArr = item.moduleKeyArr
@@ -86,7 +86,11 @@
            **/
           this.which_to_show = 'kalix-' + app + '-' + fun.toLowerCase()
         } else {
-          this.which_to_show = 'Welcome'
+          if (app !== undefined) {
+            this.which_to_show = `kalix-${app.toLowerCase()}-welcome`
+          } else {
+            this.which_to_show = 'welcome'
+          }
         }
         this.initTheme()
       },
@@ -123,7 +127,7 @@
     },
     components: {
       // adminUser, // 动态显示组件
-      Welcome: Welcome
+      'welcome': Welcome
     }
   }
 </script>
