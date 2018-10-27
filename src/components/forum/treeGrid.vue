@@ -55,13 +55,13 @@
                           <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                     <!--input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")-->
                     div.lefts(v-else)
-                      label(v-on:click="toggle(index,item)" v-if="!column.type")
+                      label.td-lbl(v-on:click="toggle(index,item)" v-if="!column.type")
                         span.tree-icon(v-if='snum==2')
                           i(v-html='item.spaceHtml')
                           i.el-icon(v-if="item.children&&item.children.length>0" v-bind:class="{'el-icon-plus':!item.expanded,'el-icon-minus':item.expanded}")
                             <!--i.iconfont.icon-2(style="padding: 0 10px;")-->
                           i(v-else class="kailx-ms-tree-space")
-                        | {{renderBody(item, column)}}
+                        div.td-div {{renderBody(item, column)}}
       component(:is="whichBizDialog" ref="kalixDialog"
       v-bind:formModel="formModel"
       v-bind:formRules="formRules")
@@ -773,6 +773,10 @@
   #hl-tree-table th > label {
     margin: 0;
   }
-
+  .td-lbl
+    display flex
+    .td-div
+      flex 1
+      word-break break-all
 </style>
 
