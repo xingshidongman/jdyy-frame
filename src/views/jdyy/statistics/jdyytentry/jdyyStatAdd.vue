@@ -2,8 +2,9 @@
   kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
-        el-select.border(v-model="formModel.doctor" filterable placeholder="请选择")
-          el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")
+        el-input(v-model="formModel.doctor")
+        <!--el-select.border(v-model="formModel.doctor" filterable placeholder="请选择")-->
+          <!--el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")-->
         <!--kalix-select.border(v-model="formModel.doctor" v-bind:requestUrl="userURL" appName="dutyDoctor" id="name" position="坐班医生" placeholder="请选择医生")-->
       el-form-item.short(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
         el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" style="width: 100%;")
@@ -74,6 +75,7 @@
           }
         }).then(res => {
           console.log('findByPosition-res.data.data======================', res.data.data)
+          console.log('date============')
           this.items = res.data.data
         })
       }
