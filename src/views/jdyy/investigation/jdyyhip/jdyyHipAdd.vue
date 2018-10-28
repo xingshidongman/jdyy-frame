@@ -480,15 +480,14 @@
               tr
                 td.a-td
                   div.con3-left 术后骨盆正位
-                td.b-td
+                td.b-td(colspan=2)
                   div.con3-mid
                     el-form-item.short(label="日期" style="float:left")
                       el-col(:span="20")
                         el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date3" style="width: 100%;")
-                    el-form-item.mini(label="术后第")
+                    el-form-item.short(label="术后第")
                       el-input(v-model="formModel.weekDay" clearable)
                         template(slot="append") 周
-                td.c-td
               tr
                 td.a-td
                   div.con3-left 臼杯位置
@@ -749,7 +748,7 @@
           div.con2
             el-form-item.mini(label="大腿痛")
               el-input(v-model="formModel.harBDate" clearable)
-            el-form-item.elin(label="Trendelenburg 征" label-width="150px")
+            el-form-item.mini(label="Trendelenburg 征" label-width="150px")
               el-input(v-model="formModel.harB1" clearable)
             el-form-item.mini(label="活动度-伸直")
               el-input(v-model="formModel.harB2" clearable)
@@ -900,15 +899,15 @@
           div.con2
             el-form-item.mini(label="日期")
               el-input(v-model="formModel.harDDate" clearable)
-            el-form-item.elin(label="术后第（）月" label-width="150px")
+            el-form-item.mini(label="术后第（）月" label-width="150px")
               el-input(v-model="formModel.harD1" clearable )
             el-form-item.mini(label="移位")
               el-input(v-model="formModel.harD2" clearable)
             el-form-item.mini(label="聚乙烯磨损")
               el-input(v-model="formModel.harD3" clearable)
-            el-form-item.elin(label="骨水泥透亮区 -1 *" label-width="150px")
+            el-form-item.mini(label="骨水泥透亮区 -1 *" label-width="150px")
               el-input(v-model="formModel.harD4" clearable)
-            el-form-item.elin(label="骨水泥透亮区 -2 *" label-width="150px")
+            el-form-item.mini(label="骨水泥透亮区 -2 *" label-width="150px")
               el-input(v-model="formModel.harD5" clearable)
             el-form-item.mini(label="骨溶解 *")
               el-input(v-model="formModel.harD6" clearable)
@@ -920,9 +919,9 @@
               el-input(v-model="formModel.harD9" clearable)
             el-form-item.mini(label="金属问题")
               el-input(v-model="formModel.harD10" clearable)
-            el-form-item.elin(label="骨水泥金属界面透亮区 *" label-width="190px")
+            el-form-item.mini(label="骨水泥金属界面透亮区 *" label-width="190px")
               el-input(v-model="formModel.harD11" clearable)
-            el-form-item.elin(label="骨水泥骨折（） *" label-width="150px")
+            el-form-item.mini(label="骨水泥骨折（） *" label-width="150px")
               el-input(v-model="formModel.harD12" clearable)
             el-form-item.mini(label="涂层脱落*")
               el-input(v-model="formModel.harD13" clearable)
@@ -1079,10 +1078,11 @@
     /*width 1160px*/
     .con3
       table
-        border 1px solid black
-        border-top 0
-        width 100%
+        word-break break-all
         margin-bottom 20px
+        border 1px solid black
+        border-collapse collapse
+        width 100%
       tr
         border-top 1px solid black
         width 100%
@@ -1115,7 +1115,7 @@
       margin-left 38%
       margin-top 20px
   .mini
-    width 250px
+    width 30%
     display inline-block
   .short
     width 50%
@@ -1138,6 +1138,7 @@
     padding-top 10px
     vertical-align top
   .stb
+    width 70%
     display inline-block
     vertical-align top
   .else
