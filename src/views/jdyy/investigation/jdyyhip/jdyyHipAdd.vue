@@ -1075,7 +1075,6 @@
           p
             line-height 25px
     .art3
-      /*width 1160px*/
       .con3
         table
           word-break break-all
