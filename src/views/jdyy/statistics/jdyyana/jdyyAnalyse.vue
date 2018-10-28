@@ -51,10 +51,10 @@
           div.left-sx
           div.left-zx
           div.block
-            el-date-picker.input-time(v-model="surDate" type="year" value-format="yyyy" placeholder="选择年份")
-            span  年龄段
+            el-date-picker.input-time(v-model="surDate" type="year" value-format="yyyy" placeholder="选择年份" )
+            span(style=" margin-left: 2%;") 年龄段
             input.block-input(type="number" v-model="surStartAge" placeholder="起始年龄")
-            span ~
+            span(style=" margin-left: 2%;") ~
             input.block-input(type="number" v-model="surEndAge" placeholder="结束年龄")
             el-radio(v-model="surRadio"  label="男") 男
             el-radio(v-model="surRadio"  label="女") 女
@@ -78,9 +78,9 @@
             div.left-zx
             div.block
               el-date-picker.input-time(v-model="diaDate" type="year" value-format="yyyy" placeholder="选择年份")
-              span  年龄段
+              span(style=" margin-left: 2%;")  年龄段
               input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄")
-              span ~
+              span(style=" margin-left: 2%;") ~
               input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄")
               el-radio(v-model="diaRadio"  label="男") 男
               el-radio(v-model="diaRadio"  label="女") 女
@@ -137,11 +137,21 @@
       }
     },
     methods: {
+      open() {
+        this.$alert('改年份没有数据', '温馨提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'info',
+              message: `action: $ { action } `
+            })
+          }
+        })
+      },
       surPie(id) {
         this.charts = echarts.init(document.getElementById(id))
         this.charts.setOption({
           tooltip: {
-            trigger: 'item',
             formatter: '{a}<br/>{b}:{c} ({d}%)'
           },
           legend: {
@@ -163,7 +173,6 @@
               type: 'pie',
               radius: '45%',
               center: ['52%', '55%'],
-              avoidLabelOverlap: false,
               data: this.surData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#FFFF00'],
               label: {
@@ -200,7 +209,6 @@
         this.charts = echarts.init(document.getElementById(id))
         this.charts.setOption({
           tooltip: {
-            trigger: 'item',
             formatter: '{a}<br/>{b}:{c} ({d}%)'
           },
           legend: {
@@ -221,8 +229,7 @@
               name: '诊断分析',
               type: 'pie',
               radius: '45%',
-              center: ['60%', '50%'],
-              avoidLabelOverlap: false,
+              center: ['52%', '55%'],
               data: this.diaData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00'],
               label: {
@@ -230,19 +237,19 @@
                 normal: {
                   formatter(v) {
                     let text = Math.round(v.percent) + '%' + '' + v.name
-                    if (text.length <= 8) {
+                    if (text.length <= 6) {
                       return text
-                    } else if (text.length > 8 && text.length <= 16) {
-                      text = `${text.slice(0, 8)}\n${text.slice(8)}`
+                    } else if (text.length > 6 && text.length <= 16) {
+                      text = `${text.slice(0, 6)}\n${text.slice(8)}`
                       return text
                     } else if (text.length > 16 && text.length <= 24) {
-                      text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16)}`
+                      text = `${text.slice(0, 6)}\n${text.slice(6, 16)}\n${text.slice(16)}`
                       return text
                     } else if (text.length > 24 && text.length <= 30) {
-                      text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24)}`
+                      text = `${text.slice(0, 6)}\n${text.slice(6, 16)}\n${text.slice(16, 24)}\n${text.slice(24)}`
                       return text
                     } else if (text.length > 30) {
-                      text = `${text.slice(0, 8)}\n${text.slice(8, 16)}\n${text.slice(16, 24)}\n${text.slice(24, 30)}\n${text.slice(30)}`
+                      text = `${text.slice(0, 6)}\n${text.slice(6, 16)}\n${text.slice(16, 24)}\n${text.slice(24, 30)}\n${text.slice(30)}`
                       return text
                     }
                   },
@@ -517,6 +524,7 @@
         }).then(res => {
           console.log('getDiaData==============', res.data.data)
           if (res.data.data.length == 0) {
+            this.open()
             this.diaDate = null
             this.getDiaData()
           }
@@ -559,6 +567,7 @@
         }).then(res => {
           console.log('getSurData==============', res.data.data)
           if (res.data.data.length == 0) {
+            this.open()
             this.surDate = null
             this.getSurData()
           }
@@ -783,18 +792,25 @@
             position absolute
             margin: -1.2% 0 0 -0.8%
           .block
-            margin-left 14%
-            width 86%
+            margin-left 10%
+            width 96%
             .input-time
-              width 30%
+              width 25%
               margin-top 15px
               border 2px solid #23769a
               color #23769a
               background-color black
+            .time-span
+              margin-left: -7%;
+              z-index: 9999;
+              position: fixed;
+              color: #9e9e9e;
+              margin-top: 23px;
             .block-input
               width 12%
               height 30px
               margin-top 15px
+              margin-left: 2%;
               border 2px solid #23769a
               color #23769a
               background-color black
