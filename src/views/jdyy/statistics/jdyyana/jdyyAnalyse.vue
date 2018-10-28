@@ -51,13 +51,13 @@
           div.left-sx
           div.left-zx
           div.block
-            el-date-picker.input-time(v-model="datevalue3"  type="year"  placeholder="选择年份")
+            el-date-picker.input-time(v-model="surDate" type="year" value-format="yyyy" placeholder="选择年份")
             span  年龄段
-            input.block-input
+            input.block-input(type="number" v-model="surStartAge" placeholder="起始年龄")
             span ~
-            input.block-input
-            el-radio(v-model="radio"  label="1") 男
-            el-radio(v-model="radio"  label="2") 女
+            input.block-input(type="number" v-model="surEndAge" placeholder="结束年龄")
+            el-radio(v-model="surRadio"  label="男") 男
+            el-radio(v-model="surRadio"  label="女") 女
           div(id="sur" style="width: 98%;min-height: 260px; left:2%;margin-top:2%;")
         div.left-xx
         div.left-xr
@@ -77,13 +77,13 @@
             div.left-sx
             div.left-zx
             div.block
-              el-date-picker.input-time(v-model="datevalue4"  type="year"  placeholder="选择年份")
+              el-date-picker.input-time(v-model="diaDate" type="year" value-format="yyyy" placeholder="选择年份")
               span  年龄段
-              input.block-input
+              input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄")
               span ~
-              input.block-input
-              el-radio(v-model="radio"  label="1") 男
-              el-radio(v-model="radio"  label="2") 女
+              input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄")
+              el-radio(v-model="diaRadio"  label="男") 男
+              el-radio(v-model="diaRadio"  label="女") 女
             div(id="dia" style="width: 98%;height: 260px;left:2%;margin-top:2%;")
           div.left-xx
           div.left-xr
@@ -101,9 +101,6 @@
     name: 'kalix-jdyy-jdyyana',
     data() {
       return {
-        datevalue1: '',
-        datevalue2: '',
-        datevalue3: '',
         datevalue4: '',
         radio: '',
         charts: '',
@@ -127,8 +124,16 @@
         surColumn: [], // 术式饼状图数据列表
         diaData: [], // 诊断饼状图数据
         surData: [], // 术式饼状图数据
-        surColumnSelected: {},
-        diaColumnSelected: {}
+        surColumnSelected: {}, // 选中的术式信息
+        diaColumnSelected: {}, // 选中的诊断信息
+        surDate: null, // 术式饼状图时间插件
+        surStartAge: null, // 术式饼状年龄段开始年龄
+        surEndAge: null, // 术式饼状图结束年龄
+        surRadio: null, // 术式饼状图男女单选按钮
+        diaDate: null, // 诊断饼状图时间插件
+        diaStartAge: null, // 诊断饼状年龄段开始年龄
+        diaEndAge: null, // 诊断饼状图结束年龄
+        diaRadio: null // 诊断饼状图男女单选按钮
       }
     },
     methods: {
@@ -498,28 +503,33 @@
           this.diagram('diagram')
         })
       },
-      getDiaColumn() { // 获取诊断列表数据
-        console.log('getDiaColumn============================')
-        this.axios.request({
-          method: 'GET',
-          url: '/camel/rest/jdyy/diagnosiss/getDiaColumn'
-        }).then(res => {
-          console.log('getDiaColumn.success=====================', res.data)
-          // this.diaColumn = res.data
-          this.getDiaData(res.data)
-        })
-      },
-      getDiaData(diaColumn) { // 获取诊断统计数据
-        console.log('diaColumn=========================', diaColumn.toString())
+      getDiaData() { // 获取诊断统计数据
+        console.log('getDiaData=========================in')
         this.axios.request({
           method: 'GET',
           url: '/camel/rest/jdyy/visits/getDiaData',
           params: {
-            diaColumn: diaColumn.toString()
+            diaDate: this.diaDate,
+            diaStartAge: this.diaStartAge,
+            diaEndAge: this.diaEndAge,
+            diaRadio: this.diaRadio
           }
         }).then(res => {
           console.log('getDiaData==============', res.data.data)
-          this.diaColumn = diaColumn
+          if (res.data.data.length == 0) {
+            this.diaDate = null
+            this.getDiaData()
+          }
+          let diaColumn = ''
+          for (let i = 0; i < res.data.data.length; i++) {
+            diaColumn += res.data.data[i].name + ","
+          }
+          console.log('diaColumn===========================', diaColumn)
+          let strs = diaColumn.substring(0, diaColumn.length - 1).split(',')
+          for (let i = 0; i < strs.length; i++) {
+            this.diaColumn[i] = strs[i]
+          }
+          console.log('this.diaColumn========================', this.diaColumn)
           this.diaData = res.data.data
           if (this.diaData){
             this.diaData.map(e => {
@@ -535,26 +545,33 @@
           this.diaPie('dia')
         })
       },
-      getSurColumn() { // 获取术式列表数据
-        console.log('getSurColumn============================')
-        this.axios.request({
-          method: 'GET',
-          url: '/camel/rest/jdyy/surgicals/getSurColumn'
-        }).then(res => {
-          console.log('getSurColumn.success=====================', res.data)
-          this.getSurData(res.data)
-        })
-      },
-      getSurData(surColumn) { // 获取术式统计数据
-        console.log('getSurData=========================')
+      getSurData() { // 获取术式统计数据
+        console.log('getSurData=========================in')
         this.axios.request({
           method: 'GET',
           url: '/camel/rest/jdyy/visits/getSurData',
           params: {
-            surColumn: surColumn.toString()
+            surDate: this.surDate,
+            surStartAge: this.surStartAge,
+            surEndAge: this.surEndAge,
+            surRadio: this.surRadio
           }
         }).then(res => {
-          this.surColumn = surColumn
+          console.log('getSurData==============', res.data.data)
+          if (res.data.data.length == 0) {
+            this.surDate = null
+            this.getSurData()
+          }
+          let surColumn = ''
+          for (let i = 0; i < res.data.data.length; i++) {
+            surColumn += res.data.data[i].name + ","
+          }
+          console.log('surColumn===========================', surColumn)
+          let strs = surColumn.substring(0, surColumn.length - 1).split(',')
+          for (let i = 0; i < strs.length; i++) {
+            this.surColumn[i] = strs[i]
+          }
+          console.log('this.surColumn========================', this.surColumn)
           this.surData = res.data.data
           if (this.surData) {
             this.surData.map(e => {
@@ -577,11 +594,54 @@
         this.getDate() // 获取系统当前日期方法
         this.getDataByMonth() // 获取月份数据对比柱状图数据方法
         this.getLine() // 获取五年比手术量线性图数据方法
-        this.getDiaColumn() // 获取诊断饼状图数据方法
-        this.getSurColumn() // 获取术式饼状图数据方法
+        this.getDiaData() // 获取诊断饼状图数据方法
+        this.getSurData() // 获取术式饼状图数据方法
       })
+    },
+    watch:{
+      surDate:function () {
+        console.log('surDate==================================', this.surDate)
+        this.getSurData()
+      },
+      surStartAge:function () {
+        if(this.surStartAge && this.surEndAge && this.surStartAge < this.surEndAge){
+          console.log('surStartAge==================================', this.surStartAge)
+          this.getSurData()
+        }
+      },
+      surEndAge:function () {
+        if(this.surStartAge && this.surEndAge && this.surStartAge < this.surEndAge){
+          console.log('surEndAge==================================', this.surEndAge)
+          this.getSurData()
+        }
+      },
+      surRadio:function () {
+        console.log('surRadio==================================', this.surRadio)
+        this.getSurData()
+      },
+      diaDate:function () {
+        console.log('surDate==================================', this.diaDate)
+        this.getDiaData()
+      },
+      diaStartAge:function () {
+        if(this.diaStartAge && this.diaEndAge && this.diaStartAge < this.diaEndAge){
+          console.log('surStartAge==================================', this.diaStartAge)
+          this.getDiaData()
+        }
+      },
+      diaEndAge:function () {
+        if(this.diaStartAge && this.diaEndAge && this.diaStartAge < this.diaEndAge){
+          console.log('surEndAge==================================', this.diaEndAge)
+          this.getDiaData()
+        }
+      },
+      diaRadio:function () {
+        console.log('surRadio==================================', this.diaRadio)
+        this.getDiaData()
+      }
     }
   }
+
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
