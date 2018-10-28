@@ -364,15 +364,15 @@
                   div.mark
                     div.sta 髋臼植骨
                     div.stb
-                      el-form-item.mini(label="结构性植骨")
+                      el-form-item.medium(label="结构性植骨")
                         el-radio-group(v-model="formModel.structuralBone1")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.mini(label="螺钉固定")
+                      el-form-item.medium(label="螺钉固定")
                         el-radio-group(v-model="formModel.screw")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.mini(label="打压植骨")
+                      el-form-item.medium(label="打压植骨")
                         el-radio-group(v-model="formModel.suppress1")
                           el-radio(label="有")
                           el-radio(label="无")
@@ -437,19 +437,19 @@
                       template(slot="append") ml
                   div.mark
                     div.sta 单拐行走
-                    div.stb
+                    div.stb.toleft
                       el-form-item.toleft
                         el-radio-group(v-model="formModel.singleAbduction")
                           el-radio(label="无法使用")
                           el-radio(label="可以使用")
                       template(v-if="formModel.singleAbduction === '可以使用'")
-                        el-form-item.mini(label="术后" )
+                        el-form-item.short(label="术后" )
                           el-input(v-model="formModel.singleDay" clearable)
                             template(slot="append") 天
                   div.mark
                     div.sta 出院
-                    div.stb
-                      el-form-item.mini.toleft(label="术后" )
+                    div.stb.toleft
+                      el-form-item.short(label="术后" )
                         el-input(v-model="formModel.leaveHospital" clearable)
                           template(slot="append") 天
 
@@ -1080,6 +1080,9 @@
   .long
     width 100%
     display inline-block
+  .medium
+    width 40%
+    display inline-block
   .toleft
     margin-left -40px
   /*margin-bottom 0*/
@@ -1092,17 +1095,14 @@
     /*height 40px*/
     /*display inline-block*/
     display inline-block
-    padding-top 10px
+    margin-top 13px
     vertical-align top
   .stb
-    width 70%
+    width 80%
     display inline-block
     vertical-align top
   .else
     width 120px
-    display inline-block
-  .elin
-    width 300px
     display inline-block
   .other
     width 315px
