@@ -10,7 +10,7 @@
           el-radio(label="男")
           el-radio(label="女")
       el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-        el-input(v-model="formModel.age" type="number")
+        el-input.tests(v-model="formModel.age" type="number")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia")
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
@@ -22,7 +22,7 @@
           el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
       el-form-item(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
-        el-input(v-model="formModel.parting")
+        el-input.tests(v-model="formModel.parting")
 </template>
 
 <script type="text/ecmascript-6">

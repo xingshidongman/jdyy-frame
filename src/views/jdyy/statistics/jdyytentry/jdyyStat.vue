@@ -29,7 +29,7 @@
           {prop: 'nowNum', label: '现住院人数'},
           {prop: 'illNum', label: '重病人数'},
           {prop: 'doctor', label: '坐班医生'},
-          {prop: 'date', type: 'datetime', label: '坐班日期'}
+          {prop: 'date', type: 'date', label: '坐班日期'}
         ],
         jdyyStatDialog: [
           {id: 'add', dialog: 'JdyyStatAdd'},
