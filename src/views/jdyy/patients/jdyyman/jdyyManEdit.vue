@@ -1,6 +1,7 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='修改' bizKey="jdyyman" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
+  kalix-dialog.user-add(title='修改' bizKey="jdyyman" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
     div.el-form(slot="dialogFormSlot")
+      div {{modifyStaff}}
       el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
         el-input(v-model="formModel.name")
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" style="")
@@ -63,8 +64,8 @@
         el-radio-group(v-model="formModel.whetherDischarge" )
           el-radio(label="是")
           el-radio(label="否")
-      el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
-        el-input(v-model="formModel.modifyStaff")
+      el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth")
+        el-input(v-model="formModel.modifyStaff" v-text="modifyStaff" readonly="readonly")
       el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
         el-input(v-model="formModel.remarks")
 
@@ -95,8 +96,12 @@
           sex: [{required: true, message: '请输入性别', trigger: 'change'}],
           age: [{required: true, message: '请输入年龄', trigger: 'change'}]
         },
-        targetURL: JdyypatientsURL
+        targetURL: JdyypatientsURL,
+        modifyStaff: this.$KalixCatch.get('user_name')
       }
+    },
+    mounted() {
+      this.getUserName()
     },
     methods: {
       init(dialogOption) {
@@ -113,6 +118,14 @@
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
         console.log('address=========', this.formModel.completeAddress)
+      },
+      getUserName() {
+        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        console.log('this.this.formModel.modifyStaff========', this.formModel.modifyStaff)
+      },
+      submitBefore(baseDialog, callBack) {
+        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        callBack()
       }
     }
   }
