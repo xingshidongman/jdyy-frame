@@ -14,7 +14,7 @@
         el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")
           el-option(label="外科" value="外科")
-      el-form-item(label="分型" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
+      el-form-item(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
         el-input.tests(v-model="formModel.parting")
 </template>
 
