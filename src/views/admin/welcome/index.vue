@@ -60,7 +60,6 @@
         let nowDate = year + '-' + month + '-' + day
         console.log('date .toLocaleDateString()==================', date.toLocaleDateString())
         this.getData(nowDate)// 根据当前时间查找今日数据指标相应数据
-        this.getColumnar(year) // 获取月份数据对比柱状图数据方法
       },
       getData(nowDate) {// 根据时间查找今日数据指标
         console.log('nowDate==================', nowDate)

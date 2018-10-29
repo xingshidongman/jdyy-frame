@@ -2,7 +2,7 @@
   keep-alive
     kalix-table(bizKey="jdyyVis" title='诊断术式信息' ref="kalixTable"
     v-bind:tableFields="tableFields"
-    v-bind:targetURL="jdyyvisitURL"
+    v-bind:targetURL="targetURL"
     v-bind:bizDialog="jdyyVisDialog"
     v-bind:btnList="jdyyVisBtnList"
     v-bind:toolbarBtnList="toolbarBtnList"
@@ -15,13 +15,14 @@
   import {JdyyvisitURL} from '../../config.toml'
   import {jdyyVisConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
+  // import KalixTableVisit from '../../../../components/corelib/components/common/baseTableVisit'
 
   export default {
     name: 'kalix-jdyy-jdyyvis',
     components: {KalixTable},
     data() {
       return {
-        jdyyvisitURL: JdyyvisitURL,
+        targetURL: JdyyvisitURL + '/getPnameByPid',
         tableFields: [
           {prop: 'pname', label: '患者'},
           {prop: 'diagnosis', label: '诊断'},
@@ -58,7 +59,13 @@
             break
           }
         }
+      },
+      getPnameByPid () {
+        console.log('getPnameByPid=====================', this.tableFields[0].pid)
       }
+    },
+    mounted() {
+      this.getPnameByPid()
     }
   }
 </script>
