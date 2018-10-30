@@ -240,18 +240,18 @@
     z-index 9
     background-color #ffffff
     .bd
-      height 200px
+      height 150px
       .logo
         width 100%
-        height 200px
+        height 150px
         overflow hidden
         transition width .2s
         background url('/static/images/logo.png') no-repeat center
       .text
-          font-size 3vw
-          width 80%
-          margin-top 50px
-          margin-left 5%
+          font-size 2.5vw
+          width 70%
+          padding: 54px 0;
+          margin-left 15%
           color white
           float left
         &.small
@@ -351,7 +351,7 @@
                 margin-top 10px
             .el-dropdown-link
               align-items center
-              margin-top 140px
+              margin-top 100px
               color #ffffff
             .el-select
               margin-top 10px
