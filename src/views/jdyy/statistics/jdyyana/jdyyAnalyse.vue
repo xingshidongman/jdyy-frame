@@ -7,7 +7,7 @@
           div.left-sx
           div.left-zx
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy-MM-dd"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy-MM-dd" placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -41,7 +41,7 @@
             div.left-zx
             div.block
               el-date-picker.input-time(v-model="chooseYear" v-on:change="getDataByMonth" type="year" value-format="yyyy" placeholder="选择年份")
-            div( id="histogram" style="width: 98%;height: 260px;pointer-events: none;")
+            div( id="histogram" style="width: 98%; margin:auto;height: 260px;")
           div.left-xx
           div.left-xr
     div.rights
@@ -52,13 +52,13 @@
           div.left-zx
           div.block
             el-date-picker.input-time(v-model="surDate" type="year" value-format="yyyy" placeholder="选择年份" )
-            span(style=" margin-left: 2%;") 年龄段
+            span(style=" margin-left: 1%;") 年龄段
             input.block-input(type="number" v-model="surStartAge" placeholder="起始年龄")
-            span(style=" margin-left: 2%;") ~
+            span(style=" margin-left: 1%;") ~
             input.block-input(type="number" v-model="surEndAge" placeholder="结束年龄")
             el-radio(v-model="surRadio"  label="男") 男
             el-radio(v-model="surRadio"  label="女") 女
-          div(id="sur" style="width: 98%;min-height: 260px; left:2%;margin-top:2%;")
+          div(id="sur" style="width: 98%;min-height: 260px;margin:auto;")
         div.left-xx
         div.left-xr
       div.lefttwo
@@ -67,7 +67,7 @@
             div.text-box.text 五年比手术量
             div.left-sx
             div.left-zx
-            div(id="diagram" style="width: 98%;height: 260px;margin-top:2%;")
+            div(id="diagram" style="width: 98%;height: 260px;margin:auto;")
           div.left-xx
           div.left-xr
       div.lefttwo
@@ -78,13 +78,13 @@
             div.left-zx
             div.block
               el-date-picker.input-time(v-model="diaDate" type="year" value-format="yyyy" placeholder="选择年份")
-              span(style=" margin-left: 2%;")  年龄段
+              span(style=" margin-left: 1%;")  年龄段
               input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄")
-              span(style=" margin-left: 2%;") ~
+              span(style=" margin-left: 1%;") ~
               input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄")
               el-radio(v-model="diaRadio"  label="男") 男
               el-radio(v-model="diaRadio"  label="女") 女
-            div(id="dia" style="width: 98%;height: 260px;left:2%;margin-top:2%;")
+            div(id="dia" style="width: 98%;height: 260px;margin:auto;")
           div.left-xx
           div.left-xr
 </template>
@@ -167,6 +167,11 @@
           labelLine: {
             show: false
           },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
           series: [
             {
               name: '手术分析',
@@ -215,6 +220,8 @@
             type: 'scroll',
             orient: 'vertical',
             x: 'left',
+            width: '48px',
+            overflow: 'hidden',
             data: this.diaColumn,
             textStyle: {
               color: '#ffffff'
@@ -224,12 +231,17 @@
           labelLine: {
             show: false
           },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
+          },
           series: [
             {
               name: '诊断分析',
               type: 'pie',
               radius: '45%',
-              center: ['52%', '55%'],
+              center: ['60%', '55%'],
               data: this.diaData,
               color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00'],
               label: {
@@ -275,10 +287,15 @@
             }
           },
           grid: {
-            left: '3%',
-            right: '5%',
+            left: '2%',
+            right: '2%',
             bottom: '3%',
             containLabel: true
+          },
+          toolbox: {
+            feature: {
+              saveAsImage: {}
+            }
           },
           xAxis: [
             {
@@ -326,12 +343,6 @@
             textStyle: {
               color: '#2d8ac7'
             }
-          },
-          grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
           },
           toolbox: {
             feature: {
@@ -797,20 +808,14 @@
             position absolute
             margin: -1.2% 0 0 -0.8%
           .block
-            margin-left 10%
-            width 96%
+            margin-left 5%
+            width 95%
             .input-time
-              width 25%
+              width 26%
               margin-top 15px
               border 2px solid #23769a
               color #23769a
               background-color black
-            .time-span
-              margin-left: -7%;
-              z-index: 9999;
-              position: fixed;
-              color: #9e9e9e;
-              margin-top: 23px;
             .block-input
               width 12%
               height 30px
