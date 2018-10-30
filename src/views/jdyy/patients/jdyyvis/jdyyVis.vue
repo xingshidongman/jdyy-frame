@@ -15,7 +15,7 @@
   import {JdyyvisitURL} from '../../config.toml'
   import {jdyyVisConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
-  // import KalixTableVisit from '../../../../components/corelib/components/common/baseTableVisit'
+  import Message from '../../../../common/message'
 
   export default {
     name: 'kalix-jdyy-jdyyvis',
@@ -33,7 +33,7 @@
         jdyyVisDialog: [
           {id: 'add', dialog: 'JdyyVisAdd'},
           {id: 'edit', dialog: 'JdyyVisEdit'},
-          {id: 'delete', dialog: 'JdyyVisDelete'},
+          // {id: 'deleteOne', dialog: 'JdyyVisDelete'},
           {id: 'editImg', dialog: 'JdyyVisImg'}
         ],
         jdyyVisBtnList: jdyyVisConfigBtnList,
@@ -56,6 +56,31 @@
             setTimeout(() => {
               that.$refs.kalixDialog.$refs.kalixBizDialog.open('图片', false, row)
             }, 20)
+            break
+          }
+          case 'deleteOne' : {
+            console.log('==deleteOne=====', row)
+            this.$confirm('确定要删除吗?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              return this.axios.request({
+                method: 'DELETE',
+                url: JdyyvisitURL + '/' + row.id,
+                params: {},
+                data: {
+                  id: row.id
+                }
+              })
+            }).then(response => {
+              // this.getData()
+              this.$refs.kalixTable.getData()
+              Message.success(response.data.msg)
+              // 添加删除后自定义处理事件
+              // this.$emit('afterDelete')
+            }).catch(() => {
+            })
             break
           }
         }
