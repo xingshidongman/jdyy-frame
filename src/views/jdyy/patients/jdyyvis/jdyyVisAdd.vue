@@ -1,9 +1,8 @@
 <template lang="pug">
   kalix-dialog.user-add(title='添加' bizKey="jdyyVis" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
-      el-form-item(label="患者" prop="pid" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")
-        el-select.border(v-model="formModel.pid" filterable placeholder="请选择")
-          el-option(v-for="item in option" :key="option.index" :label="item.label" :value="item.value" )
+      el-form-item(label="患者" prop="pname" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")
+        el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
@@ -45,20 +44,19 @@
           // periodization: [{required: true, message: '请输入分期', trigger: 'change'}]
         },
         targetURL: JdyyvisitURL,
-        JdyypatientsURL: JdyypatientsURL
+        JdyypatientsURL: JdyypatientsURL,
+        restaurants: [],
+        timeout: null
       }
     },
     mounted() {
-      this.getDiaCascader()
-      this.getSurCascader()
-      this.getQueDate()
+      this.getDiaCascader() // 获取诊断信息并以级联形式显示
+      this.getSurCascader() // 获取术式信息并以级联形式显示
+      this.loadAll() // 获取病员信息
     },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
-      },
-      setGroup(item) {
-        this.formModel.downlosd = item.albumname
       },
       getDiaCascader() { // 获取诊断信息并以级联形式显示
         console.log('getDiaCascader========================')
@@ -107,26 +105,32 @@
           this.formModel.surgicalCode = res.data.data[0].code
         })
       },
-      // getQue(value) { // 将pname存到数据库
-      //   for (let i = 0; i < this.option.length; i++) {
-      //     if (this.option[i].value === value) {
-      //       console.log('4564564564564564================', this.option[i].label)
-      //       this.formModel.pname = this.option[i].label
-      //     }
-      //   }
-      // },
-      getQueDate() { // 获取病员信息
-        console.log('getQueDate=================')
+      loadAll() { // 获取病员信息
         this.axios.request({
           method: 'GET',
-          url: JdyypatientsURL + '/getDataBySelect',
-          params: {
-            position: '患者'
-          }
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
         }).then(res => {
-          console.log('getQueDate-res.data.data======================', res.data.data)
-          this.option = res.data.data
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
         })
+      },
+      querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          cb(results)
+        }, 3000 * Math.random())
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelect(item) {
+        console.log('item===========================', item)
+        this.formModel.pid = item.vpid
       }
     }
   }

@@ -43,7 +43,6 @@
     mounted () {
       this.getDiaCascader()
       this.getSurCascader()
-      this.getQueDate()
     },
     methods: {
       init(dialogOption) {
