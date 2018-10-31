@@ -138,7 +138,7 @@
     },
     methods: {
       open() {
-        this.$alert('改年份没有数据', '温馨提示', {
+        this.$alert(' ', '温馨提示', {
           confirmButtonText: '确定',
           callback: action => {
             this.$message({
