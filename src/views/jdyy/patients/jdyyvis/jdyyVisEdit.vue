@@ -4,9 +4,9 @@
       el-form-item(label="患者" prop="pname" v-bind:label-width="labelWidth")
         el-input.tests(v-model="formModel.pname" readonly)
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" )
-        el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia" v-bind:show-all-levels="false" change-on-select)
+        el-cascader.tests(v-model="diaCascader" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" )
-        el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
+        el-cascader.tests(v-model="surCascader" placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="手术日期" prop="operationdate" v-bind:label-width="labelWidth" )
         el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy-MM-dd" style="width: 60%;")
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" )
@@ -37,7 +37,9 @@
         filePathArr: [],
         fileNameArr: [],
         rules: {},
-        targetURL: JdyyvisitURL
+        targetURL: JdyyvisitURL,
+        diaCascader: [],
+        surCascader: []
       }
     },
     mounted () {
@@ -47,6 +49,30 @@
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
+        console.log('this.formModel.diagnosis==================', this.formModel.diagnosisCode)
+        console.log('this.formModel.surgical==================', this.formModel.surgicalCode)
+        let diaCode = this.formModel.diagnosisCode // 诊断级联回显
+        for (let i = 1; i <= diaCode.length / 2; i++) {
+          if (diaCode.substring((i - 1) * 2, i * 2) !== '00') {
+            let a = ''
+            for (let j = 0; j < (diaCode.length - i * 2); j++) {
+              a += '0'
+            }
+            this.diaCascader.push(diaCode.substring(0, i * 2) + a)
+          }
+        }
+        console.log('diaCascader+++++++++++++++++++++++', this.diaCascader)
+        let surCode = this.formModel.surgicalCode // 术式级联回显
+        for (let i = 1; i <= surCode.length / 2; i++) {
+          if (surCode.substring((i - 1) * 2, i * 2) !== '00') {
+            let a = ''
+            for (let j = 0; j < (surCode.length - i * 2); j++) {
+              a += '0'
+            }
+            this.surCascader.push(surCode.substring(0, i * 2) + a)
+          }
+        }
+        console.log('surCascader+++++++++++++++++++++++', this.surCascader)
       },
       getDiaCascader() { // 获取诊断信息并以级联形式显示
         console.log('getDiaCascader========================')
@@ -70,29 +96,29 @@
       },
       getDia(val) { // 通过级联获取数据后转成字符串
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
-        this.formModel.diagnosis = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyydiaURL + '/getCodeByContent',
           params: {
-            content: this.formModel.diagnosis
+            code: this.formModel.diagnosisCode
           }
         }).then(res => {
-          console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.diagnosisCode = res.data.data[0].code
+          console.log('formModel.diagnosis==============================', res.data.data)
+          this.formModel.diagnosis = res.data.data[0].content
         })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
-        this.formModel.surgical = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyysurURL + '/getCodeByContent',
           params: {
-            content: this.formModel.surgical
+            code: this.formModel.surgicalCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.surgicalCode = res.data.data[0].code
+          this.formModel.surgical = res.data.data[0].content
         })
       }
     }

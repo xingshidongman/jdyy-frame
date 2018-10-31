@@ -623,6 +623,7 @@
         this.getDiaData() // 获取诊断饼状图数据方法
         this.getSurData() // 获取术式饼状图数据方法
       })
+
     },
     watch:{
       surDate:function () {
@@ -630,13 +631,15 @@
         this.getSurData()
       },
       surStartAge:function () {
-        if(this.surStartAge && this.surEndAge && this.surStartAge < this.surEndAge){
+        let i = this.surEndAge - this.surStartAge
+        if(i > 0){
           console.log('surStartAge==================================', this.surStartAge)
           this.getSurData()
         }
       },
       surEndAge:function () {
-        if(this.surStartAge && this.surEndAge && this.surStartAge < this.surEndAge){
+        let i = this.surEndAge - this.surStartAge
+        if(i > 0){
           console.log('surEndAge==================================', this.surEndAge)
           this.getSurData()
         }
@@ -650,13 +653,15 @@
         this.getDiaData()
       },
       diaStartAge:function () {
-        if(this.diaStartAge && this.diaEndAge && this.diaStartAge < this.diaEndAge){
+        let i = this.diaEndAge - this.diaStartAge
+        if (i > 0){
           console.log('surStartAge==================================', this.diaStartAge)
           this.getDiaData()
         }
       },
       diaEndAge:function () {
-        if(this.diaStartAge && this.diaEndAge && this.diaStartAge < this.diaEndAge){
+        let i = this.diaEndAge - this.diaStartAge
+        if (i > 0){
           console.log('surEndAge==================================', this.diaEndAge)
           this.getDiaData()
         }
