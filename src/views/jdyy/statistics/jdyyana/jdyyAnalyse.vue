@@ -78,7 +78,7 @@
             div.left-zx
             div.block
               el-date-picker.input-time(v-model="diaDate" type="year" value-format="yyyy" placeholder="选择年份")
-              span(style=" margin-left: 1%;")  年龄段
+              span(style=" margin-left: 0.5%;")  年龄段
               input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄")
               span(style=" margin-left: 1%;") ~
               input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄")
@@ -160,9 +160,12 @@
             x: 'left',
             data: this.surColumn,
             textStyle: {
-              color: '#ffffff'
+              color: '#'
             },
-            selected: this.surColumnSelected
+            selected: this.surColumnSelected,
+            formatter: function (name) {
+              return (name.length > 6 ? (name.slice(0, 4) + '...') : name)
+            }
           },
           labelLine: {
             show: false
@@ -177,9 +180,9 @@
               name: '手术分析',
               type: 'pie',
               radius: '45%',
-              center: ['52%', '55%'],
+              center: ['55%', '55%'],
               data: this.surData,
-              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#FFFF00'],
+              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#DB7093'],
               label: {
                 align: 'left',
                 normal: {
@@ -224,9 +227,12 @@
             overflow: 'hidden',
             data: this.diaColumn,
             textStyle: {
-              color: '#ffffff'
+              color: '#'
             },
-            selected: this.diaColumnSelected
+            selected: this.diaColumnSelected,
+            formatter: function (name) {
+              return (name.length > 8 ? (name.slice(0, 8) + '...') : name)
+            }
           },
           labelLine: {
             show: false
@@ -243,7 +249,7 @@
               radius: '45%',
               center: ['60%', '55%'],
               data: this.diaData,
-              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#33CC00', '#FFFF00'],
+              color: ['#f49f42', '#00BFFF', '#FF0000', '#3CB371', '#9370DB', '#808080', '#00FFFF', '#FF33FF', '#33CC00', '#DB7093'],
               label: {
                 align: 'left',
                 normal: {
@@ -815,6 +821,7 @@
               width 12%
               height 30px
               margin-top 15px
+              padding-left 10px
               margin-left: 2%;
               border 2px solid #23769a
               color #23769a
@@ -826,7 +833,7 @@
               cursor: pointer;
               white-space: nowrap;
               outline: 0
-              margin-left 2%
+              margin-left 1%
               background-color black
         .left-xr
           width 5px
