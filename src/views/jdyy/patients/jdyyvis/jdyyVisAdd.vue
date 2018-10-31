@@ -80,29 +80,29 @@
       },
       getDia(val) { // 通过级联获取数据后转成字符串
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
-        this.formModel.diagnosis = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyydiaURL + '/getCodeByContent',
           params: {
-            content: this.formModel.diagnosis
+            code: this.formModel.diagnosisCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.diagnosisCode = res.data.data[0].code
+          this.formModel.diagnosis = res.data.data[0].content
         })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
-        this.formModel.surgical = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyysurURL + '/getCodeByContent',
           params: {
-            content: this.formModel.surgical
+            code: this.formModel.surgicalCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.surgicalCode = res.data.data[0].code
+          this.formModel.surgical = res.data.data[0].content
         })
       },
       loadAll() { // 获取病员信息
