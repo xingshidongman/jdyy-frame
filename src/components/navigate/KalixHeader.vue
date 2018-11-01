@@ -53,7 +53,12 @@
                   el-dropdown-menu(slot="dropdown")
                     el-dropdown-item(command="changeInfo") 修改个人信息
                     el-dropdown-item(command="changePwd") 修改密码
-                    el-dropdown-item(command="logout") 退出
+
+              li
+                img.exit-img(src="../../../static/images/exit.png" height="18" width="18")
+                div.exit(v-on:click="doLogout") 退出
+                div.clear
+            div.clear
 </template>
 
 <script type="text/ecmascript-6">
@@ -187,9 +192,6 @@
           case 'changePwd':
             this.$emit('onClickChangePwd', '')
             break
-          case 'logout' :
-            this.doLogout()
-            break
         }
       },
       checkLogin() {
@@ -249,7 +251,6 @@
         background url('/static/images/logo.png') no-repeat center
       .text
           font-size 2.5vw
-          width 70%
           padding: 54px 0;
           margin-left 15%
           color white
@@ -344,9 +345,10 @@
                 &.router-link-active
                   color: #000000
           &.aside
-            margin-right 20px
+            margin-right 100px
+            float right
             li
-              vertical-align top
+              vertical-align middle
               .el-badge
                 margin-top 10px
             .el-dropdown-link
@@ -361,7 +363,7 @@
     .avatar-wrapper
       height 36px
       line-height 36px
-      width 120px
+      width 104px
       .avatar
         float left
         width 36px
@@ -379,4 +381,15 @@
       background url('/static/images/default_user.png') 50% 50% no-repeat
       background-size cover
       overflow height
+  .exit
+    color white
+    float left
+    font-size 2.5vm
+    margin-top 100px
+  .exit-img
+    float left
+    margin-top 100px
+    margin-right 5px
+  .clear
+    clear both
 </style>
