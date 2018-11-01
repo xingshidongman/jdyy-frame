@@ -283,19 +283,19 @@
                   div.mark
                     div.sta 摆放角度
                     div.stb
-                      el-form-item.mini.toleft(label="外翻")
+                      el-form-item.short.toleft(label="外翻")
                         el-input(v-model="formModel.ectropion" clearable)
                           template(slot="append") °
-                      el-form-item.mini(label="前倾")
+                      el-form-item.short(label="前倾")
                         el-input(v-model="formModel.forward " clearable)
                           template(slot="append") °
                   div.mark
                     div.sta 聚乙烯衬垫植入角度
                     div.stb
-                      el-form-item.mini.toleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.inAngle" clearable)
                           template(slot="append") °
-                      el-form-item.mini(label="防脱缘 在")
+                      el-form-item.short(label="防脱缘在")
                         el-input(v-model="formModel.inclock " clearable)
                           template(slot="append") 点钟
             tr
@@ -395,22 +395,22 @@
                   div.mark
                     div.sta 后方稳定性
                     div.stb
-                      el-form-item.mini.toleft
+                      el-form-item.medium.totoleft
                         el-input(v-model="formModel.frontA" clearable)
                           template(slot="append") °屈曲
-                      el-form-item.mini.toleft
+                      el-form-item.medium.toleft
                         el-input(v-model="formModel.frontB " clearable)
                           template(slot="append") °内收
-                      el-form-item.mini.toleft
+                      el-form-item.medium.toleft
                         el-input(v-model="formModel.frontC " clearable)
                           template(slot="append") °内旋
                   div.mark
                     div.sta 前方稳定性
                     div.stb
-                      el-form-item.mini.toleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.afterA" clearable)
                           template(slot="append") °伸展
-                      el-form-item.mini.toleft
+                      el-form-item.short.toleft
                         el-input(v-model="formModel.afterB " clearable)
                           template(slot="append") °外旋
                   div.mark
@@ -454,23 +454,23 @@
                           template(slot="append") 天
 
                   div.sta 出院时关节活动角度
-                  div.stb
-                    el-form-item.mini(label="屈曲")
+                  div.stb.toleft
+                    el-form-item.short(label="屈曲")
                       el-input(v-model="formModel.angleA" clearable)
                         template(slot="append") °
-                    el-form-item.mini(label="外展")
+                    el-form-item.short(label="外展")
                       el-input(v-model="formModel.angleB " clearable)
                         template(slot="append") °
-                    el-form-item.mini(label="内旋")
+                    el-form-item.short(label="内旋")
                       el-input(v-model="formModel.angleC " clearable)
                         template(slot="append") °
-                    el-form-item.mini(label="过伸")
+                    el-form-item.short(label="过伸")
                       el-input(v-model="formModel.angleD " clearable)
                         template(slot="append") °
-                    el-form-item.mini(label="内收")
+                    el-form-item.short(label="内收")
                       el-input(v-model="formModel.angleE " clearable)
                         template(slot="append") °
-                    el-form-item.mini(label="外旋")
+                    el-form-item.short(label="外旋")
                       el-input(v-model="formModel.angleF " clearable)
                         template(slot="append") °
       div.art3

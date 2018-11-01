@@ -1211,8 +1211,8 @@
     .p-left
       margin-left 10px
     .top-align
-      margin-top 6px
-      vertical-align top
+      p
+        line-height 20px
     .big-width
       width 96px
       margin-left -6px
@@ -1229,5 +1229,4 @@
         width 80%
         height auto
 
-  /*margin-bottom 0*/
 </style>
