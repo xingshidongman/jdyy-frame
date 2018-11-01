@@ -566,9 +566,6 @@
             this.pager.totalCount = response.data.totalCount
             this.loading = false
             document.querySelector('.el-table__body-wrapper').scrollTop = 0
-            if (!this.isFixedColumn) {
-              document.querySelector('.el-table__body-wrapper').style.overflowX = 'hidden'
-            }
             this._getTableHeight()
           }).catch(() => {
             this.loading = false
