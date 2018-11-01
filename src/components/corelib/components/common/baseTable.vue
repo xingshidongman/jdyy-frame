@@ -13,7 +13,7 @@
     div.kalix-wrapper(v-bind:style="wrapperTop")
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
-        v-bind:toolbarBtnList="toolbarBtnListClone" v-bind:bizKey="bizKey"
+        v-bind:toolbarBtnList="toolbarBtnList" v-bind:bizKey="bizKey"
         v-on:onToolBarClick="onToolBarClick"
         v-on:onCheckBtnList="onCheckBtnList")
         div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle")
@@ -686,7 +686,7 @@
         return (1 + ((this.pager.currentPage - 1) * this.pager.limit)) // 返回当前行号
       },
       tableContainerStyle() {
-        return {'top': (this.isShowToolBarB ? '60px' : '16px')}
+        return {'top': (this.isShowToolBarB ? '102px' : '50px')}
       },
       pageCount() {
         return Math.floor((this.pager.totalCount + this.pager.limit - 1) / this.pager.limit)

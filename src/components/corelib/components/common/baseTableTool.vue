@@ -67,7 +67,9 @@
       // console.log(`[kalix] table tool button is `, this.btnList)
     },
     data() {
-      return {}
+      return {
+        iconCls: ''
+      }
     },
     computed: {
       columnWidth() {
