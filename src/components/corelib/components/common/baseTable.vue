@@ -20,7 +20,7 @@
           el-table(:data="tableData"  style="width:100%" ref="kalixTable"
           v-bind:row-class-name="tableRowClassName"
           v-loading.body="loading" fit
-          height="250"
+          v-bind:height="tableHeight"
           highlight-current-row
           v-on:selection-change="onTableSelectionChange"
           v-on:current-change="handleCurrentChange"
