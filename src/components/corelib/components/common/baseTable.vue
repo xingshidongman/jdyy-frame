@@ -11,6 +11,9 @@
       v-bind:class="searchCls"
       v-on:onSearchBtnClick="onSearchClick")
     div.kalix-wrapper(v-bind:style="wrapperTop")
+      div.kalix-wrapper-hd
+        i(v-bind:class="iconCls")
+          | {{title}}
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
         v-bind:toolbarBtnList="toolbarBtnList" v-bind:bizKey="bizKey"
@@ -20,7 +23,7 @@
           el-table(:data="tableData"  style="width:100%" ref="kalixTable"
           v-bind:row-class-name="tableRowClassName"
           v-loading.body="loading" fit
-          height="250"
+          v-bind:height="tableHeight"
           highlight-current-row
           v-on:selection-change="onTableSelectionChange"
           v-on:current-change="handleCurrentChange"
@@ -36,12 +39,12 @@
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" min-width="120")
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:width="field.width")
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮
               el-table-column(v-if="isShowOperate" label="操作" align="center"
-              fixed="right"
+              v-bind:fixed="isFiex"
               v-bind:width="columnWidth(true)"
               class-name="base-teble-operation")
                 template(slot-scope="scope")
@@ -570,6 +573,9 @@
             this.pager.totalCount = response.data.totalCount
             this.loading = false
             document.querySelector('.el-table__body-wrapper').scrollTop = 0
+            if (!this.isFixedColumn) {
+              document.querySelector('.el-table__body-wrapper').style.overflowX = 'hidden'
+            }
             this._getTableHeight()
           }).catch(() => {
             this.loading = false

@@ -15,7 +15,7 @@
       div.kalix-wrapper-hd(style="width:90%;font-size:25px;margin: 10px 45%;")
         <!--i(v-bind:class="iconCls")-->
         | {{title}}
-      div.kalix-wrapper-bd(style="position: absolute;width: 40%;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 35%;")
+      div.kalix-wrapper-bd(style="position: absolute;width: 500px;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 35%;")
         template(v-if="isToolBarSelf")
           kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)

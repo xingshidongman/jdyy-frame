@@ -96,21 +96,25 @@ name = "AdminConfiguer"
 [[DataAuthToolButtonList]]
   id = "view"
   title = "查看"
+  icon = "icon-chakan"
   isShow = true    # 是否显示
   isPermission = true   # 是否进行权限认证
 [[DataAuthToolButtonList]]
   id = "edit"
   title = "编辑"
+  icon =  "icon-bianji"
   isShow = true
   isPermission = true
 [[DataAuthToolButtonList]]
   id = "delete"
   title = "删除"
+  icon = "icon-shanchu"
   isShow = true
   isPermission = true
 [[DataAuthToolButtonList]]
   id = "addUser"
   title = "用户"
+  icon = "icon-yonghuguanli"
   toolTipTitle = "添加用户"
   isShow = true
   isPermission = true
@@ -119,16 +123,19 @@ name = "AdminConfiguer"
   [[ToolButtonList]]
     id = "view"
     title = "查看"
+    icon = "icon-chakan"
     isShow = true    # 是否显示
     isPermission = true   # 是否进行权限认证
   [[ToolButtonList]]
     id = "edit"
     title = "编辑"
+    icon =  "icon-bianji"
     isShow = true
     isPermission = true
   [[ToolButtonList]]
     id = "delete"
     title = "删除"
+    icon = "icon-shanchu"
     isShow = true
     isPermission = true
 

@@ -40,6 +40,9 @@
           {id: 'add', dialog: 'AdminRoleAdd'},
           {id: 'addUser', dialog: 'AdminRoleAddUser'},
           {id: 'auth', dialog: 'AdminRoleAuth'}
+        ],
+        toolbarBtnList: [
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ]
       }
     },

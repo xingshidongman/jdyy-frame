@@ -6,16 +6,19 @@ const jdyyKneeConfigBtnList = [
   {
     id: 'edit',
     title: '编辑',
+    icon: 'icon-bianji',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {
     id: 'view',
     title: '查看',
+    icon: 'icon-chakan',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }, {
     id: 'delete',
     title: '删除',
+    icon: 'icon-shanchu',
     isShow: true, // 是否显示
     isPermission: true // 是否进行权限认证
   }]

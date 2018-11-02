@@ -27,6 +27,7 @@
         i.el-icon-arrow-down.el-icon--right
       el-dropdown-menu(slot="dropdown")
         el-dropdown-item(v-for="btn in btnList" v-if="btnShow(btn)" v-bind:command="btn.id" v-bind:key="btn.id") {{buttonTitle(btn)}}
+          i.iconfont(:class="btn.icon" style="float:left;")
 </template>
 
 <script type="text/ecmascript-6">
@@ -67,9 +68,7 @@
       // console.log(`[kalix] table tool button is `, this.btnList)
     },
     data() {
-      return {
-        iconCls: ''
-      }
+      return {}
     },
     computed: {
       columnWidth() {

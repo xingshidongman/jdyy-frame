@@ -53,9 +53,8 @@
                   el-dropdown-menu(slot="dropdown")
                     el-dropdown-item(command="changeInfo") 修改个人信息
                     el-dropdown-item(command="changePwd") 修改密码
-
               li
-                img.exit-img(src="../../../static/images/exit.png" height="18" width="18")
+                i.iconfont.icon-tuichu.exit-img
                 div.exit(v-on:click="doLogout") 退出
                 div.clear
             div.clear
@@ -390,6 +389,7 @@
     float left
     margin-top 100px
     margin-right 5px
+    color white
   .clear
     clear both
 </style>

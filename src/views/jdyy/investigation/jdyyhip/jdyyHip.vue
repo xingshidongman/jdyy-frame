@@ -35,7 +35,7 @@
         ],
         jdyyHipBtnList: jdyyHipConfigBtnList,
         toolbarBtnList: [
-          {id: 'add', isShow: true, title: '添加', isPermission: true}
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ]
       }
     }

@@ -35,7 +35,7 @@
       return {
         btnList: orgBtnList,
         toolBarBtnList: [
-          {id: 'add', isShow: true, title: '添加', isPermission: true}
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ],
         targetURL: orgURL,
         formModel: Object.assign({}, FormModel),
