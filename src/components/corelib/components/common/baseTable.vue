@@ -20,7 +20,7 @@
           el-table(:data="tableData"  style="width:100%" ref="kalixTable"
           v-bind:row-class-name="tableRowClassName"
           v-loading.body="loading" fit
-          height="250"
+          v-bind:height="tableHeight"
           highlight-current-row
           v-on:selection-change="onTableSelectionChange"
           v-on:current-change="handleCurrentChange"
@@ -30,18 +30,20 @@
             //table的字段
             template(v-if="tableData && tableData.length > 0")
               el-table-column(v-if="hasTableSelection" type="selection" width="55" align="center")
-              el-table-column(label="行号" width="70" align="center"
-              v-bind:fixed="isFixedColumn")
+              el-table-column(label="行号" width="90" align="center"
+              v-bind:fixed="isFixedColumn"
+              sortable)
                 template(slot-scope="scope")
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" min-width="120")
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*50+'px'"
+                sortable)
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮
               el-table-column(v-if="isShowOperate" label="操作" align="center"
-              fixed="right"
+              v-bind:fixed="isFiex"
               v-bind:width="columnWidth(true)"
               class-name="base-teble-operation")
                 template(slot-scope="scope")
