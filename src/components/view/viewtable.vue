@@ -1,10 +1,10 @@
 <template lang="pug">
   el-table(v-bind:data="tableData" border)
-    el-table-column(prop="diagnosis" label="诊断" width="250")
-    el-table-column(prop="surgical" label="术式" width="250")
-    el-table-column(prop="operationDate" label="手术日期" width="250")
-    el-table-column(prop="periodization" label="分期" width="200")
-    el-table-column(label="图片" width="115")
+    el-table-column(prop="diagnosis" label="诊断" width="180")
+    el-table-column(prop="surgical" label="术式" width="180")
+    el-table-column(prop="operationDate" label="手术日期" width="180")
+    el-table-column(prop="periodization" label="分期" width="180")
+    el-table-column(label="图片" width="360")
       template(slot-scope="scope")
         kalix-img-upload(v-model="scope.row.photo")
     <!--el-table-column(label="操作" width="115")-->
