@@ -2,7 +2,7 @@
   keep-alive
     kalix-table(bizKey="dataauth" title='数据权限列表' v-bind:tableFields="tableFields" v-bind:targetURL="targetURL"
     v-bind:bizDialog="bizDialog" v-bind:bizSearch="'AdminDataAuthSearch'" v-bind:btnList="btnList"
-    v-bind:dictDefine="dictDefine" v-bind:customTableTool="customTableTool")
+    v-bind:dictDefine="dictDefine" v-bind:customTableTool="customTableTool" v-bind:toolbarBtnList="toolbarBtnList")
 </template>
 
 <script type="text/ecmascript-6">
@@ -32,6 +32,9 @@
           {id: 'add', dialog: 'AdminDataAuthAdd'},
           {id: 'edit', dialog: 'AdminDataAuthAdd'},
           {id: 'addUser', dialog: 'AdminDataAuthAddUser'}
+        ],
+        toolbarBtnList: [
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ]
       }
     },

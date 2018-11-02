@@ -32,11 +32,12 @@
       return {
         itemBasePath: functionItemBaseURL,
         toolbarBtnList: [
-          {id: 'add', isShow: false},
-          {id: 'refresh', isShow: true, icon: 'icon-refresh', title: '刷新'}
+          {id: 'add', icon: 'icon-pinleizengjia', isShow: false},
+          {id: 'refresh', isShow: true, icon: 'icon-zhongzhi', title: '刷新'}
         ],
         treeToolbarBtnList: [
-          {id: 'refresh', isShow: true, icon: 'icon-refresh', title: '刷新'}
+          {id: 'add', icon: 'icon-pinleizengjia', isShow: true},
+          {id: 'refresh', isShow: true, icon: 'icon-zhongzhi', title: '刷新'}
         ],
         targetUrl: functionMenuURL,
         treeUrl: undefined,

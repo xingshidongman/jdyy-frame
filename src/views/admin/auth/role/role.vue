@@ -2,7 +2,7 @@
   keep-alive
     kalix-table(bizKey="role" title='角色列表' v-bind:targetURL="targetURL"
     v-bind:bizDialog="bizDialog" v-bind:tableFields="tableFields" bizSearch="AdminRoleSearch" v-bind:btnList="btnList"
-    v-bind:customTableTool="customTableTool" v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
+    v-bind:customTableTool="customTableTool" v-bind:buttonPermissionPrefix="buttonPermissionPrefix" v-bind:toolbarBtnList="toolbarBtnList"
     v-bind:dictDefine="dictDefine" ref="userTable")
 </template>
 <script type="text/ecmascript-6">

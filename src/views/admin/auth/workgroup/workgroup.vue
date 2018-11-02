@@ -5,7 +5,7 @@
     v-bind:customTableTool="customTableTool"
     v-bind:toolbarBtnList="toolbarBtnList"
     v-bind:formModel.sync="formModel" v-bind:formRules="formRules" v-bind:bizDialog="bizDialog"
-    bizSearch="AdminWorkGroupSearch"  v-bind:btnList="btnList")
+    bizSearch="AdminWorkGroupSearch"  v-bind:btnList="btnList" )
 </template>
 
 <script type="text/ecmascript-6">
@@ -31,6 +31,9 @@
           {id: 'edit', dialog: 'AdminWorkGroupAdd'},
           {id: 'addUser', dialog: 'AdminWorkGroupAddUser'},
           {id: 'addRole', dialog: 'AdminWorkGroupAddRole'}
+        ],
+        toolbarBtnList: [
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ],
         formModel: {
           name: '',

@@ -6,8 +6,8 @@
           kalix-org-tree(v-on:orgTreeClick="onOrgTreeClick")
         el-col.duty-col(:span="16")
           kalix-table.duty-wrapper(ref="kalixBaseTable"
-          bizKey='duty' title='职务列表' v-bind:targetURL='targetURL'
-          v-bind:bizDialog='bizDialog' v-bind:btnList='btnList' v-bind:customRender="customRender"
+          bizKey='duty' title='职务列表1' v-bind:targetURL='targetURL'
+          v-bind:bizDialog='bizDialog' v-bind:btnList='btnList' v-bind:toolbarBtnList="toolBarBtnList" v-bind:customRender="customRender"
           v-bind:isFixedColumn="isFixedColumn" v-bind:dialogOptions="dialogOptions"
           v-bind:customTableTool="customTableTool")
             template(slot="tableColumnSlot")
@@ -78,6 +78,9 @@
           {id: 'edit', dialog: 'AdminDutyAdd'},
           {id: 'add', dialog: 'AdminDutyAdd'},
           {id: 'addUser', dialog: 'AdminDutyAddUser'}
+        ],
+        toolBarBtnList: [
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ],
         tableHeight: 0 //  列表组件高度
         // bizSearch: 'AdminDutySearch'
