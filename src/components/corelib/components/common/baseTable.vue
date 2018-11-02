@@ -20,7 +20,7 @@
           el-table(:data="tableData"  style="width:100%" ref="kalixTable"
           v-bind:row-class-name="tableRowClassName"
           v-loading.body="loading" fit
-          height="250"
+          v-bind:height="tableHeight"
           highlight-current-row
           v-on:selection-change="onTableSelectionChange"
           v-on:current-change="handleCurrentChange"
@@ -36,7 +36,8 @@
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" min-width="120")
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*50+'px'"
+                sortable)
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮

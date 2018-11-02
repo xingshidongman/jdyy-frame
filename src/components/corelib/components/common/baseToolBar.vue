@@ -8,7 +8,7 @@
   div.kalix-base-tool-bar
     template(v-for="btn in defaultBtnList")
       el-button.buttons(v-if="btn.isShow" v-on:click="toggle(btn.id)" v-bind:disabled="btn.isDisable")
-        i.iconfont(v-bind:class="btn.icon")
+        i.iconfont.icon-pinleizengjia(v-bind:class="iconCls")
         | {{btn.title}}
 </template>
 

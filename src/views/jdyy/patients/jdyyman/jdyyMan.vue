@@ -5,6 +5,7 @@
     v-bind:targetURL="jdyypatientsURL"
     v-bind:bizDialog="jdyyManDialog"
     v-bind:btnList="jdyyManBtnList"
+    v-bind:sort="dateAdmission"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyManSearch")
     // v-bind:buttonPermissionPrefix="buttonjdyyManPrefix"
@@ -25,7 +26,7 @@
           {prop: 'name', label: '姓名'},
           {prop: 'sex', label: '性别'},
           {prop: 'age', label: '年龄'},
-          {prop: 'bedNumber', label: '病历号'},
+          {prop: 'medicalRecordNumber', label: '病历号'},
           {prop: 'dateAdmission', type: 'datetime', label: '住院日期'},
           // {prop: 'diagnosis', label: '诊断'},
           // {prop: 'dateOperation', type: 'datetime', label: '手术日期'},

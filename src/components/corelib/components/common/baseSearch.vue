@@ -8,6 +8,9 @@
 
 <template lang="pug">
   div.kalix-search
+    div.kalix-search-hd
+      i.iconfont.icon-chaxun1
+      | {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
         slot(name="searchFormSlot")
@@ -26,10 +29,10 @@
             el-input(v-else v-model="form[item.prop]")
           el-form-item.right
             el-button(type="primary" v-on:click="onSubmitClick")
-              i.iconfont.icon-query
+              i.iconfont.icon-chaxun1
               | 查询
             el-button(type="success" v-on:click="onResetClick")
-              i.iconfont.icon-reset
+              i.iconfont.icon-zhongzhi
               | 重置
 </template>
 
@@ -235,66 +238,28 @@
 </script>
 
 <style lang='stylus' type='text/stylus'>
-  @import "../../assets/stylus/color.styl"
-  @import "../../assets/stylus/kalix-color.styl"
+  @import "~@/assets/stylus/color.styl"
+  @import "~@/assets/stylus/kalix-color.styl"
   .kalix-search
-    padding  10px
-    width 100%
+    margin 10px
     background-color $background-color-1
     .kalix-search-hd
       background-color $plank-title-background-color
       color $plank-title-color
-      line-height 5%
-      padding 0 2%
+      line-height 44px
+      padding 0 15px
       text-align left
-      width 100%
-      height 500px
     .kalix-search-bd
-      /*border-top 1px solid border-color_1*/
+      border-top 1px solid border-color_1
       font-size 0
-      /*padding 1% 2%*/
+      padding 8px 12px
       text-align left
-      width 100%
       .search-container
         margin-bottom -12px
-        /*width 100%*/
     .el-form-item
+      margin-right 12px
       margin-bottom 12px
-      /*width 18%*/
-      display inline-block
-      .el-form-item__label
-          float: left;
-          text-align: center
-          font-size: 14px;
-          color:  #3465cb
-          -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-          /*width 30%*/
-      .el-form-item__content
-          display: inline-block;
-          vertical-align: top;
-          /*width: 70%;*/
-          /*float right*/
-        .el-input__inner
-            border-radius: 1px;
-            border: 1px solid #3465cb;
-            -webkit-box-sizing: border-box;
-            display: inline-block;
-            font-size: inherit;
-            height: 40px;
-            line-height: 40px;
-            outline: 0;
-            padding: 0 25px;
-            -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-            transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-            width: 100%;
     .el-button
       .iconfont
         font-size 14px
-  .short
-    /*width 32%*/
-    display inline-block
-  .right
-    margin-left 80px
-    display block
 </style>
