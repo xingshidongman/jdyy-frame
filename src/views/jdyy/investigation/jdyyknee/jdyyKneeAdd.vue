@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='全膝术后编辑' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
+  kalix-dialog.user-add(title='添加全膝术后调查' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
     div.back(slot="dialogFormSlot")
       div.art1
         h1.title 全膝关节置换术
@@ -669,8 +669,8 @@
       <!--div.art2-->
         <!--h1.title 膝关节功能评分-->
         <!--div.con2-->
-          <!--el-table( :data="tableData1" style="width:100%" height="250")-->
-            <!--el-table-column(fixed prop="date3" label="日期" min-width="150")-->
+          <!--el-table( :data="tableData1" style="width:100%" height="250" :default-sort = "{prop: 'date3', order: 'descending'}")-->
+            <!--el-table-column(fixed prop="date3" label="日期" min-width="150" sortable)-->
             <!--el-table-column(prop="postoperationMonth" label="术后第（）个月" min-width="120")-->
             <!--el-table-column(prop="pain2" label="疼痛" min-width="60")-->
             <!--el-table-column(prop="activity" label="活动度" min-width="100")-->
@@ -679,7 +679,7 @@
             <!--el-table-column(prop="extensionRelaxation" label="伸直位松弛" min-width="100")-->
             <!--el-table-column(prop="forceLine3" label="力线" min-width="60")-->
             <!--el-table-column(prop="total3" label="总计" min-width="60")-->
-            <!--el-table-column(label="操作" min-width="60" fixed="right")-->
+            <!--el-table-column(label="操作" min-width="60" fixed="right" :formatter="formatter")-->
               <!--template(slot-scope="scope")-->
                 <!--el-button(type="text" size="small") 编辑-->
         div.con2
@@ -997,6 +997,16 @@
           extensionRelaxation: '-5',
           forceLine3: '12',
           total3: '100'
+        }, {
+          date3: '2018-03-10',
+          postoperationMonth: '术前',
+          pain2: '50',
+          activity: '25',
+          stability: '25',
+          fixedFlexionContracture2: '-10',
+          extensionRelaxation: '-5',
+          forceLine3: '12',
+          total3: '100'
         }],
         tableData2: [{
           date4: '2018-03-12',
@@ -1093,6 +1103,9 @@
       }
     },
     methods: {
+      formatter(row, column) {
+        return row.address
+      },
       onSubmit() {
         console.log('submit!')
         alert('天啦噜')

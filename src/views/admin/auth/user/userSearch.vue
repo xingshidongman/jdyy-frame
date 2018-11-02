@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-search(v-bind:searchFields="searchFields")
+  kalix-search(title="用户查询" v-bind:searchFields="searchFields")
 </template>
 <script type="text/ecmascript-6">
   export default {
