@@ -4,14 +4,19 @@
     el-table-column(prop="surgical" label="术式" width="250")
     el-table-column(prop="operationDate" label="手术日期" width="250")
     el-table-column(prop="periodization" label="分期" width="200")
-    el-table-column(label="操作" width="115")
+    el-table-column(label="图片" width="115")
       template(slot-scope="scope")
-        el-button(@click="handleClick(scope.row)" type="text" size="small") 查看图片
+        kalix-img-upload(v-model="scope.row.photo")
+    <!--el-table-column(label="操作" width="115")-->
+      <!--template(slot-scope="scope")-->
+        <!--el-button(@click="handleClick(scope.row)" type="text" size="small") 查看图片-->
 </template>
 
 <script type="text/ecmascript-6">
+    import KalixImgUpload from '../corelib/components/common/imgUpload'
     export default {
       name: 'view-table',
+      components: {KalixImgUpload},
       props: {
         targetURL: {
           type: String

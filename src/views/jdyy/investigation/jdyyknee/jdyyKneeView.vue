@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='全膝术后编辑' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" isView)
+  kalix-dialog.user-add(title='查看全膝术后调查' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" isView)
     div.back(slot="dialogFormSlot")
       div.art1
         h1.title 全膝关节置换术

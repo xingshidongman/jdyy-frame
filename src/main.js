@@ -15,6 +15,11 @@ import Tinymce from './components/Tinymce'
 
 import Squire from './components/squire/Squire'
 // Vue.use(ElementUI)
+
+// html转pdf
+import htmlToPdf from './components/corelib/components/common/htmlToPdf'
+Vue.use(htmlToPdf)
+
 Es6Promise.polyfill()
 Vue.config.productionTip = false
 

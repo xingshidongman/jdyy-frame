@@ -39,7 +39,8 @@
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:width="field.width")
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*50+'px'"
+                sortable)
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮
