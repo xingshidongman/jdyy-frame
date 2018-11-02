@@ -41,7 +41,7 @@
             div.left-zx
             div.block
               el-date-picker.input-time(v-model="chooseYear" v-on:change="getDataByMonth" type="year" value-format="yyyy" placeholder="选择年份")
-            div( id="histogram" style="width: 98%; margin:auto;height: 260px;")
+            div( id="histogram" style="width: 98%; margin:50px 1% 0 1%;height: 260px;")
           div.left-xx
           div.left-xr
     div.rights
