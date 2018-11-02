@@ -21,6 +21,7 @@
     components: {KalixTable},
     data() {
       return {
+        dateAdmission: '',
         jdyypatientsURL: JdyypatientsURL,
         tableFields: [
           {prop: 'name', label: '姓名'},

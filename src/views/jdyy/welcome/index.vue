@@ -7,7 +7,7 @@
           div.left-sx
           div.left-zx
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy-MM-dd"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy/MM/dd"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -57,7 +57,7 @@
         if (month >= 1 && month <= 9) {
           month = "0" + month;
         }
-        let nowDate = year + '-' + month + '-' + day
+        let nowDate = year + '/' + month + '/' + day
         console.log('date .toLocaleDateString()==================', date.toLocaleDateString())
         this.getData(nowDate)// 根据当前时间查找今日数据指标相应数据
       },

@@ -6,8 +6,9 @@
         div.con1
           div.con1-left
             el-form-item.toleft(label="姓名" @change="getData()")
-              el-select(v-model="formModel.pid" @change="getData($event)" filterable placeholder="请选择")
-                el-option(v-for="item in options" :key="item.value" :label="item.label" :value="item.value")
+              el-input(v-model="formModel.name" readonly)
+              <!--el-select(v-model="formModel.pid" @change="getData($event)" filterable placeholder="请选择")-->
+                <!--el-option(v-for="item in options" :key="item.value" :label="item.label" :value="item.value")-->
             el-form-item.toleft(label="性别")
               el-radio-group(v-model="formModel.sex" disabled)
                 el-radio(label="男")
