@@ -15,12 +15,12 @@
       div.kalix-wrapper-hd(style="width:90%;font-size:25px;margin: 10px 45%;")
         <!--i(v-bind:class="iconCls")-->
         | {{title}}
-      div.kalix-wrapper-bd(style="position: absolute;width: 500px;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 35%;")
+      div.kalix-wrapper-bd(style="position: absolute;width: 40%;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 30%;")
         template(v-if="isToolBarSelf")
           kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)
           kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
-        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 82%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
+        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 93%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
           div.autoTbale(v-bind:style="{width:tableWidth}")
             table.table.table-bordered(id="hl-tree-table")
               <!--thead-->
@@ -673,8 +673,8 @@
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
-    width: 60%;
-    margin: 5px auto;
+    width: 100%;
+    margin: 5px 20%;
   .tree-icon
     margin-right 8px
     color #3465cb
