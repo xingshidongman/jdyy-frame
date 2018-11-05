@@ -155,7 +155,7 @@
                   }
                 }
               } else {
-                if (itemVal !== undefined) {
+                if (itemVal !== undefined && itemVal !== null) {
                   let field = item
                   let key = `"${field}"`
                   let val = `"${itemVal}"`
