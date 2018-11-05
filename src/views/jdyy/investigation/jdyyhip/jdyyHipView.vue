@@ -26,7 +26,7 @@
               el-input(v-model="formModel.orderNumber" clearable)
             el-form-item.toleft(label="日期")
               el-col(:span="22")
-                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;" disabled)
+                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;" disabled format="yyyy/MM/dd")
             el-form-item.toleft(label="部位")
               el-radio-group(v-model="formModel.position" disabled)
                 el-radio(label="左")
@@ -176,7 +176,7 @@
                 div.con2-right
                   el-form-item(label="日期")
                     el-col(:span="23")
-                      el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date2" style="width: 45%;" disabled)
+                      el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date2" style="width: 45%;" disabled format="yyyy/MM/dd")
                   el-form-item.short(label="手术医生")
                     el-input(v-model="formModel.doctor2" readonly clearable)
             tr
@@ -485,7 +485,7 @@
                 div.con3-mid
                   el-form-item.short(label="日期" style="float:left")
                     el-col(:span="20")
-                      el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date3" style="width: 100%;" readonly)
+                      el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date3" style="width: 100%;" readonly format="yyyy/MM/dd")
                   el-form-item.short(label="术后第")
                     el-input(v-model="formModel.weekDay" readonly clearable)
                       template(slot="append") 周
@@ -958,6 +958,12 @@
         //   {harDDate: '2016-05-03', harD1: '好很多', harD2: '3', harD3: '3', harD4: '3', harD5: '9', harD6: '0', harD7: '5', harD8: '3', harD9: '2', harD10: '1', harD11: '-2', harD12: '56', harD13: '56'},
         //   {harDDate: '2016-05-03', harD1: '好很多', harD2: '3', harD3: '3', harD4: '3', harD5: '9', harD6: '0', harD7: '5', harD8: '3', harD9: '2', harD10: '1', harD11: '-2', harD12: '56', harD13: '56'}
         // ]
+      }
+    },
+    computed: {
+      total1: function () {
+        let a = parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
+        return a
       }
     }
   }
