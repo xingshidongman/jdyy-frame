@@ -14,6 +14,7 @@ import './element-ui'
 import Tinymce from './components/Tinymce'
 
 import Squire from './components/squire/Squire'
+import * as typeFormat from './common/typeFormat.js'
 // Vue.use(ElementUI)
 
 // html转pdf
@@ -32,6 +33,10 @@ Vue.use(KalixVueNavigate)
 
 Vue.component(Squire.name, Squire)
 Vue.component(Tinymce.name, Tinymce)
+
+Vue.filter('formatDate', (value, fmt) => {
+  return typeFormat.formatDate(new Date(value), fmt)
+})
 // 全局加载方式
 // Vue.use(KalixVueOA)
 // 异步加载方式
