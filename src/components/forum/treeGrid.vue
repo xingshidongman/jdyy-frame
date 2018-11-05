@@ -15,44 +15,44 @@
       div.kalix-wrapper-hd(style="width:90%;font-size:25px;margin: 10px 45%;")
         <!--i(v-bind:class="iconCls")-->
         | {{title}}
-      div.kalix-wrapper-bd(style="position: absolute;width: 40%;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 30%;")
+      div.kalix-wrapper-bd(style="position: absolute;width: 40%;overflow: hidden;top: 20px;left: 0;bottom: 0; margin: 25px 0 0 30%;")
         template(v-if="isToolBarSelf")
           kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)
           kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
-        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 93%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
+        div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 96%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
           div.autoTbale(v-bind:style="{width:tableWidth}")
             table.table.table-bordered(id="hl-tree-table")
               <!--thead-->
-                <!--tr-->
-                  <!--template(v-if="isColumnfixed")-->
-                    <!--th(v-for="(column,index) in cloneColumns" v-bind:style="getColumnWidth(column.width)")-->
-                      <!--i(v-if="column.type === 'hidden'" type="hidden" v-bind:style="{width:0}")-->
-                      <!--label(v-else) {{ renderHeader(column, index) }}-->
-                        <!--span.ivu-table-sort(v-if="column.sortable")-->
-                          <!--i(v-bind:class="{on: column._sortType === 'asc'}"-->
-                          <!--v-on:click.native="handleSort(index, 'asc')" title="上箭头")-->
-                          <!--i(v-bind:class="{on: column._sortType === 'desc'}"-->
-                          <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
-                  <!--template(v-else)-->
-                    <!--th(v-for="(column,index) in cloneColumns")-->
-                      <!--i(v-if="column.type === 'hidden'" type="hidden" v-bind:style="{width:0}")-->
-                      <!--label(v-else) {{ renderHeader(column, index) }}-->
-                        <!--span.ivu-table-sort(v-if="column.sortable")-->
-                          <!--i(v-bind:class="{on: column._sortType === 'asc'}"-->
-                          <!--v-on:click.native="handleSort(index, 'asc')" title="上箭头")-->
-                          <!--i(v-bind:class="{on: column._sortType === 'desc'}"-->
-                          <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
+              <!--tr-->
+              <!--template(v-if="isColumnfixed")-->
+              <!--th(v-for="(column,index) in cloneColumns" v-bind:style="getColumnWidth(column.width)")-->
+              <!--i(v-if="column.type === 'hidden'" type="hidden" v-bind:style="{width:0}")-->
+              <!--label(v-else) {{ renderHeader(column, index) }}-->
+              <!--span.ivu-table-sort(v-if="column.sortable")-->
+              <!--i(v-bind:class="{on: column._sortType === 'asc'}"-->
+              <!--v-on:click.native="handleSort(index, 'asc')" title="上箭头")-->
+              <!--i(v-bind:class="{on: column._sortType === 'desc'}"-->
+              <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
+              <!--template(v-else)-->
+              <!--th(v-for="(column,index) in cloneColumns")-->
+              <!--i(v-if="column.type === 'hidden'" type="hidden" v-bind:style="{width:0}")-->
+              <!--label(v-else) {{ renderHeader(column, index) }}-->
+              <!--span.ivu-table-sort(v-if="column.sortable")-->
+              <!--i(v-bind:class="{on: column._sortType === 'asc'}"-->
+              <!--v-on:click.native="handleSort(index, 'asc')" title="上箭头")-->
+              <!--i(v-bind:class="{on: column._sortType === 'desc'}"-->
+              <!--v-on:click.native="handleSort(index, 'desc')" title="下箭头")-->
               tbody
                 tr(v-for="(item,index) in initItems" v-bind:key="item.id" v-show="show(item)" v-bind:class="{'child-tr':item.parent,'active':item.id === checkId}" v-on:click="toSelect(item)")
                   <!--td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")-->
                   td(v-for="(column,snum) in columns" v-bind:key="column.key" v-bind:style="tdStyle(column)")
                     div(v-if="column.type === 'action'")
                       <!--slot(name="treeGridToolSlot" slot-scope="item")-->
-                        <!--template(v-if="btnSelfClick !== undefined")-->
-                          <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnSelfClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
-                        <!--template(v-else)-->
-                          <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
+                      <!--template(v-if="btnSelfClick !== undefined")-->
+                      <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnSelfClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
+                      <!--template(v-else)-->
+                      <!--kalix-table-tool(v-if="isShowOperate" v-bind:displayStyle="2" v-bind:btnList="btnList" v-on:onTableToolBarClick="btnClick" v-bind:isTreeGridTool="true" v-bind:scope="item")-->
                     <!--input(v-if="column.type === 'hidden'" type="hidden" v-bind:value="renderBody(item, column)")-->
                     div.lefts(v-else)
                       label.td-lbl(v-on:click="toggle(index,item)" v-if="!column.type")
@@ -673,8 +673,8 @@
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
-    width: 100%;
-    margin: 5px 20%;
+    width: 300px;
+    margin: 5px auto;
   .tree-icon
     margin-right 8px
     color #3465cb
