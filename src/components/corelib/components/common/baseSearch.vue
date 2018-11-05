@@ -27,7 +27,7 @@
               v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
             input(v-else-if="item.type==='inputHidden'" v-model="form[item.prop]" type="hidden")
             el-input(v-else v-model="form[item.prop]")
-          el-form-item.right
+          el-form-item.right(style="margin-left:6%;")
             el-button(type="primary" v-on:click="onSubmitClick")
               i.iconfont.icon-chaxun1(style="padding-right:3px;")
               | 查询
@@ -270,8 +270,7 @@
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
-      /*width: 70%;*/
-      /*float right*/
+        width: 270px;
       .el-input__inner
         border-radius: 1px;
         border: 1px solid #3465cb;
