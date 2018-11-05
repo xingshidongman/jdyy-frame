@@ -7,7 +7,7 @@
     data() {
       return {
         searchFields: [
-          {label: '审核状态', prop: 'audit', type: 'dict', appName: 'admin', dictType: '审核标识'},
+          {label: '审核状态', prop: 'available', type: 'dict', appName: 'admin', dictType: '审核标识'},
           {label: '登录名', prop: 'loginName'},
           {label: '姓名', prop: 'name'}
         ]

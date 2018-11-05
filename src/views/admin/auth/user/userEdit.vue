@@ -23,7 +23,7 @@
       el-form-item(label="状态" prop="available" v-bind:label-width="labelWidth")
         el-switch(v-model="formModel.available" active-text="停用" inactive-text="启用" active-value="0" inactive-value="1")
       el-form-item(label="出生日期" prop="birthdate" v-bind:label-width="labelWidth")
-        el-date-picker(v-model="formModel.birthdate" type="date" placeholder="选择出生日期" value-format="yyyy-MM-dd" style="width: 100%;")
+        kalix-datepicker-simple(v-model="formModel.birthdate" type="date" placeholder="选择出生日期" format="yyyy-MM-dd" style="width: 100%;")
       el-form-item(label="身份证号" prop="idNumber" v-bind:rules="rules.idNumber" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.idNumber")
       el-form-item(label="地址" prop="address" v-bind:rules="rules.address" v-bind:label-width="labelWidth")
@@ -36,7 +36,7 @@
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {usersURL, rolesURL} from '../../config.toml'
+  import {usersURL} from '../../config.toml'
 
   export default {
     name: 'AdminUserEdit',
@@ -52,7 +52,6 @@
           ]
         },
         targetURL: usersURL,
-        rolesURL: rolesURL,
         labelWidth: '140px',
         items: []
       }
