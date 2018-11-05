@@ -12,8 +12,8 @@
       v-on:onSearchBtnClick="onSearchClick")
     div.kalix-wrapper(v-bind:style="wrapperTop")
       div.kalix-wrapper-hd
-        i(v-bind:class="iconCls")
-          | {{title}}
+        i(v-bind:class="iconCls" style="padding-right:5px;")
+        | {{title}}
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
         v-bind:toolbarBtnList="toolbarBtnList" v-bind:bizKey="bizKey"

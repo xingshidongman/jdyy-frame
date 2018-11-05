@@ -266,7 +266,7 @@
           cursor pointer
           color white
           &:before
-            setBottomLine(#e0e3ec)
+            /*setBottomLine(#e0e3ec)*/
         .tit_icon
           margin-right 9px
           font-size 12px

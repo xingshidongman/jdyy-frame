@@ -9,7 +9,7 @@
 <template lang="pug">
   div.kalix-search
     div.kalix-search-hd
-      i.iconfont.icon-chaxun1
+      i.iconfont.icon-chaxun1(style="padding-right:5px;")
       | {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
@@ -29,10 +29,10 @@
             el-input(v-else v-model="form[item.prop]")
           el-form-item.right
             el-button(type="primary" v-on:click="onSubmitClick")
-              i.iconfont.icon-chaxun1
+              i.iconfont.icon-chaxun1(style="padding-right:3px;")
               | 查询
             el-button(type="success" v-on:click="onResetClick")
-              i.iconfont.icon-zhongzhi
+              i.iconfont.icon-zhongzhi(style="padding-right:3px;")
               | 重置
 </template>
 
@@ -155,7 +155,7 @@
                   }
                 }
               } else {
-                if (itemVal) {
+                if (itemVal !== undefined) {
                   let field = item
                   let key = `"${field}"`
                   let val = `"${itemVal}"`

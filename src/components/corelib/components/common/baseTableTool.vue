@@ -25,8 +25,8 @@
     el-dropdown(v-if="displayStyle === 2" v-on:command="handleCommand" size="medium" )
       el-button(size="small" type="primary" plain) {{dropDownTitle}}
         i.el-icon-arrow-down.el-icon--right
-      el-dropdown-menu(slot="dropdown")
-        el-dropdown-item(v-for="btn in btnList" v-if="btnShow(btn)" v-bind:command="btn.id" v-bind:key="btn.id") {{buttonTitle(btn)}}
+      el-dropdown-menu(slot="dropdown" )
+        el-dropdown-item(v-for="btn in btnList" v-if="btnShow(btn)" v-bind:command="btn.id" v-bind:key="btn.id" ) {{buttonTitle(btn)}}
           i.iconfont(:class="btn.icon" style="float:left;")
 </template>
 

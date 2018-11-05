@@ -3,7 +3,7 @@
   kalix-dialog.user-add(title='查询详情页' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
       button(type="button" @click="getPdf()") 导出PDF
-      div.row(id="pdfDom")
+      div.row(id="pdfDom" style="padding-top: 30px;")
         el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth")
           el-input(v-model="formModel.name" readonly)
         el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" style="")
