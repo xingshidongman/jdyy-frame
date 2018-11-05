@@ -15,6 +15,12 @@
     v-bind:dictDefine="dictDefine"
     ref="userTable")
       template(slot="tableColumnSlot")
+        <!--el-table-column(prop="icon" label="头像" align="center")-->
+        <!--template(slot-scope="scope")-->
+        <!--img(v-if="scope.row.icon" v-bind:src="scope.row.icon" width="32" height="32" alt="")-->
+        <!--img(v-else src="/static/images/default_user.png" width="32" height="32" alt="")-->
+        <!--el-table-column(prop="userTypeName" label="用户类型" align="center" width="100px")-->
+        <!--el-table-column(prop="code" label="工号/学号/企业组织机构代码" align="center" width="200px")-->
         el-table-column(prop="loginName" label="登录名" align="center" width="100px")
         el-table-column(prop="name" label="姓名" align="center" width="200px")
         el-table-column(prop="auditName" label="审核状态" align="center" width="150px")
@@ -34,7 +40,7 @@
 <script type="text/ecmascript-6">
   import {usersURL, userBtnPermissionPrefix} from '../../config.toml'
   import {userBtnList} from './config.js'
-  import {ON_REFRESH_DATA} from '@/components/corelib/components/common/event.toml'
+  import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
 
   export default {
     name: 'kalix-admin-user',
@@ -66,14 +72,16 @@
         }],
         btnList: userBtnList,
         buttonPermissionPrefix: userBtnPermissionPrefix,
-        targetURL: usersURL,
+        // targetURL: usersURL,
         tableFields: [
           // {prop: 'userTypeName', label: '用户类型'},
-          {prop: 'name', label: '姓名'},
-          {prop: 'age', label: '年龄'},
-          {prop: 'sex', label: '职位'},
-          {prop: 'position', label: '联系电话'},
-          {prop: 'doctor', label: '所属主管医生'}
+          {prop: 'code', label: '用户代码'},
+          {prop: 'loginName', label: '登录名'},
+          {prop: 'name', label: '名称'},
+          {prop: 'sex', label: '性别'},
+          {prop: 'email', label: '邮箱'},
+          {prop: 'phone', label: '固定电话'},
+          {prop: 'mobile', label: '手机'}
         ],
         bizDialog: [
           {id: 'view', dialog: 'AdminUserView'},
@@ -83,7 +91,7 @@
           {id: 'auth', dialog: 'AdminUserAuthView'}
         ],
         toolbarBtnList: [
-          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
+          {id: 'add', isShow: true, title: '添加', isPermission: true}
         ]
       }
     },
