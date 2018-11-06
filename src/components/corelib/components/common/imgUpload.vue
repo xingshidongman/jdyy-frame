@@ -185,8 +185,8 @@
   }
 
   .avatar {
-    width: 178px;
-    height: 178px;
-    display: block;
+    width: 150px;
+    /*height: 150px;*/
+    margin: 5px;
   }
 </style>
