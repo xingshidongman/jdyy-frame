@@ -16,6 +16,7 @@
         el-input.tests(v-model="formModel.parting" readonly)
       el-form-item.photo-width(label="图片" prop="photo" v-bind:label-width="labelWidth")
         kalix-img-upload(v-model="formModel.photo" readonly)
+        el-input(v-if="formModel.photo === null || formModel.photo === ''" v-text="photo" readonly)
 </template>
 
 <script type="text/ecmascript-6">
@@ -32,7 +33,8 @@
         visPatUrl: visPatUrl,
         imgs: [],
         formModel: Object.assign({}, FormModel),
-        labelWidth: '120px'
+        labelWidth: '120px',
+        photo: '无图片'
       }
     },
     methods: {
