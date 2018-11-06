@@ -28,7 +28,7 @@
               v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
             input(v-else-if="item.type==='inputHidden'" v-model="form[item.prop]" type="hidden")
             el-input(v-else v-model="form[item.prop]")
-          el-form-item.right(style="margin-left: 0.5%;")
+          el-form-item.right(style="margin-left: 1%;")
             el-button(type="primary" v-on:click="onSubmitClick")
               i.iconfont.icon-chaxun1(style="padding-right:3px;")
               span(style="font-size: 14px;") 查询

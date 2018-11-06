@@ -289,7 +289,7 @@
           legend: {
             data: ['手术人数'],
             textStyle: {
-              color: '#ffffff'
+              color: '#000'
             }
           },
           grid: {

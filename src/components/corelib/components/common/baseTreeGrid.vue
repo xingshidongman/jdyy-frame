@@ -893,7 +893,7 @@
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
     background-color #ebeef5
-    color white
+    color black
   }
 
   #hl-tree-table > tbody > tr {
