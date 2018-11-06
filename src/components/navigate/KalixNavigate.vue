@@ -241,7 +241,6 @@
   }
 </script>
 <style lang="stylus" type="text/stylus">
-  @import "~@/assets/stylus/border.styl"
   .kalix-navigate
     position relative
     width 190px
@@ -252,7 +251,7 @@
     z-index 999
     overflow-y auto
     background-color #f6f9fa
-    font-size 12px
+    font-size 13px
     color #666666
     &:after
       setRightLine(#e0e3ec)
@@ -284,7 +283,7 @@
             color white
             &:hover,
             &.active
-              background-color #3465cb
+              /*background-color rgba(77,109,177,0.8)*/
               color #eaf715
               &:before
                 visibility visible
@@ -293,7 +292,7 @@
             color #ffffff
           &.active
             .tit-txt
-              background-color #3465cb
+              background-color rgba(77,109,177,0.8)
               color #eaf715
           .mn
             .tit
@@ -301,7 +300,7 @@
               color white
               &:hover,
               &.active
-                background-color #3465cb
+                background-color rgba(77,109,177,0.8)
                 color #eaf715
                 &:before
                   visibility visible
@@ -309,7 +308,7 @@
       &.column
         .column-item
           .column-item-tt
-            font-size 18px
+            font-size 16px
             transition all .2s
             &.active
               color white
@@ -321,7 +320,7 @@
               margin-left 20px
             &:hover,
             &.active
-              background-color #3465cb
+              background-color rgba(77,109,177,0.8)
               color #eaf715
               &:before
                 visibility visible

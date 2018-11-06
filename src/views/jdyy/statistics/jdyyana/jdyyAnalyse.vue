@@ -687,7 +687,6 @@
     height 1000px
     padding 80px 5px
     color #2d8ac7
-    background-color #02010f
     .left
       width 50%
       float left
@@ -706,11 +705,11 @@
       .text-box
         width 30%
         position relative
-        background-color rgba(1, 14, 45, 0.8)
+        background-color rgba(77,109,177,0.8)
         margin -25px 0 0 15%
         text-align center
         font-size 1.2vw
-        color #3ac8f3
+        color #ffffff
         font-weight bold
         padding 5px 0
       .left-sx
@@ -745,11 +744,8 @@
         margin-top 15px
         border 2px solid #23769a
         color #23769a
-        background-color black
         .el-input__inner
           padding-left: 30px;
-          background-color: black;
-          border 1px solid black
           height 30px
       .left-block
         width 90%
@@ -761,7 +757,7 @@
           width 90%
           height 30px
           line-height 30px
-          background-color #373641
+          background-color #cccccc
           margin 10px auto
           font-size 1vw
           .block-span
@@ -794,11 +790,11 @@
           .text-box
             width 30%
             position relative
-            background-color rgba(1, 14, 45, 0.8)
+            background-color rgba(77,109,177,0.8)
             margin -25px 0 0 15%
             text-align center
             font-size 1.2vw
-            color #3ac8f3
+            color #FFFFFF
             font-weight bold
             padding 5px 0
           .left-sx
@@ -821,7 +817,6 @@
               margin-top 15px
               border 2px solid #23769a
               color #23769a
-              background-color black
             .block-input
               width 12%
               height 30px
@@ -830,7 +825,6 @@
               margin-left: 2%;
               border 2px solid #23769a
               color #23769a
-              background-color black
             .el-radio
               color: #23769a;
               font-weight: 500;
@@ -839,7 +833,6 @@
               white-space: nowrap;
               outline: 0
               margin-left 1%
-              background-color black
         .left-xr
           width 5px
           height 30px

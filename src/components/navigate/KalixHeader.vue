@@ -47,7 +47,7 @@
                 el-dropdown(v-on:command="handleCommand" style="min-width:120px margin-top 200px")
                   div.s-flex.el-dropdown-link
                     div.avatar-wrapper
-                      div.avatar(v-bind:style="styleObject")
+                      i.iconfont.icon-user-5.avatar(v-bind:style="styleObject")
                       div.user-name {{userName}}
                     i.el-icon-caret-bottom.el-icon--right
                   el-dropdown-menu(slot="dropdown")
@@ -365,8 +365,7 @@
       width 104px
       .avatar
         float left
-        width 36px
-        height 36px
+        font-size 2.5vm
         border-radius 50%
         background-color transparent
         margin-right 10px
@@ -377,7 +376,7 @@
         margin-right 7px
         color #ffffff
     .avatar
-      background url('/static/images/default_user.png') 50% 50% no-repeat
+      /*background url('/static/images/default_user.png') 50% 50% no-repeat*/
       background-size cover
       overflow height
   .exit

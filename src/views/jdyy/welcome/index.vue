@@ -95,53 +95,53 @@
 
 </script>
 <style scoped lang="stylus" type="text/stylus">
-  *
+  * {
     margin: 0;
     padding: 0;
     list-style: none;
+  }
+
   .start
     width 100%
-    height 660px
-    padding 80px 5px
+    padding 40px 5px
     color #2d8ac7
-    background-color #02010f
     .left
-      width 60%
-      margin auto
+      width 80%
+      margin: 20px 10%;
       .left-box
         width 96%
         margin auto
-        min-height 440px
+        min-height 580px
         border 2px solid #23769a
       .left-line
         width 98%
-        min-height 420px
+        min-height 560px
         margin 10px auto
         border 0.3px solid #23769a
         border-radius 5px
         box-shadow 0px 0px 10px 5px #23769a inset
-        .text-box
-          width 30%
-          position relative
-          background-color rgba(1, 14, 45, 0.8)
-          margin -25px 0 0 15%
-          text-align center
-          font-size 1.2vw
-          color #3ac8f3
-          font-weight bold
-          padding 5px 0
-        .left-sx
-          width 30px
-          height 5px
-          background-color #3ac8f3
-          position absolute
-          margin: -1.5% 0 0 -0.8%
-        .left-zx
-          width 5px
-          height 30px
-          background-color #3ac8f3
-          position absolute
-          margin: -1.2% 0 0 -0.8%
+      .text-box
+        width 30%
+        position relative
+        background-color rgba(77,109,177,0.8)
+        margin -25px 0 0 15%
+        text-align center
+        font-size 1.2vw
+        color #ffffff
+        font-weight bold
+        padding 12px 0
+      .left-sx
+        width 30px
+        height 5px
+        background-color #3ac8f3
+        position absolute
+        margin: -2.2% 0 0 -0.8%
+      .left-zx
+        width 5px
+        height 30px
+        background-color #3ac8f3
+        position absolute
+        margin: -2.2% 0 0 -1%
       .left-xr
         width 5px
         height 30px
@@ -162,33 +162,30 @@
         margin-top 15px
         border 2px solid #23769a
         color #23769a
-        background-color black
         .el-input__inner
           padding-left: 30px;
-          background-color: black;
-          border 1px solid black
           height 30px
       .left-block
         width 90%
         margin auto
         position relative
-        margin-top 90px
+        margin-top 75px
         height 300px
         .block-box
           width 90%
-          height 30px
-          line-height 30px
-          background-color #373641
-          margin 10px auto
+          height 40px
+          line-height 40px
+          background-color #f2f2f2
+          margin 15px auto
           font-size 1vw
           .block-span
             width 75%
-            color #23769a
-            padding-left 5px
+            color rgb(77,109,177)
+            padding-left 30px
             float left
           .block-spantwo
             width 20%
-            color #23769a
+            color rgb(77,109,177)
             float right
             text-align center
 </style>

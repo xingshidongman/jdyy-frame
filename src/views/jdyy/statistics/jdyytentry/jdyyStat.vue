@@ -1,6 +1,6 @@
 <template lang="pug">
   keep-alive
-    kalix-table(bizKey="jdyyStat" title='统计信息' ref="kalixTable"
+    kalix-table(bizKey="jdyyStat" title='统计信息列表' ref="kalixTable"
     v-bind:tableFields="tableFields"
     v-bind:targetURL="jdyystatURL"
     v-bind:bizDialog="jdyyStatDialog"
