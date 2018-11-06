@@ -19,17 +19,21 @@
           v-bind:isToolBarSelf="true" v-bind:toolbarBtnList="treeToolbarBtnList" v-bind:onToolBarSelfClick="onToolBarClick"
           v-bind:bizDialog="bizDialog" v-bind:columns='columns' v-bind:targetURL="treeUrl"
           v-bind:customRender="showPermissionText" v-on:selectedRow="getSelectRow"
-          v-bind:isRowButtonSelf="true" v-bind:btnSelfClick="btnClick" v-bind:isColumnfixed="false")
+          v-bind:isRowButtonSelf="true" v-bind:btnSelfClick="btnClick" v-bind:isColumnfixed="false"
+          v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
+          v-bind:btnList="functionBtnList")
 </template>
 
 <script type="text/ecmascript-6">
   import FormModel from './model'
-  import {functionURL, functionMenuURL, functionItemBaseURL} from '../../config.toml'
+  import {functionURL, functionMenuURL, functionItemBaseURL, functionTreeBtnPermissionPrefix} from '../../config.toml'
+  import {functionBtnList} from './config'
 
   export default {
     name: 'kalix-admin-function',
     data() {
       return {
+        functionBtnList: functionBtnList,
         itemBasePath: functionItemBaseURL,
         toolbarBtnList: [
           {id: 'add', icon: 'icon-pinleizengjia', isShow: false},
@@ -56,6 +60,7 @@
           {id: 'add', dialog: 'AdminFunctionAdd'},
           {id: 'edit', dialog: 'AdminFunctionEdit'}
         ],
+        buttonPermissionPrefix: functionTreeBtnPermissionPrefix,
         columns: [{
           type: 'hidden',
           key: 'id',
