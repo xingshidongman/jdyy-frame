@@ -60,5 +60,10 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-form
+    width 80%
+    margin auto
+    .el-form-item
+      width 49%
+      display inline-block
 </style>

@@ -90,5 +90,22 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
-
+  .el-form
+    width 80%
+    margin auto
+    .el-form-item
+      width 49%
+      display inline-block
+    .address
+      width 98%
+    .Border
+      width 49%
+      height 40px
+      line-height 40px
+    .el-form-item__content
+      position: relative;
+      font-size: 14px;
+      padding: 12px 10px;
+    .el-input__inner
+      border-radius 1px
 </style>

@@ -13,7 +13,7 @@
     div.kalix-wrapper(v-bind:style="wrapperTop")
       div.kalix-wrapper-hd
         div.line
-          i(v-bind:class="iconCls" style=" margin-left:30px;line-height: 44px")
+          i(v-bind:class="iconCls" style=" margin-left:20px;line-height: 28px")
           span.test {{title}}
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
@@ -689,7 +689,7 @@
         return (1 + ((this.pager.currentPage - 1) * this.pager.limit)) // 返回当前行号
       },
       tableContainerStyle() {
-        return {'top': (this.isShowToolBarB ? '102px' : '50px')}
+        return {'top': (this.isShowToolBarB ? '75px' : '50px')}
       },
       pageCount() {
         return Math.floor((this.pager.totalCount + this.pager.limit - 1) / this.pager.limit)

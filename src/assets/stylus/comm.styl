@@ -60,7 +60,8 @@ input:-webkit-autofill
   text-overflow ellipsis
 #kalixApp
   .kalix-base-tool-bar
-    padding 8px 12px
+    padding: 8px 28px;
+    float: right;
     .el-button
       .iconfont
         font-size 14px
@@ -79,9 +80,9 @@ input:-webkit-autofill
         border-bottom 0
     .table-title
       text-align center
-      font-size 18px
+      font-size 16px
       font-weight bold
-      padding 10px 0px
+      padding 5px 0px
       color #3465cb
     .el-form-item
       margin-bottom 0
@@ -131,22 +132,26 @@ input:-webkit-autofill
           color #ffffff
           background-color #5fa2dd
           border-color #5fa2dd
-
+      .el-table__header-wrapper
+        width: 100%;
+        height: 40px;
+        line-height 40px
   .kalix-form-table-view
     .kalix-form-table-td
       border-right borderStyle
       &:last-child
         border-right none
-
   .base-table-th
     color #303133
     background-color #ebeef5
     border none !important
     font-size 14px
     font-weight normal
+    padding 8px 0
   .base-table-cell
     color #3465cb
     border-bottom-color #fdf4e8 !important
+    padding 8px 0
   .base-teble-operation
     .operation-btn
       font-size 13px
@@ -210,9 +215,18 @@ input:-webkit-autofill
     color #3465cb
     &:focus,
     &:hover
-      background-color #707070
+      background-color #3465cb
       border-color #e8e8e8
-      color #3465cb
+      color #ffffff
+  .el-button--success
+    background-color #f3f3f3
+    border-color #dfdfdf
+    color #3465cb
+    &:focus,
+    &:hover
+      background-color #3465cb
+      border-color #e8e8e8
+      color #ffffff
   .kalix-article
     padding 10px
   .el-input.is-active .el-input__inner,

@@ -892,7 +892,7 @@
 
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
-    background-color #3465cb
+    background-color #ebeef5
     color white
   }
 

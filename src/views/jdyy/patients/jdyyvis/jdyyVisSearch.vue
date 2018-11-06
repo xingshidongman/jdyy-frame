@@ -8,7 +8,7 @@
     data() {
       return {
         searchFields: [
-          {label: '患者姓名:', prop: 'name'}
+          {label: '患者姓名 :', prop: 'name'}
         ]
       }
     }

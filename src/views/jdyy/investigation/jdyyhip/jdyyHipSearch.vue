@@ -8,8 +8,8 @@
     data() {
       return {
         searchFields: [
-          {label: '姓名', prop: 'name'},
-          {label: '住院号', prop: 'hospitalNumber'}
+          {label: '姓名 :', prop: 'name'},
+          {label: '住院号 :', prop: 'hospitalNumber'}
         ]
       }
     }

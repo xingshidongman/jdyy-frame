@@ -3,6 +3,7 @@
   开发人：sunli
   开发日期：2018年6月9日
 -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <template lang="pug">
   div.kalix-article
     keep-alive
@@ -674,7 +675,7 @@
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
     width: 300px;
-    margin: 5px auto;
+    margin: 8px 25% 0 0;
   .tree-icon
     margin-right 8px
     color #3465cb
@@ -778,5 +779,11 @@
     .td-div
       flex 1
       word-break break-all
+  @media screen and (max-width: 1500px) and (min-width: 1200px){
+    .buttom{
+      width 300px
+      margin 8px 5% 0 0;
+    }
+  }
 </style>
 

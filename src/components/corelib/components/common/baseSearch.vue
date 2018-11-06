@@ -10,7 +10,7 @@
   div.kalix-search
     div.kalix-search-hd
       div.line
-        i.iconfont.icon-chaxun1(style=" margin-left:30px;line-height: 44px")
+        i.iconfont.icon-chaxun1(style=" margin-left:20px;line-height: 28px")
         span.test {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
@@ -28,13 +28,13 @@
               v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
             input(v-else-if="item.type==='inputHidden'" v-model="form[item.prop]" type="hidden")
             el-input(v-else v-model="form[item.prop]")
-          el-form-item.right(style="margin-left:6%;")
+          el-form-item.right
             el-button(type="primary" v-on:click="onSubmitClick")
               i.iconfont.icon-chaxun1(style="padding-right:3px;")
-              | 查询
+              span(style="font-size: 14px;") 查询
             el-button(type="success" v-on:click="onResetClick")
               i.iconfont.icon-zhongzhi(style="padding-right:3px;")
-              | 重置
+              span(style="font-size: 14px;") 重置
 </template>
 
 <script>
@@ -247,12 +247,12 @@
     .kalix-search-hd
       padding 0 2px
       .line
-        width 10px
+        width 8px
         background-color #3465cb
-        height 44px
+        height 28px
         .test
-          margin-left: 50px;
-          margin-top: -30px;
+          margin-left: 40px;
+          margin-top: -23px;
           position: absolute;
     .kalix-search-bd
       font-size 0
@@ -266,7 +266,7 @@
       .el-form-item__label
         float: left;
         text-align: center
-        font-size: 14px;
+        font-size: 15px;
         color:  #3465cb
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -274,21 +274,22 @@
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
-        width: 270px;
+        width: 200px;
       .el-input__inner
         border-radius: 1px;
         border: 1px solid #3465cb;
         -webkit-box-sizing: border-box;
         display: inline-block;
         font-size: inherit;
-        height: 40px;
-        line-height: 40px;
+        height: 30px;
+        line-height: 30px;
         outline: 0;
         padding: 0 25px;
         -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
         transition: border-color .2s cubic-bezier(.645,.045,.355,1);
         width: 100%;
     .el-button
+      padding: 8px 12px;
       .iconfont
         font-size 14px
   .short

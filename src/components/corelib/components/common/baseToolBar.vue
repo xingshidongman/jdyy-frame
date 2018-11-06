@@ -57,6 +57,12 @@
 </script>
 <style lang="stylus" type="text/stylus">
   .buttons
+    background-color #f3f3f3
+    border-color #dfdfdf
+    color #3465cb
+    padding: 8px 12px;
+  .buttons:hover
     background-color #3465cb
-    color white
+    border-color #e8e8e8
+    color #ffffff
 </style>
