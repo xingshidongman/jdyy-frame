@@ -14,7 +14,7 @@
         el-input.tests(v-model="formModel.periodization" readonly)
       el-form-item(label="分型" prop="parting" v-bind:label-width="labelWidth")
         el-input.tests(v-model="formModel.parting" readonly)
-      el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth")
+      el-form-item.photo-width(label="图片" prop="photo" v-bind:label-width="labelWidth")
         kalix-img-upload(v-model="formModel.photo" readonly)
 </template>
 
@@ -66,4 +66,6 @@
     .el-form-item
       width 49%
       display inline-block
+    .photo-width
+      width 100%
 </style>
