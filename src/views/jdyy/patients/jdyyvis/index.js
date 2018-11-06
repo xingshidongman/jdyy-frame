@@ -3,13 +3,15 @@ import JdyyVisAdd from './jdyyVisAdd.vue'
 import JdyyVisEdit from './jdyyVisEdit.vue'
 import JdyyVisSearch from './jdyyVisSearch.vue'
 import JdyyVisImg from './jdyyVisImg.vue'
+import JdyyVisView from './jdyyVisView.vue'
 
 const components = [
   JdyyVis,
   JdyyVisAdd,
   JdyyVisEdit,
   JdyyVisSearch,
-  JdyyVisImg
+  JdyyVisImg,
+  JdyyVisView
 ]
 
 const main = {

@@ -34,6 +34,7 @@
           {prop: 'directorDoctor', label: '主管医生'}
         ],
         jdyyManDialog: [
+          {id: 'view', dialog: 'JdyyManView'},
           {id: 'add', dialog: 'JdyyManAdd'},
           {id: 'edit', dialog: 'JdyyManEdit'},
           {id: 'delete', dialog: 'JdyyManDelete'}

@@ -31,9 +31,9 @@
           {prop: 'periodization', label: '分期'}
         ],
         jdyyVisDialog: [
+          {id: 'view', dialog: 'JdyyVisView'},
           {id: 'add', dialog: 'JdyyVisAdd'},
           {id: 'edit', dialog: 'JdyyVisEdit'},
-          // {id: 'deleteOne', dialog: 'JdyyVisDelete'},
           {id: 'editImg', dialog: 'JdyyVisImg'}
         ],
         jdyyVisBtnList: jdyyVisConfigBtnList,
