@@ -10,7 +10,7 @@ import Cache from '../components/corelib/common/cache'
 import Router from 'router'
 
 // axios 配置
-axios.defaults.timeout = 5000
+axios.defaults.timeout = 60000
 axios.defaults.baseURL = baseURL
 
 // http请求拦截器
