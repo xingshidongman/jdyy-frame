@@ -26,7 +26,7 @@
         startURL: appsStartURL,
         stopURL: appsStopURL,
         toolbarBtnList: [
-          {id: 'add', icon: 'icon-pinleizengjia', isShow: true}
+          {id: 'add', icon: 'icon-pinleizengjia', isShow: false}
         ],
         tableFields: [
           {prop: 'name', label: '名称'},

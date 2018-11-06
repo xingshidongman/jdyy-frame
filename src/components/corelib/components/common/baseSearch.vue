@@ -9,8 +9,9 @@
 <template lang="pug">
   div.kalix-search
     div.kalix-search-hd
-      i.iconfont.icon-chaxun1(style="padding-right:5px;")
-      | {{title}}
+      div.line
+        i.iconfont.icon-chaxun1(style=" margin-left:30px;line-height: 44px")
+        span.test {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
         slot(name="searchFormSlot")
@@ -19,7 +20,7 @@
               el-option(v-for="option in item.options" v-bind:key="option.value" v-bind:label="option.label" v-bind:value="option.value")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             org-tree.inline(v-else-if="item.type==='orgTree'" v-model="form[item.prop]" v-bind:isAll="item.isAll")
-            kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]")
+            kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]" )
             kalix-query-date-picker(v-else-if="item.type==='year'" v-model="form[item.prop]" type="year")
             kalix-query-datetime-picker(v-else-if="item.type==='datetime'" v-model="form[item.prop]")
             kalix-dict-select(v-else-if="item.type==='dict'" v-bind:appName="item.appName" v-bind:dictType="item.dictType" v-model="form[item.prop]")
@@ -244,13 +245,16 @@
     margin 25px
     background-color $background-color-1
     .kalix-search-hd
-      background-color $plank-title-background-color
-      color $plank-title-color
-      line-height 44px
-      padding 0 15px
-      text-align left
+      padding 0 2px
+      .line
+        width 10px
+        background-color #3465cb
+        height 44px
+        .test
+          margin-left: 50px;
+          margin-top: -30px;
+          position: absolute;
     .kalix-search-bd
-      border-top 1px solid border-color_1
       font-size 0
       padding 8px 12px
       text-align left

@@ -24,7 +24,7 @@
               el-input(v-model="formModel.orderNumber" readonly)
             el-form-item.toleft(label="日期")
               el-col(:span="22")
-                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;" readonly format="yyyy/MM/dd")
+                el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date" style="width: 100%;" readonly value-format="yyyy/M/d" format="yyyy/M/d")
             el-form-item.toleft(label="部位")
               el-radio-group(v-model="formModel.position" readonly)
                 el-radio(label="左")
@@ -222,7 +222,7 @@
               td.long-td
                 div.con2-right
                   el-form-item.short(label="日期")
-                    el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2" disabled format="yyyy/MM/dd")
+                    el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date2" disabled value-format="yyyy/M/d" format="yyyy/M/d")
                   el-form-item.short(label="手术医生")
                     el-input(v-model="formModel.doctor2" readonly)
             tr
@@ -685,7 +685,7 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" disabled format="yyyy/MM/dd")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" disabled value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.mini(label="术后第（）个月" label-width="120px")
             el-input(v-model="formModel.postoperationMonth" readonly)
           el-form-item.mini(label="疼痛" label-width="160px")
@@ -775,7 +775,7 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" readonly format="yyyy/MM/dd")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" readonly value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.mini(label="术后第（）个月" label-width="120px")
             el-input(v-model="formModel.postoperationMonth2" readonly)
           el-form-item.mini(label="患者满意度" label-width="110px")
@@ -832,7 +832,7 @@
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" readonly format="yyyy/MM/dd")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" readonly value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.mini(label="术后第（）个月" label-width="120px")
             el-input(v-model="formModel.postoperationMonth3" readonly)
           el-form-item.mini(label="步行")
@@ -855,7 +855,7 @@
               td(colspan="2").right-td
                 el-form-item.short.bottom-align(label="日期" style="float:left")
                   el-col(:span="20")
-                    el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;" readonly format="yyyy/MM/dd")
+                    el-date-picker(type="date" placeholder="选择日期" v-model="formModel.date6" style="width: 100%;" readonly value-format="yyyy/M/d" format="yyyy/M/d")
                 el-form-item.short.bottom-align(label="术后第")
                   el-input(v-model="formModel.postoperationWeek" readonly)
                     template(slot="append") 周
@@ -951,7 +951,7 @@
           div.con2-left
             el-form-item.short(label="日期" style="float:left" label-width="180px")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" readonly format="yyyy/MM/dd")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" readonly value-format="yyyy/M/d" format="yyyy/M/d")
             el-form-item.short(label="术后第（）个月" label-width="180px")
               el-input(v-model="formModel.postoperationMonth4" readonly)
             el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
