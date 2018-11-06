@@ -9,8 +9,9 @@
 <template lang="pug">
   div.kalix-search
     div.kalix-search-hd
-      i.iconfont.icon-chaxun1(style="padding-right:5px;")
-      | {{title}}
+      div.line
+        i.iconfont.icon-chaxun1(style=" margin-left:30px;line-height: 44px")
+        span.test {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
         slot(name="searchFormSlot")
@@ -244,13 +245,16 @@
     margin 25px
     background-color $background-color-1
     .kalix-search-hd
-      background-color $plank-title-background-color
-      color $plank-title-color
-      line-height 44px
-      padding 0 15px
-      text-align left
+      padding 0 2px
+      .line
+        width 10px
+        background-color #3465cb
+        height 44px
+        .test
+          margin-left: 50px;
+          margin-top: -30px;
+          position: absolute;
     .kalix-search-bd
-      border-top 1px solid border-color_1
       font-size 0
       padding 8px 12px
       text-align left
