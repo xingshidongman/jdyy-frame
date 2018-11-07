@@ -106,7 +106,7 @@
     padding 20px 5px
     color #2d8ac7
     .left
-      width 80%
+      width 65%
       position absolute
       height 390px
       top: 0
@@ -115,7 +115,7 @@
       bottom 0
       margin auto
       .left-box
-        width 96%
+        width 100%
         margin auto
         min-height 390px
         border 2px solid #23769a
@@ -141,13 +141,13 @@
         height 5px
         background-color #3ac8f3
         position absolute
-        margin: -2px 0 0 12px;
+        margin: -2px 0 0 0;
       .left-zx
         width 5px
         height 30px
         background-color #3ac8f3
         position absolute
-        margin: 0 0 0 12px;
+        margin: 0 0 0 -1px;
       .left-xr
         width 5px
         height 30px
