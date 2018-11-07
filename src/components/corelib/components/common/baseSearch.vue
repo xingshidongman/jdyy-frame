@@ -13,7 +13,7 @@
         i.iconfont.icon-chaxun1(style=" margin-left:20px;line-height: 28px")
         span.test {{title}}
     div.kalix-search-bd
-      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true" label-width="90px")
+      el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true")
         slot(name="searchFormSlot")
           el-form-item.short(v-for="item in searchFields" v-bind:label="item.label" v-bind:prop="item.prop" v-bind:key="item.prop")
             el-select(v-if="item.type==='select'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType" v-bind:clearable="item.clearable")
@@ -242,7 +242,7 @@
   @import "~@/assets/stylus/color.styl"
   @import "~@/assets/stylus/kalix-color.styl"
   .kalix-search
-    margin 25px
+    margin: 8px 25px;
     background-color $background-color-1
     .kalix-search-hd
       padding 0 2px
@@ -256,25 +256,26 @@
           position: absolute;
     .kalix-search-bd
       font-size 0
-      padding 8px 12px
+      padding 8px 0px
       text-align left
       .search-container
         margin-bottom -12px
     .el-form-item
       margin-bottom 12px
       display inline-block
+      width 22%
       .el-form-item__label
         float: left;
         text-align: center
-        font-size: 15px;
+        font-size: 14px;
         color:  #3465cb
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-      /*width 30%*/
+        width 35%
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
-        width: 200px;
+        width 65%
       .el-input__inner
         border-radius: 1px;
         border: 1px solid #3465cb;

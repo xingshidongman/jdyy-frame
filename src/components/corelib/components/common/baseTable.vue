@@ -289,8 +289,8 @@
         } else {
           this.$nextTick(() => {
             let kalixSearch = document.querySelector('.kalix-search-' + this.bizKey)
-            console.log('===== kalixSearch =====', kalixSearch.clientHeight + 40 + 'px')
-            this.wrapperTop = {'top': kalixSearch.clientHeight + 40 + 'px'}
+            console.log('===== kalixSearch =====', kalixSearch.clientHeight + 20 + 'px')
+            this.wrapperTop = {'top': kalixSearch.clientHeight + 20 + 'px'}
           })
         }
       },
@@ -689,7 +689,7 @@
         return (1 + ((this.pager.currentPage - 1) * this.pager.limit)) // 返回当前行号
       },
       tableContainerStyle() {
-        return {'top': (this.isShowToolBarB ? '75px' : '50px')}
+        return {'top': (this.isShowToolBarB ? '70px' : '50px')}
       },
       pageCount() {
         return Math.floor((this.pager.totalCount + this.pager.limit - 1) / this.pager.limit)

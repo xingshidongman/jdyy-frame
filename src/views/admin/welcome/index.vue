@@ -107,7 +107,13 @@
     color #2d8ac7
     .left
       width 80%
-      margin: 10px 10%;
+      position absolute
+      height 390px
+      top: 0
+      left 0
+      right 0
+      bottom 0
+      margin auto
       .left-box
         width 96%
         margin auto
@@ -135,13 +141,13 @@
         height 5px
         background-color #3ac8f3
         position absolute
-        margin -0.2% 0 0 1%;
+        margin -0.2% 0 0 1.1%;
       .left-zx
         width 5px
         height 30px
         background-color #3ac8f3
         position absolute
-        margin: 0% 0 0 1%;
+        margin: 0% 0 0 1.1%;
       .left-xr
         width 5px
         height 30px
