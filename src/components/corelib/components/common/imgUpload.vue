@@ -9,25 +9,25 @@
     template(v-if="readonly")
       template(v-if="isImage")
         template(v-for="imageUrl in fileList")
-          img.avatar(v-if="imageUrl" v-bind:src="imageUrl")
-          img.avatar(v-else src="/static/images/default_attachment.png")
+          img.avatars(v-if="imageUrl" v-bind:src="imageUrl")
+          img.avatars(v-else src="/static/images/default_attachment.png")
       template(v-else)
         template 空
         <!--template(v-if="this.value")-->
           <!--a(v-bind:href="this.value") {{this.fileName}}-->
         <!--template(v-else) 空-->
     template(v-else)
-      el-upload(v-bind:class="{'avatar-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action"
+      el-upload(v-bind:class="{'avatars-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action"
       v-bind:multiple="false" v-bind:show-file-list="true" v-bind:file-list="fileList"
       v-bind:on-change="handleChange" v-bind:before-upload="handleBeforeUpload"
       v-bind:on-success="handleSuccess" v-bind:on-error="handleError"
       v-bind:on-preview="handlePreview" v-bind:on-remove="handleRemove")
         template(v-if="isImage")
-          img.avatar(v-if="imageUrl" v-bind:src="imageUrl")
-          i.el-icon-plus.avatar-uploader-icon(v-else)
+          img.avatars(v-if="imageUrl" v-bind:src="imageUrl")
+          i.el-icon-plus.avatars-uploader-icon(v-else)
         template(v-else)
           el-button(size="small" type="primary") 点击上传
-      <!--el-upload(v-bind:class="{'avatar-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action" v-bind:headers="headers"-->
+      <!--el-upload(v-bind:class="{'avatars-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action" v-bind:headers="headers"-->
       <!--v-bind:multiple="false" v-bind:show-file-list="true" v-bind:file-list="fileList"-->
       <!--v-bind:on-change="handleChange" v-bind:before-upload="handleBeforeUpload"-->
       <!--v-bind:on-success="handleSuccess" v-bind:on-error="handleError"-->
@@ -163,7 +163,7 @@
 </script>
 
 <style>
-  .avatar-uploader .el-upload {
+  .avatars-uploader .el-upload {
     border: 1px dashed #d9d9d9;
     border-radius: 6px;
     cursor: pointer;
@@ -171,11 +171,11 @@
     overflow: hidden;
   }
 
-  .avatar-uploader .el-upload:hover {
+  .avatars-uploader .el-upload:hover {
     border-color: #20a0ff;
   }
 
-  .avatar-uploader-icon {
+  .avatars-uploader-icon {
     font-size: 28px;
     color: #8c939d;
     width: 178px;
@@ -184,7 +184,7 @@
     text-align: center;
   }
 
-  .avatar {
+  .avatars {
     width: 150px;
     /*height: 150px;*/
     margin: 5px;

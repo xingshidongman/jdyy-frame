@@ -141,13 +141,13 @@
         height 5px
         background-color #3ac8f3
         position absolute
-        margin -0.2% 0 0 1.1%;
+        margin: -2px 0 0 12px;
       .left-zx
         width 5px
         height 30px
         background-color #3ac8f3
         position absolute
-        margin: 0% 0 0 1.1%;
+        margin: 0 0 0 12px;
       .left-xr
         width 5px
         height 30px
