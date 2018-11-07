@@ -241,16 +241,16 @@
     z-index 9
     background-color #ffffff
     .bd
-      height 150px
+      height 120px
       .logo
         width 100%
-        height 150px
+        height 120px
         overflow hidden
         transition width .2s
-        background url('/static/images/logo.png') no-repeat center
+        background url('/static/images/top.png') no-repeat center
       .text
           font-size 2.5vw
-          padding: 54px 0;
+          padding: 45px 0;
           margin-left 15%
           color white
           float left
@@ -346,6 +346,7 @@
           &.aside
             margin-right 100px
             float right
+            margin-top -15px
             li
               vertical-align middle
               .el-badge
@@ -360,9 +361,9 @@
                 &.el-icon--right
                   color #5d6266
     .avatar-wrapper
-      height 36px
-      line-height 36px
-      width 104px
+      /*height 36px*/
+      /*line-height 36px*/
+      width 90px
       .avatar
         float left
         font-size 2.5vm

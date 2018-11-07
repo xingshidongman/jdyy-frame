@@ -1,13 +1,13 @@
 <template lang="pug">
   div.start
     div.left
+      div.left-sx
+      div.left-zx
       div.left-box
         div.left-line
           div.text-box.text 今日数据指标
-          div.left-sx
-          div.left-zx
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy/M/d"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy/M/d" format="yyyy/M/d"  placeholder="选择日期")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -103,19 +103,19 @@
 
   .start
     width 100%
-    padding 40px 5px
+    padding 20px 5px
     color #2d8ac7
     .left
       width 80%
-      margin: 20px 10%;
+      margin: 10px 10%;
       .left-box
         width 96%
         margin auto
-        min-height 580px
+        min-height 390px
         border 2px solid #23769a
       .left-line
         width 98%
-        min-height 560px
+        min-height 370px
         margin 10px auto
         border 0.3px solid #23769a
         border-radius 5px
@@ -126,7 +126,7 @@
         background-color rgba(77,109,177,0.8)
         margin -25px 0 0 15%
         text-align center
-        font-size 1.2vw
+        font-size 16px
         color #ffffff
         font-weight bold
         padding 12px 0
@@ -135,13 +135,13 @@
         height 5px
         background-color #3ac8f3
         position absolute
-        margin: -2.2% 0 0 -0.8%
+        margin -0.2% 0 0 1%;
       .left-zx
         width 5px
         height 30px
         background-color #3ac8f3
         position absolute
-        margin: -2.2% 0 0 -1%
+        margin: 0% 0 0 1%;
       .left-xr
         width 5px
         height 30px
@@ -157,10 +157,11 @@
         margin 0 -1px 0 0
       .block
         float right
+        margin-right: -20px;
       .input-time
-        width 60%
-        margin-top 15px
-        border 2px solid #23769a
+        width 53%
+        margin-top 5px
+        border 1px solid #dfdfdf
         color #23769a
         .el-input__inner
           padding-left: 30px;
@@ -169,19 +170,19 @@
         width 90%
         margin auto
         position relative
-        margin-top 75px
-        height 300px
+        margin-top 50px
+        height 280px
         .block-box
           width 90%
-          height 40px
-          line-height 40px
+          height 25px
+          line-height 25px
           background-color #f2f2f2
           margin 15px auto
           font-size 1vw
           .block-span
-            width 75%
+            width 70%
             color rgb(77,109,177)
-            padding-left 30px
+            padding-left 8%
             float left
           .block-spantwo
             width 20%

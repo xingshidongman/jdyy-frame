@@ -243,7 +243,7 @@
 <style lang="stylus" type="text/stylus">
   .kalix-navigate
     position relative
-    width 190px
+    width 200px
     height 100%
     text-align left
     overflow hidden
