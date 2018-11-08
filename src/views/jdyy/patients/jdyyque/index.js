@@ -1,11 +1,13 @@
-import JdyyMan from './jdyyQue.vue'
-import JdyyManSearch from './jdyyQueSearch.vue'
-import JdyyManView from './jdyyQueView.vue'
+import JdyyQue from './jdyyQue.vue'
+import JdyyQueSearch from './jdyyQueSearch.vue'
+import JdyyQueView from './jdyyQueView.vue'
+import JdyyQueEdit from './jdyyQueEdit.vue'
 
 const components = [
-  JdyyMan,
-  JdyyManSearch,
-  JdyyManView
+  JdyyQue,
+  JdyyQueSearch,
+  JdyyQueView,
+  JdyyQueEdit
 ]
 
 const main = {

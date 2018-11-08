@@ -33,6 +33,16 @@ const FormModel = {
   abduction: null, // 外展
   adduction: null, // 内收
   modifyStaff: null, // 修改人员
-  heavyTime: null // 重患时间
+  heavyTime: null, // 重患时间
+  diagnosis: null, // 诊断
+  surgical: null, // 术式
+  diagnosisCode: null, // 诊断代码
+  surgicalCode: null, // 术式代码
+  AOcode: null, // AO代码
+  operationDate: null, // 手术日期
+  periodization: null, // 分期
+  parting: null, // 分型
+  xid: null, // id（未知）
+  photo: null // 图片
 }
 export default FormModel
