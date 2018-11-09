@@ -1,11 +1,11 @@
 <template lang="pug">
   keep-alive
     div(class="back")
-      div
+      div(style="width:10%;margin:20px auto;font-size: 20px;") 基 本 信 息
       el-form(v-bind:model="formModel")
         el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
           el-input(v-model="formModel.name")
-        el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" style="")
+        el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
           el-radio-group(v-model="formModel.sex" )
             el-radio(label="男")
             el-radio(label="女")
@@ -71,20 +71,21 @@
         <!--el-input(v-model="formModel.modifyStaff")-->
         <!--el-form-item(label="患者" prop="pname" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")-->
           <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
-        el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-          el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
-        el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
-          el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
-        el-form-item(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
-          el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 50%;")
-        el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-          el-select.tests(v-model="formModel.periodization" placeholder="请选择")
+        div(style="width:10%;margin:20px auto;font-size: 20px;") 诊 断 信 息
+        el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
+          el-cascader(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
+        el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
+          el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
+        el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
+          el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
+        el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
+          el-select(v-model="formModel.periodization" placeholder="请选择")
             el-option(label="内科" value="内科")
             el-option(label="外科" value="外科")
-        el-form-item(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
-          el-input.tests(v-model="formModel.parting")
-        el-form-item(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-          kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB" title="点击文字图片放大")
+        el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
+          el-input(v-model="formModel.parting")
+        el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
+          kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
           kalix-img-upload(v-model="formModel.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
         div.box
           ul.right_ul
@@ -108,7 +109,7 @@
       return {
         downloadURL: JdyypatientsURL,
         formModel: Object.assign({}, FormModel),
-        labelWidth: '160px',
+        labelWidth: '120px',
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
         // options: [],
@@ -174,23 +175,22 @@
     width 100%
     margin auto
     .el-form-item
-      width 49%
+      width 50%
+      display inline-block
+    .text
+      width 100%
+    .texttoo
+      width 33%
       display inline-block
     .address
-      width 98%
-    .Border
-      width 49%
-      height 40px
-      line-height 40px
-    .el-form-item__content
-      position: relative;
-      font-size: 14px;
-      padding: 12px 10px;
+      width 100%
     .el-input__inner
       border-radius 1px
+    .box
+      width 20%
+      margin auto
   .back
     width 80%
     margin 0 auto
-    padding-top 50px
     padding-bottom 50px
 </style>

@@ -782,7 +782,7 @@
   @media screen and (max-width: 1500px) and (min-width: 1200px){
     .buttom{
       width 300px
-      margin 8px 5% 0 0;
+      margin 8px 15% 0 0;
     }
   }
 </style>

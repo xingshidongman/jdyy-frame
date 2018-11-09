@@ -73,7 +73,7 @@
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
         el-cascader.tests(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
-        el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 50%;")
+        el-date-picker(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 78%;")
       el-form-item(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
         el-select.tests(v-model="formModel.periodization" placeholder="请选择")
           el-option(label="内科" value="内科")
@@ -159,10 +159,8 @@
       width 49%
       height 40px
       line-height 40px
-    .el-form-item__content
-      position: relative;
-      font-size: 14px;
-      padding: 12px 10px;
+    .tests
+      width 78%
     .el-input__inner
       border-radius 1px
 </style>
