@@ -742,7 +742,7 @@
       .input-time
         width 60%
         margin-top 15px
-        border 2px solid #23769a
+        border 1px solid #dfdfdf
         color #23769a
         .el-input__inner
           padding-left: 30px;
@@ -757,7 +757,7 @@
           width 90%
           height 30px
           line-height 30px
-          background-color #cccccc
+          background-color #f2f2f2
           margin 10px auto
           font-size 1vw
           .block-span
@@ -815,7 +815,7 @@
             .input-time
               width 26%
               margin-top 15px
-              border 2px solid #23769a
+              border 1px solid #dfdfdf
               color #23769a
             .block-input
               width 12%

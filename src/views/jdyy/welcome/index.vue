@@ -165,7 +165,7 @@
         float right
         margin-right: -20px;
       .input-time
-        width 53%
+        width 60%
         margin-top 5px
         border 1px solid #dfdfdf
         color #23769a
