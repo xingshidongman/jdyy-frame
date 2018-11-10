@@ -3,7 +3,7 @@
     div(class="back")
       div.base-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
-        el-form(v-bind:model="formModel1")
+        el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
             el-input(v-model="formModel1.name")
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
@@ -71,7 +71,7 @@
           div.box
             ul.right_ul
               li.right_li
-                el-button.btn-submit(v-on:click="onSubmit()" :disabled="forbidden" size="large") 保存
+                el-button.btn-submit(v-on:click="reset('formModel1')" :disabled="forbidden" size="large") 保存
                 el-button.btn-submit.btn-reset(v-on:click="showMessage" :disabled="forbidden"  size="large") 保存并继续
           div.clear
         <!--el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")-->
@@ -80,7 +80,7 @@
           <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
       div.diagnose-message(v-if="show")
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
-        el-form(v-bind:model="formModel2")
+        el-form(v-bind:model="formModel2" ref="formModel2")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
             el-cascader(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
@@ -100,7 +100,7 @@
           ul.right_ul
             li.right_li
               el-button.btn-submit(v-on:click="onSubmit()" size="large") 保存
-              el-button.btn-submit.btn-reset( v-on:click="reset" size="large") 重置
+              el-button.btn-submit.btn-reset( v-on:click="resetAll('formModel2')" size="large") 重置
         div.clear
 
 </template>
@@ -158,10 +158,13 @@
       }
     },
     methods: {
-      reset() {
-        this.$refs['formModel'].reset()
+      reset(formName) {
+        this.$refs[formName].resetFields()
         // this.formModel.name = ''
         // this.formModel.dateAdmission = ''
+      },
+      resetAll(formName) {
+        this.$refs[formName].resetFields()
       },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
