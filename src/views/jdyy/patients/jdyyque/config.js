@@ -4,7 +4,7 @@
  **/
 const jdyyQueConfigBtnList = [
   {
-    id: 'view',
+    id: 'viewPdf',
     title: '查看',
     icon: 'icon-chakan',
     isShow: true, // 是否显示
