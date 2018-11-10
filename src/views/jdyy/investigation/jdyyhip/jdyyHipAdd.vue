@@ -649,27 +649,27 @@
                 div.con2-right
                   p 活动度总和 = 无过伸，屈曲>110°，外展>20°，内收>15°，外旋>15°（5）
                   p 每10°过伸（-0.5）/屈曲<90°（-0.5）/无外展<（-0.7）/无外旋（-0.3）
-      <!--div.art2-->
-      <!--h1.title-->
-      <!--div.con2-->
-      <!--el-table(:data="tableData1" style="width: 1450px;margin:0 auto" height="250")-->
-      <!--el-table-column(fixed prop="harADate" label="日期" width="100")-->
-      <!--el-table-column(prop="harA1" label="术后第（）月" width="120")-->
-      <!--el-table-column(prop="harA2" label="疼痛" width="60")-->
-      <!--el-table-column(prop="harA3" label="上下楼梯" width="120")-->
-      <!--el-table-column(prop="harA4" label="坐" width="60")-->
-      <!--el-table-column(prop="harA5" label="穿鞋袜" width="120")-->
-      <!--el-table-column(prop="harA6" label="上公交车" width="120")-->
-      <!--el-table-column(prop="harA7" label="跛行" width="60")-->
-      <!--el-table-column(prop="harA8" label="行走辅助" width="120")-->
-      <!--el-table-column(prop="harA9" label="行走距离" width="120")-->
-      <!--el-table-column(prop="harA10" label="无畸形" width="120")-->
-      <!--el-table-column(prop="harA11" label="关节活动度" width="120")-->
-      <!--el-table-column(prop="harA12" label="总分（100）" width="120")-->
-      <!--el-table-column(fixed="right" label="操作" width="50")-->
-      <!--template(slot-scope="scope")-->
-      <!--&lt;!&ndash;el-button(@click="handleClick(scope.row)" type="text" size="large") 查看&ndash;&gt;-->
-      <!--el-button(type="text" size="small") 编辑-->
+      div.art2
+        h1.title
+        div.con2
+          el-table(:data="tableData1" style="width: 1450px;margin:0 auto" height="250")
+            el-table-column(fixed prop="harADate" label="日期" width="100")
+            el-table-column(prop="harA1" label="术后第（）月" width="120")
+            el-table-column(prop="harA2" label="疼痛" width="60")
+            el-table-column(prop="harA3" label="上下楼梯" width="120")
+            el-table-column(prop="harA4" label="坐" width="60")
+            el-table-column(prop="harA5" label="穿鞋袜" width="120")
+            el-table-column(prop="harA6" label="上公交车" width="120")
+            el-table-column(prop="harA7" label="跛行" width="60")
+            el-table-column(prop="harA8" label="行走辅助" width="120")
+            el-table-column(prop="harA9" label="行走距离" width="120")
+            el-table-column(prop="harA10" label="无畸形" width="120")
+            el-table-column(prop="harA11" label="关节活动度" width="120")
+            el-table-column(prop="harA12" label="总分（100）" width="120")
+            <!--el-table-column(fixed="right" label="操作" width="50")-->
+              <!--template(slot-scope="scope")-->
+                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="日期")
           el-input(v-model="formModel.harADate" clearable)
@@ -728,23 +728,23 @@
               td.long-td
                 div.con2-right
                   p 如手术侧下肢较长，为正数
-      <!--div.art2-->
-      <!--h1.title-->
-      <!--div.con2-->
-      <!--el-table(:data="tableData2" style="width: 1190px;margin:0 auto" height="250")-->
-      <!--el-table-column(prop="harBDate" label="大腿痛" width="100")-->
-      <!--el-table-column(prop="harB1" label="Trendelenburg 征" width="150")-->
-      <!--el-table-column(prop="harB2" label="活动度-伸直" width="120")-->
-      <!--el-table-column(prop="harB3" label="活动度-屈曲" width="120")-->
-      <!--el-table-column(prop="harB4" label="活动度-外展" width="120")-->
-      <!--el-table-column(prop="harB5" label="活动度-内收" width="120")-->
-      <!--el-table-column(prop="harB6" label="活动度-内旋" width="120")-->
-      <!--el-table-column(prop="harB7" label="活动度-外旋" width="120")-->
-      <!--el-table-column(prop="harB8" label="双下肢不等长" width="120")-->
-      <!--el-table-column(fixed="right" label="操作" width="50")-->
-      <!--template(slot-scope="scope")-->
-      <!--&lt;!&ndash;el-button(@click="handleClick(scope.row)" type="text" size="large") 查看&ndash;&gt;-->
-      <!--el-button(type="text" size="small") 编辑-->
+      div.art2
+        h1.title
+        div.con2
+          el-table(:data="tableData2" style="width: 1190px;margin:0 auto" height="250")
+            el-table-column(prop="harBDate" label="大腿痛" width="100")
+            el-table-column(prop="harB1" label="Trendelenburg 征" width="150")
+            el-table-column(prop="harB2" label="活动度-伸直" width="120")
+            el-table-column(prop="harB3" label="活动度-屈曲" width="120")
+            el-table-column(prop="harB4" label="活动度-外展" width="120")
+            el-table-column(prop="harB5" label="活动度-内收" width="120")
+            el-table-column(prop="harB6" label="活动度-内旋" width="120")
+            el-table-column(prop="harB7" label="活动度-外旋" width="120")
+            el-table-column(prop="harB8" label="双下肢不等长" width="120")
+            <!--el-table-column(fixed="right" label="操作" width="50")-->
+              <!--template(slot-scope="scope")-->
+                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="大腿痛")
           el-input(v-model="formModel.harBDate" clearable)
@@ -774,17 +774,17 @@
               td.long-td
                 div.con2-right
                   p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-          <!--el-table(:data="tableData3" style="width: 620px;margin:0 auto" height="250")-->
-          <!--el-table-column(fixed prop="harCDate" label="日期" width="100")-->
-          <!--el-table-column(prop="harC1" label="与术前相比" width="120")-->
-          <!--el-table-column(prop="harC2" label="术后第（）月" width="120")-->
-          <!--el-table-column(prop="harC3" label="疼痛" width="60")-->
-          <!--el-table-column(prop="harC4" label="功能" width="60")-->
-          <!--el-table-column(prop="harC5" label="总评" width="60")-->
-          <!--el-table-column(fixed="right" label="操作" width="50")-->
-          <!--template(slot-scope="scope")-->
-          <!--&lt;!&ndash;el-button(@click="handleClick(scope.row)" type="text" size="large") 查看&ndash;&gt;-->
-          <!--el-button(type="text" size="small") 编辑-->
+          el-table(:data="tableData3" style="width: 620px;margin:0 auto" height="250")
+            el-table-column(fixed prop="harCDate" label="日期" width="100")
+            el-table-column(prop="harC1" label="与术前相比" width="120")
+            el-table-column(prop="harC2" label="术后第（）月" width="120")
+            el-table-column(prop="harC3" label="疼痛" width="60")
+            el-table-column(prop="harC4" label="功能" width="60")
+            el-table-column(prop="harC5" label="总评" width="60")
+            <!--el-table-column(fixed="right" label="操作" width="50")-->
+              <!--template(slot-scope="scope")-->
+                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                <!--el-button(type="text" size="small") 编辑-->
         div.con2
           el-form-item.mini(label="日期")
             el-input(v-model="formModel.harCDate" clearable)
@@ -874,28 +874,28 @@
               td.long-td
                 div.con2-right
                   p 针对骨水泥假体，如果是生物性假体请标记 NA *
-      <!--div.art2-->
-      <!--h1.title-->
-      <!--div.con2-->
-      <!--el-table(:data="tableData4" style="width: 100%" height="250")-->
-      <!--el-table-column(fixed prop="harDDate" label="日期" width="100")-->
-      <!--el-table-column(prop="harD1" label="术后第（）月" width="120")-->
-      <!--el-table-column(prop="harD2" label="移位" width="250")-->
-      <!--el-table-column(prop="harD3" label="聚乙烯磨损" width="120")-->
-      <!--el-table-column(prop="harD4" label="骨水泥透亮区 -1 *" width="250")-->
-      <!--el-table-column(prop="harD5" label="骨水泥透亮区 -2 *" width="150")-->
-      <!--el-table-column(prop="harD6" label="骨溶解 *" width="120")-->
-      <!--el-table-column(prop="harD7" label="增生*" width="60")-->
-      <!--el-table-column(prop="harD8" label="萎缩 *" width="60")-->
-      <!--el-table-column(prop="harD9" label="异位骨化" width="120")-->
-      <!--el-table-column(prop="harD10" label="金属问题" width="150")-->
-      <!--el-table-column(prop="harD11" label="骨水泥金属界面透亮区 *" width="240")-->
-      <!--el-table-column(prop="harD12" label="骨水泥骨折（） *" width="150")-->
-      <!--el-table-column(prop="harD13" label="涂层脱落*" width="120")-->
-      <!--el-table-column(fixed="right" label="操作" width="50")-->
-      <!--template(slot-scope="scope")-->
-      <!--&lt;!&ndash;el-button(@click="handleClick(scope.row)" type="text" size="large") 查看&ndash;&gt;-->
-      <!--el-button(type="text" size="small") 编辑-->
+      div.art2
+        h1.title
+        div.con2
+          el-table(:data="tableData4" style="width: 100%" height="250")
+            el-table-column(fixed prop="harDDate" label="日期" width="100")
+            el-table-column(prop="harD1" label="术后第（）月" width="120")
+            el-table-column(prop="harD2" label="移位" width="250")
+            el-table-column(prop="harD3" label="聚乙烯磨损" width="120")
+            el-table-column(prop="harD4" label="骨水泥透亮区 -1 *" width="250")
+            el-table-column(prop="harD5" label="骨水泥透亮区 -2 *" width="150")
+            el-table-column(prop="harD6" label="骨溶解 *" width="120")
+            el-table-column(prop="harD7" label="增生*" width="60")
+            el-table-column(prop="harD8" label="萎缩 *" width="60")
+            el-table-column(prop="harD9" label="异位骨化" width="120")
+            el-table-column(prop="harD10" label="金属问题" width="150")
+            el-table-column(prop="harD11" label="骨水泥金属界面透亮区 *" width="240")
+            el-table-column(prop="harD12" label="骨水泥骨折（） *" width="150")
+            el-table-column(prop="harD13" label="涂层脱落*" width="120")
+            <!--el-table-column(fixed="right" label="操作" width="50")-->
+              <!--template(slot-scope="scope")-->
+                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
+                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="日期")
           el-input(v-model="formModel.harDDate" clearable)

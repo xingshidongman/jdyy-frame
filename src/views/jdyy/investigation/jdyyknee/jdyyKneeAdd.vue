@@ -754,21 +754,21 @@
                 div.con2-left 后方松弛
               td.long-td
                 div.con2-right2 1 - 无/2 - 轻度/3 - 明显
-      <!--div.art2-->
-        <!--h1.title 置换术后的特殊问题-->
-        <!--div.con2-->
-          <!--el-table( :data="tableData2" style="width:100%" height="250")-->
-            <!--el-table-column(fixed prop="date4" label="日期" min-width="150")-->
-            <!--el-table-column(prop="postoperationMonth2" label="术后第（）个月" min-width="120")-->
-            <!--el-table-column(prop="satisfaction" label="患者满意度" min-width="100")-->
-            <!--el-table-column(prop="gait" label="步态" min-width="60")-->
-            <!--el-table-column(prop="problem" label="髌骨侧问题" min-width="100")-->
-            <!--el-table-column(prop="muscleStrength" label="股四头肌肌力" min-width="120")-->
-            <!--el-table-column(prop="fixedFlexionContracture3" label="固定屈曲挛缩（FFC）" min-width="170")-->
-            <!--el-table-column(prop="hyperextension2" label="过伸" min-width="60")-->
-            <!--el-table-column(prop="lateralSlack" label="侧方松弛" min-width="100")-->
-            <!--el-table-column(prop="frontBackSlack" label="前后松弛" min-width="100")-->
-            <!--el-table-column(prop="backSlack" label="后方松弛" min-width="100")-->
+      div.art2
+        h1.title 置换术后的特殊问题
+        div.con2
+          el-table( :data="tableData2" style="width:100%" height="250")
+            el-table-column(fixed prop="date4" label="日期" min-width="150")
+            el-table-column(prop="postoperationMonth2" label="术后第（）个月" min-width="120")
+            el-table-column(prop="satisfaction" label="患者满意度" min-width="100")
+            el-table-column(prop="gait" label="步态" min-width="60")
+            el-table-column(prop="problem" label="髌骨侧问题" min-width="100")
+            el-table-column(prop="muscleStrength" label="股四头肌肌力" min-width="120")
+            el-table-column(prop="fixedFlexionContracture3" label="固定屈曲挛缩（FFC）" min-width="170")
+            el-table-column(prop="hyperextension2" label="过伸" min-width="60")
+            el-table-column(prop="lateralSlack" label="侧方松弛" min-width="100")
+            el-table-column(prop="frontBackSlack" label="前后松弛" min-width="100")
+            el-table-column(prop="backSlack" label="后方松弛" min-width="100")
             <!--el-table-column(label="操作" min-width="60" fixed="right")-->
               <!--template(slot-scope="scope")-->
                 <!--el-button(type="text" size="small") 编辑-->
@@ -816,16 +816,16 @@
                 div.con2-left 辅助行走
               td.long-td
                 div.con2-right2 无（0）/单拐（5）/双拐（10）/腋杖，助步器（20）
-      <!--div.art2-->
-        <!--h1.title 膝关节协会功能评估-->
-        <!--div.con2-->
-          <!--el-table( :data="tableData3" style="width:100%" height="250")-->
-            <!--el-table-column(fixed prop="date5" label="日期" min-width="150")-->
-            <!--el-table-column(prop="postoperationMonth3" label="术后第（）个月" min-width="120")-->
-            <!--el-table-column(prop="walk1" label="步行" min-width="100")-->
-            <!--el-table-column(prop="stairActivity1" label="上下楼梯" min-width="60")-->
-            <!--el-table-column(prop="walkingAid1" label="辅助行走" min-width="100")-->
-            <!--el-table-column(prop="total5" label="总计" min-width="60")-->
+      div.art2
+        h1.title 膝关节协会功能评估
+        div.con2
+          el-table( :data="tableData3" style="width:100%" height="250")
+            el-table-column(fixed prop="date5" label="日期" min-width="150")
+            el-table-column(prop="postoperationMonth3" label="术后第（）个月" min-width="120")
+            el-table-column(prop="walk1" label="步行" min-width="100")
+            el-table-column(prop="stairActivity1" label="上下楼梯" min-width="60")
+            el-table-column(prop="walkingAid1" label="辅助行走" min-width="100")
+            el-table-column(prop="total5" label="总计" min-width="60")
             <!--el-table-column(label="操作" min-width="60" fixed="right")-->
               <!--template(slot-scope="scope")-->
                 <!--el-button(type="text" size="small") 编辑-->
@@ -931,20 +931,20 @@
             tr
               td.img
                 img(src="../../../../../static/images/img.png")
-      <!--div.art2-->
-        <!--div.con2-->
-          <!--el-table( :data="tableData4" style="width:100%" height="250")-->
-            <!--el-table-column(fixed prop="date7" label="日期" min-width="150")-->
-            <!--el-table-column(prop="postoperationMonth4" label="术后第（）个月" min-width="120")-->
-            <!--el-table-column(prop="thighboneSide" label="股骨骨水泥透亮区-侧位" min-width="190")-->
-            <!--el-table-column(prop="tibiaFab" label="胫骨骨水泥透亮区-前后位" min-width="190")-->
-            <!--el-table-column(prop="tibiaSide" label="胫骨骨水泥透亮区-侧位" min-width="190")-->
-            <!--el-table-column(prop="thighboneCut" label="髌骨骨水泥透亮区-切位" min-width="190")-->
-            <!--el-table-column(prop="thighboneSubluxation" label="髌骨半脱位" min-width="90")-->
-            <!--el-table-column(prop="boneGraft" label="植骨吸收" min-width="90")-->
-            <!--el-table-column(prop="loose" label="松动（股骨/胫骨/髌骨）" min-width="190")-->
-            <!--el-table-column(prop="polyethyleneLiner" label="聚乙烯内衬" min-width="90")-->
-            <!--el-table-column(prop="osteolysis" label="骨溶解" min-width="90")-->
+      div.art2
+        div.con2
+          el-table( :data="tableData4" style="width:100%" height="250")
+            el-table-column(fixed prop="date7" label="日期" min-width="150")
+            el-table-column(prop="postoperationMonth4" label="术后第（）个月" min-width="120")
+            el-table-column(prop="thighboneSide" label="股骨骨水泥透亮区-侧位" min-width="190")
+            el-table-column(prop="tibiaFab" label="胫骨骨水泥透亮区-前后位" min-width="190")
+            el-table-column(prop="tibiaSide" label="胫骨骨水泥透亮区-侧位" min-width="190")
+            el-table-column(prop="thighboneCut" label="髌骨骨水泥透亮区-切位" min-width="190")
+            el-table-column(prop="thighboneSubluxation" label="髌骨半脱位" min-width="90")
+            el-table-column(prop="boneGraft" label="植骨吸收" min-width="90")
+            el-table-column(prop="loose" label="松动（股骨/胫骨/髌骨）" min-width="190")
+            el-table-column(prop="polyethyleneLiner" label="聚乙烯内衬" min-width="90")
+            el-table-column(prop="osteolysis" label="骨溶解" min-width="90")
             <!--el-table-column(label="操作" min-width="60" fixed="right")-->
               <!--template(slot-scope="scope")-->
                 <!--el-button(type="text" size="small") 编辑-->
