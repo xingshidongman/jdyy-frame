@@ -72,16 +72,16 @@
           <!--el-input(v-model="formModel.modifyStaff" readonly)-->
         <!--el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")-->
           <!--el-input(v-model="formModel.remarks" readonly)-->
-        el-table(v-bind:data="tableData" border)
-          el-table-column(prop="diagnosis" label="诊断" width="170")
-          el-table-column(prop="surgical" label="术式" width="170")
-          el-table-column(prop="operationDate" label="手术日期" width="170")
-          el-table-column(prop="periodization" label="分期" width="170")
+        el-table(v-bind:data="formModel.tableData" border)
+          el-table-column(prop="diagnosis" label="诊断" width="150")
+          el-table-column(prop="surgical" label="术式" width="150")
+          el-table-column(prop="operationDate" label="手术日期" width="120")
+          el-table-column(prop="periodization" label="分期" width="120")
           el-table-column(label="图片" width="360")
             template(slot-scope="scope")
-              div.picture(v-for="img in imgs")
-                img(v-bind:src="img" ref="image" width="100px")
-        //view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
+              div.picture(v-for="img in formModel.imgs")
+                img(v-bind:src="img.val" v-bind:ref="img.key")
+        // view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
         <!--div.mark(ref="mark")-->
           <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
             <!--img(v-bind:src="img.val" v-bind:ref="img.key" style="width:150px; height:150px")-->

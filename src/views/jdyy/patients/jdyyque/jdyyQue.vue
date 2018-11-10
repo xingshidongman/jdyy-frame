@@ -2,15 +2,16 @@
   keep-alive
     kalix-table(bizKey="jdyyQue" title='查询列表' ref="kalixTable"
     v-bind:tableFields="tableFields"
-    v-bind:targetURL="jdyypatientsURL"
+    v-bind:targetURL="targetURL"
     v-bind:bizDialog="jdyyQueDialog"
     v-bind:btnList="btnList"
     v-bind:toolbarBtnList="toolbarBtnList"
+    v-bind:customTableTool="callCustomTableTool"
     bizSearch="jdyyQueSearch")
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
+  import {JdyyvisitURL} from '../../config.toml'
   import {jdyyQueConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -19,7 +20,7 @@
     components: {KalixTable},
     data() {
       return {
-        jdyypatientsURL: JdyypatientsURL,
+        targetURL: JdyyvisitURL + '/getAllPatVis',
         tableFields: [
           {prop: 'name', label: '姓名'},
           {prop: 'sex', label: '性别'},
@@ -58,13 +59,66 @@
           // {prop: 'heavyTime', label: '重患时间'}
         ],
         jdyyQueDialog: [
-          {id: 'view', dialog: 'JdyyQueView'},
+          {id: 'viewPdf', dialog: 'JdyyQueView'},
           {id: 'edit', dialog: 'JdyyQueEdit'},
           {id: 'delete', dialog: 'JdyyManQueDelete'}],
         btnList: jdyyQueConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: false, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ]
+      }
+    },
+    methods: {
+      callCustomTableTool(row, btnId, that) {
+        switch (btnId) {
+          case 'viewPdf': {
+            that.whichBizDialog = ''
+            let dig =
+              that.bizDialog.filter((item) => {
+                return item.id === 'viewPdf'
+              })
+            that.whichBizDialog = dig[0].dialog
+            console.log('row.id---------------', row.id)
+            setTimeout(() => {
+              this.$http.get('/camel/rest/jdyy/visits/getAllByUserId', {
+                params: {
+                  userId: row.id
+                }
+              }).then(res => {
+                this.tableData = res.data.data
+                console.log('viewtable _res===========', this.tableData)
+                // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
+                if (this.tableData.length !== 0) {
+                  // if (this.tableData[0].photo === null || this.tableData[0].photo === '') {
+                  //   this.imgs = ['无图片']
+                  // } else
+                  if (this.tableData[0].photo.indexOf(',')) {
+                    let arr = this.tableData[0].photo.split(',')
+                    let imgObj = {}
+                    for (let i = 0; i < arr.length; i++) {
+                      imgObj.val = arr[i]
+                      imgObj.key = 'img' + i
+                      this.imgs.push(imgObj)
+                    }
+                  } else {
+                    let imgObj = {
+                      val: this.tableData[0].photo,
+                      key: 'img0'
+                    }
+                    this.imgs.push(imgObj)
+                  }
+                  row.tableData = this.tableData
+                  row.imgs = this.imgs
+                  that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+                } else {
+                  row.tableData = []
+                  that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+                }
+              })
+            }, 20)
+            break
+          }
+        }
       }
     }
   }
