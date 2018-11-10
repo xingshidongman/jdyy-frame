@@ -71,7 +71,7 @@
           div.box
             ul.right_ul
               li.right_li
-                el-button.btn-submit(v-on:click="reset('formModel1')" :disabled="forbidden" size="large") 保存
+                el-button.btn-submit(v-on:click="reset" :disabled="forbidden" size="large") 保存
                 el-button.btn-submit.btn-reset(v-on:click="showMessage" :disabled="forbidden"  size="large") 保存并继续
           div.clear
         <!--el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")-->
@@ -158,13 +158,14 @@
       }
     },
     methods: {
-      reset(formName) {
-        this.$refs[formName].resetFields()
+      reset() {
+        this.$refs.formModel1.resetFields()
         // this.formModel.name = ''
         // this.formModel.dateAdmission = ''
       },
-      resetAll(formName) {
-        this.$refs[formName].resetFields()
+      resetAll() {
+        this.$refs.formModel1.resetFields()
+        this.$refs.formModel2.resetFields()
       },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
