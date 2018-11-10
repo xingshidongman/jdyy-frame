@@ -1,4 +1,4 @@
-const FormModel = {
+const FormModel1 = {
   id: null,
   name: null, // 姓名
   sex: null, // 性别
@@ -17,7 +17,6 @@ const FormModel = {
   currentSituation: null, // 现况
   telephonePerson: null, // 本人联系方式
   familyPhone: null, // 家属联系方式
-  // address: null,
   completeAddress: null, // 通讯地址
   bmi: null, // BMI
   bloodPressure: null, // 血压
@@ -36,4 +35,4 @@ const FormModel = {
   heavyTime: null // 重患时间
 
 }
-export default FormModel
+export default FormModel1
