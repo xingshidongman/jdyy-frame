@@ -5,7 +5,7 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
-            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")
+            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
             el-radio-group(v-model="formModel1.sex")
               el-radio(label="男")
@@ -86,13 +86,13 @@
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
             el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
-            el-date-picker(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
+            el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
             el-select(v-model="formModel2.periodization" placeholder="请选择")
               el-option(label="内科" value="内科")
               el-option(label="外科" value="外科")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
-            el-input(v-model="formModel2.parting")
+            el-input.tst(v-model="formModel2.parting")
           el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
             kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
             kalix-img-upload(v-model="formModel2.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
@@ -314,4 +314,6 @@
     width 80%
     margin 0 auto
     padding-bottom 50px
+  .tst
+    max-width: 206px;
 </style>
