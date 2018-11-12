@@ -13,8 +13,8 @@
     div.kalix-wrapper(v-bind:style="wrapperTop")
       div.kalix-wrapper-hd
         div.line
-          i(v-bind:class="iconCls" style=" margin-left:20px;line-height: 28px")
-          span.test {{title}}
+        i(v-bind:class="iconCls" style=" margin-left:1%;line-height: 28px; position: absolute;")
+        span.test {{title}}
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
         v-bind:toolbarBtnList="toolbarBtnList" v-bind:bizKey="bizKey"

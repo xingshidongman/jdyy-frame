@@ -10,8 +10,8 @@
   div.kalix-search
     div.kalix-search-hd
       div.line
-        i.iconfont.icon-chaxun1(style=" margin-left:20px;line-height: 28px")
-        span.test {{title}}
+      i.iconfont.icon-chaxun1(style=" margin-left:1%;line-height: 28px;position: absolute;")
+      span.test {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true")
         slot(name="searchFormSlot")
@@ -247,13 +247,15 @@
     .kalix-search-hd
       padding 0 2px
       .line
-        width 8px
+        width 0.8%
         background-color #3465cb
         height 28px
-        .test
-          margin-left: 40px;
-          margin-top: -23px;
+        display: inline-block;
+      .test
+          margin-left: 2.5%;
           position: absolute;
+          height 28px
+          line-height 28px
     .kalix-search-bd
       font-size 0
       padding 8px 0px
