@@ -89,9 +89,9 @@
                 console.log('viewtable _res===========', this.tableData)
                 // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
                 if (this.tableData.length !== 0) {
-                  // if (this.tableData[0].photo === null || this.tableData[0].photo === '') {
-                  //   this.imgs = ['无图片']
-                  // } else
+                  if (this.tableData[0].photo === null || this.tableData[0].photo === '') {
+                    this.imgs = ['无图片']
+                  } else
                   if (this.tableData[0].photo.indexOf(',')) {
                     let arr = this.tableData[0].photo.split(',')
                     let imgObj = {}
