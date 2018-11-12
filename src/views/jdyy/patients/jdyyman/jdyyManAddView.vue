@@ -5,9 +5,9 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
-            el-input(v-model="formModel1.name")
+            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
-            el-radio-group(v-model="formModel1.sex" )
+            el-radio-group(v-model="formModel1.sex")
               el-radio(label="男")
               el-radio(label="女")
           el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
@@ -82,7 +82,7 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-            el-cascader(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
+            el-cascader(v-model="dia" placeholder="请选择诊断信息" :options="options" :clearable="false" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
             el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
@@ -100,13 +100,13 @@
           ul.right_ul
             li.right_li
               el-button.btn-submit(v-on:click="onSubmit()" size="large") 保存
-              el-button.btn-submit.btn-reset( v-on:click="resetAll('formModel2')" size="large") 重置
+              el-button.btn-submit.btn-reset( v-on:click="resetAll()" size="large") 重置
         div.clear
 
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
+  import {JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
   import {baseURL} from '../../../../config/global.toml'
@@ -130,9 +130,9 @@
         rules: {
           name: [{required: true, message: '请输入姓名', trigger: 'change'}],
           sex: [{required: true, message: '请输入性别', trigger: 'change'}],
-          age: [{required: true, message: '请输入年龄', trigger: 'change'}]
+          age: [{required: true, message: '请输入年龄', trigger: 'change'}],
           // brith: [{required: true, message: '请输入出生日期', trigger: 'change'}],
-          // idCard: [{required: true, message: '请输入身份证号', trigger: 'change'}],
+          idCard: [{required: true, message: '请输入身份证号', trigger: 'change'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
           // directorDoctor: [{required: true, message: '请输入主管医生', trigger: 'change'}],
@@ -154,8 +154,16 @@
           // remarks: [{required: true, message: '请输入备注', trigger: 'change'}],
           // harris: [{required: true, message: '请输入Harris评分', trigger: 'change'}],
         },
-        targetURL: JdyypatientsURL
+        targetURL: JdyypatientsURL,
+        options: [],
+        items: [],
+        dia: ''
       }
+    },
+    mounted() {
+      this.getDiaCascader() // 获取诊断信息并以级联形式显示
+      this.getSurCascader() // 获取术式信息并以级联形式显示
+      this.loadAll() // 获取病员信息
     },
     methods: {
       // reset() {
@@ -166,6 +174,7 @@
       resetAll() {
         this.$refs.formModel1.resetFields()
         this.$refs.formModel2.resetFields()
+        this.dia.setState({cascaderValue: []})
       },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
@@ -186,6 +195,96 @@
       showMessage() {
         this.show = true
         this.forbidden = true
+      },
+      getDiaCascader() { // 获取诊断信息并以级联形式显示
+        console.log('getDiaCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getDiaCascader'
+        }).then(res => {
+          console.log('Request-Cascader-Success==============', res.data.data)
+          this.options = res.data.data
+        })
+      },
+      getSurCascader() { // 获取术式信息并以级联形式显示
+        console.log('getSurCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getSurCascader'
+        }).then(res => {
+          console.log('Request-getSurCascader-Success==============', res.data.data)
+          this.items = res.data.data
+        })
+      },
+      getDia(val) { // 通过级联获取数据后转成字符串
+        console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
+        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getCodeByContent',
+          params: {
+            code: this.formModel.diagnosisCode
+          }
+        }).then(res => {
+          console.log('formModel.diagnosisCode==============================', res.data.data)
+          this.formModel.diagnosis = res.data.data[0].content
+        })
+      },
+      getSur(val) { // 通过级联获取数据后转成字符串
+        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getCodeByContent',
+          params: {
+            code: this.formModel.surgicalCode
+          }
+        }).then(res => {
+          console.log('formModel.diagnosisCode==============================', res.data.data)
+          this.formModel.surgical = res.data.data[0].content
+        })
+      },
+      loadAll() { // 获取病员信息
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
+        }).then(res => {
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
+        })
+      },
+      querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          cb(results)
+        }, 3000 * Math.random())
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelect(item) {
+        console.log('item===========================', item)
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/' + item.pid
+        }).then(res => {
+          console.log('handleSelect========================', res.data)
+          this.formModel1 = res.data
+        })
+      }
+      // change() {
+      //   console.log('change==================', 11111111111111111111111111)
+      // }
+    },
+    watch: {
+      'formModel1.name'() {
+        if (this.formModel1.name === '') {
+          this.formModel1 = Object.assign({}, FormModel1)
+        }
       }
     }
   }
