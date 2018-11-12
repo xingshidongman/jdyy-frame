@@ -82,9 +82,9 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-            el-cascader(v-model="dia" placeholder="请选择诊断信息" :options="options" :clearable="false" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
-          el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
-            el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
+            el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+          el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" :clearable="true" )
+            el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
@@ -106,13 +106,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {JdyypatientsURL, JdyysurURL, JdyydiaURL, JdyyvisitURL} from '../../config.toml'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  import Message from '../../../../components/corelib/common/message'
   export default {
     name: 'kalix-jdyy-jdyyman',
     components: {KalixDatepickerSimple, KalixClansmanUpload, KalixFontCascader},
@@ -128,11 +129,12 @@
         columnParam: undefined,
         // options: [],
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'change'}],
-          sex: [{required: true, message: '请输入性别', trigger: 'change'}],
-          age: [{required: true, message: '请输入年龄', trigger: 'change'}],
+          name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
+          sex: [{required: true, message: '请输入性别', trigger: 'blur'}],
+          age: [{required: true, message: '请输入年龄', trigger: 'blur'}],
           // brith: [{required: true, message: '请输入出生日期', trigger: 'change'}],
-          idCard: [{required: true, message: '请输入身份证号', trigger: 'change'}]
+          idCard: [{required: true, message: '请输入身份证号', trigger: 'blur'}]
+          // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
           // directorDoctor: [{required: true, message: '请输入主管医生', trigger: 'change'}],
@@ -174,7 +176,14 @@
       resetAll() {
         this.$refs.formModel1.resetFields()
         this.$refs.formModel2.resetFields()
-        this.dia.setState({cascaderValue: []})
+        let obj = {}
+        obj.stopPropagation = () => {}
+        this.$refs.cascader1.clearValue(obj)
+        this.$refs.cascader2.clearValue(obj)
+      },
+      clearValue(ev) {
+        ev.stopPropagation()
+        this.handlepick([], true)
       },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
@@ -182,15 +191,15 @@
       getFilePath(filePath, fileName) {
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
-        this.formModel.photo = filePath
-        this.formModel.imgName = fileName
+        this.formModel2.photo = filePath
+        this.formModel2.imgName = fileName
       },
       setGroup(val) {
-        this.formModel.downlosd = val
+        this.formModel2.downlosd = val
       },
       getModel(val) { // 三级联动地区参数区分
-        this.formModel.completeAddress = val.join('')
-        console.log('address=========', this.formModel.completeAddress)
+        this.formModel1.completeAddress = val.join('')
+        console.log('address=========', this.formModel1.completeAddress)
       },
       showMessage() {
         this.show = true
@@ -217,30 +226,31 @@
         })
       },
       getDia(val) { // 通过级联获取数据后转成字符串
+        console.log('ccccccccccccccccc', this.formModel1.diagnosisCode)
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
-        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel2.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyydiaURL + '/getCodeByContent',
           params: {
-            code: this.formModel.diagnosisCode
+            code: this.formModel2.diagnosisCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.diagnosis = res.data.data[0].content
+          this.formModel2.diagnosis = res.data.data[0].content
         })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
-        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel2.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyysurURL + '/getCodeByContent',
           params: {
-            code: this.formModel.surgicalCode
+            code: this.formModel2.surgicalCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.surgical = res.data.data[0].content
+          this.formModel2.surgical = res.data.data[0].content
         })
       },
       loadAll() { // 获取病员信息
@@ -275,10 +285,47 @@
           console.log('handleSelect========================', res.data)
           this.formModel1 = res.data
         })
+      },
+      onSubmit() {
+        console.log('onSubmit-formModel1===========================', this.formModel1)
+        this.$refs.formModel1.validate((valid) => {
+          console.log('valid---------------------', valid)
+          if (valid) {
+            this.axios.request({
+              method: 'POST',
+              url: JdyypatientsURL,
+              data: this.formModel1
+            }).then(res => {
+              console.log('res======================', res.data.tag)
+              if (res.data.success) {
+                Message.success(res.data.msg)
+                if (this.formModel2.diagnosis !== null) {
+                  this.formModel2.pid = res.data.tag
+                  this.subMitFormModel2()
+                }
+              } else {
+                Message.error(res.data.msg)
+              }
+              this.$refs.formModel1.resetFields()
+            })
+          } else {
+            Message.error('请检查输入项！')
+            this.submitComplete(false)
+            return false
+          }
+        })
+      },
+      subMitFormModel2() {
+        console.log('onSubmit-formModel2===========================', this.formModel2)
+        this.axios.request({
+          method: 'POST',
+          url: JdyyvisitURL,
+          data: this.formModel2
+        }).then(res => {
+          console.log('subMitFormModel2-success==================', res.data.msg)
+          this.$refs.formModel2.resetFields()
+        })
       }
-      // change() {
-      //   console.log('change==================', 11111111111111111111111111)
-      // }
     },
     watch: {
       'formModel1.name'() {
