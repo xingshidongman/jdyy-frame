@@ -82,9 +82,9 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-            el-cascader(v-model="dia" placeholder="请选择诊断信息" :options="options" :clearable="false" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
+            el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
-            el-cascader(placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
+            el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
@@ -174,7 +174,14 @@
       resetAll() {
         this.$refs.formModel1.resetFields()
         this.$refs.formModel2.resetFields()
-        this.dia.setState({cascaderValue: []})
+        let obj = {}
+        obj.stopPropagation = () => {}
+        this.$refs.cascader1.clearValue(obj)
+        this.$refs.cascader2.clearValue(obj)
+      },
+      clearValue(ev) {
+        ev.stopPropagation()
+        this.handlepick([], true)
       },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
@@ -217,30 +224,31 @@
         })
       },
       getDia(val) { // 通过级联获取数据后转成字符串
+        console.log('ccccccccccccccccc', this.formModel1.diagnosisCode)
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
-        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel1.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyydiaURL + '/getCodeByContent',
           params: {
-            code: this.formModel.diagnosisCode
+            code: this.formModel1.diagnosisCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.diagnosis = res.data.data[0].content
+          this.formModel1.diagnosis = res.data.data[0].content
         })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
-        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel2.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyysurURL + '/getCodeByContent',
           params: {
-            code: this.formModel.surgicalCode
+            code: this.formModel2.surgicalCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel.surgical = res.data.data[0].content
+          this.formModel2.surgical = res.data.data[0].content
         })
       },
       loadAll() { // 获取病员信息
