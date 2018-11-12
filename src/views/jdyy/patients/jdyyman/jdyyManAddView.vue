@@ -80,7 +80,7 @@
           <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
-        el-form(v-bind:model="formModel2" ref="formModel2")
+        el-form(v-bind:model="formModel2" ref="formModel2" v-bind:submitBefore="submitBefore")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
             el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" :clearable="true" )
@@ -188,14 +188,36 @@
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
       },
-      getFilePath(filePath, fileName) {
+      getFilePath(filePath, fileName) { // 图片上传路径
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
-        this.formModel2.photo = filePath
-        this.formModel2.imgName = fileName
+        this.filePathArr.push(filePath)
+        this.fileNameArr.push(fileName)
       },
-      setGroup(val) {
-        this.formModel2.downlosd = val
+      submitBefore(baseDialog, callBack) { // 多张图片拼路径
+        console.log('===FilePath=================', this.filePathArr)
+        let filePath = ''
+        if (this.filePathArr.length) {
+          this.filePathArr.forEach(e => {
+            filePath += e + ','
+          })
+          filePath = filePath.substr(0, filePath.length - 1)
+        }
+        let fileName = ''
+        if (this.fileNameArr.length) {
+          this.fileNameArr.forEach(e => {
+            fileName += e + ','
+          })
+          fileName = fileName.substr(0, fileName.length - 1)
+        }
+
+        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+        baseDialog.formModel.photo = photoStr + filePath
+        baseDialog.formModel.imgName = fileName
+        callBack()
+      },
+      setGroup(item) {
+        this.formModel.downlosd = item.albumname
       },
       getModel(val) { // 三级联动地区参数区分
         this.formModel1.completeAddress = val.join('')
