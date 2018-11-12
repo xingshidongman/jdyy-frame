@@ -2,7 +2,7 @@
   keep-alive
     kalix-table(bizKey="jdyyQue" title='查询列表' ref="kalixTable"
     v-bind:tableFields="tableFields"
-    v-bind:targetURL="jdyypatientsURL"
+    v-bind:targetURL="targetURL"
     v-bind:bizDialog="jdyyQueDialog"
     v-bind:btnList="btnList"
     v-bind:toolbarBtnList="toolbarBtnList"
@@ -11,7 +11,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
+  import {JdyyvisitURL} from '../../config.toml'
   import {jdyyQueConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -20,7 +20,7 @@
     components: {KalixTable},
     data() {
       return {
-        jdyypatientsURL: JdyypatientsURL,
+        targetURL: JdyyvisitURL + '/getAllPatVis',
         tableFields: [
           {prop: 'name', label: '姓名'},
           {prop: 'sex', label: '性别'},

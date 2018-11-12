@@ -818,7 +818,7 @@
               border 1px solid #dfdfdf
               color #23769a
             .block-input
-              width 12%
+              width 14%
               height 30px
               margin-top 15px
               padding-left 10px
