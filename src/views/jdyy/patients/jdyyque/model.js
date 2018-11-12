@@ -43,6 +43,7 @@ const FormModel = {
   periodization: null, // 分期
   parting: null, // 分型
   xid: null, // id（未知）
-  photo: null // 图片
+  photo: null, // 图片
+  imgs: null
 }
 export default FormModel
