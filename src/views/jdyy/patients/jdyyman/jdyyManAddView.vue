@@ -82,8 +82,8 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-            el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
-          el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
+            el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+          el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" :clearable="true" )
             el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
