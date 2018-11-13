@@ -123,6 +123,8 @@
         formModel1: Object.assign({}, FormModel1),
         formModel2: Object.assign({}, FormModel2),
         labelWidth: '120px',
+        fileList: [],
+        isImage: true,
         show: false,
         forbidden: false,
         action: baseURL + '/camel/rest/upload',
