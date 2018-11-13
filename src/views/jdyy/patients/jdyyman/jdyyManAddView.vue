@@ -94,8 +94,8 @@
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
             el-input.tst(v-model="formModel2.parting")
           el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-            kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
-            kalix-img-upload(v-model="formModel2.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
+            kalix-clansman-upload(:action="action" ref="clearUpload"
+            v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
         div.box
           ul.right_ul
             li.right_li
@@ -180,6 +180,7 @@
         obj.stopPropagation = () => {}
         this.$refs.cascader1.clearValue(obj)
         this.$refs.cascader2.clearValue(obj)
+        this.$refs.clearUpload.uploadClean()
       },
       clearValue(ev) {
         ev.stopPropagation()
