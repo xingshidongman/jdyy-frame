@@ -20,7 +20,8 @@
               el-option(v-for="option in item.options" v-bind:key="option.value" v-bind:label="option.label" v-bind:value="option.value")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             org-tree.inline(v-else-if="item.type==='orgTree'" v-model="form[item.prop]" v-bind:isAll="item.isAll")
-            kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]" )
+            kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]")
+            <!--kalix-query-date-picker(v-else-if="show" v-model="form[item.prop]")-->
             kalix-query-date-picker(v-else-if="item.type==='year'" v-model="form[item.prop]" type="year")
             kalix-query-datetime-picker(v-else-if="item.type==='datetime'" v-model="form[item.prop]")
             kalix-dict-select(v-else-if="item.type==='dict'" v-bind:appName="item.appName" v-bind:dictType="item.dictType" v-model="form[item.prop]")
@@ -59,7 +60,8 @@
       return {
         form: {},
         isSearch: false,
-        queryStrs: {}
+        queryStrs: {},
+        show: false
       }
     },
     props: {
@@ -234,7 +236,16 @@
     },
     computed: {
     },
-    watch: {}
+    watch: {
+      // 'form[select]'() {
+      //   if (this.form.date === '') {
+      //     this.show = false
+      //     console.log('123')
+      //   } else {
+      //     this.show = true
+      //   }
+      // }
+    }
   }
 </script>
 

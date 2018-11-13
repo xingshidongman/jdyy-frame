@@ -71,12 +71,12 @@
         <!--el-input(v-model="formModel.modifyStaff" readonly)-->
         <!--el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")-->
         <!--el-input(v-model="formModel.remarks" readonly)-->
-        el-table(v-bind:data="formModel.tableData" border)
-          el-table-column(prop="diagnosis" label="诊断" min-width="150")
-          el-table-column(prop="surgical" label="术式" min-width="150")
-          el-table-column(prop="operationDate" label="手术日期" min-width="120")
-          el-table-column(prop="periodization" label="分期" min-width="120")
-          el-table-column(label="图片" min-width="360")
+        el-table(v-bind:data="formModel.tableData" border )
+          el-table-column(prop="diagnosis" label="诊断" min-width="150" :resizable="false")
+          el-table-column(prop="surgical" label="术式" min-width="150" :resizable="false")
+          el-table-column(prop="operationDate" label="手术日期" min-width="120" :resizable="false")
+          el-table-column(prop="periodization" label="分期" min-width="120" :resizable="false")
+          el-table-column(label="图片" min-width="360" :resizable="false")
             template(slot-scope="scope")
               div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
                 img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(index)")
