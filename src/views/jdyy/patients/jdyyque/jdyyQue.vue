@@ -61,7 +61,7 @@
         jdyyQueDialog: [
           {id: 'viewPdf', dialog: 'JdyyQueView'},
           {id: 'edit', dialog: 'JdyyQueEdit'},
-          {id: 'delete', dialog: 'JdyyManQueDelete'}],
+          {id: 'delPatVis'}],
         btnList: jdyyQueConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: false, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
@@ -119,6 +119,11 @@
             break
           }
         }
+      }
+    },
+    watch: {
+      delPatVis: function () {
+        console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
       }
     }
   }

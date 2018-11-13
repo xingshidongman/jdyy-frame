@@ -503,6 +503,31 @@
             })
             break
           }
+          // 删除病员信息查询table表数据（两表连删）
+          case 'delPatVis': {
+            console.log('delPatVis is clicked', row.id)
+            this.$confirm('确定要删除吗?', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(() => {
+              return this.axios.request({
+                method: 'DELETE',
+                url: '/camel/rest/jdyy/visits/' + row.id + '/delPatVis',
+                params: {
+                  id: row.id,
+                  vid: row.vid
+                }
+              })
+            }).then(response => {
+              this.getData()
+              Message.success(response.data.msg)
+              // 添加删除后自定义处理事件
+              // this.$emit('afterDelete')
+            }).catch(() => {
+            })
+            break
+          }
           // 附件管理
           case 'attachment': {
             console.log(' attachment is clicked ', 'background:#c7320a;')
