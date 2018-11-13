@@ -1,8 +1,8 @@
 <template lang="pug">
   kalix-dialog.user-add(title='修改' bizKey="jdyyque" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
-    div.el-form(slot="dialogFormSlot")
+    div.el-form(slot="dialogFormSlot" v-bind:submitBefore="submitBefore")
       <!--div {{modifyStaff}}-->
-      el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
+      el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name" )
         el-input(v-model="formModel.name")
       el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" style="")
         el-radio-group(v-model="formModel.sex" )
@@ -64,10 +64,10 @@
         el-radio-group(v-model="formModel.whetherDischarge" )
           el-radio(label="是")
           el-radio(label="否")
-      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
-        el-input(v-model="formModel.remarks")
       el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.modifyStaff" v-text="modifyStaff" readonly="readonly")
+      el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
+        el-input(v-model="formModel.remarks")
       el-form-item(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
         el-cascader.tests(placeholder="请选择诊断信息" :options="options" filterable @change="getDia"  v-bind:show-all-levels="false" change-on-select)
       el-form-item(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical" )
@@ -87,21 +87,26 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL} from '../../config.toml'
+  import {JdyypatientsURL, JdyyvisitURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixSelect from '../../../../components/corelib/components/common/baseSelect'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
+  import KalixImgUpload from '../../../../components/corelib/components/common/imgUpload'
 
   export default {
     name: 'JdyyQueEdit',
-    components: {KalixDatepickerSimple, KalixSelect, KalixClansmanUpload, KalixFontCascader},
+    components: {
+      KalixImgUpload, JdyyvisitURL, JdyysurURL, JdyypatientsURL, JdyydiaURL, KalixDatepickerSimple, KalixSelect, KalixClansmanUpload, KalixFontCascader},
     data() {
       return {
         downloadURL: JdyypatientsURL,
         fileList: [],
+        options: [],
+        items: [],
+        isImage: true,
         labelWidth: '150px',
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
@@ -112,23 +117,98 @@
           age: [{required: true, message: '请输入年龄', trigger: 'change'}]
         },
         targetURL: JdyypatientsURL,
-        modifyStaff: this.$KalixCatch.get('user_name')
+        JdyyvisitURL: JdyyvisitURL,
+        modifyStaff: this.$KalixCatch.get('user_name'),
+        diaCascader: [],
+        surCascader: []
       }
     },
     mounted() {
+      this.getDiaCascader() // 获取诊断信息并以级联形式显示
+      this.getSurCascader() // 获取术式信息并以级联形式显示
       this.getUserName()
     },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
       },
-      getFilePath(filePath, fileName) {
+      getDiaCascader() { // 获取诊断信息并以级联形式显示
+        console.log('getDiaCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getDiaCascader'
+        }).then(res => {
+          console.log('Request-Cascader-Success==============', res.data.data)
+          this.options = res.data.data
+        })
+      },
+      getSurCascader() { // 获取术式信息并以级联形式显示
+        console.log('getSurCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getSurCascader'
+        }).then(res => {
+          console.log('Request-getSurCascader-Success==============', res.data.data)
+          this.items = res.data.data
+        })
+      },
+      getDia(val) { // 通过级联获取数据后转成字符串
+        console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
+        this.formModel.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getCodeByContent',
+          params: {
+            code: this.formModel.diagnosisCode
+          }
+        }).then(res => {
+          console.log('formModel.diagnosis==============================', res.data.data)
+          this.formModel.diagnosis = res.data.data[0].content
+        })
+      },
+      getSur(val) { // 通过级联获取数据后转成字符串
+        this.formModel.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.axios.request({
+          method: 'GET',
+          url: JdyysurURL + '/getCodeByContent',
+          params: {
+            code: this.formModel.surgicalCode
+          }
+        }).then(res => {
+          console.log('formModel.diagnosisCode==============================', res.data.data)
+          this.formModel.surgical = res.data.data[0].content
+        })
+      },
+      getFilePath(filePath, fileName) { // 图片上传路径
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
-        this.formModel.name = fileName
+        this.filePathArr.push(filePath)
+        this.fileNameArr.push(fileName)
       },
-      setGroup(val) {
-        this.formModel.downlosd = val
+      submitBefore(baseDialog, callBack) { // 多张图片拼路径
+        console.log('===FilePath=================', this.filePathArr)
+        let filePath = ''
+        if (this.filePathArr.length) {
+          this.filePathArr.forEach(e => {
+            filePath += e + ','
+          })
+          filePath = filePath.substr(0, filePath.length - 1)
+        }
+        let fileName = ''
+        if (this.fileNameArr.length) {
+          this.fileNameArr.forEach(e => {
+            fileName += e + ','
+          })
+          fileName = fileName.substr(0, fileName.length - 1)
+        }
+        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+        baseDialog.formModel.photo = photoStr + filePath
+        baseDialog.formModel.imgName = fileName
+        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        callBack()
+      },
+      setGroup(item) {
+        this.formModel.downlosd = item.albumname
       },
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
@@ -137,11 +217,11 @@
       getUserName() {
         this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
         console.log('this.this.formModel.modifyStaff========', this.formModel.modifyStaff)
-      },
-      submitBefore(baseDialog, callBack) {
-        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
-        callBack()
       }
+      // submitBefore(baseDialog, callBack) {
+      //   this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+      //   callBack()
+      // }
     }
   }
 </script>

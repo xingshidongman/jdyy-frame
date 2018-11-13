@@ -5,7 +5,7 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
-            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")
+            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
             el-radio-group(v-model="formModel1.sex")
               el-radio(label="男")
@@ -80,19 +80,19 @@
           <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
-        el-form(v-bind:model="formModel2" ref="formModel2")
+        el-form(v-bind:model="formModel2" ref="formModel2" v-bind:submitBefore="submitBefore")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
             el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical"  )
             el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
-            el-date-picker(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
+            el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
             el-select(v-model="formModel2.periodization" placeholder="请选择")
               el-option(label="内科" value="内科")
               el-option(label="外科" value="外科")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
-            el-input(v-model="formModel2.parting")
+            el-input.tst(v-model="formModel2.parting")
           el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
             kalix-clansman-upload(:action="action" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
             kalix-img-upload(v-model="formModel2.photo" v-bind:isImage="isImage" style="width:100%" v-bind:readonly="true")
@@ -106,13 +106,14 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {JdyypatientsURL, JdyysurURL, JdyydiaURL, JdyyvisitURL} from '../../config.toml'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
+  import Message from '../../../../components/corelib/common/message'
   export default {
     name: 'kalix-jdyy-jdyyman',
     components: {KalixDatepickerSimple, KalixClansmanUpload, KalixFontCascader},
@@ -128,11 +129,12 @@
         columnParam: undefined,
         // options: [],
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'change'}],
-          sex: [{required: true, message: '请输入性别', trigger: 'change'}],
-          age: [{required: true, message: '请输入年龄', trigger: 'change'}],
+          name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
+          sex: [{required: true, message: '请输入性别', trigger: 'blur'}],
+          age: [{required: true, message: '请输入年龄', trigger: 'blur'}],
           // brith: [{required: true, message: '请输入出生日期', trigger: 'change'}],
-          idCard: [{required: true, message: '请输入身份证号', trigger: 'change'}]
+          idCard: [{required: true, message: '请输入身份证号', trigger: 'blur'}]
+          // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
           // directorDoctor: [{required: true, message: '请输入主管医生', trigger: 'change'}],
@@ -186,18 +188,40 @@
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
       },
-      getFilePath(filePath, fileName) {
+      getFilePath(filePath, fileName) { // 图片上传路径
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
-        this.formModel.photo = filePath
-        this.formModel.imgName = fileName
+        this.filePathArr.push(filePath)
+        this.fileNameArr.push(fileName)
       },
-      setGroup(val) {
-        this.formModel.downlosd = val
+      submitBefore(baseDialog, callBack) { // 多张图片拼路径
+        console.log('===FilePath=================', this.filePathArr)
+        let filePath = ''
+        if (this.filePathArr.length) {
+          this.filePathArr.forEach(e => {
+            filePath += e + ','
+          })
+          filePath = filePath.substr(0, filePath.length - 1)
+        }
+        let fileName = ''
+        if (this.fileNameArr.length) {
+          this.fileNameArr.forEach(e => {
+            fileName += e + ','
+          })
+          fileName = fileName.substr(0, fileName.length - 1)
+        }
+
+        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+        baseDialog.formModel.photo = photoStr + filePath
+        baseDialog.formModel.imgName = fileName
+        callBack()
+      },
+      setGroup(item) {
+        this.formModel.downlosd = item.albumname
       },
       getModel(val) { // 三级联动地区参数区分
-        this.formModel.completeAddress = val.join('')
-        console.log('address=========', this.formModel.completeAddress)
+        this.formModel1.completeAddress = val.join('')
+        console.log('address=========', this.formModel1.completeAddress)
       },
       showMessage() {
         this.show = true
@@ -226,16 +250,16 @@
       getDia(val) { // 通过级联获取数据后转成字符串
         console.log('ccccccccccccccccc', this.formModel1.diagnosisCode)
         console.log('val===========================', val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length))
-        this.formModel1.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
+        this.formModel2.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
         this.axios.request({
           method: 'GET',
           url: JdyydiaURL + '/getCodeByContent',
           params: {
-            code: this.formModel1.diagnosisCode
+            code: this.formModel2.diagnosisCode
           }
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
-          this.formModel1.diagnosis = res.data.data[0].content
+          this.formModel2.diagnosis = res.data.data[0].content
         })
       },
       getSur(val) { // 通过级联获取数据后转成字符串
@@ -283,10 +307,47 @@
           console.log('handleSelect========================', res.data)
           this.formModel1 = res.data
         })
+      },
+      onSubmit() {
+        console.log('onSubmit-formModel1===========================', this.formModel1)
+        this.$refs.formModel1.validate((valid) => {
+          console.log('valid---------------------', valid)
+          if (valid) {
+            this.axios.request({
+              method: 'POST',
+              url: JdyypatientsURL,
+              data: this.formModel1
+            }).then(res => {
+              console.log('res======================', res.data.tag)
+              if (res.data.success) {
+                Message.success(res.data.msg)
+                if (this.formModel2.diagnosis !== null) {
+                  this.formModel2.pid = res.data.tag
+                  this.subMitFormModel2()
+                }
+              } else {
+                Message.error(res.data.msg)
+              }
+              this.$refs.formModel1.resetFields()
+            })
+          } else {
+            Message.error('请检查输入项！')
+            this.submitComplete(false)
+            return false
+          }
+        })
+      },
+      subMitFormModel2() {
+        console.log('onSubmit-formModel2===========================', this.formModel2)
+        this.axios.request({
+          method: 'POST',
+          url: JdyyvisitURL,
+          data: this.formModel2
+        }).then(res => {
+          console.log('subMitFormModel2-success==================', res.data.msg)
+          this.$refs.formModel2.resetFields()
+        })
       }
-      // change() {
-      //   console.log('change==================', 11111111111111111111111111)
-      // }
     },
     watch: {
       'formModel1.name'() {
@@ -322,4 +383,6 @@
     width 80%
     margin 0 auto
     padding-bottom 50px
+  .tst
+    max-width: 206px;
 </style>
