@@ -1,4 +1,3 @@
-
 <template lang="pug">
   kalix-dialog.user-add(title='查询详情页' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
@@ -27,51 +26,51 @@
         el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
           el-input(v-model="formModel.directorDoctor" readonly)
         <!--el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth")-->
-          <!--el-date-picker(v-model="formModel.brith" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
+        <!--el-date-picker(v-model="formModel.brith" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
         <!--el-form-item.address(label="通讯地址" prop="completeAddress" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.completeAddress" readonly)-->
+        <!--el-input(v-model="formModel.completeAddress" readonly)-->
         <!--el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.idCard" type="number" readonly)-->
+        <!--el-input(v-model="formModel.idCard" type="number" readonly)-->
         <!--el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.stature" type="number" readonly)-->
+        <!--el-input(v-model="formModel.stature" type="number" readonly)-->
         <!--el-form-item(label="体重" prop="weight" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.weight" type="number" readonly)-->
+        <!--el-input(v-model="formModel.weight" type="number" readonly)-->
         <!--el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.medicalRecords" readonly)-->
+        <!--el-input(v-model="formModel.medicalRecords" readonly)-->
         <!--el-form-item(label="住院号" prop="hospitalNumber" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.hospitalNumber" type="number" readonly)-->
+        <!--el-input(v-model="formModel.hospitalNumber" type="number" readonly)-->
         <!--el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.currentSituation" readonly)-->
+        <!--el-input(v-model="formModel.currentSituation" readonly)-->
         <!--el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth")-->
-          <!--el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
+        <!--el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
         <!--el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.familyPhone" readonly)-->
+        <!--el-input(v-model="formModel.familyPhone" readonly)-->
         <!--&lt;!&ndash;el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth")&ndash;&gt;-->
-          <!--&lt;!&ndash;kalix-font-cascader.Border(v-on:change="getModel" readonly)&ndash;&gt;-->
+        <!--&lt;!&ndash;kalix-font-cascader.Border(v-on:change="getModel" readonly)&ndash;&gt;-->
         <!--el-form-item(label="BMI" prop="bmi" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.bmi" type="number" readonly)-->
+        <!--el-input(v-model="formModel.bmi" type="number" readonly)-->
         <!--el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.bloodPressure" type="number" readonly)-->
+        <!--el-input(v-model="formModel.bloodPressure" type="number" readonly)-->
         <!--el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.specialDisorders" readonly)-->
+        <!--el-input(v-model="formModel.specialDisorders" readonly)-->
         <!--el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.descriptionSpecialDisease" readonly)-->
+        <!--el-input(v-model="formModel.descriptionSpecialDisease" readonly)-->
         <!--el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.allergicHistory" readonly)-->
+        <!--el-input(v-model="formModel.allergicHistory" readonly)-->
         <!--el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.medicalCategory" readonly)-->
+        <!--el-input(v-model="formModel.medicalCategory" readonly)-->
         <!--el-form-item(label="Harris评分" prop="harris" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.harris" type="number" readonly)-->
+        <!--el-input(v-model="formModel.harris" type="number" readonly)-->
         <!--el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.hss" type="number" readonly)-->
+        <!--el-input(v-model="formModel.hss" type="number" readonly)-->
         <!--el-form-item(label="是否出院" prop="WhetherDischarge" v-bind:label-width="labelWidth")-->
-          <!--el-radio-group(v-model="formModel.WhetherDischarge" disabled)-->
-            <!--el-radio(label="是")-->
-            <!--el-radio(label="否")-->
+        <!--el-radio-group(v-model="formModel.WhetherDischarge" disabled)-->
+        <!--el-radio(label="是")-->
+        <!--el-radio(label="否")-->
         <!--el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.modifyStaff" readonly)-->
+        <!--el-input(v-model="formModel.modifyStaff" readonly)-->
         <!--el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.remarks" readonly)-->
+        <!--el-input(v-model="formModel.remarks" readonly)-->
         el-table(v-bind:data="formModel.tableData" border)
           el-table-column(prop="diagnosis" label="诊断" min-width="150")
           el-table-column(prop="surgical" label="术式" min-width="150")
@@ -87,8 +86,8 @@
                 img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
         // view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")
         <!--div.mark(ref="mark")-->
-          <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
-            <!--img(v-bind:src="img.val" v-bind:ref="img.key" style="width:150px; height:150px")-->
+        <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
+        <!--img(v-bind:src="img.val" v-bind:ref="img.key" style="width:150px; height:150px")-->
 
 </template>
 
@@ -100,6 +99,7 @@
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import ViewTable from '../../../../components/view/viewtable'
+
   export default {
     name: 'JdyyQueView',
     components: {ViewTable, KalixFontCascader, KalixDatepickerSimple},
@@ -120,11 +120,11 @@
     //   this.getData()
     // },
     methods: {
-      change (i) {
+      change(i) {
         this.mark = i
         console.log('=====================', this.mark)
       },
-      cut () {
+      cut() {
         if (this.mark === 1) {
           this.mark = this.formModel.imgs.length
         }
@@ -199,7 +199,7 @@
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
         console.log('address=========', this.formModel.completeAddress)
-      },
+      }
       // getDate() {
       //   // this.$http.get(this.targetURL + `/${this.userId}`, {
       //   this.$http.get(this.visPatUrl, {
@@ -241,9 +241,9 @@
       //     alert('无图片')
       //   }
       // },
-      markclose() {
-        this.$refs.mark.style.display = 'none'
-      }
+      // markclose() {
+      //   this.$refs.mark.style.display = 'none'
+      // }
     }
   }
 </script>
@@ -267,27 +267,32 @@
       padding: 12px 10px;
     .el-input__inner
       border-radius 1px
+
   .mark
-    position:fixed
-    z-index:9
-    background:black
-    opacity:0.5
-    top:20%
-    width:60%
-    text-align:center
+    position: fixed
+    z-index: 9
+    background: black
+    opacity: 0.5
+    top: 20%
+    width: 60%
+    text-align: center
     display none
+
   .img-width
     height 50vh
     display block
     margin 0 auto
+
   .prev
   .next
-    background-color:rgba(0,0,0,0.5)
+    background-color: rgba(0, 0, 0, 0.5)
     padding 20px 0
     position absolute
     top 40%
+
   .prev
     left 20px
+
   .next
     right 20px
 </style>
