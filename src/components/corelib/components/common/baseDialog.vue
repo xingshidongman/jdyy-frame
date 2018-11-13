@@ -13,6 +13,10 @@
     v-bind:append-to-body="true" width="80%")
       el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
         slot(name="dialogFormSlot")
+      el-form(ref="dialogForm1" v-bind:model="formModel1" :label-width="labelWidth" :label-position="labelPosition")
+        slot(name="dialogFormSlot1")
+      el-form(ref="dialogForm2" v-bind:model="formModel2" :label-width="labelWidth" :label-position="labelPosition")
+        slot(name="dialogFormSlot2")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
@@ -47,6 +51,14 @@
       },
       bizKey: String,
       formModel: { // dialog中的form的数据模型，由父组件传递
+        type: Object,
+        required: true
+      },
+      formModel1: { // dialog中的form的数据模型，由父组件传递
+        type: Object,
+        required: true
+      },
+      formModel2: { // dialog中的form的数据模型，由父组件传递
         type: Object,
         required: true
       },

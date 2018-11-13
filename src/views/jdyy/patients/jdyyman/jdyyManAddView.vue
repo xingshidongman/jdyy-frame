@@ -129,6 +129,8 @@
         forbidden: false,
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
+        filePathArr: [],
+        fileNameArr: [],
         // options: [],
         rules: {
           name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
@@ -387,5 +389,5 @@
     margin 0 auto
     padding-bottom 50px
   .tst
-    max-width: 206px;
+    max-width: 100%
 </style>
