@@ -1,6 +1,7 @@
 <template lang="pug">
   div
     el-upload(
+      ref="uploadClean"
       :action="action"
       :headers="headers"
       :multiple="true"
@@ -57,6 +58,9 @@
       }
     },
     methods: {
+      uploadClean() {
+        this.$refs.uploadClean.clearFiles()
+      },
       handleRemove(file, fileList) {
         console.log(123)
         if (file.status === 'success') {
