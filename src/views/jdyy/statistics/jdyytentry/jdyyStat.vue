@@ -6,11 +6,12 @@
     v-bind:bizDialog="jdyyStatDialog"
     v-bind:btnList="jdyyStatBtnList"
     v-bind:toolbarBtnList="toolbarBtnList"
+    v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
     bizSearch="jdyyStatSearch")
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyystatURL} from '../../config.toml'
+  import {JdyystatURL, jdyyStatBtnPermissionPrefix} from '../../config.toml'
   import {jdyyStatConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -39,7 +40,8 @@
         jdyyStatBtnList: jdyyStatConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
-        ]
+        ],
+        buttonPermissionPrefix: jdyyStatBtnPermissionPrefix
       }
     }
   }

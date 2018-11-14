@@ -5,12 +5,13 @@
     v-bind:targetURL="jdyyhipURL"
     v-bind:bizDialog="jdyyHipDialog"
     v-bind:btnList="jdyyHipBtnList"
+    v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyHipSearch")
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyyhipURL} from '../../config.toml'
+  import {JdyyhipURL, jdyyHipBtnPermissionPrefix} from '../../config.toml'
   import {jdyyHipConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -36,7 +37,8 @@
         jdyyHipBtnList: jdyyHipConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
-        ]
+        ],
+        buttonPermissionPrefix: jdyyHipBtnPermissionPrefix
       }
     }
   }

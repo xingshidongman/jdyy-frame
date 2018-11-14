@@ -23,6 +23,7 @@
         v-bind:noSearchParam:sync="noSearchParam"
         v-bind:isColumnfixed="false"
         v-bind:btnList="btnList"
+        v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
       )
       <!--template(slot="tableColumnSlot") v-bind:btnSelfClick="btnClick"-->
         <!--el-table-column(prop="username"  label="回复人姓名") v-bind:buttonPermissionPrefix="buttonPermissionPrefix"-->
@@ -37,8 +38,7 @@
   import FormModel from './model'
   import {jdyyDiaConfigBtnList} from './config'
   import Message from '../../../../common/message'
-  import {JdyydiaURL} from '../../config.toml'
-  // import KalixReplyTree from '../../../../components/cascader/replyTree'
+  import {JdyydiaURL, jdyyDiaBtnPermissionPrefix} from '../../config.toml'
   import KalixTreeGrid from '../../../../components/forum/treeGrid'
 
   export default {
@@ -46,6 +46,7 @@
     data() {
       return {
         btnList: jdyyDiaConfigBtnList,
+        buttonPermissionPrefix: jdyyDiaBtnPermissionPrefix,
         name: '',
         noSearchParam: true,
         // toolbarBtnList: [
@@ -56,7 +57,7 @@
         treeToolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true},
           {id: 'edit', isShow: true, icon: 'icon-bianji', title: '编辑', isPermission: true},
-          {id: 'delete', isShow: true, icon: 'icon-shanchu', title: '删除'}
+          {id: 'delete', isShow: true, icon: 'icon-shanchu', title: '删除', isPermission: true}
         ],
         // targetUrl: replyMenuURL,
         treeUrl: JdyydiaURL + '/getAllDiaByParentId?parentId=-1',
