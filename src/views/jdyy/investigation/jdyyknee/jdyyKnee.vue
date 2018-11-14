@@ -5,12 +5,13 @@
     v-bind:targetURL="jdyykneeURL"
     v-bind:bizDialog="jdyyKneeDialog"
     v-bind:btnList="jdyyKneeBtnList"
+    v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
     v-bind:toolbarBtnList="toolbarBtnList"
     bizSearch="jdyyKneeSearch")
 </template>
 
 <script type="text/ecmascript-6">
-  import {JdyykneeURL} from '../../config.toml'
+  import {JdyykneeURL, jdyyKneeBtnPermissionPrefix} from '../../config.toml'
   import {jdyyKneeConfigBtnList} from './config'
   import KalixTable from '../../../../components/corelib/components/common/baseTable'
 
@@ -36,7 +37,8 @@
         jdyyKneeBtnList: jdyyKneeConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
-        ]
+        ],
+        buttonPermissionPrefix: jdyyKneeBtnPermissionPrefix
       }
     }
   }

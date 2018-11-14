@@ -23,6 +23,7 @@
       v-bind:noSearchParam:sync="noSearchParam"
       v-bind:isColumnfixed="false"
       v-bind:btnList="btnList"
+      v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
       )
       <!--template(slot="tableColumnSlot") v-bind:btnSelfClick="btnClick"-->
         <!--el-table-column(prop="username"  label="回复人姓名") v-bind:buttonPermissionPrefix="buttonPermissionPrefix"-->
@@ -37,7 +38,7 @@
   import FormModel from './model'
   import {jdyySurConfigBtnList} from './config'
   import Message from '../../../../common/message'
-  import {JdyysurURL} from '../../config.toml'
+  import {JdyysurURL, jdyySurBtnPermissionPrefix} from '../../config.toml'
   // import KalixReplyTree from '../../../../components/cascader/replyTree'
   import KalixTreeGrid from '../../../../components/forum/treeGrid'
 
@@ -102,7 +103,8 @@
           title: '术式名称',
           key: 'content',
           width: '120'
-        }]
+        }],
+        buttonPermissionPrefix: jdyySurBtnPermissionPrefix
       }
     },
     components: {
