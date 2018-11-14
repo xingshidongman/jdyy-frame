@@ -389,5 +389,5 @@
     margin 0 auto
     padding-bottom 50px
   .tst
-    max-width: 100%
+    max-width: 217px
 </style>
