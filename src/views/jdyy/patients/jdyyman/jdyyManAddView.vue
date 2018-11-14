@@ -178,13 +178,13 @@
       //   // this.formModel.dateAdmission = ''
       // },
       resetAll() {
-        this.$refs.formModel1.resetFields()
-        this.$refs.formModel2.resetFields()
+        this.$refs.formModel1.resetFields() // 表单一重置
+        this.$refs.formModel2.resetFields() // 表单二重置
         let obj = {}
         obj.stopPropagation = () => {}
-        this.$refs.cascader1.clearValue(obj)
-        this.$refs.cascader2.clearValue(obj)
-        this.$refs.clearUpload.uploadClean()
+        this.$refs.cascader1.clearValue(obj) // 诊断级联选择器重置
+        this.$refs.cascader2.clearValue(obj) // 术式级联选择器重置
+        this.$refs.clearUpload.uploadClean() // 上传图片清空
       },
       clearValue(ev) {
         ev.stopPropagation()
