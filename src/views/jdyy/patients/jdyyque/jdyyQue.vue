@@ -86,7 +86,7 @@
                 }
               }).then(res => {
                 this.tableData = res.data.data
-                console.log('viewtable _res===========', this.tableData)
+                console.log('viewtable _res===========', this.tableData.length)
                 // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
                 if (this.tableData.length !== 0) {
                   if (this.tableData[0].photo === null || this.tableData[0].photo === '') {

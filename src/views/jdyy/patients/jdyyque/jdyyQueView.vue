@@ -98,9 +98,7 @@
   import html2Canvas from 'html2canvas'
   import JsPDF from 'jspdf'
   import FormModel from './model'
-  import FormModel1 from './model1'
-  import FormModel2 from './model2'
-  import {JdyyvisitURL, visPatUrl} from '../../config.toml'
+  import {JdyypatientsURL, visPatUrl} from '../../config.toml'
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import ViewTable from '../../../../components/view/viewtable'
@@ -112,10 +110,8 @@
       return {
         htmlTitle: '页面导出PDF文件名', // 这个是pdf文件的名字
         visPatUrl: visPatUrl,
-        targetURL: JdyyvisitURL,
+        targetURL: JdyypatientsURL,
         formModel: Object.assign({}, FormModel),
-        formModel1: Object.assign({}, FormModel1),
-        formModel2: Object.assign({}, FormModel2),
         labelWidth: '200px',
         tableData: [],
         dialogVisible: false,
@@ -204,8 +200,8 @@
         // }
       },
       getModel(val) { // 三级联动地区参数区分
-        this.formModel1.completeAddress = val.join('')
-        console.log('address=========', this.formModel1.completeAddress)
+        this.formModel.completeAddress = val.join('')
+        console.log('address=========', this.formModel.completeAddress)
       }
       // getDate() {
       //   // this.$http.get(this.targetURL + `/${this.userId}`, {
