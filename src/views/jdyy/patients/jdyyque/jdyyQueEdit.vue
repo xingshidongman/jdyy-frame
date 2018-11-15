@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='修改' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel1.sync="formModel1" v-bind:formModel2.sync="formModel2" v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
+  kalix-dialog.user-add(title='修改' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel1" v-bind:targetURL="targetURL" v-bind:submitBefore="submitBefore")
     div.el-form(slot="dialogFormSlot1")
       <!--div {{modifyStaff}}-->
       div.base-message
@@ -69,28 +69,16 @@
               el-radio(label="否")
           el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
             el-input(v-text="modifyStaff" readonly="readonly")
-          <!--el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth")-->
-          <!--el-input(v-model="formModel.modifyStaff" v-text="modifyStaff" readonly="readonly")-->
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
             el-input(v-model="formModel1.remarks")
-          <!--div.box-->
-          <!--ul.right_ul-->
-          <!--li.right_li-->
-          <!--el-button.btn-submit(v-on:click="reset" :disabled="forbidden" size="large") 保存-->
-          <!--el-button.btn-submit.btn-reset(v-on:click="showMessage" :disabled="forbidden"  size="large") 保存并继续-->
-          <!--div.clear-->
-            <!--el-form-item(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth")-->
-            <!--el-input(v-model="formModel.modifyStaff" v-text="modifyStaff" readonly="readonly")-->
-        <!--el-form-item(label="患者" prop="pname" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")-->
-        <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
     div.el-form(slot="dialogFormSlot2")
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2" v-bind:submitBefore="submitBefore")
           el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-            el-cascader(ref="cascader1" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+            el-cascader(v-model="diaCascader" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical"  )
-            el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+            el-cascader(v-model="surCascader" placeholder="请选择术式信息" :options="items" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
@@ -106,7 +94,9 @@
 </template>
 
 <script type="text/ecmascript-6">
+  // import Message from '../../../../common/message'
   import {JdyypatientsURL, JdyyvisitURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import FormModel from './model'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
   import {baseURL} from '../../../../config/global.toml'
@@ -140,6 +130,7 @@
         labelWidth: '150px',
         action: baseURL + '/camel/rest/upload',
         columnParam: undefined,
+        formModel: Object.assign({}, FormModel),
         formModel1: Object.assign({}, FormModel1),
         formModel2: Object.assign({}, FormModel2),
         rules: {
@@ -166,7 +157,88 @@
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
+        console.log('---------this.formModel------------', this.formModel1)
+        console.log('---------this.formMode2------------', this.formModel2)
+        this.formModel2.diagnosis = this.formModel1.diagnosis
+        this.formModel2.surgical = this.formModel1.surgical
+        this.formModel2.operationDate = this.formModel1.operationDate
+        this.formModel2.periodization = this.formModel1.periodization
+        this.formModel2.parting = this.formModel1.parting
+        this.formModel2.photo = this.formModel1.photo
+        let diaCode = this.formModel1.diagnosisCode // 诊断级联回显
+        console.log('diaCode+++++', diaCode)
+        for (let i = 1; i <= diaCode.length / 2; i++) {
+          if (diaCode.substring((i - 1) * 2, i * 2) !== '00') {
+            let a = ''
+            for (let j = 0; j < (diaCode.length - i * 2); j++) {
+              a += '0'
+            }
+            this.diaCascader.push(diaCode.substring(0, i * 2) + a)
+          }
+        }
+        console.log('diaCascader+++++++++++++++++++++++', this.diaCascader)
+        let surCode = this.formModel1.surgicalCode // 术式级联回显
+        for (let i = 1; i <= surCode.length / 2; i++) {
+          if (surCode.substring((i - 1) * 2, i * 2) !== '00') {
+            let a = ''
+            for (let j = 0; j < (surCode.length - i * 2); j++) {
+              a += '0'
+            }
+            this.surCascader.push(surCode.substring(0, i * 2) + a)
+          }
+        }
       },
+      // submitAction() {
+      //   console.log('onSubmit-formModel1===========================', this.formModel1)
+      //   this.$refs.formModel1.validate((valid) => {
+      //     console.log('valid---------------------', valid)
+      //     if (valid) {
+      //       this.axios.request({
+      //         method: 'POST',
+      //         url: JdyypatientsURL,
+      //         data: this.formModel1
+      //       }).then(res => {
+      //         console.log('res======================', res.data.tag)
+      //         if (res.data.success) {
+      //           Message.success(res.data.msg)
+      //           if (this.formModel2.diagnosis !== null) {
+      //             this.formModel2.pid = res.data.tag
+      //             this.subMitFormModel2()
+      //           }
+      //         } else {
+      //           Message.error(res.data.msg)
+      //         }
+      //         this.$refs.formModel1.resetFields()
+      //       })
+      //     } else {
+      //       Message.error('请检查输入项！')
+      //       this.submitComplete(false)
+      //       return false
+      //     }
+      //   })
+      // },
+      // subMitFormModel2() {
+      //   console.log('onSubmit-formModel2===========================', this.formModel2)
+      //   this.axios.request({
+      //     method: 'POST',
+      //     url: JdyyvisitURL,
+      //     data: this.formModel2
+      //   }).then(res => {
+      //     console.log('subMitFormModel2-success==================', res.data.msg)
+      //     this.$refs.formModel2.resetFields()
+      //   })
+      // },
+      // onSubmitClick() {
+      //   if (this.submitCustom && typeof (this.submitCustom) === 'function') {
+      //     this.submitCustom(this)
+      //   } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+      //     this.submitBefore(this, () => {
+      //       this.submitAction()
+      //     })
+      //   } else {
+      //     this.submitAction()
+      //   }
+      // },
       getFilePath(filePath, fileName) { // 图片上传路径
         console.log('--getFilePath---', filePath)
         console.log('--fileName---', fileName)
@@ -193,7 +265,7 @@
         let photoStr = (this.formModel2.photo !== null ? this.formModel2.photo + ',' : '')
         baseDialog.formModel2.photo = photoStr + filePath
         baseDialog.formModel2.imgName = fileName
-        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        this.formModel1.modifyStaff = this.$KalixCatch.get('user_name')
         callBack()
       },
       setGroup(item) {
@@ -247,7 +319,7 @@
             code: this.formModel2.surgicalCode
           }
         }).then(res => {
-          console.log('formModel.diagnosisCode==============================', res.data.data)
+          console.log('formModel2.diagnosisCode==============================', res.data.data)
           this.formModel2.surgical = res.data.data[0].content
         })
       },
