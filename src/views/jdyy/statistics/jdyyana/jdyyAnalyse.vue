@@ -53,9 +53,9 @@
           div.block
             el-date-picker.input-time(v-model="surDate" type="year" value-format="yyyy" placeholder="选择年份" )
             span(style=" margin-left: 1%;") 年龄段
-            input.block-input(type="number" v-model="surStartAge" placeholder="起始年龄")
+            input.block-input(type="number" v-model="surStartAge" placeholder="起始年龄" min="0")
             span(style=" margin-left: 1%;") ~
-            input.block-input(type="number" v-model="surEndAge" placeholder="结束年龄")
+            input.block-input(type="number" v-model="surEndAge" placeholder="结束年龄" min="0")
             el-radio(v-model="surRadio"  label="男") 男
             el-radio(v-model="surRadio"  label="女") 女
           div(id="sur" style="width: 98%;min-height: 260px;margin:auto;")
@@ -79,9 +79,9 @@
             div.block
               el-date-picker.input-time(v-model="diaDate" type="year" value-format="yyyy" placeholder="选择年份")
               span(style=" margin-left: 0.5%;")  年龄段
-              input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄")
+              input.block-input(type="number" v-model="diaStartAge" placeholder="起始年龄" min="0")
               span(style=" margin-left: 1%;") ~
-              input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄")
+              input.block-input(type="number" v-model="diaEndAge" placeholder="结束年龄" min="0")
               el-radio(v-model="diaRadio"  label="男") 男
               el-radio(v-model="diaRadio"  label="女") 女
             div(id="dia" style="width: 98%;height: 260px;margin:auto;")
