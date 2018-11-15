@@ -7,7 +7,7 @@
           <!--el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")-->
         <!--kalix-select.border(v-model="formModel.doctor" v-bind:requestUrl="userURL" appName="dutyDoctor" id="name" position="坐班医生" placeholder="请选择医生")-->
       el-form-item.short(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
-        el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;")
+        el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" v-on:change="getDataByDate" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
         el-input(v-model="formModel.protoNum" type="number")
       el-form-item(label="出院人数" prop="outNum" v-bind:label-width="labelWidth" v-bind:rules="rules.outNum")
@@ -78,8 +78,25 @@
           console.log('date============')
           this.items = res.data.data
         })
+      },
+      getDataByDate() {
+        console.log('getDataByDate======================', this.formModel.date)
+        let searchDate = {'%date%': this.formModel.date}
+        this.axios.request({
+          method: 'GET',
+          url: JdyystatURL,
+          params: {
+            jsonStr: searchDate
+          }
+        }).then(res => {
+          console.log('res.data============================', res.data.data)
+          if (res.data.data.length !== 0) {
+            // this.formModel = res.data.data[0]
+            this.$alert('所选日期已存在统计数据，请重新选择！')
+            this.formModel.date = null
+          }
+        })
       }
-
     }
   }
 </script>
