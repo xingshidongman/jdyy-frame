@@ -99,7 +99,7 @@
         div.box
           ul.right_ul
             li.right_li
-              el-button.btn-submit(v-on:click="onSubmit()" size="large") 保存
+              el-button.btn-submit(v-on:click="submitAction()" size="large") 保存
               el-button.btn-submit.btn-reset( v-on:click="resetAll()" size="large") 重置
         div.clear
 
@@ -172,11 +172,6 @@
       this.loadAll() // 获取病员信息
     },
     methods: {
-      // reset() {
-      //   this.$refs.formModel1.resetFields()
-      //   // this.formModel.name = ''
-      //   // this.formModel.dateAdmission = ''
-      // },
       resetAll() {
         this.$refs.formModel1.resetFields() // 表单一重置
         this.$refs.formModel2.resetFields() // 表单二重置
@@ -194,13 +189,11 @@
         console.log('---------dialogOption------------', dialogOption)
       },
       getFilePath(filePath, fileName) { // 图片上传路径
-        console.log('--getFilePath---', filePath)
-        console.log('--fileName---', fileName)
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
       },
-      submitBefore(baseDialog, callBack) { // 多张图片拼路径
-        console.log('===FilePath=================', this.filePathArr)
+      submitBefore(baseDialog, callBack) {
+        console.log('===33333333333333333333333333=================', this.filePathArr)
         let filePath = ''
         if (this.filePathArr.length) {
           this.filePathArr.forEach(e => {
@@ -215,14 +208,23 @@
           })
           fileName = fileName.substr(0, fileName.length - 1)
         }
-
-        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
-        baseDialog.formModel.photo = photoStr + filePath
-        baseDialog.formModel.imgName = fileName
+        baseDialog.formModel2.photo = filePath
+        baseDialog.formModel2.imgName = fileName
         callBack()
       },
       setGroup(item) {
-        this.formModel.downlosd = item.albumname
+        this.formModel2.photo = item.photo
+      },
+      onSubmitClick() { // 重写多张图片上传方法
+        if (this.submitCustom && typeof (this.submitCustom) === 'function') {
+          this.submitCustom(this)
+        } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+          this.submitBefore(this, () => {
+            this.onSubmit() // 执行提交方法
+          })
+        } else {
+          this.onSubmit()
+        }
       },
       getModel(val) { // 三级联动地区参数区分
         this.formModel1.completeAddress = val.join('')
@@ -313,8 +315,10 @@
           this.formModel1 = res.data
         })
       },
+      submitAction() { // 提交方法
+        this.onSubmitClick() // 调用重写的图片上传方法
+      },
       onSubmit() {
-        console.log('onSubmit-formModel1===========================', this.formModel1)
         this.$refs.formModel1.validate((valid) => {
           console.log('valid---------------------', valid)
           if (valid) {

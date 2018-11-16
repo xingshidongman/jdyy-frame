@@ -181,17 +181,6 @@
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
       },
-      onSubmitClick() {
-        if (this.submitCustom && typeof (this.submitCustom) === 'function') {
-          this.submitCustom(this)
-        } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
-          this.submitBefore(this, () => {
-            this.submitAction()
-          })
-        } else {
-          this.submitAction()
-        }
-      },
       submitBefore(baseDialog, callBack) { // 多张图片拼路径
         console.log('===FilePath=================', this.filePathArr)
         let filePath = ''
