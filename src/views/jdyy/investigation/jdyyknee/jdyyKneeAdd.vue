@@ -6,8 +6,7 @@
         div.con1
           div.con1-left
             el-form-item.toleft(label="姓名")
-              el-select(v-model="formModel.pid" @change="getData($event)" filterable placeholder="请选择")
-                el-option(v-for="item in options" :key="item.value" :label="item.label" :value="item.value")
+              el-autocomplete(v-model="formModel.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
             el-form-item.toleft(label="性别")
               el-radio-group(v-model="formModel.sex" disabled)
                 el-radio(label="男")
@@ -1110,26 +1109,36 @@
         console.log('submit!')
         alert('天啦噜')
       },
-      getPatients() {
-        console.log('getPatients===============================start')
+      loadAll() { // 获取病员信息
         this.axios.request({
           method: 'GET',
-          url: JdyypatientsURL + '/getDataBySelect'
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
         }).then(res => {
-          console.log('getPatients.success==================', res.data.data)
-          this.options = res.data.data
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
         })
       },
-      getData(value) {
-        console.log('getData========================', value)
+      querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+
+        clearTimeout(this.timeout)
+        this.timeout = setTimeout(() => {
+          cb(results)
+        }, 3000 * Math.random())
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelect(item) {
+        console.log('item===========================', item)
         this.axios.request({
           method: 'GET',
-          url: JdyypatientsURL + '/' + value,
-          data: {
-            id: value
-          }
+          url: JdyypatientsURL + '/' + item.pid
         }).then(res => {
-          console.log('getData.success======================', res.data)
+          console.log('handleSelect========================', res.data)
           this.formModel.name = res.data.name
           this.formModel.sex = res.data.sex
           this.formModel.age = res.data.age
@@ -1140,7 +1149,7 @@
       }
     },
     mounted() {
-      this.getPatients()
+      this.loadAll() // 获取病员信息
     },
     computed: {
       total1() {

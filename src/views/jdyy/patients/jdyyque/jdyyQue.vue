@@ -86,26 +86,26 @@
                 }
               }).then(res => {
                 this.tableData = res.data.data
-                console.log('viewtable _res===========', this.tableData)
+                console.log('viewtable _res===========', this.tableData.length)
                 // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
-                if (this.tableData.length !== 0) {
-                  if (this.tableData[0].photo === null || this.tableData[0].photo === '') {
-                    this.imgs = ['无图片']
-                  } else
-                  if (this.tableData[0].photo.indexOf(',')) {
-                    let arr = this.tableData[0].photo.split(',')
-                    let imgObj = {}
-                    for (let i = 0; i < arr.length; i++) {
-                      imgObj.val = arr[i]
-                      imgObj.key = 'img' + i
+                if (this.tableData.length > 0) {
+                  // this.imgs.splice(0, this.imgs.length)
+                  if (this.tableData[0].photo !== null && this.tableData[0].photo !== '') {
+                    if (this.tableData[0].photo.indexOf('&')) {
+                      let arr = this.tableData[0].photo.split('&')
+                      let imgObj = {}
+                      for (let i = 0; i < arr.length; i++) {
+                        imgObj.val = arr[i]
+                        imgObj.key = 'img' + i
+                        this.imgs.push(imgObj)
+                      }
+                    } else {
+                      let imgObj = {
+                        val: this.tableData[0].photo,
+                        key: 'img0'
+                      }
                       this.imgs.push(imgObj)
                     }
-                  } else {
-                    let imgObj = {
-                      val: this.tableData[0].photo,
-                      key: 'img0'
-                    }
-                    this.imgs.push(imgObj)
                   }
                   row.tableData = this.tableData
                   row.imgs = this.imgs
