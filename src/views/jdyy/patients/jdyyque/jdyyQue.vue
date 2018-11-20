@@ -60,8 +60,9 @@
         ],
         jdyyQueDialog: [
           {id: 'viewPdf', dialog: 'JdyyQueView'},
-          {id: 'edit', dialog: 'JdyyQueEdit'},
-          {id: 'delPatVis'}],
+          {id: 'edit', dialog: 'jdyyQueModify'}
+          // {id: 'delPatVis'}
+        ],
         btnList: jdyyQueConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: false, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
