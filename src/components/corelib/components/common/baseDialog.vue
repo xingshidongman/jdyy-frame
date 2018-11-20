@@ -12,6 +12,7 @@
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
       el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
+        div formModel.limit：{{formModel.limit}}
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
@@ -111,6 +112,7 @@
           console.log('valid', valid)
           this.formModel.parent = null
           this.formModel.childred = null
+          console.log('submitAction this.formModel：', this.formModel)
           if (valid) {
             this.axios.request({
               method: this.isEdit ? 'PUT' : 'POST',
