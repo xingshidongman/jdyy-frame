@@ -1,7 +1,7 @@
 import JdyyQue from './jdyyQue.vue'
 import JdyyQueSearch from './jdyyQueSearch.vue'
 import JdyyQueView from './jdyyQueView.vue'
-import JdyyQueEdit from './jdyyQueEdit.vue'
+import JdyyQueEdit from './jdyyQueModify.vue'
 
 const components = [
   JdyyQue,
