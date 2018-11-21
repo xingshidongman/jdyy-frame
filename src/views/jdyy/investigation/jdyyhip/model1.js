@@ -1,0 +1,27 @@
+const FormModel1 = {
+  id: null,
+  hid: null,
+  harADate: null,
+  harA1: null,
+  harA2: null,
+  harA3: null,
+  harA4: null,
+  harA5: null,
+  harA6: null,
+  harA7: null,
+  harA8: null,
+  harA9: null,
+  harA10: null,
+  harA11: null,
+  harA12: null,
+  harBDate: null,
+  harB1: null,
+  harB2: null,
+  harB3: null,
+  harB4: null,
+  harB5: null,
+  harB6: null,
+  harB7: null,
+  harB8: null
+}
+export default FormModel1

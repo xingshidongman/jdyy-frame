@@ -21,6 +21,9 @@ jdyyDiaBtnPermissionPrefix = "jdyy:jdyyDiaSurModule:jdyyDiaMenu:"
 #全髋
 JdyyhipURL = "/camel/rest/jdyy/hips"
 jdyyHipBtnPermissionPrefix = "jdyy:jdyyInvModule:jdyyHipMenu:"
+JdyyhipHarrisScoreURL = "/camel/rest/jdyy/hipHarrisScores"
+JdyyhipImgEvaluationURL = "/camel/rest/jdyy/hipImgEvaluations"
+JdyyhipSatisfactionURL = "/camel/rest/jdyy/hipSatisfactions"
 #全膝
 JdyykneeURL = "/camel/rest/jdyy/knees"
 jdyyKneeBtnPermissionPrefix = "jdyy:jdyyInvModule:jdyyKneeMenu:"
