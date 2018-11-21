@@ -20,6 +20,7 @@
         template(v-else-if="isYesNoView")
           el-button(type="primary" v-on:click="onYesClick") {{yesText}}
           el-button(type="primary" v-on:click="onNoClick") {{noText}}
+        template(v-else-if="isNoView")
         template(v-else)
           el-button(v-on:click="onCancelClick") 取 消
           el-button(type="primary" v-on:click="onSubmitClick") 提 交
@@ -64,6 +65,7 @@
         type: String
       },
       isView: false,
+      isNoView: false,
       isYesNoView: {
         type: Boolean,
         default: false

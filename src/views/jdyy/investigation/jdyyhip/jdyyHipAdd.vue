@@ -1,5 +1,6 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='添加全髋术后调查' bizKey="jdyyHip" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" )
+  kalix-dialog.user-add(title='添加全髋术后调查' bizKey="jdyyHip" ref="kalixBizDialog" v-bind:formModel.sync="formModel"
+  v-bind:targetURL="targetURL" v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" v-bind:isNoView="true")
     div.back(slot="dialogFormSlot")
       div.art1
         h1.title 全髋关节置换术
@@ -648,57 +649,33 @@
                 div.con2-right
                   p 活动度总和 = 无过伸，屈曲>110°，外展>20°，内收>15°，外旋>15°（5）
                   p 每10°过伸（-0.5）/屈曲<90°（-0.5）/无外展<（-0.7）/无外旋（-0.3）
-      div.art2
-        h1.title
-        div.con2
-          el-table(:data="tableData1" style="width: 1450px;margin:0 auto" height="250")
-            el-table-column(fixed prop="harADate" label="日期" width="100")
-            el-table-column(prop="harA1" label="术后第（）月" width="120")
-            el-table-column(prop="harA2" label="疼痛" width="60")
-            el-table-column(prop="harA3" label="上下楼梯" width="120")
-            el-table-column(prop="harA4" label="坐" width="60")
-            el-table-column(prop="harA5" label="穿鞋袜" width="120")
-            el-table-column(prop="harA6" label="上公交车" width="120")
-            el-table-column(prop="harA7" label="跛行" width="60")
-            el-table-column(prop="harA8" label="行走辅助" width="120")
-            el-table-column(prop="harA9" label="行走距离" width="120")
-            el-table-column(prop="harA10" label="无畸形" width="120")
-            el-table-column(prop="harA11" label="关节活动度" width="120")
-            el-table-column(prop="harA12" label="总分（100）" width="120")
-            <!--el-table-column(fixed="right" label="操作" width="50")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
-                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="日期")
-          el-input(v-model="formModel.harADate" clearable)
+          el-date-picker(type="date" placeholder="选择日期" v-model="formModel1.harADate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
         el-form-item.mini(label="术后第（）月")
-          el-input(v-model="formModel.harA1" clearable)
+          el-input(v-model="formModel1.harA1" type="number" :min="0" clearable)
         el-form-item.mini(label="疼痛")
-          el-input(v-model="formModel.harA2" clearable)
+          el-input(v-model="formModel1.harA2" type="number" :min="0" clearable)
         el-form-item.mini(label="上下楼梯")
-          el-input(v-model="formModel.harA3" clearable)
+          el-input(v-model="formModel1.harA3" type="number" :min="0" clearable)
         el-form-item.mini(label="坐")
-          el-input(v-model="formModel.harA4" clearable)
+          el-input(v-model="formModel1.harA4" type="number" :min="0" clearable)
         el-form-item.mini(label="穿鞋袜")
-          el-input(v-model="formModel.harA5" clearable)
+          el-input(v-model="formModel1.harA5" type="number" :min="0" clearable)
         el-form-item.mini(label="上公交车")
-          el-input(v-model="formModel.harA6" clearable)
+          el-input(v-model="formModel1.harA6" type="number" :min="0" clearable)
         el-form-item.mini(label="跛行")
-          el-input(v-model="formModel.harA7" clearable)
+          el-input(v-model="formModel1.harA7" type="number" :min="0" clearable)
         el-form-item.mini(label="行走辅助")
-          el-input(v-model="formModel.harA8" clearable)
+          el-input(v-model="formModel1.harA8" type="number" :min="0" clearable)
         el-form-item.mini(label="行走距离")
-          el-input(v-model="formModel.harA9" clearable)
+          el-input(v-model="formModel1.harA9" type="number" :min="0" clearable)
         el-form-item.mini(label="无畸形")
-          el-input(v-model="formModel.harA10" clearable)
+          el-input(v-model="formModel1.harA10" type="number" :min="0" clearable)
         el-form-item.mini(label="关节活动度")
-          el-input(v-model="formModel.harA11" clearable)
+          el-input(v-model="formModel1.harA11" type="number" :min="0" clearable)
         div.mark
           div.sta 总分：{{total1}}
-        <!--el-form-item.mini(label="总分")-->
-        <!--el-input(v-model="formModel.harA12 = total1" clearable)-->
-
       div.art2
         h1.title
         div.con2
@@ -727,42 +704,25 @@
               td.long-td
                 div.con2-right
                   p 如手术侧下肢较长，为正数
-      div.art2
-        h1.title
-        div.con2
-          el-table(:data="tableData2" style="width: 1190px;margin:0 auto" height="250")
-            el-table-column(prop="harBDate" label="大腿痛" width="100")
-            el-table-column(prop="harB1" label="Trendelenburg 征" width="150")
-            el-table-column(prop="harB2" label="活动度-伸直" width="120")
-            el-table-column(prop="harB3" label="活动度-屈曲" width="120")
-            el-table-column(prop="harB4" label="活动度-外展" width="120")
-            el-table-column(prop="harB5" label="活动度-内收" width="120")
-            el-table-column(prop="harB6" label="活动度-内旋" width="120")
-            el-table-column(prop="harB7" label="活动度-外旋" width="120")
-            el-table-column(prop="harB8" label="双下肢不等长" width="120")
-            <!--el-table-column(fixed="right" label="操作" width="50")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
-                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="大腿痛")
-          el-input(v-model="formModel.harBDate" clearable)
+          el-input(v-model="formModel1.harBDate" clearable)
         el-form-item.mini(label="Trendelenburg 征" label-width="150px")
-          el-input(v-model="formModel.harB1" clearable)
+          el-input(v-model="formModel1.harB1" clearable)
         el-form-item.mini(label="活动度-伸直")
-          el-input(v-model="formModel.harB2" clearable)
+          el-input(v-model="formModel1.harB2" clearable)
         el-form-item.mini(label="活动度-屈曲")
-          el-input(v-model="formModel.harB3" clearable)
+          el-input(v-model="formModel1.harB3" clearable)
         el-form-item.mini(label="活动度-外展")
-          el-input(v-model="formModel.harB4" clearable)
+          el-input(v-model="formModel1.harB4" clearable)
         el-form-item.mini(label="活动度-内收")
-          el-input(v-model="formModel.harB5" clearable)
+          el-input(v-model="formModel1.harB5" clearable)
         el-form-item.mini(label="活动度-内旋")
-          el-input(v-model="formModel.harB6" clearable)
+          el-input(v-model="formModel1.harB6" clearable)
         el-form-item.mini(label="活动度-外旋")
-          el-input(v-model="formModel.harB7" clearable)
+          el-input(v-model="formModel1.harB7" clearable)
         el-form-item.mini(label="双下肢不等长")
-          el-input(v-model="formModel.harB8" clearable)
+          el-input(v-model="formModel1.harB8" clearable)
       div.art2
         h1.title 患者满意度
         div.con2
@@ -773,30 +733,19 @@
               td.long-td
                 div.con2-right
                   p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-          el-table(:data="tableData3" style="width: 620px;margin:0 auto" height="250")
-            el-table-column(fixed prop="harCDate" label="日期" width="100")
-            el-table-column(prop="harC1" label="与术前相比" width="120")
-            el-table-column(prop="harC2" label="术后第（）月" width="120")
-            el-table-column(prop="harC3" label="疼痛" width="60")
-            el-table-column(prop="harC4" label="功能" width="60")
-            el-table-column(prop="harC5" label="总评" width="60")
-            <!--el-table-column(fixed="right" label="操作" width="50")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
-                <!--el-button(type="text" size="small") 编辑-->
         div.con2
           el-form-item.mini(label="日期")
-            el-input(v-model="formModel.harCDate" clearable)
+            el-date-picker(type="date" placeholder="选择日期" v-model="formModel2.harCDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.mini(label="与术前相比")
-            el-input(v-model="formModel.harC1" clearable)
+            el-input(v-model="formModel2.harC1" clearable)
           el-form-item.mini(label="术后第（）月")
-            el-input(v-model="formModel.harC2" clearable)
+            el-input(v-model="formModel2.harC2" clearable)
           el-form-item.mini(label="疼痛")
-            el-input(v-model="formModel.harC3" clearable)
+            el-input(v-model="formModel2.harC3" clearable)
           el-form-item.mini(label="功能")
-            el-input(v-model="formModel.harC4" clearable)
+            el-input(v-model="formModel2.harC4" clearable)
           el-form-item.mini(label="总评")
-            el-input(v-model="formModel.harC5" clearable)
+            el-input(v-model="formModel2.harC5" clearable)
       div.art2
         h1.title 影像学评估
         div.con2
@@ -873,68 +822,52 @@
               td.long-td
                 div.con2-right
                   p 针对骨水泥假体，如果是生物性假体请标记 NA *
-      div.art2
-        h1.title
-        div.con2
-          el-table(:data="tableData4" style="width: 100%" height="250")
-            el-table-column(fixed prop="harDDate" label="日期" width="100")
-            el-table-column(prop="harD1" label="术后第（）月" width="120")
-            el-table-column(prop="harD2" label="移位" width="250")
-            el-table-column(prop="harD3" label="聚乙烯磨损" width="120")
-            el-table-column(prop="harD4" label="骨水泥透亮区 -1 *" width="250")
-            el-table-column(prop="harD5" label="骨水泥透亮区 -2 *" width="150")
-            el-table-column(prop="harD6" label="骨溶解 *" width="120")
-            el-table-column(prop="harD7" label="增生*" width="60")
-            el-table-column(prop="harD8" label="萎缩 *" width="60")
-            el-table-column(prop="harD9" label="异位骨化" width="120")
-            el-table-column(prop="harD10" label="金属问题" width="150")
-            el-table-column(prop="harD11" label="骨水泥金属界面透亮区 *" width="240")
-            el-table-column(prop="harD12" label="骨水泥骨折（） *" width="150")
-            el-table-column(prop="harD13" label="涂层脱落*" width="120")
-            <!--el-table-column(fixed="right" label="操作" width="50")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(@click="handleClick(scope.row)" type="text" size="large") 查看-->
-                <!--el-button(type="text" size="small") 编辑-->
       div.con2
         el-form-item.mini(label="日期")
-          el-input(v-model="formModel.harDDate" clearable)
+          el-date-picker(type="date" placeholder="选择日期" v-model="formModel3.harDDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
         el-form-item.mini(label="术后第（）月" label-width="150px")
-          el-input(v-model="formModel.harD1" clearable )
+          el-input(v-model="formModel3.harD1" clearable )
         el-form-item.mini(label="移位")
-          el-input(v-model="formModel.harD2" clearable)
+          el-input(v-model="formModel3.harD2" clearable)
         el-form-item.mini(label="聚乙烯磨损")
-          el-input(v-model="formModel.harD3" clearable)
+          el-input(v-model="formModel3.harD3" clearable)
         el-form-item.mini(label="骨水泥透亮区 -1 *" label-width="150px")
-          el-input(v-model="formModel.harD4" clearable)
+          el-input(v-model="formModel3.harD4" clearable)
         el-form-item.mini(label="骨水泥透亮区 -2 *" label-width="150px")
-          el-input(v-model="formModel.harD5" clearable)
+          el-input(v-model="formModel3.harD5" clearable)
         el-form-item.mini(label="骨溶解 *")
-          el-input(v-model="formModel.harD6" clearable)
+          el-input(v-model="formModel3.harD6" clearable)
         el-form-item.mini(label="增生*")
-          el-input(v-model="formModel.harD7" clearable)
+          el-input(v-model="formModel3.harD7" clearable)
         el-form-item.mini(label="萎缩 *")
-          el-input(v-model="formModel.harD8" clearable)
+          el-input(v-model="formModel3.harD8" clearable)
         el-form-item.mini(label="异位骨化")
-          el-input(v-model="formModel.harD9" clearable)
+          el-input(v-model="formModel3.harD9" clearable)
         el-form-item.mini(label="金属问题")
-          el-input(v-model="formModel.harD10" clearable)
+          el-input(v-model="formModel3.harD10" clearable)
         el-form-item.mini(label="骨水泥金属界面透亮区 *" label-width="190px")
-          el-input(v-model="formModel.harD11" clearable)
+          el-input(v-model="formModel3.harD11" clearable)
         el-form-item.mini(label="骨水泥骨折（） *" label-width="150px")
-          el-input(v-model="formModel.harD12" clearable)
+          el-input(v-model="formModel3.harD12" clearable)
         el-form-item.mini(label="涂层脱落*")
-          el-input(v-model="formModel.harD13" clearable)
-        <!--div.btn-box-->
-          <!--div.btn-->
-            <!--el-form-item-->
-              <!--el-button(type="primary" @click="onSubmit") 保存-->
-              <!--el-button 取消-->
+          el-input(v-model="formModel3.harD13" clearable)
+        div.btn-box
+          div.btn
+            el-form-item
+              el-button(type="primary" @click="onSubmit") 保存
+              el-button(type="primary" @click="onCancel") 取消
 </template>
 
 <script>
   import FormModel from './model'
-  import {JdyyhipURL, JdyypatientsURL} from '../../config.toml'
+  import FormModel1 from './model1'
+  import FormModel2 from './model2'
+  import FormModel3 from './model3'
+  import {JdyyhipURL, JdyypatientsURL, JdyyhipHarrisScoreURL, JdyyhipImgEvaluationURL, JdyyhipSatisfactionURL} from '../../config.toml'
   import KalixSelect from '../../../../components/corelib/components/common/baseSelect'
+  import Message from '../../../../components/corelib/common/message'
+  import EventBus from '../../../../components/corelib/common/eventbus'
+  import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
   export default {
     name: 'jdyyHipAdd',
     components: {KalixSelect},
@@ -946,33 +879,25 @@
         width: '80%',
         labelPosition: 'right',
         formModel: Object.assign({}, FormModel),
-        // tableData1: [
-        //   {harADate: '2016-05-03', harA1: '术前', harA2: '40', harA3: '3', harA4: '3', harA5: '2', harA6: '0', harA7: '5', harA8: '3', harA9: '2', harA10: '1', harA11: '-2', harA12: '56'},
-        //   {harADate: '2016-05-03', harA1: '术前', harA2: '40', harA3: '3', harA4: '3', harA5: '2', harA6: '0', harA7: '5', harA8: '3', harA9: '2', harA10: '1', harA11: '-2', harA12: '56'},
-        //   {harADate: '2016-05-03', harA1: '术前', harA2: '40', harA3: '3', harA4: '3', harA5: '2', harA6: '0', harA7: '5', harA8: '3', harA9: '2', harA10: '1', harA11: '-2', harA12: '56'}
-        // ],
-        // tableData2: [
-        //   {harADate: '2016-05-03', harB1: '术前', harB2: '40', harB3: '3', harB4: '3', harB5: '2', harB6: '0', harB7: '5', harB8: '3'},
-        //   {harADate: '2016-05-03', harB1: '术前', harB2: '40', harB3: '3', harB4: '3', harB5: '2', harB6: '0', harB7: '5', harB8: '3'},
-        //   {harADate: '2016-05-03', harB1: '术前', harB2: '40', harB3: '3', harB4: '3', harB5: '2', harB6: '0', harB7: '5', harB8: '3'}
-        // ],
-        // tableData3: [
-        //   {harCDate: '2016-05-03', harC1: '好很多', harC2: '3', harC3: '3', harC4: '3', harC5: '9'},
-        //   {harCDate: '2016-05-03', harC1: '好很多', harC2: '3', harC3: '3', harC4: '3', harC5: '9'},
-        //   {harCDate: '2016-05-03', harC1: '好很多', harC2: '3', harC3: '3', harC4: '3', harC5: '9'}
-        // ],
-        // tableData4: [
-        //   {harDDate: '2016-05-03', harD1: '3', harD2: '股骨柄假体出现内外翻 - 力线改变', harD3: '32', harD4: '骨水泥 - 骨或骨水泥 - 假体 - <2mm', harD5: '9', harD6: '0', harD7: '5', harD8: '3', harD9: '2', harD10: '金属变形或折断', harD11: '-2', harD12: '56', harD13: '56'},
-        //   {harDDate: '2016-05-03', harD1: '好很多', harD2: '3', harD3: '3', harD4: '3', harD5: '9', harD6: '0', harD7: '5', harD8: '3', harD9: '2', harD10: '1', harD11: '-2', harD12: '56', harD13: '56'},
-        //   {harDDate: '2016-05-03', harD1: '好很多', harD2: '3', harD3: '3', harD4: '3', harD5: '9', harD6: '0', harD7: '5', harD8: '3', harD9: '2', harD10: '1', harD11: '-2', harD12: '56', harD13: '56'}
-        // ],
+        formModel1: Object.assign({}, FormModel1),
+        formModel2: Object.assign({}, FormModel2),
+        formModel3: Object.assign({}, FormModel3),
         options: []
       }
     },
     computed: {
       total1: function () {
-        let a = parseInt(this.formModel.harA2) + parseInt(this.formModel.harA3) + parseInt(this.formModel.harA4) + parseInt(this.formModel.harA5) + parseInt(this.formModel.harA6) + parseInt(this.formModel.harA7) + parseInt(this.formModel.harA8) + parseInt(this.formModel.harA9) + parseInt(this.formModel.harA10) + parseInt(this.formModel.harA11)
-        return a
+        this.formModel1.harA12 = (this.formModel1.harA2 == null ? 0 : parseInt(this.formModel1.harA2)) +
+          (this.formModel1.harA3 == null ? 0 : parseInt(this.formModel1.harA3)) +
+          (this.formModel1.harA4 == null ? 0 : parseInt(this.formModel1.harA4)) +
+          (this.formModel1.harA5 == null ? 0 : parseInt(this.formModel1.harA5)) +
+          (this.formModel1.harA6 == null ? 0 : parseInt(this.formModel1.harA6)) +
+          (this.formModel1.harA7 == null ? 0 : parseInt(this.formModel1.harA7)) +
+          (this.formModel1.harA8 == null ? 0 : parseInt(this.formModel1.harA8)) +
+          (this.formModel1.harA9 == null ? 0 : parseInt(this.formModel1.harA9)) +
+          (this.formModel1.harA10 == null ? 0 : parseInt(this.formModel1.harA10)) +
+          (this.formModel1.harA11 == null ? 0 : parseInt(this.formModel1.harA11))
+        return this.formModel1.harA12
       }
     },
     methods: {
@@ -982,9 +907,68 @@
       setGroup(val) {
         this.formModel.downlosd = val
       },
-      onSubmit() {
-        console.log('submit!')
-        alert('success')
+      onSubmit() { // 保存临床评价——Harris评分信息
+        console.log('submit=======================', this.formModel)
+        this.axios.request({
+          method: 'POST',
+          url: JdyyhipURL,
+          data: this.formModel
+        }).then(res => {
+          console.log('res========================', res.data.tag)
+          Message.success(res.data.msg)
+          if (this.formModel1.harADate != null || this.formModel1.harA1 != null || this.formModel1.harA2 != null ||
+            this.formModel1.harA3 != null || this.formModel1.harA4 != null || this.formModel1.harA5 != null ||
+            this.formModel1.harA6 != null || this.formModel1.harA7 != null || this.formModel1.harA8 != null ||
+            this.formModel1.harA9 != null || this.formModel1.harA10 != null || this.formModel1.harA11 != null) {
+            this.formModel1.hid = res.data.tag
+            this.submitHarrisScore()
+          }
+          if (this.formModel2.harCDate != null || this.formModel2.harC1 != null || this.formModel2.harC2 != null ||
+            this.formModel2.harC3 != null || this.formModel2.harC4 != null || this.formModel2.harC5 != null) {
+            this.formModel2.hid = res.data.tag
+            this.submitSatisfaction()
+          }
+          if (this.formModel3.harDDate != null || this.formModel3.harD1 != null || this.formModel3.harD2 != null ||
+            this.formModel3.harD3 != null || this.formModel3.harD4 != null || this.formModel3.harD5 != null ||
+            this.formModel3.harD6 != null || this.formModel3.harD7 != null || this.formModel3.harD8 != null ||
+            this.formModel3.harD9 != null || this.formModel3.harD10 != null || this.formModel3.harD11 != null ||
+            this.formModel3.harD12 != null || this.formModel3.harD13 != null) {
+            this.formModel3.hid = res.data.tag
+            this.submitImgEvaluation()
+          }
+          this.onCancel()
+        })
+      },
+      submitHarrisScore() { // 保存临床评价——Harris评分信息
+        this.axios.request({
+          method: 'POST',
+          url: JdyyhipHarrisScoreURL,
+          data: this.formModel1
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      submitImgEvaluation() { // 保存影像学评估信息
+        this.axios.request({
+          method: 'POST',
+          url: JdyyhipImgEvaluationURL,
+          data: this.formModel3
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      submitSatisfaction() { // 保存患者满意度信息
+        this.axios.request({
+          method: 'POST',
+          url: JdyyhipSatisfactionURL,
+          data: this.formModel2
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      onCancel() { // 取消
+        this.$refs.kalixBizDialog.onCancelClick()
+        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
       },
       loadAll() { // 获取病员信息
         this.axios.request({
