@@ -678,7 +678,7 @@
             el-table-column(prop="extensionRelaxation" label="伸直位松弛" min-width="100")
             el-table-column(prop="forceLine3" label="力线" min-width="60")
             el-table-column(prop="total3" label="总计" min-width="60")
-            el-table-column(label="操作" min-width="60" fixed="right")
+            el-table-column(label="操作" width="50" fixed="right")
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable1(scope.row)") 编辑
                 el-button.chan(type="text" size="small" @click="deleteTable1(scope.row)") 删除
@@ -837,7 +837,7 @@
             el-table-column(prop="stairActivity1" label="上下楼梯" min-width="60")
             el-table-column(prop="walkingAid1" label="辅助行走" min-width="100")
             el-table-column(prop="total4" label="总计" min-width="60")
-            el-table-column(label="操作" min-width="60" fixed="right")
+            el-table-column(label="操作" width="50" fixed="right")
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable3(scope.row)") 编辑
                 el-button.chan(type="text" size="small" @click="deleteTable3(scope.row)") 删除
@@ -962,7 +962,7 @@
             el-table-column(prop="loose" label="松动（股骨/胫骨/髌骨）" min-width="190")
             el-table-column(prop="polyethyleneLiner" label="聚乙烯内衬" min-width="90")
             el-table-column(prop="osteolysis" label="骨溶解" min-width="90")
-            el-table-column(label="操作" min-width="60" fixed="right")
+            el-table-column(label="操作" width="60" fixed="right")
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable4(scope.row)") 编辑
                 el-button.chan(type="text" size="small" @click="deleteTable4(scope.row)") 删除
@@ -1505,5 +1505,8 @@
     .anniu
       float right
       margin 1% 1%
+      padding: 6px 12px;
+    .chan
+      margin-left 0px
   /*margin-bottom 0*/
 </style>

@@ -975,7 +975,8 @@
                 el-input(v-model="formModel4.polyethyleneLiner" readonly)
               el-form-item.short(label="骨溶解" label-width="180px")
                 el-input(v-model="formModel4.osteolysis" readonly)
-            el-button.anniu(@click="closeTable4" type="primary") 关闭
+            div.agg(style="margin-bottom: 1%;")
+              el-button.anniu(@click="closeTable4" type="primary") 关闭
 </template>
 
 <script>
@@ -1306,5 +1307,8 @@
       img
         width 80%
         height auto
-
+    .anniu
+      float right
+      margin 1% 1%
+      padding: 6px 12px;
 </style>

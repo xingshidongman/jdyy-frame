@@ -775,10 +775,10 @@
             el-table-column(prop="harC3" label="疼痛")
             el-table-column(prop="harC4" label="功能" )
             el-table-column(prop="harC5" label="总评" )
-            el-table-column(fixed="right" label="操作")
+            el-table-column(fixed="right" label="操作" width="60")
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable2(scope.row)") 编辑
-                el-button(type="text" size="small" @click="deleteTable2(scope.row)") 删除
+                el-button.chan(type="text" size="small" @click="deleteTable2(scope.row)") 删除
           div
             el-button.anniu(@click="addTable2"  type="primary") 添加
         template(v-if="show2")
@@ -891,10 +891,10 @@
             el-table-column(prop="harD11" label="骨水泥金属界面透亮区 *" )
             el-table-column(prop="harD12" label="骨水泥骨折（） *" )
             el-table-column(prop="harD13" label="涂层脱落*" )
-            el-table-column(fixed="right" label="操作" )
+            el-table-column(fixed="right" label="操作" width="60" )
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable3(scope.row)") 编辑
-                el-button(type="text" size="small" @click="deleteTable3(scope.row)") 删除
+                el-button.chan(type="text" size="small" @click="deleteTable3(scope.row)") 删除
           div
             el-button.anniu( @click="addTable3"  type="primary") 添加
         template(v-if="show3")
@@ -1311,6 +1311,7 @@
   .anniu
     float right
     margin 1% 1%
+    padding: 6px 12px;
   .chan
     margin-left 0px
 </style>

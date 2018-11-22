@@ -1152,4 +1152,8 @@
       padding:10px
       width:95px
       text-align:center
+    .anniu
+      float right
+      margin 1% 1%
+      padding: 6px 12px;
 </style>
