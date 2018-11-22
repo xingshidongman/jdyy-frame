@@ -750,7 +750,7 @@
             el-input(v-model="formModel1.harB7" readonly clearable)
           el-form-item.mini(label="双下肢不等长")
             el-input(v-model="formModel1.harB8" readonly clearable)
-        el-button(round @click="closeTable1") 关闭
+        el-button.anniu(@click="closeTable1" type="primary") 关闭
       div.art2
         h1.title 患者满意度
         div.con2
@@ -761,14 +761,14 @@
               td.long-td
                 div.con2-right
                   p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-          el-table(:data="tableData2" style="width: 620px;margin:0 auto" height="250")
-          el-table-column(fixed prop="harCDate" label="日期" width="100")
-          el-table-column(prop="harC1" label="与术前相比" width="120")
-          el-table-column(prop="harC2" label="术后第（）月" width="120")
-          el-table-column(prop="harC3" label="疼痛" width="60")
-          el-table-column(prop="harC4" label="功能" width="60")
-          el-table-column(prop="harC5" label="总评" width="60")
-          el-table-column(fixed="right" label="操作" width="50")
+          el-table(:data="tableData2" style="width: 90%;margin:0 auto" height="250")
+          el-table-column(fixed prop="harCDate" label="日期" )
+          el-table-column(prop="harC1" label="与术前相比" )
+          el-table-column(prop="harC2" label="术后第（）月" )
+          el-table-column(prop="harC3" label="疼痛" )
+          el-table-column(prop="harC4" label="功能")
+          el-table-column(prop="harC5" label="总评" )
+          el-table-column(fixed="right" label="操作" )
             template(slot-scope="scope")
               el-button(@click="viewTable2(scope.row)" type="text" size="large") 查看
         template(v-if="show2")
@@ -785,7 +785,7 @@
               el-input(v-model="formModel2.harC4" readonly clearable)
             el-form-item.mini(label="总评")
               el-input(v-model="formModel2.harC5" readonly clearable)
-          el-button(round @click="closeTable2") 关闭
+          el-button.anniu( @click="closeTable2" type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -913,7 +913,7 @@
             el-input(v-model="formModel3.harD12" readonly clearable)
           el-form-item.mini(label="涂层脱落*")
             el-input(v-model="formModel3.harD13" readonly clearable)
-        el-button(round @click="closeTable3") 关闭
+        el-button.anniu(round @click="closeTable3" type="primary") 关闭
 </template>
 
 <script>
@@ -926,7 +926,7 @@
     name: 'jdyyHipView',
     data() {
       return {
-        labelWidth: '100px',
+        labelWidth: '150px',
         width: '80%',
         labelPosition: 'right',
         formModel: Object.assign({}, FormModel),
@@ -1155,4 +1155,6 @@
       padding:10px
       width:95px
       text-align:center
+  .anniu
+   float right
 </style>

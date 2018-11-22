@@ -823,7 +823,7 @@
               margin-top 15px
               padding-left 10px
               margin-left: 2%;
-              border 2px solid #23769a
+              border 1px solid #dfdfdf
               color #23769a
             .el-radio
               color: #23769a;

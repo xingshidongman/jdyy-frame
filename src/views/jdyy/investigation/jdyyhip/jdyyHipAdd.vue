@@ -875,7 +875,7 @@
       return {
         targetURL: JdyyhipURL,
         patientsURL: JdyypatientsURL,
-        labelWidth: '100px',
+        labelWidth: '150px',
         width: '80%',
         labelPosition: 'right',
         formModel: Object.assign({}, FormModel),
@@ -1109,6 +1109,7 @@
     .mini
       width 30%
       display inline-block
+      margin-left 2%
     .short
       width 50%
       display inline-block
@@ -1119,7 +1120,7 @@
       width 40%
       display inline-block
     .toleft
-      margin-left -40px
+      margin-left -52px
     /*margin-bottom 0*/
     .totoleft
       margin-left -80px

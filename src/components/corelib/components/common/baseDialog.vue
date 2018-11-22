@@ -12,7 +12,7 @@
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
       el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
-        div formModel.limit：{{formModel.limit}}
+        <!--div formModel.limit：{{formModel.limit}}-->
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
