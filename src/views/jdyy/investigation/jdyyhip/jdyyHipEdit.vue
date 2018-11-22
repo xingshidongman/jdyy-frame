@@ -681,7 +681,7 @@
       div.art2
         h1.title
         div.con2
-          el-table(:data="tableData1" style="width: 1450px;margin:0 auto" height="250")
+          el-table(:data="tableData1" style="width: 1450px;margin:0 auto")
             el-table-column(fixed prop="harADate" label="日期" width="100")
             el-table-column(prop="harA1" label="术后第（）月" width="120")
             el-table-column(prop="harA2" label="疼痛" width="60")
@@ -768,7 +768,7 @@
               td.long-td
                 div.con2-right
                   p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-          el-table(:data="tableData2" style="width: 90%;margin:0 auto" height="250")
+          el-table(:data="tableData2" style="width: 90%;margin:0 auto")
             el-table-column(fixed prop="harCDate" label="日期" )
             el-table-column(prop="harC1" label="与术前相比" )
             el-table-column(prop="harC2" label="术后第（）月" )
@@ -876,7 +876,7 @@
       div.art2
         h1.title
         div.con2
-          el-table(:data="tableData3" style="width: 100%" height="250")
+          el-table(:data="tableData3" style="width: 100%")
             el-table-column(fixed prop="harDDate" label="日期" )
             el-table-column(prop="harD1" label="术后第（）月" )
             el-table-column(prop="harD2" label="移位" )

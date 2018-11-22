@@ -668,7 +668,7 @@
       div.art2
         h1.title
         div.con2
-          el-table( :data="tableData1" style="width:100%" height="250")
+          el-table( :data="tableData1" style="width:100%")
             el-table-column(fixed prop="date3" label="日期" min-width="150")
             el-table-column(prop="postoperationMonth" label="术后第（）个月" min-width="120")
             el-table-column(prop="pain2" label="疼痛" min-width="60")
@@ -762,7 +762,7 @@
       div.art2
         h1.title
         div.con2
-          el-table( :data="tableData2" style="width:100%" height="250")
+          el-table( :data="tableData2" style="width:100%")
             el-table-column(fixed prop="date4" label="日期" min-width="150")
             el-table-column(prop="postoperationMonth2" label="术后第（）个月" min-width="120")
             el-table-column(prop="satisfaction" label="患者满意度" min-width="100")
@@ -830,7 +830,7 @@
       div.art2
         h1.title
         div.con2
-          el-table( :data="tableData3" style="width:100%" height="250")
+          el-table( :data="tableData3" style="width:100%")
             el-table-column(fixed prop="date5" label="日期" min-width="150")
             el-table-column(prop="postoperationMonth3" label="术后第（）个月" min-width="120")
             el-table-column(prop="walk1" label="步行" min-width="100")
@@ -950,7 +950,7 @@
                 img(src="../../../../../static/images/img.png")
       div.art2
         div.con2
-          el-table( :data="tableData4" style="width:100%" height="250")
+          el-table( :data="tableData4" style="width:100%" )
             el-table-column(fixed prop="date7" label="日期" min-width="150")
             el-table-column(prop="postoperationMonth4" label="术后第（）个月" min-width="120")
             el-table-column(prop="thighboneSide" label="股骨骨水泥透亮区-侧位" min-width="190")
@@ -994,8 +994,9 @@
                 el-input(v-model="formModel4.polyethyleneLiner" clearable)
               el-form-item.short(label="骨溶解" label-width="180px")
                 el-input(v-model="formModel4.osteolysis" clearable)
-            el-button.anniu( @click="submitTable4"  type="primary") 保存
-            el-button.anniu( @click="closeTable4"  type="primary") 关闭
+            div.agg(style="margin-bottom: 1.5%;")
+              el-button.anniu( @click="submitTable4"  type="primary") 保存
+              el-button.anniu( @click="closeTable4"  type="primary") 关闭
 </template>
 
 <script>
@@ -1501,6 +1502,8 @@
       img
         width 80%
         height auto
-
+    .anniu
+      float right
+      margin 1% 1%
   /*margin-bottom 0*/
 </style>

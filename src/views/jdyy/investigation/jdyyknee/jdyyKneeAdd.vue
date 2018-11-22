@@ -906,7 +906,7 @@
             el-form-item.short(label="骨溶解" label-width="180px")
               el-input(v-model="formModel4.osteolysis" clearable)
             div.btn-box
-            div.btn
+            div.btn(style="width:20%; margin:auto;")
               el-form-item
                 el-button(type="primary" @click="onSubmit") 保存
                 el-button(type="primary" @click="onCancel") 取消
