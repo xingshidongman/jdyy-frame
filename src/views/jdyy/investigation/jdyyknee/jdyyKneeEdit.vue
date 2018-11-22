@@ -666,7 +666,7 @@
               td.long-td
                 div.con2-right2 5-10°（0）/0-4°或者11-15°（每度3分）/其他(20)
       div.art2
-        h1.title 膝关节功能评分
+        h1.title
         div.con2
           el-table( :data="tableData1" style="width:100%" height="250")
             el-table-column(fixed prop="date3" label="日期" min-width="150")
@@ -680,30 +680,36 @@
             el-table-column(prop="total3" label="总计" min-width="60")
             el-table-column(label="操作" min-width="60" fixed="right")
               template(slot-scope="scope")
-                el-button(type="text" size="small") 编辑
-        div.con2
-          div.con2-left
-          el-form-item.mini(label="日期" style="float:left")
-            el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" value-format="yyyy/M/d" format="yyyy/M/d")
-          el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth" clearable)
-          el-form-item.mini(label="疼痛" label-width="160px")
-            el-input(v-model="formModel.pain2" clearable)
-          el-form-item.mini(label="活动度")
-            el-input(v-model="formModel.activity" clearable)
-          el-form-item.mini(label="稳定性"  label-width="120px")
-            el-input(v-model="formModel.stability" clearable)
-          el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
-            el-input(v-model="formModel.fixedFlexionContracture2" clearable)
-          el-form-item.mini(label="伸直位松弛")
-            el-input(v-model="formModel.extensionRelaxation" clearable)
-          el-form-item.mini(label="力线"  label-width="120px")
-            el-input(v-model="formModel.forceLine3" clearable)
-          div
-            div.left-align
-              p 总计
-            span {{total3}}/100
+                el-button(type="text" size="small" @click="editTable1(scope.row)") 编辑
+                el-button.chan(type="text" size="small" @click="deleteTable1(scope.row)") 删除
+        div(style="width:100%;height: 63px;")
+          el-button.anniu( @click="addTable1"  type="primary") 添加
+        template(v-if="show1")
+          div.con2
+            div.con2-left
+            el-form-item.mini(label="日期" style="float:left")
+              el-col
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel1.date3" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
+            el-form-item.mini(label="术后第（）个月" label-width="120px")
+              el-input(v-model="formModel1.postoperationMonth" type="number" :min="0" clearable)
+            el-form-item.mini(label="疼痛" label-width="160px")
+              el-input(v-model="formModel1.pain2" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="活动度")
+              el-input(v-model="formModel1.activity" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="稳定性"  label-width="120px")
+              el-input(v-model="formModel1.stability" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
+              el-input(v-model="formModel1.fixedFlexionContracture2" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="伸直位松弛")
+              el-input(v-model="formModel1.extensionRelaxation" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="力线"  label-width="120px")
+              el-input(v-model="formModel1.forceLine3" type="number" :min="0" :max="100" clearable)
+            div
+              div.left-align
+                p 总计
+              span {{total3}}/100
+          el-button.anniu( @click="submitTable1"  type="primary") 保存
+          el-button.anniu( @click="closeTable1"  type="primary") 关闭
       div.art2
         h1.title 置换术后的特殊问题
         div.con2
@@ -754,7 +760,7 @@
               td.long-td
                 div.con2-right2 1 - 无/2 - 轻度/3 - 明显
       div.art2
-        h1.title 置换术后的特殊问题
+        h1.title
         div.con2
           el-table( :data="tableData2" style="width:100%" height="250")
             el-table-column(fixed prop="date4" label="日期" min-width="150")
@@ -770,32 +776,38 @@
             el-table-column(prop="backSlack" label="后方松弛" min-width="100")
             el-table-column(label="操作" min-width="60" fixed="right")
               template(slot-scope="scope")
-                el-button(type="text" size="small") 编辑
-        div.con2
-          div.con2-left
-          el-form-item.mini(label="日期" style="float:left")
-            el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" value-format="yyyy/M/d" format="yyyy/M/d")
-          el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth2" clearable)
-          el-form-item.mini(label="患者满意度" label-width="110px")
-            el-input(v-model="formModel.satisfaction" clearable)
-          el-form-item.mini(label="步态" )
-            el-input(v-model="formModel.gait" clearable)
-          el-form-item.mini(label="髌骨侧问题" label-width="120px")
-            el-input(v-model="formModel.problem" clearable)
-          el-form-item.mini(label="股四头肌肌力" label-width="110px")
-            el-input(v-model="formModel.muscleStrength" clearable)
-          el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
-            el-input(v-model="formModel.fixedFlexionContracture3" clearable)
-          el-form-item.mini(label="过伸" label-width="120px")
-            el-input(v-model="formModel.hyperextension2" clearable)
-          el-form-item.mini(label="侧方松弛" label-width="110px")
-            el-input(v-model="formModel.lateralSlack" clearable)
-          el-form-item.mini(label="前后松弛" )
-            el-input(v-model="formModel.frontBackSlack" clearable)
-          el-form-item.mini(label="后方松弛" label-width="120px")
-            el-input(v-model="formModel.backSlack" clearable)
+                el-button(type="text" size="small" @click="editTable2(scope.row)") 编辑
+                el-button.chan(type="text" size="small" @click="deleteTable2(scope.row)") 删除
+        div(style="width:100%;height: 63px;")
+          el-button.anniu( @click="addTable2"  type="primary") 添加
+        template(v-if="show2")
+          div.con2
+            div.con2-left
+            el-form-item.mini(label="日期" style="float:left")
+              el-col
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel2.date4" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
+            el-form-item.mini(label="术后第（）个月" label-width="120px")
+              el-input(v-model="formModel2.postoperationMonth2" clearable)
+            el-form-item.mini(label="患者满意度" label-width="110px")
+              el-input(v-model="formModel2.satisfaction" clearable)
+            el-form-item.mini(label="步态" )
+              el-input(v-model="formModel2.gait" clearable)
+            el-form-item.mini(label="髌骨侧问题" label-width="120px")
+              el-input(v-model="formModel2.problem" clearable)
+            el-form-item.mini(label="股四头肌肌力" label-width="110px")
+              el-input(v-model="formModel2.muscleStrength" clearable)
+            el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
+              el-input(v-model="formModel2.fixedFlexionContracture3" clearable)
+            el-form-item.mini(label="过伸" label-width="120px")
+              el-input(v-model="formModel2.hyperextension2" clearable)
+            el-form-item.mini(label="侧方松弛" label-width="110px")
+              el-input(v-model="formModel2.lateralSlack" clearable)
+            el-form-item.mini(label="前后松弛" )
+              el-input(v-model="formModel2.frontBackSlack" clearable)
+            el-form-item.mini(label="后方松弛" label-width="120px")
+              el-input(v-model="formModel2.backSlack" clearable)
+          el-button.anniu( @click="submitTable2"  type="primary") 保存
+          el-button.anniu( @click="closeTable2"  type="primary") 关闭
       div.art2
         h1.title 膝关节协会功能评估
         div.con2
@@ -816,7 +828,7 @@
               td.long-td
                 div.con2-right2 无（0）/单拐（5）/双拐（10）/腋杖，助步器（20）
       div.art2
-        h1.title 膝关节协会功能评估
+        h1.title
         div.con2
           el-table( :data="tableData3" style="width:100%" height="250")
             el-table-column(fixed prop="date5" label="日期" min-width="150")
@@ -824,27 +836,33 @@
             el-table-column(prop="walk1" label="步行" min-width="100")
             el-table-column(prop="stairActivity1" label="上下楼梯" min-width="60")
             el-table-column(prop="walkingAid1" label="辅助行走" min-width="100")
-            el-table-column(prop="total5" label="总计" min-width="60")
+            el-table-column(prop="total4" label="总计" min-width="60")
             el-table-column(label="操作" min-width="60" fixed="right")
               template(slot-scope="scope")
-                el-button(type="text" size="small") 编辑
-        div.con2
-          div.con2-left
-          el-form-item.mini(label="日期" style="float:left")
-            el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" value-format="yyyy/M/d" format="yyyy/M/d")
-          el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth3" clearable)
-          el-form-item.mini(label="步行")
-            el-input(v-model="formModel.walk1" clearable)
-          el-form-item.mini(label="上下楼梯")
-            el-input(v-model="formModel.stairActivity1" clearable)
-          el-form-item.mini(label="辅助行走" label-width="120px")
-            el-input(v-model="formModel.walkingAid1" clearable)
-          div
-            div.left-align
-              p 总计
-            span {{total5}}/100
+                el-button(type="text" size="small" @click="editTable3(scope.row)") 编辑
+                el-button.chan(type="text" size="small" @click="deleteTable3(scope.row)") 删除
+        div(style="width:100%;height: 63px;")
+          el-button.anniu( @click="addTable3"  type="primary") 添加
+        template(v-if="show3")
+          div.con2
+            div.con2-left
+            el-form-item.mini(label="日期" style="float:left")
+              el-col
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel3.date5" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
+            el-form-item.mini(label="术后第（）个月" label-width="120px")
+              el-input(v-model="formModel3.postoperationMonth3" type="number" :min="0" clearable)
+            el-form-item.mini(label="步行")
+              el-input(v-model="formModel3.walk1" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="上下楼梯")
+              el-input(v-model="formModel3.stairActivity1" type="number" :min="0" :max="100" clearable)
+            el-form-item.mini(label="辅助行走" label-width="120px")
+              el-input(v-model="formModel3.walkingAid1" type="number" :min="0" :max="100" clearable)
+            div
+              div.left-align
+                p 总计
+              span {{total4}}/100
+          el-button.anniu( @click="submitTable3"  type="primary") 保存
+          el-button.anniu( @click="closeTable3"  type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -946,37 +964,48 @@
             el-table-column(prop="osteolysis" label="骨溶解" min-width="90")
             el-table-column(label="操作" min-width="60" fixed="right")
               template(slot-scope="scope")
-                el-button(type="text" size="small") 编辑
-        div.con2
-          div.con2-left
-            el-form-item.short(label="日期" style="float:left" label-width="180px")
-              el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" value-format="yyyy/M/d" format="yyyy/M/d")
-            el-form-item.short(label="术后第（）个月" label-width="180px")
-              el-input(v-model="formModel.postoperationMonth4" clearable)
-            el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.thighboneSide" clearable)
-            el-form-item.short(label="胫骨骨水泥透亮区-前后位" label-width="180px")
-              el-input(v-model="formModel.tibiaFab" clearable)
-            el-form-item.short(label="胫骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.tibiaSide" clearable)
-            el-form-item.short(label="髌骨骨水泥透亮区-切位" label-width="180px")
-              el-input(v-model="formModel.thighboneCut" clearable)
-            el-form-item.short(label="髌骨半脱位" label-width="180px")
-              el-input(v-model="formModel.thighboneSubluxation" clearable)
-            el-form-item.short(label="植骨吸收" label-width="180px")
-              el-input(v-model="formModel.boneGraft" clearable)
-            el-form-item.short(label="松动（股骨/胫骨/髌骨）" label-width="180px")
-              el-input(v-model="formModel.loose" clearable)
-            el-form-item.short(label="聚乙烯内衬" label-width="180px")
-              el-input(v-model="formModel.polyethyleneLiner" clearable)
-            el-form-item.short(label="骨溶解" label-width="180px")
-              el-input(v-model="formModel.osteolysis" clearable)
+                el-button(type="text" size="small" @click="editTable4(scope.row)") 编辑
+                el-button.chan(type="text" size="small" @click="deleteTable4(scope.row)") 删除
+        div(style="width:100%;height: 63px;")
+          el-button.anniu( @click="addTable4"  type="primary") 添加
+        template(v-if="show4")
+          div.con2
+            div.con2-left
+              el-form-item.short(label="日期" style="float:left" label-width="180px")
+                el-col
+                  el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel4.date7" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
+              el-form-item.short(label="术后第（）个月" label-width="180px")
+                el-input(v-model="formModel4.postoperationMonth4" clearable)
+              el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
+                el-input(v-model="formModel4.thighboneSide" clearable)
+              el-form-item.short(label="胫骨骨水泥透亮区-前后位" label-width="180px")
+                el-input(v-model="formModel4.tibiaFab" clearable)
+              el-form-item.short(label="胫骨骨水泥透亮区-侧位" label-width="180px")
+                el-input(v-model="formModel4.tibiaSide" clearable)
+              el-form-item.short(label="髌骨骨水泥透亮区-切位" label-width="180px")
+                el-input(v-model="formModel4.thighboneCut" clearable)
+              el-form-item.short(label="髌骨半脱位" label-width="180px")
+                el-input(v-model="formModel4.thighboneSubluxation" clearable)
+              el-form-item.short(label="植骨吸收" label-width="180px")
+                el-input(v-model="formModel4.boneGraft" clearable)
+              el-form-item.short(label="松动（股骨/胫骨/髌骨）" label-width="180px")
+                el-input(v-model="formModel4.loose" clearable)
+              el-form-item.short(label="聚乙烯内衬" label-width="180px")
+                el-input(v-model="formModel4.polyethyleneLiner" clearable)
+              el-form-item.short(label="骨溶解" label-width="180px")
+                el-input(v-model="formModel4.osteolysis" clearable)
+            el-button.anniu( @click="submitTable4"  type="primary") 保存
+            el-button.anniu( @click="closeTable4"  type="primary") 关闭
 </template>
 
 <script>
   import FormModel from './model'
-  import {JdyykneeURL} from '../../config.toml'
+  import FormModel1 from './model1'
+  import FormModel2 from './model2'
+  import FormModel3 from './model3'
+  import FormModel4 from './model4'
+  import {JdyykneeURL, JdyykneeFunctionalScoreURL, JdyykneeImgEvaluationURL, JdyykneeKSSEvaluationURL, JdyykneeTKASpecialURL} from '../../config.toml'
+  import Message from '../../../../components/corelib/common/message'
   export default {
     name: 'jdyyKneeEdit',
     data() {
@@ -986,51 +1015,10 @@
         labelWidth: '90px',
         labelPosition: 'right',
         formModel: Object.assign({}, FormModel),
-        tableData1: [{
-          date3: '2018-03-12',
-          postoperationMonth: '术前',
-          pain2: '50',
-          activity: '25',
-          stability: '25',
-          fixedFlexionContracture2: '-10',
-          extensionRelaxation: '-5',
-          forceLine3: '12',
-          total3: '100'
-        }],
-        tableData2: [{
-          date4: '2018-03-12',
-          postoperationMonth2: '术前',
-          satisfaction: '1',
-          gait: '1',
-          problem: '1',
-          muscleStrength: '1',
-          fixedFlexionContracture3: '1',
-          hyperextension2: '1',
-          lateralSlack: '1',
-          frontBackSlack: '1',
-          backSlack: '1'
-        }],
-        tableData3: [{
-          date5: '2018-03-12',
-          postoperationMonth3: '术前',
-          walk1: '1',
-          stairActivity1: '1',
-          walkingAid1: '1',
-          total5: '1'
-        }],
-        tableData4: [{
-          date7: '2018-03-12',
-          postoperationMonth4: '术前',
-          thighboneSide: '1',
-          tibiaFab: '1',
-          tibiaSide: '1',
-          thighboneCut: '1',
-          thighboneSubluxation: '1',
-          boneGraft: '1',
-          loose: '1',
-          polyethyleneLiner: '1',
-          osteolysis: '1'
-        }],
+        formModel1: Object.assign({}, FormModel1),
+        formModel2: Object.assign({}, FormModel2),
+        formModel3: Object.assign({}, FormModel3),
+        formModel4: Object.assign({}, FormModel4),
         arr1: [
           {name: '无', id: '50'},
           {name: '偶尔轻度疼痛', id: '45'},
@@ -1087,29 +1075,305 @@
           {name: '单拐', id: '5'},
           {name: '双拐', id: '10'},
           {name: '腋杖，助步器', id: '20'}
-        ]
+        ],
+        tableData1: [],
+        tableData2: [],
+        tableData3: [],
+        tableData4: [],
+        show1: false,
+        show2: false,
+        show3: false,
+        show4: false
       }
     },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
+        this.getTableData1(this.formModel.id)
+        this.getTableData2(this.formModel.id)
+        this.getTableData3(this.formModel.id)
+        this.getTableData4(this.formModel.id)
       },
       setGroup(val) {
         this.formModel.downlosd = val
+      },
+      getTableData1(kid) { // 获取膝关节功能评分信息
+        console.log('getTableData1=========================', kid)
+        let jsonStr = {'kid': kid}
+        this.axios.request({
+          method: 'GET',
+          url: JdyykneeFunctionalScoreURL,
+          params: {
+            jsonStr: jsonStr
+          }
+        }).then(res => {
+          console.log('res.data1==========================', res.data.data[0].id)
+          this.tableData1 = res.data.data
+        })
+      },
+      getTableData2(kid) { // 获取置换术后的特殊问题信息
+        console.log('getTableData2=========================', kid)
+        let jsonStr = {'kid': kid}
+        this.axios.request({
+          method: 'GET',
+          url: JdyykneeTKASpecialURL,
+          params: {
+            jsonStr: jsonStr
+          }
+        }).then(res => {
+          console.log('res.data2==========================', res.data.data[0].id)
+          this.tableData2 = res.data.data
+        })
+      },
+      getTableData3(kid) { // 获取膝关节协会功能评估信息
+        console.log('getTableData3=========================', kid)
+        let jsonStr = {'kid': kid}
+        this.axios.request({
+          method: 'GET',
+          url: JdyykneeKSSEvaluationURL,
+          params: {
+            jsonStr: jsonStr
+          }
+        }).then(res => {
+          console.log('res.data3==========================', res.data.data[0].id)
+          this.tableData3 = res.data.data
+        })
+      },
+      getTableData4(kid) { // 获取影像学评估信息
+        console.log('getTableData4=========================', kid)
+        let jsonStr = {'kid': kid}
+        this.axios.request({
+          method: 'GET',
+          url: JdyykneeImgEvaluationURL,
+          params: {
+            jsonStr: jsonStr
+          }
+        }).then(res => {
+          console.log('res.data4==========================', res.data.data[0].id)
+          this.tableData4 = res.data.data
+        })
+      },
+      addTable1() { // 添加膝关节功能评分信息
+        console.log('addTable1==========click')
+        this.formModel1 = Object.assign({}, FormModel1)
+        this.formModel1.kid = this.formModel.id
+        this.show1 = true
+      },
+      addTable2() { // 添加置换术后的特殊问题信息
+        console.log('addTable2==========click')
+        this.formModel2 = Object.assign({}, FormModel2)
+        this.formModel2.kid = this.formModel.id
+        this.show2 = true
+      },
+      addTable3() { // 添加膝关节协会功能评估信息
+        console.log('addTable3==========click')
+        this.formModel3 = Object.assign({}, FormModel3)
+        this.formModel3.kid = this.formModel.id
+        this.show3 = true
+      },
+      addTable4() { // 添加影像学评估信息
+        console.log('addTable4==========click')
+        this.formModel4 = Object.assign({}, FormModel4)
+        this.formModel4.kid = this.formModel.id
+        this.show4 = true
+      },
+      editTable1(row) { // 编辑膝关节功能评分信息
+        this.show1 = true
+        console.log('editTable1=================', row)
+        this.formModel1 = row
+      },
+      editTable2(row) { // 编辑置换术后的特殊问题信息
+        this.show2 = true
+        console.log('editTable2=================', row)
+        this.formModel2 = row
+      },
+      editTable3(row) { // 编辑膝关节协会功能评估信息
+        this.show3 = true
+        console.log('editTable3=================', row)
+        this.formModel3 = row
+      },
+      editTable4(row) { // 编辑影像学评估信息
+        this.show4 = true
+        console.log('editTable4=================', row)
+        this.formModel4 = row
+      },
+      deleteTable1(row) { // 删除膝关节功能评分信息
+        console.log('deleteTable1==================', row.id)
+        this.$confirm('确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log('DELETE==================', row.id)
+          this.axios.request({
+            method: 'DELETE',
+            url: JdyykneeFunctionalScoreURL + '/' + row.id,
+            params: {
+              id: row.id
+            }
+          }).then(res => {
+            Message.success(res.data.msg)
+            this.getTableData1(this.formModel.id)
+          })
+        })
+      },
+      deleteTable2(row) { // 删除置换术后的特殊问题信息
+        console.log('deleteTable2==================', row.id)
+        this.$confirm('确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log('DELETE==================', row.id)
+          this.axios.request({
+            method: 'DELETE',
+            url: JdyykneeTKASpecialURL + '/' + row.id,
+            params: {
+              id: row.id
+            }
+          }).then(res => {
+            Message.success(res.data.msg)
+            this.getTableData2(this.formModel.id)
+          })
+        })
+      },
+      deleteTable3(row) { // 删除膝关节协会功能评估信息
+        console.log('deleteTable3==================', row.id)
+        this.$confirm('确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log('DELETE==================', row.id)
+          this.axios.request({
+            method: 'DELETE',
+            url: JdyykneeKSSEvaluationURL + '/' + row.id,
+            params: {
+              id: row.id
+            }
+          }).then(res => {
+            Message.success(res.data.msg)
+            this.getTableData3(this.formModel.id)
+          })
+        })
+      },
+      deleteTable4(row) { // 删除影像学评估信息
+        console.log('deleteTable4==================', row.id)
+        this.$confirm('确定要删除吗?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          console.log('DELETE==================', row.id)
+          this.axios.request({
+            method: 'DELETE',
+            url: JdyykneeImgEvaluationURL + '/' + row.id,
+            params: {
+              id: row.id
+            }
+          }).then(res => {
+            Message.success(res.data.msg)
+            this.getTableData4(this.formModel.id)
+          })
+        })
+      },
+      submitTable1() { // 膝关节功能评分信息保存按钮
+        console.log('submitTable1==================', this.formModel1)
+        this.axios.request({
+          method: this.formModel1.id == null ? 'POST' : 'PUT',
+          url: this.formModel1.id == null ? JdyykneeFunctionalScoreURL : JdyykneeFunctionalScoreURL + '/' + this.formModel1.id,
+          data: this.formModel1
+        }).then(res => {
+          console.log('submitTable1-res.data===================', res.data)
+          Message.success(res.data.msg)
+          this.show1 = false
+          this.getTableData1(this.formModel.id)
+        })
+      },
+      submitTable2() { // 置换术后的特殊问题信息保存按钮
+        console.log('submitTable2==================', this.formModel2)
+        this.axios.request({
+          method: this.formModel2.id == null ? 'POST' : 'PUT',
+          url: this.formModel2.id == null ? JdyykneeTKASpecialURL : JdyykneeTKASpecialURL + '/' + this.formModel2.id,
+          data: this.formModel2
+        }).then(res => {
+          console.log('submitTable2-res.data===================', res.data)
+          Message.success(res.data.msg)
+          this.show2 = false
+          this.getTableData2(this.formModel.id)
+        })
+      },
+      submitTable3() { // 影像膝关节协会功能评估信息
+        console.log('submitTable3==================', this.formModel3)
+        this.axios.request({
+          method: this.formModel3.id == null ? 'POST' : 'PUT',
+          url: this.formModel3.id == null ? JdyykneeKSSEvaluationURL : JdyykneeKSSEvaluationURL + '/' + this.formModel3.id,
+          data: this.formModel3
+        }).then(res => {
+          console.log('submitTable3-res.data===================', res.data)
+          Message.success(res.data.msg)
+          this.show3 = false
+          this.getTableData3(this.formModel.id)
+        })
+      },
+      submitTable4() { // 影像学评估信息保存按钮
+        console.log('submitTable4==================', this.formModel4)
+        this.axios.request({
+          method: this.formModel4.id == null ? 'POST' : 'PUT',
+          url: this.formModel4.id == null ? JdyykneeImgEvaluationURL : JdyykneeImgEvaluationURL + '/' + this.formModel4.id,
+          data: this.formModel4
+        }).then(res => {
+          console.log('submitTable4-res.data===================', res.data)
+          Message.success(res.data.msg)
+          this.show4 = false
+          this.getTableData4(this.formModel.id)
+        })
+      },
+      closeTable1() { // 关闭膝关节功能评分信息
+        this.show1 = false
+      },
+      closeTable2() { // 关闭置换术后的特殊问题信息
+        this.show2 = false
+      },
+      closeTable3() { // 关闭膝关节协会功能评估信息
+        this.show3 = false
+      },
+      closeTable4() { // 关闭影像学评估信息
+        this.show4 = false
       }
     },
     computed: {
       total1() {
-        return parseInt(this.formModel.pain) + parseInt(this.formModel.unwind / 5) + parseInt(this.formModel.buckling / 5) + parseInt(this.formModel.apPosition) + parseInt(this.formModel.lateralPosition) + parseInt(this.formModel.hyperextension) + parseInt(this.formModel.fixedFlexionContracture) + parseInt(this.formModel.forceLine)
+        this.formModel.total1 = (this.formModel.pain == null ? 0 : parseInt(this.formModel.pain)) +
+          (this.formModel.unwind == null ? 0 : parseInt(this.formModel.unwind / 5)) +
+          (this.formModel.buckling == null ? 0 : parseInt(this.formModel.buckling / 5)) +
+          (this.formModel.apPosition == null ? 0 : parseInt(this.formModel.apPosition)) +
+          (this.formModel.lateralPosition == null ? 0 : parseInt(this.formModel.lateralPosition)) +
+          (this.formModel.hyperextension == null ? 0 : parseInt(this.formModel.hyperextension)) +
+          (this.formModel.fixedFlexionContracture == null ? 0 : parseInt(this.formModel.fixedFlexionContracture)) +
+          (this.formModel.forceLine == null ? 0 : parseInt(this.formModel.forceLine))
+        return this.formModel.total1
       },
       total2() {
-        return parseInt(this.formModel.hoof) + parseInt(this.formModel.stairActivity) + parseInt(this.formModel.walkingAid)
+        this.formModel.total2 = (this.formModel.hoof == null ? 0 : parseInt(this.formModel.hoof)) +
+          (this.formModel.stairActivity == null ? 0 : parseInt(this.formModel.stairActivity)) +
+          (this.formModel.walkingAid == null ? 0 : parseInt(this.formModel.walkingAid))
+        return this.formModel.total2
       },
       total3() {
-        return parseInt(this.formModel.pain2) + parseInt(this.formModel.activity) + parseInt(this.formModel.stability) + parseInt(this.formModel.fixedFlexionContracture2) + parseInt(this.formModel.extensionRelaxation) + parseInt(this.formModel.forceLine3)
+        this.formModel1.total3 = (this.formModel1.pain2 == null ? 0 : parseInt(this.formModel1.pain2)) +
+          (this.formModel1.activity == null ? 0 : parseInt(this.formModel1.activity)) +
+          (this.formModel1.stability == null ? 0 : parseInt(this.formModel1.stability)) +
+          (this.formModel1.fixedFlexionContracture2 == null ? 0 : parseInt(this.formModel1.fixedFlexionContracture2)) +
+          (this.formModel1.extensionRelaxation == null ? 0 : parseInt(this.formModel1.extensionRelaxation)) +
+          (this.formModel1.forceLine3 == null ? 0 : parseInt(this.formModel1.forceLine3))
+        return this.formModel1.total3
       },
-      total5() {
-        return parseInt(this.formModel.walk1) + parseInt(this.formModel.stairActivity1) + parseInt(this.formModel.walkingAid1)
+      total4() {
+        this.formModel3.total4 = (this.formModel3.walk1 == null ? 0 : parseInt(this.formModel3.walk1)) +
+          (this.formModel3.stairActivity1 == null ? 0 : parseInt(this.formModel3.stairActivity1)) +
+          (this.formModel3.walkingAid1 == null ? 0 : parseInt(this.formModel3.walkingAid1))
+        return this.formModel3.total4
       }
     }
   }

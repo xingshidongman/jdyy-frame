@@ -1,5 +1,6 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='添加全膝术后调查' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition")
+  kalix-dialog.user-add(title='添加全膝术后调查' bizKey="jdyyKnee" ref="kalixBizDialog" v-bind:formModel.sync="formModel"
+  v-bind:targetURL="targetURL"  v-bind:labelWidth="labelWidth" v-bind:labelPosition="labelPosition" v-bind:isNoView="true")
     div.back(slot="dialogFormSlot")
       div.art1
         h1.title 全膝关节置换术
@@ -209,8 +210,6 @@
                       template(slot="append") kg
                   el-form-item.short(label="机械轴（前后位X线片）" label-width="50%")
                     el-input(v-model="formModel.machine" clearable)
-                  el-form-item.short()
-                    el-input(v-model="formModel.angle11" clearable)
                       template(slot="append") °
                   el-form-item.short()
                     el-radio-group.long(v-model="formModel.around")
@@ -665,41 +664,24 @@
                 div.con2-left 力线
               td.long-td
                 div.con2-right2 5-10°（0）/0-4°或者11-15°（每度3分）/其他(20)
-      <!--div.art2-->
-        <!--h1.title 膝关节功能评分-->
-        <!--div.con2-->
-          <!--el-table( :data="tableData1" style="width:100%" height="250" :default-sort = "{prop: 'date3', order: 'descending'}")-->
-            <!--el-table-column(fixed prop="date3" label="日期" min-width="150" sortable)-->
-            <!--el-table-column(prop="postoperationMonth" label="术后第（）个月" min-width="120")-->
-            <!--el-table-column(prop="pain2" label="疼痛" min-width="60")-->
-            <!--el-table-column(prop="activity" label="活动度" min-width="100")-->
-            <!--el-table-column(prop="stability" label="稳定性" min-width="100")-->
-            <!--el-table-column(prop="fixedFlexionContracture2" label="固定屈曲挛缩（FFC）" min-width="170")-->
-            <!--el-table-column(prop="extensionRelaxation" label="伸直位松弛" min-width="100")-->
-            <!--el-table-column(prop="forceLine3" label="力线" min-width="60")-->
-            <!--el-table-column(prop="total3" label="总计" min-width="60")-->
-            <!--el-table-column(label="操作" min-width="60" fixed="right" :formatter="formatter")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(type="text" size="small") 编辑-->
-        div.con2
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date3" value-format="yyyy/M/d" format="yyyy/M/d")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel1.date3" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth" clearable)
+            el-input(v-model="formModel1.postoperationMonth" type="number" :min="0" clearable)
           el-form-item.mini(label="疼痛" label-width="160px")
-            el-input(v-model="formModel.pain2" clearable)
+            el-input(v-model="formModel1.pain2" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="活动度")
-            el-input(v-model="formModel.activity" clearable)
-          el-form-item.mini(label="稳定性"  label-width="120px")
-            el-input(v-model="formModel.stability" clearable)
+            el-input(v-model="formModel1.activity" type="number" :min="0" :max="100" clearable)
+          el-form-item.mini(label="稳定性" label-width="120px")
+            el-input(v-model="formModel1.stability" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
-            el-input(v-model="formModel.fixedFlexionContracture2" clearable)
+            el-input(v-model="formModel1.fixedFlexionContracture2" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="伸直位松弛")
-            el-input(v-model="formModel.extensionRelaxation" clearable)
+            el-input(v-model="formModel1.extensionRelaxation" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="力线"  label-width="120px")
-            el-input(v-model="formModel.forceLine3" clearable)
+            el-input(v-model="formModel1.forceLine3" type="number" :min="0" :max="100" clearable)
           div
             div.left-align
               p 总计
@@ -753,49 +735,30 @@
                 div.con2-left 后方松弛
               td.long-td
                 div.con2-right2 1 - 无/2 - 轻度/3 - 明显
-      div.art2
-        h1.title 置换术后的特殊问题
-        div.con2
-          el-table( :data="tableData2" style="width:100%" height="250")
-            el-table-column(fixed prop="date4" label="日期" min-width="150")
-            el-table-column(prop="postoperationMonth2" label="术后第（）个月" min-width="120")
-            el-table-column(prop="satisfaction" label="患者满意度" min-width="100")
-            el-table-column(prop="gait" label="步态" min-width="60")
-            el-table-column(prop="problem" label="髌骨侧问题" min-width="100")
-            el-table-column(prop="muscleStrength" label="股四头肌肌力" min-width="120")
-            el-table-column(prop="fixedFlexionContracture3" label="固定屈曲挛缩（FFC）" min-width="170")
-            el-table-column(prop="hyperextension2" label="过伸" min-width="60")
-            el-table-column(prop="lateralSlack" label="侧方松弛" min-width="100")
-            el-table-column(prop="frontBackSlack" label="前后松弛" min-width="100")
-            el-table-column(prop="backSlack" label="后方松弛" min-width="100")
-            <!--el-table-column(label="操作" min-width="60" fixed="right")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(type="text" size="small") 编辑-->
-        div.con2
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date4" value-format="yyyy/M/d" format="yyyy/M/d")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel2.date4" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth2" clearable)
+            el-input(v-model="formModel2.postoperationMonth2" clearable)
           el-form-item.mini(label="患者满意度" label-width="110px")
-            el-input(v-model="formModel.satisfaction" clearable)
+            el-input(v-model="formModel2.satisfaction" clearable)
           el-form-item.mini(label="步态" )
-            el-input(v-model="formModel.gait" clearable)
+            el-input(v-model="formModel2.gait" clearable)
           el-form-item.mini(label="髌骨侧问题" label-width="120px")
-            el-input(v-model="formModel.problem" clearable)
+            el-input(v-model="formModel2.problem" clearable)
           el-form-item.mini(label="股四头肌肌力" label-width="110px")
-            el-input(v-model="formModel.muscleStrength" clearable)
+            el-input(v-model="formModel2.muscleStrength" clearable)
           el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
-            el-input(v-model="formModel.fixedFlexionContracture3" clearable)
+            el-input(v-model="formModel2.fixedFlexionContracture3" clearable)
           el-form-item.mini(label="过伸" label-width="120px")
-            el-input(v-model="formModel.hyperextension2" clearable)
+            el-input(v-model="formModel2.hyperextension2" clearable)
           el-form-item.mini(label="侧方松弛" label-width="110px")
-            el-input(v-model="formModel.lateralSlack" clearable)
+            el-input(v-model="formModel2.lateralSlack" clearable)
           el-form-item.mini(label="前后松弛" )
-            el-input(v-model="formModel.frontBackSlack" clearable)
+            el-input(v-model="formModel2.frontBackSlack" clearable)
           el-form-item.mini(label="后方松弛" label-width="120px")
-            el-input(v-model="formModel.backSlack" clearable)
+            el-input(v-model="formModel2.backSlack" clearable)
       div.art2
         h1.title 膝关节协会功能评估
         div.con2
@@ -815,36 +778,22 @@
                 div.con2-left 辅助行走
               td.long-td
                 div.con2-right2 无（0）/单拐（5）/双拐（10）/腋杖，助步器（20）
-      div.art2
-        h1.title 膝关节协会功能评估
-        div.con2
-          el-table( :data="tableData3" style="width:100%" height="250")
-            el-table-column(fixed prop="date5" label="日期" min-width="150")
-            el-table-column(prop="postoperationMonth3" label="术后第（）个月" min-width="120")
-            el-table-column(prop="walk1" label="步行" min-width="100")
-            el-table-column(prop="stairActivity1" label="上下楼梯" min-width="60")
-            el-table-column(prop="walkingAid1" label="辅助行走" min-width="100")
-            el-table-column(prop="total5" label="总计" min-width="60")
-            <!--el-table-column(label="操作" min-width="60" fixed="right")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(type="text" size="small") 编辑-->
-        div.con2
           div.con2-left
           el-form-item.mini(label="日期" style="float:left")
             el-col
-              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date5" value-format="yyyy/M/d" format="yyyy/M/d")
+              el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel3.date5" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.mini(label="术后第（）个月" label-width="120px")
-            el-input(v-model="formModel.postoperationMonth3" clearable)
+            el-input(v-model="formModel3.postoperationMonth3" type="number" :min="0" clearable)
           el-form-item.mini(label="步行")
-            el-input(v-model="formModel.walk1" clearable)
+            el-input(v-model="formModel3.walk1" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="上下楼梯")
-            el-input(v-model="formModel.stairActivity1" clearable)
+            el-input(v-model="formModel3.stairActivity1" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="辅助行走" label-width="120px")
-            el-input(v-model="formModel.walkingAid1" clearable)
+            el-input(v-model="formModel3.walkingAid1" type="number" :min="0" :max="100" clearable)
           div
             div.left-align
               p 总计
-            span {{total5}}/100
+            span {{total4}}/100
       div.art2
         h1.title 影像学评估
         div.con2
@@ -932,51 +881,47 @@
                 img(src="../../../../../static/images/img.png")
       div.art2
         div.con2
-          el-table( :data="tableData4" style="width:100%" height="250")
-            el-table-column(fixed prop="date7" label="日期" min-width="150")
-            el-table-column(prop="postoperationMonth4" label="术后第（）个月" min-width="120")
-            el-table-column(prop="thighboneSide" label="股骨骨水泥透亮区-侧位" min-width="190")
-            el-table-column(prop="tibiaFab" label="胫骨骨水泥透亮区-前后位" min-width="190")
-            el-table-column(prop="tibiaSide" label="胫骨骨水泥透亮区-侧位" min-width="190")
-            el-table-column(prop="thighboneCut" label="髌骨骨水泥透亮区-切位" min-width="190")
-            el-table-column(prop="thighboneSubluxation" label="髌骨半脱位" min-width="90")
-            el-table-column(prop="boneGraft" label="植骨吸收" min-width="90")
-            el-table-column(prop="loose" label="松动（股骨/胫骨/髌骨）" min-width="190")
-            el-table-column(prop="polyethyleneLiner" label="聚乙烯内衬" min-width="90")
-            el-table-column(prop="osteolysis" label="骨溶解" min-width="90")
-            <!--el-table-column(label="操作" min-width="60" fixed="right")-->
-              <!--template(slot-scope="scope")-->
-                <!--el-button(type="text" size="small") 编辑-->
-        div.con2
           div.con2-left
             el-form-item.short(label="日期" style="float:left" label-width="180px")
               el-col
-                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel.date7" value-format="yyyy/M/d" format="yyyy/M/d")
+                el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel4.date7" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.short(label="术后第（）个月" label-width="180px")
-              el-input(v-model="formModel.postoperationMonth4" clearable)
+              el-input(v-model="formModel4.postoperationMonth4" clearable)
             el-form-item.short(label="股骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.thighboneSide" clearable)
+              el-input(v-model="formModel4.thighboneSide" clearable)
             el-form-item.short(label="胫骨骨水泥透亮区-前后位" label-width="180px")
-              el-input(v-model="formModel.tibiaFab" clearable)
+              el-input(v-model="formModel4.tibiaFab" clearable)
             el-form-item.short(label="胫骨骨水泥透亮区-侧位" label-width="180px")
-              el-input(v-model="formModel.tibiaSide" clearable)
+              el-input(v-model="formModel4.tibiaSide" clearable)
             el-form-item.short(label="髌骨骨水泥透亮区-切位" label-width="180px")
-              el-input(v-model="formModel.thighboneCut" clearable)
+              el-input(v-model="formModel4.thighboneCut" clearable)
             el-form-item.short(label="髌骨半脱位" label-width="180px")
-              el-input(v-model="formModel.thighboneSubluxation" clearable)
+              el-input(v-model="formModel4.thighboneSubluxation" clearable)
             el-form-item.short(label="植骨吸收" label-width="180px")
-              el-input(v-model="formModel.boneGraft" clearable)
+              el-input(v-model="formModel4.boneGraft" clearable)
             el-form-item.short(label="松动（股骨/胫骨/髌骨）" label-width="180px")
-              el-input(v-model="formModel.loose" clearable)
+              el-input(v-model="formModel4.loose" clearable)
             el-form-item.short(label="聚乙烯内衬" label-width="180px")
-              el-input(v-model="formModel.polyethyleneLiner" clearable)
+              el-input(v-model="formModel4.polyethyleneLiner" clearable)
             el-form-item.short(label="骨溶解" label-width="180px")
-              el-input(v-model="formModel.osteolysis" clearable)
+              el-input(v-model="formModel4.osteolysis" clearable)
+            div.btn-box
+            div.btn
+              el-form-item
+                el-button(type="primary" @click="onSubmit") 保存
+                el-button(type="primary" @click="onCancel") 取消
 </template>
 
 <script>
   import FormModel from './model'
-  import {JdyykneeURL, JdyypatientsURL} from '../../config.toml'
+  import FormModel1 from './model1'
+  import FormModel2 from './model2'
+  import FormModel3 from './model3'
+  import FormModel4 from './model4'
+  import {JdyykneeURL, JdyypatientsURL, JdyykneeFunctionalScoreURL, JdyykneeImgEvaluationURL, JdyykneeKSSEvaluationURL, JdyykneeTKASpecialURL} from '../../config.toml'
+  import Message from '../../../../components/corelib/common/message'
+  import EventBus from '../../../../components/corelib/common/eventbus'
+  import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
   export default {
     name: 'jdyyKneeAdd',
     data() {
@@ -986,61 +931,10 @@
         labelWidth: '90px',
         labelPosition: 'right',
         formModel: Object.assign({}, FormModel),
-        tableData1: [{
-          date3: '2018-03-12',
-          postoperationMonth: '术前',
-          pain2: '50',
-          activity: '25',
-          stability: '25',
-          fixedFlexionContracture2: '-10',
-          extensionRelaxation: '-5',
-          forceLine3: '12',
-          total3: '100'
-        }, {
-          date3: '2018-03-10',
-          postoperationMonth: '术前',
-          pain2: '50',
-          activity: '25',
-          stability: '25',
-          fixedFlexionContracture2: '-10',
-          extensionRelaxation: '-5',
-          forceLine3: '12',
-          total3: '100'
-        }],
-        tableData2: [{
-          date4: '2018-03-12',
-          postoperationMonth2: '术前',
-          satisfaction: '1',
-          gait: '1',
-          problem: '1',
-          muscleStrength: '1',
-          fixedFlexionContracture3: '1',
-          hyperextension2: '1',
-          lateralSlack: '1',
-          frontBackSlack: '1',
-          backSlack: '1'
-        }],
-        tableData3: [{
-          date5: '2018-03-12',
-          postoperationMonth3: '术前',
-          walk1: '1',
-          stairActivity1: '1',
-          walkingAid1: '1',
-          total5: '1'
-        }],
-        tableData4: [{
-          date7: '2018-03-12',
-          postoperationMonth4: '术前',
-          thighboneSide: '1',
-          tibiaFab: '1',
-          tibiaSide: '1',
-          thighboneCut: '1',
-          thighboneSubluxation: '1',
-          boneGraft: '1',
-          loose: '1',
-          polyethyleneLiner: '1',
-          osteolysis: '1'
-        }],
+        formModel1: Object.assign({}, FormModel1),
+        formModel2: Object.assign({}, FormModel2),
+        formModel3: Object.assign({}, FormModel3),
+        formModel4: Object.assign({}, FormModel4),
         arr1: [
           {name: '无', id: '50'},
           {name: '偶尔轻度疼痛', id: '45'},
@@ -1105,9 +999,83 @@
       formatter(row, column) {
         return row.address
       },
-      onSubmit() {
-        console.log('submit!')
-        alert('天啦噜')
+      onSubmit() { // 保存全膝关节调查基本信息
+        console.log('submit=======================', this.formModel)
+        this.axios.request({
+          method: 'POST',
+          url: JdyykneeURL,
+          data: this.formModel
+        }).then(res => {
+          console.log('res========================', res.data.tag)
+          Message.success(res.data.msg)
+          if (this.formModel1.date3 != null || this.formModel1.postoperationMonth != null || this.formModel1.pain2 != null ||
+            this.formModel1.activity != null || this.formModel1.stability != null || this.formModel1.fixedFlexionContracture2 != null ||
+            this.formModel1.extensionRelaxation != null || this.formModel1.forceLine3 != null) {
+            this.formModel1.kid = res.data.tag
+            this.submitFunctionalScore()
+          }
+          if (this.formModel2.date4 != null || this.formModel2.postoperationMonth2 != null || this.formModel2.satisfaction != null ||
+            this.formModel2.gait != null || this.formModel2.problem != null || this.formModel2.muscleStrength != null ||
+            this.formModel2.fixedFlexionContracture3 != null || this.formModel2.hyperextension2 != null || this.formModel2.lateralSlack != null ||
+            this.formModel2.frontBackSlack != null || this.formModel2.backSlack != null) {
+            this.formModel2.kid = res.data.tag
+            this.submitTKASpecial()
+          }
+          if (this.formModel3.date5 != null || this.formModel3.postoperationMonth3 != null || this.formModel3.walk1 != null ||
+            this.formModel3.stairActivity1 != null || this.formModel3.walkingAid1 != null) {
+            this.formModel3.kid = res.data.tag
+            this.submitKSSEvaluation()
+          }
+          if (this.formModel4.date7 != null || this.formModel4.postoperationMonth4 != null || this.formModel4.thighboneSide != null ||
+            this.formModel4.tibiaFab != null || this.formModel4.tibiaSide != null || this.formModel4.thighboneCut != null ||
+            this.formModel4.thighboneSubluxation != null || this.formModel4.boneGraft != null || this.formModel4.loose != null ||
+            this.formModel4.polyethyleneLiner != null || this.formModel4.osteolysis != null) {
+            this.formModel4.kid = res.data.tag
+            this.submitImgEvaluation()
+          }
+          this.onCancel()
+        })
+      },
+      submitFunctionalScore() { // 保存膝关节功能评分
+        this.axios.request({
+          method: 'POST',
+          url: JdyykneeFunctionalScoreURL,
+          data: this.formModel1
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      submitTKASpecial() { // 保存置换术后的特殊问题
+        this.axios.request({
+          method: 'POST',
+          url: JdyykneeTKASpecialURL,
+          data: this.formModel2
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      submitKSSEvaluation() { // 保存膝关节协会功能评估
+        console.log('submitKSSEvaluation==============', this.formModel3)
+        this.axios.request({
+          method: 'POST',
+          url: JdyykneeKSSEvaluationURL,
+          data: this.formModel3
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      submitImgEvaluation() { // 保存影像学评估
+        this.axios.request({
+          method: 'POST',
+          url: JdyykneeImgEvaluationURL,
+          data: this.formModel4
+        }).then(res => {
+          console.log('res========================', res.data)
+        })
+      },
+      onCancel() { // 取消
+        this.$refs.kalixBizDialog.onCancelClick()
+        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
       },
       loadAll() { // 获取病员信息
         this.axios.request({
@@ -1153,16 +1121,36 @@
     },
     computed: {
       total1() {
-        return parseInt(this.formModel.pain) + parseInt(this.formModel.unwind / 5) + parseInt(this.formModel.buckling / 5) + parseInt(this.formModel.apPosition) + parseInt(this.formModel.lateralPosition) + parseInt(this.formModel.hyperextension) + parseInt(this.formModel.fixedFlexionContracture) + parseInt(this.formModel.forceLine)
+        this.formModel.total1 = (this.formModel.pain == null ? 0 : parseInt(this.formModel.pain)) +
+          (this.formModel.unwind == null ? 0 : parseInt(this.formModel.unwind / 5)) +
+          (this.formModel.buckling == null ? 0 : parseInt(this.formModel.buckling / 5)) +
+          (this.formModel.apPosition == null ? 0 : parseInt(this.formModel.apPosition)) +
+          (this.formModel.lateralPosition == null ? 0 : parseInt(this.formModel.lateralPosition)) +
+          (this.formModel.hyperextension == null ? 0 : parseInt(this.formModel.hyperextension)) +
+          (this.formModel.fixedFlexionContracture == null ? 0 : parseInt(this.formModel.fixedFlexionContracture)) +
+          (this.formModel.forceLine == null ? 0 : parseInt(this.formModel.forceLine))
+        return this.formModel.total1
       },
       total2() {
-        return parseInt(this.formModel.hoof) + parseInt(this.formModel.stairActivity) + parseInt(this.formModel.walkingAid)
+        this.formModel.total2 = (this.formModel.hoof == null ? 0 : parseInt(this.formModel.hoof)) +
+          (this.formModel.stairActivity == null ? 0 : parseInt(this.formModel.stairActivity)) +
+          (this.formModel.walkingAid == null ? 0 : parseInt(this.formModel.walkingAid))
+        return this.formModel.total2
       },
       total3() {
-        return parseInt(this.formModel.pain2) + parseInt(this.formModel.activity) + parseInt(this.formModel.stability) + parseInt(this.formModel.fixedFlexionContracture2) + parseInt(this.formModel.extensionRelaxation) + parseInt(this.formModel.forceLine3)
+        this.formModel1.total3 = (this.formModel1.pain2 == null ? 0 : parseInt(this.formModel1.pain2)) +
+          (this.formModel1.activity == null ? 0 : parseInt(this.formModel1.activity)) +
+          (this.formModel1.stability == null ? 0 : parseInt(this.formModel1.stability)) +
+          (this.formModel1.fixedFlexionContracture2 == null ? 0 : parseInt(this.formModel1.fixedFlexionContracture2)) +
+          (this.formModel1.extensionRelaxation == null ? 0 : parseInt(this.formModel1.extensionRelaxation)) +
+          (this.formModel1.forceLine3 == null ? 0 : parseInt(this.formModel1.forceLine3))
+        return this.formModel1.total3
       },
-      total5() {
-        return parseInt(this.formModel.walk1) + parseInt(this.formModel.stairActivity1) + parseInt(this.formModel.walkingAid1)
+      total4() {
+        this.formModel3.total4 = (this.formModel3.walk1 == null ? 0 : parseInt(this.formModel3.walk1)) +
+          (this.formModel3.stairActivity1 == null ? 0 : parseInt(this.formModel3.stairActivity1)) +
+          (this.formModel3.walkingAid1 == null ? 0 : parseInt(this.formModel3.walkingAid1))
+        return this.formModel3.total4
       }
     }
   }

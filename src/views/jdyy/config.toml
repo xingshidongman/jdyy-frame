@@ -27,4 +27,8 @@ JdyyhipSatisfactionURL = "/camel/rest/jdyy/hipSatisfactions"
 #全膝
 JdyykneeURL = "/camel/rest/jdyy/knees"
 jdyyKneeBtnPermissionPrefix = "jdyy:jdyyInvModule:jdyyKneeMenu:"
+JdyykneeFunctionalScoreURL = "/camel/rest/jdyy/kneeFunctionalScores"
+JdyykneeImgEvaluationURL = "/camel/rest/jdyy/kneeImgEvaluations"
+JdyykneeKSSEvaluationURL = "/camel/rest/jdyy/kneeKSSEvaluations"
+JdyykneeTKASpecialURL = "/camel/rest/jdyy/kneeTKASpecials"
 
