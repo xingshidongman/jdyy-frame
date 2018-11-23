@@ -3,6 +3,7 @@
     div.el-form(slot="dialogFormSlot")
       button(type="button" v-on:click="getBase64Pdf()") 导出PDF
       div.row(id="pdfDom" ref="pdfDom" style="padding-top: 30px;")
+        div(style="margin:20px auto;font-size: 20px;text-align:center;") 基 本 信 息
         el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth")
           el-input(v-model="formModel.medicalRecordNumber" readonly)
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth")

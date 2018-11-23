@@ -60,7 +60,7 @@
         ],
         jdyyQueDialog: [
           {id: 'viewPdf', dialog: 'JdyyQueView'},
-          {id: 'edit', dialog: 'jdyyQueModify'}
+          {id: 'edit', dialog: 'JdyyQueEdit'}
           // {id: 'delPatVis'}
         ],
         btnList: jdyyQueConfigBtnList,

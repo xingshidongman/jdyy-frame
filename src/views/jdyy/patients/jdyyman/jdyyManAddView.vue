@@ -5,35 +5,35 @@
         div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
-            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
+            el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" @select="handleSelect" style="width:100%")
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
             el-radio-group(v-model="formModel1.sex")
               el-radio(label="男")
               el-radio(label="女")
           el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-            el-input(v-model="formModel1.age" type="number")
+            el-input(v-model="formModel1.age" )
           el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
             el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
-            el-input(v-model="formModel1.idCard" type="number")
+            el-input(v-model="formModel1.idCard" )
           el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
             el-input(v-model="formModel1.telephonePerson")
           el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
-            el-input(v-model="formModel1.stature" type="number")
+            el-input(v-model="formModel1.stature"  placeholder="单位 : cm")
           el-form-item(label="体重" prop="weight" v-bind:label-width="labelWidth" v-bind:rules="rules.weight")
-            el-input(v-model="formModel1.weight" type="number")
+            el-input(v-model="formModel1.weight" placeholder="单位 : kg")
           el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth" v-bind:rules="rules.dateAdmission")
             el-date-picker(v-model="formModel1.dateAdmission" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
             el-date-picker(v-model="formModel1.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
-          el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-bind:rules="rules.directorDoctor")
-            el-input(v-model="formModel1.directorDoctor")
+          el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-on:blur="validDoctor(value)")
+            el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")
           el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
             el-input(v-model="formModel1.medicalRecords")
           el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
             el-input(v-model="formModel1.medicalRecordNumber")
           el-form-item(label="住院号" prop="hospitalNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.hospitalNumber")
-            el-input(v-model="formModel1.hospitalNumber" type="number")
+            el-input(v-model="formModel1.hospitalNumber" )
           el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
             el-input(v-model="formModel1.bedNumber")
           el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
@@ -45,11 +45,11 @@
           el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
             kalix-font-cascader.Border(v-on:change="getModel")
           el-form-item.address(label="通讯地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
-            el-input(v-model="formModel1.completeAddress")
+            el-input(v-model="formModel1.completeAddress" )
           el-form-item(label="BMI" prop="bmi" v-bind:label-width="labelWidth" v-bind:rules="rules.bmi")
-            el-input(v-model="formModel1.bmi" type="number")
+            el-input(v-model="formModel1.bmi" )
           el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
-            el-input(v-model="formModel1.bloodPressure" type="number")
+            el-input(v-model="formModel1.bloodPressure" )
           el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
             el-input(v-model="formModel1.specialDisorders")
           el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
@@ -59,9 +59,9 @@
           el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
             el-input(v-model="formModel1.medicalCategory")
           el-form-item(label="Harris评分" prop="harris" v-bind:label-width="labelWidth" v-bind:rules="rules.harris")
-            el-input(v-model="formModel1.harris" type="number")
+            el-input(v-model="formModel1.harris" )
           el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
-            el-input(v-model="formModel1.hss" type="number")
+            el-input(v-model="formModel1.hss" )
           el-form-item(label="是否出院" prop="whetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.whetherDischarge")
             el-radio-group(v-model="formModel1.whetherDischarge" )
               el-radio(label="是")
@@ -88,7 +88,7 @@
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-            el-select(v-model="formModel2.periodization" placeholder="请选择")
+            el-select(v-model="formModel2.periodization" placeholder="请选择分期")
               el-option(label="内科" value="内科")
               el-option(label="外科" value="外科")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
@@ -107,6 +107,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL, JdyysurURL, JdyydiaURL, JdyyvisitURL} from '../../config.toml'
+  // import {noop} from 'element-ui/src/utils/util'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
   import {baseURL} from '../../../../config/global.toml'
@@ -118,6 +119,109 @@
     name: 'kalix-jdyy-jdyyman',
     components: {KalixDatepickerSimple, KalixClansmanUpload, KalixFontCascader},
     data() {
+      // callback: noop()
+      var validatename = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确姓名'))
+          }
+        } else {
+          callback(new Error('请输姓名'))
+        }
+      }
+      var validateidCard = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          // let idCard = require('idcard') // 身份证号码验证  加载身份验证插件命令： yarn add idcard
+          // this.formModel.idCard = ''
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确身份证号码'))
+          }
+        } else {
+          callback(new Error('请输入身份证号码'))
+        }
+      }
+      // var validatetelephone = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
+      //     if (reg.test(valTrim) && valTrim.length === 11) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确手机号码'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback(new Error('请输入手机号码'))
+      //   }
+      // }
+      var validateage = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^(?:[1-9]?\d|200)$/
+          if (reg.test(valTrim)) {
+            this.phoneNumberInfo = true
+            callback()
+          } else {
+            this.phoneNumberInfo = false
+            callback(new Error('请输入正确年龄'))
+          }
+        } else {
+          this.phoneNumberInfo = false
+          callback(new Error('请输入年龄'))
+        }
+      }
+      // var validatestature = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^(?:[1-9]{1,2}\d|300)$/
+      //     if (reg.test(valTrim)) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确身高'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback(new Error('请输入身高'))
+      //   }
+      // }
+      // var validatecompleteAddress = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){5,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确通讯地址'))
+      //     }
+      //   } else {
+      //     callback(new Error('请输通讯地址'))
+      //   }
+      // }
+      // var validatexinxi = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){1,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确信息'))
+      //     }
+      //   } else {
+      //     callback(new Error('请输通讯信息'))
+      //   }
+      // }
       return {
         downloadURL: JdyypatientsURL,
         formModel1: Object.assign({}, FormModel1),
@@ -133,31 +237,30 @@
         fileNameArr: [],
         // options: [],
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
-          sex: [{required: true, message: '请输入性别', trigger: 'blur'}],
-          age: [{required: true, message: '请输入年龄', trigger: 'blur'}],
-          // brith: [{required: true, message: '请输入出生日期', trigger: 'change'}],
-          idCard: [{required: true, message: '请输入身份证号', trigger: 'blur'}]
+          name: [{required: true, validator: validatename, trigger: 'blur'}],
+          sex: [{required: true, trigger: 'blur'}],
+          age: [{required: true, validator: validateage, trigger: 'blur'}],
+          idCard: [{required: true, validator: validateidCard, trigger: 'blur'}]
+          // directorDoctor: [{validator: validatename, trigger: 'change'}],
+          // stature: [{required: false, validator: validatestature, trigger: 'change'}],
+          // telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
+          // familyPhone: [{validator: validatetelephone, trigger: 'change'}],
+          // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
+          // medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          // currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          // specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          // descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          // allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          // typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
+          // remarks: [{validator: validatexinxi, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
-          // directorDoctor: [{required: true, message: '请输入主管医生', trigger: 'change'}],
           // dateAdmission: [{required: true, message: '请输入入院日期', trigger: 'change'}],
           // dateAischarge: [{required: true, message: '请输入出院日期', trigger: 'change'}],
-          // stature: [{required: true, message: '请输入身高', trigger: 'change'}],
-          // weight: [{required: true, message: '请输入体重', trigger: 'change'}],
           // bmi: [{required: true, message: '请输入BMI', trigger: 'change'}],
           // bloodPressure: [{required: true, message: '请输入血压', trigger: 'change'}],
-          // specialDisorders: [{required: true, message: '请输入特殊疾患', trigger: 'change'}],
-          // descriptionSpecialDisease: [{required: true, message: '请输入特殊疾患描述', trigger: 'change'}],
-          // allergicHistory: [{required: true, message: '请输入过敏史', trigger: 'change'}],
-          // typeMedicalTreatment: [{required: true, message: '请输入医疗类别', trigger: 'change'}],
           // WhetherDischarge: [{required: true, message: '请输入是否出院', trigger: 'change'}],
-          // telephonePerson: [{required: true, message: '请输入本人联系方式', trigger: 'change'}],
-          // familyPhone: [{required: true, message: '请输入家属联系方式', trigger: 'change'}],
-          // // address: [{required: true, message: '请输入省市区', trigger: 'change'}],
-          // completeAddress: [{required: true, message: '请输入家详细地址', trigger: 'change'}],
-          // remarks: [{required: true, message: '请输入备注', trigger: 'change'}],
           // harris: [{required: true, message: '请输入Harris评分', trigger: 'change'}],
         },
         targetURL: JdyypatientsURL,
@@ -172,6 +275,22 @@
       this.loadAll() // 获取病员信息
     },
     methods: {
+      validDoctor(val, callback) {
+        if (val !== undefined && val !== null && val !== '') {
+          let valTrim = val.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          if (reg.test(valTrim)) {
+            // alert('nihao')
+            callback()
+          } else {
+            // alert('two')
+            callback(new Error('请输入正确姓名'))
+          }
+        } else {
+          // alert('three')
+          callback(new Error('请输姓名'))
+        }
+      },
       resetAll() {
         this.$refs.formModel1.resetFields() // 表单一重置
         this.$refs.formModel2.resetFields() // 表单二重置
