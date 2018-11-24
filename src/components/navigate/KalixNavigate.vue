@@ -85,6 +85,7 @@
     watch: {
       '$route'(to, from) {
         if (to.path !== '/' && to.path !== '/login') {
+          this.currApp = this.$route.params.app
           // this.fetchData()
         }
       }
