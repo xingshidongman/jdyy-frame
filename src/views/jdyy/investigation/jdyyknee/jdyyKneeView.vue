@@ -682,7 +682,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable1(scope.row)" type="text" size="large") 查看
         template(v-if="show1")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -703,7 +703,8 @@
               el-input(v-model="formModel1.forceLine3" readonly)
             el-form-item.mini(label="总计" label-width="120px")
               el-input(v-model="formModel1.total3" readonly)
-          el-button.anniu(@click="closeTable1" type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu(@click="closeTable1" type="primary") 关闭
       div.art2
         h1.title 置换术后的特殊问题
         div.con2
@@ -772,7 +773,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable2(scope.row)" type="text" size="large") 查看
         template(v-if="show2")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -797,7 +798,8 @@
               el-input(v-model="formModel2.frontBackSlack" readonly)
             el-form-item.mini(label="后方松弛" label-width="120px")
               el-input(v-model="formModel2.backSlack" readonly)
-          el-button.anniu(@click="closeTable2" type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu(@click="closeTable2" type="primary") 关闭
       div.art2
         h1.title 膝关节协会功能评估
         div.con2
@@ -831,7 +833,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable3(scope.row)" type="text" size="large") 查看
         template(v-if="show3")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -846,7 +848,8 @@
               el-input(v-model="formModel3.walkingAid1" readonly)
             el-form-item.mini(label="总计" label-width="120px")
               el-input(v-model="formModel3.total4" readonly)
-          el-button.anniu(@click="closeTable3" type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu(@click="closeTable3" type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -950,7 +953,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable4(scope.row)" type="text" size="large") 查看
         template(v-if="show4")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
               el-form-item.short(label="日期" style="float:left" label-width="180px")
                 el-col
@@ -975,8 +978,8 @@
                 el-input(v-model="formModel4.polyethyleneLiner" readonly)
               el-form-item.short(label="骨溶解" label-width="180px")
                 el-input(v-model="formModel4.osteolysis" readonly)
-            div.agg(style="margin-bottom: 1%;")
-              el-button.anniu(@click="closeTable4" type="primary") 关闭
+              el-form-item(style="width:55%;")
+                el-button.anniu(@click="closeTable4" type="primary") 关闭
 </template>
 
 <script>
@@ -1254,7 +1257,7 @@
       display inline-block
       vertical-align top
     .short
-      width 50%
+      width 49%
       display inline-block
     .long
       width 100%

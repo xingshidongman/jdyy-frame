@@ -685,7 +685,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable1"  type="primary") 添加
         template(v-if="show1")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -708,8 +708,9 @@
               div.left-align
                 p 总计
               span {{total3}}/100
-          el-button.anniu( @click="submitTable1"  type="primary") 保存
-          el-button.anniu( @click="closeTable1"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="submitTable1"  type="primary") 保存
+              el-button.anniu( @click="closeTable1"  type="primary") 关闭
       div.art2
         h1.title 置换术后的特殊问题
         div.con2
@@ -781,7 +782,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable2"  type="primary") 添加
         template(v-if="show2")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -806,8 +807,9 @@
               el-input(v-model="formModel2.frontBackSlack" clearable)
             el-form-item.mini(label="后方松弛" label-width="120px")
               el-input(v-model="formModel2.backSlack" clearable)
-          el-button.anniu( @click="submitTable2"  type="primary") 保存
-          el-button.anniu( @click="closeTable2"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="submitTable2"  type="primary") 保存
+              el-button.anniu( @click="closeTable2"  type="primary") 关闭
       div.art2
         h1.title 膝关节协会功能评估
         div.con2
@@ -844,7 +846,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable3"  type="primary") 添加
         template(v-if="show3")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -861,8 +863,9 @@
               div.left-align
                 p 总计
               span {{total4}}/100
-          el-button.anniu( @click="submitTable3"  type="primary") 保存
-          el-button.anniu( @click="closeTable3"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="submitTable3"  type="primary") 保存
+              el-button.anniu( @click="closeTable3"  type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -969,7 +972,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable4"  type="primary") 添加
         template(v-if="show4")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             div.con2-left
               el-form-item.short(label="日期" style="float:left" label-width="180px")
                 el-col
@@ -994,9 +997,9 @@
                 el-input(v-model="formModel4.polyethyleneLiner" clearable)
               el-form-item.short(label="骨溶解" label-width="180px")
                 el-input(v-model="formModel4.osteolysis" clearable)
-            div.agg(style="margin-bottom: 1.5%;")
-              el-button.anniu( @click="submitTable4"  type="primary") 保存
-              el-button.anniu( @click="closeTable4"  type="primary") 关闭
+              el-form-item(style="width:55%;")
+                el-button.anniu( @click="submitTable4"  type="primary") 保存
+                el-button.anniu( @click="closeTable4"  type="primary") 关闭
 </template>
 
 <script>
@@ -1449,7 +1452,7 @@
       display inline-block
       vertical-align top
     .short
-      width 50%
+      width 49%
       display inline-block
     .long
       width 100%

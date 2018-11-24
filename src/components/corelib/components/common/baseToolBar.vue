@@ -60,6 +60,7 @@
     background-color #f3f3f3
     border-color #dfdfdf
     color #3465cb
+    float right
     padding: 8px 12px;
   .buttons:hover
     background-color #3465cb

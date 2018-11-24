@@ -40,8 +40,7 @@
           {id: 'refresh', isShow: true, icon: 'icon-zhongzhi', title: '刷新'}
         ],
         treeToolbarBtnList: [
-          {id: 'add', icon: 'icon-pinleizengjia', isShow: true},
-          {id: 'refresh', isShow: true, icon: 'icon-zhongzhi', title: '刷新'}
+          {id: 'add', icon: 'icon-pinleizengjia', isShow: true}
         ],
         targetUrl: functionMenuURL,
         treeUrl: undefined,

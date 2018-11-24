@@ -711,7 +711,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable1"  type="primary") 添加
         template(v-if="show1")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel1.harADate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="术后第（）月")
@@ -756,8 +756,9 @@
               el-input(v-model="formModel1.harB7" clearable)
             el-form-item.mini(label="双下肢不等长")
               el-input(v-model="formModel1.harB8" clearable)
-          el-button.anniu( @click="submitTable1"  type="primary") 保存
-          el-button.anniu( @click="closeTable1"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="submitTable1"  type="primary") 保存
+              el-button.anniu( @click="closeTable1"  type="primary") 关闭
       div.art2
         h1.title 患者满意度
         div.con2
@@ -779,10 +780,10 @@
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable2(scope.row)") 编辑
                 el-button.chan(type="text" size="small" @click="deleteTable2(scope.row)") 删除
-          div
+          div(style="width:100%;height: 63px;")
             el-button.anniu(@click="addTable2"  type="primary") 添加
         template(v-if="show2")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel2.harCDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="与术前相比")
@@ -795,8 +796,9 @@
               el-input(v-model="formModel2.harC4" clearable)
             el-form-item.mini(label="总评")
               el-input(v-model="formModel2.harC5" clearable)
-          el-button.anniu(@click="submitTable2"  type="primary") 保存
-          el-button.anniu(@click="closeTable2"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu(@click="submitTable2"  type="primary") 保存
+              el-button.anniu(@click="closeTable2"  type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -895,10 +897,10 @@
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable3(scope.row)") 编辑
                 el-button.chan(type="text" size="small" @click="deleteTable3(scope.row)") 删除
-          div
+          div(style="width:100%;height: 63px;")
             el-button.anniu( @click="addTable3"  type="primary") 添加
         template(v-if="show3")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel3.harDDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="术后第（）月" label-width="150px")
@@ -927,8 +929,9 @@
               el-input(v-model="formModel3.harD12" clearable)
             el-form-item.mini(label="涂层脱落*")
               el-input(v-model="formModel3.harD13" clearable)
-          el-button.anniu( @click="submitTable3"  type="primary") 保存
-          el-button.anniu( @click="closeTable3"  type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="submitTable3"  type="primary") 保存
+              el-button.anniu( @click="closeTable3"  type="primary") 关闭
 
 </template>
 
@@ -1200,7 +1203,7 @@
     /*width 1160px*/
     margin-top 25px
     .con2
-      margin-bottom 20px
+      margin-bottom 5px
       table
         word-break break-all
         margin-bottom 20px
