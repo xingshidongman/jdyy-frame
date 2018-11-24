@@ -17,7 +17,7 @@
     },
     mounted() {
       this.fetchData()
-      this.getDate() // 获取系统当前日期方法
+      // this.getDate() // 获取系统当前日期方法
     },
     watch: {'$route': 'fetchData'},
     methods: {

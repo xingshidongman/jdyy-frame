@@ -29,7 +29,7 @@
   // import Eventbus from 'common/eventbus'
   import Cache from '../corelib/common/cache'
   import Login from 'api/login'
-  import {logoutUrl} from 'config/global.toml'
+  import {logoutUrl, applicationURL, systemApplicationsBaseURL} from 'config/global.toml'
 
   export default {
     name: 'LoginForm',
@@ -53,7 +53,9 @@
         error: {
           flag: false,
           message: ''
-        }
+        },
+        toolListData: {},
+        treeListData: {}
       }
     },
     activated() {
@@ -103,7 +105,15 @@
             let now = new Date().getTime()
             Cache._saveLocal('lastLoginTime', now)
             Cache.save('lastLoginTime', now)
-            this.$router.push({path: '/'})
+            this.$nextTick(() => {
+              this._initMenu((key) => {
+                this.$nextTick(() => {
+                  this._initItem(() => {
+                    this.$router.push({path: `/${key}`})
+                  })
+                })
+              })
+            })
           } else {
             this.$refs.loginFormName.focus()
             Message.error(data.message)
@@ -146,6 +156,61 @@
       },
       listen() {
         this.error.flag = false
+      },
+      /**
+       * 初始化菜单
+       */
+      _initMenu(callBack) {
+        console.log(' ++++++++++ Kalix - Header')
+        if (applicationURL.length) {
+          this.$http.get(applicationURL, {
+            params: this.params
+          }).then(response => {
+            if (response && response.data) {
+              this.toolListData = response.data
+              console.log('toolListData', this.toolListData)
+              this.$KalixCatch.save('toolListData', JSON.stringify(this.toolListData))
+              if (this.toolListData.length > 0) {
+                callBack(this.toolListData[0].id)
+              }
+            }
+          })
+        } else {
+          console.log(' ===== this.reqUrl is Null! ===== ')
+        }
+      },
+      _initItem(callBack) {
+        if (this.toolListData.length > 0) {
+          this._getTreeData(0, callBack)
+        }
+      },
+      _getTreeData(index, callBack) {
+        console.log('index', index)
+        let lstItem = this.toolListData[index]
+        if (lstItem) {
+          let d = new Date()
+          let cd = d.getTime()
+          let appId = lstItem.id
+          this.$http.get(systemApplicationsBaseURL + appId, {
+            params: {
+              _dc: cd,
+              node: 'root'
+            }
+          }).then(response => {
+            if (response.data && response.data.code !== 401) {
+              this.treeData = response.data
+              this.treeData.map(e => {
+                this.$set(e, 'isShow', false)
+              })
+              this.treeListData[appId] = this.treeData
+              this.treeListData.createDate = d.getTime()
+              this.$KalixCatch.save('treeListData', JSON.stringify(this.treeListData))
+              this._getTreeData(index += 1, callBack)
+            }
+          })
+        } else {
+          callBack()
+        }
       }
     },
     components: {},

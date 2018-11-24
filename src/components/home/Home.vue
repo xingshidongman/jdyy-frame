@@ -29,7 +29,7 @@
       return {
         isSmall: false,
         which_to_show: null,
-        themeValue: null,
+        themeValue: 'theme-triton',
         applicationURL: applicationURL,
         cacheTime: cacheTime,
         systemApplicationsBaseURL: systemApplicationsBaseURL
@@ -92,7 +92,7 @@
             this.which_to_show = 'welcome'
           }
         }
-        this.initTheme()
+        // this.initTheme()
       },
       changeTheme(value) {
         this.themeValue = value

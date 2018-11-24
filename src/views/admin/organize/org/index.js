@@ -2,14 +2,14 @@ import Org from './org.vue'
 import OrgAdd from './orgAdd.vue'
 import OrgAddUser from './orgAddUser.vue'
 import OrgEdit from './orgEdit.vue'
-import OrgSearch from './orgSearch.vue'
+// import OrgSearch from './orgSearch.vue'
 
 const components = [
   Org,
   OrgAdd,
   OrgAddUser,
-  OrgEdit,
-  OrgSearch
+  OrgEdit
+  // OrgSearch
 ]
 
 const main = {

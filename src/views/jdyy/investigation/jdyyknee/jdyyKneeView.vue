@@ -682,7 +682,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable1(scope.row)" type="text" size="large") 查看
         template(v-if="show1")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -773,7 +773,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable2(scope.row)" type="text" size="large") 查看
         template(v-if="show2")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -833,7 +833,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable3(scope.row)" type="text" size="large") 查看
         template(v-if="show3")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -953,7 +953,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable4(scope.row)" type="text" size="large") 查看
         template(v-if="show4")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
               el-form-item.short(label="日期" style="float:left" label-width="180px")
                 el-col

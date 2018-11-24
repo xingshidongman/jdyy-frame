@@ -7,9 +7,10 @@
       v-if="bizSearch"
       v-on:onSearchBtnClick="onSearchClick")
       div.kalix-wrapper(v-bind:style="setWrapperStyle()" style="bottom:8px;")
-        <!--div.kalix-wrapper-hd-->
-          <!--i(v-bind:class="iconCls")-->
-          <!--| {{title}}-->
+        div.kalix-wrapper-hd.top-ten
+          div.line
+          i(v-bind:class="iconCls" style=" margin-left:1%;line-height: 28px; position: absolute;")
+          span.test {{title}}
         div.kalix-wrapper-bd
           template(v-if="isToolBarSelf")
             kalix-tool-bar(v-bind:toolbarBtnList="toolbarBtnListClone" v-on:onToolBarClick="onToolBarSelfClick")
@@ -797,6 +798,20 @@
     display inline-block
     width 1em
   }
+  .kalix-wrapper-hd
+    padding 0 15px
+    .line
+      width 0.8%
+      background-color #3465cb
+      height 28px
+      display: inline-block;
+    .test
+      margin-left: 2.8%;
+      height 28px
+      line-height 28px
+      position: absolute;
+  .top-ten
+    margin-top 10px
 </style>
 <style scoped lang="stylus" type="text/stylus">
   @import "../../assets/stylus/baseTable.styl"
