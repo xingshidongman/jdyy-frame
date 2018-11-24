@@ -65,7 +65,7 @@ name = "AdminConfiguer"
   isPermission = true
 [[DutyButtonList]]
   id = "addUser"
-  title = "添加"
+  title = "用户"
   toolTipTitle= "添加用户"
   isShow = true
   isPermission = true
