@@ -69,27 +69,38 @@
     },
     activated() {
       console.log('+++++++++++++= activated =++++++++++++++++')
-      this.initColumn()
-      this.$KalixEventBus.$on('HeaderOnSmall', (e) => {
-        this.menuChk = e
-      })
-      this.fetchData()
+      this.showColumn()
+      // this.initColumn()
+      // this.$KalixEventBus.$on('HeaderOnSmall', (e) => {
+      //   this.menuChk = e
+      // })
     },
     mounted() {
       console.log('+++++++++++++= mounted =++++++++++++++++')
       // setTimeout(() => {
-      //   this.initColumn()
       // }, 5000)
-      this.fetchData()
+      // this.fetchData()
+      this.showColumn()
     },
     watch: {
       '$route'(to, from) {
         if (to.path !== '/' && to.path !== '/login') {
-          this.fetchData()
+          // this.fetchData()
         }
       }
     },
     methods: {
+      showColumn() {
+        console.log('+++++++++++++= showColumn =++++++++++++++++')
+        if (this.$KalixCatch.get('toolListData')) {
+          this.columnList = JSON.parse(this.$KalixCatch.get('toolListData'))
+          this.columnList.map(e => {
+            this.$set(e, 'isActive', false)
+          })
+          console.log('columnList', this.columnList)
+          this.fetchData()
+        }
+      },
       /**
        *  获取栏目
        */
@@ -160,71 +171,49 @@
       },
       fetchData() {
         this.treeData = []
-        let d = new Date()
-        let cd = d.getTime()
         this.currApp = this.$route.params.app
         this.currFun = this.$route.params.fun || ''
         if (this.$KalixCatch.get('treeListData')) {
           this.treeListData = JSON.parse(this.$KalixCatch.get('treeListData'))
-        }
-        if (this.treeListData.createDate && (this.treeListData.createDate - cd) < this.cacheTime && this.treeListData[this.currApp]) {
-          this.treeData = this.treeListData[this.currApp]
           this.setItemShow()
-        } else {
-          const data = {_dc: cd, node: 'root'}
-          if (this.flag) {
-            this.flag = false
-            this.$http
-              .get(this.url + this.currApp,
-                {
-                  params: data
-                })
-              .then(response => {
-                this.flag = true
-                let nowDate = new Date()
-                if (response.data && response.data.code !== 401) {
-                  console.log('[response.data]:', response.data)
-                  this.treeData = response.data
-                  if (this.treeData.length) {
-                    this.treeData.forEach(e => {
-                      this.$set(e, 'isShow', false)
-                    })
-                    this.treeListData[this.currApp] = this.treeData
-                    this.treeListData.createDate = nowDate.getTime()
-                    this.setItemShow()
-                    this.$KalixCatch.save('treeListData', JSON.stringify(this.treeListData))
-                  }
-                }
-              })
-          }
         }
       },
       setItemShow() {
-        let routeName = this.currFun.toLowerCase()
-        this.treeData.forEach((item) => {
-          item.isShow = false
-          let temp = item.children.find(function (e) {
-            let routeId = e.routeId.split('/').pop()
-            return routeId.toLowerCase() === routeName
+        this.$nextTick(() => {
+          this.columnList.forEach((e) => {
+            console.log('SetItemShow ==== e.id', e.id)
+            console.log('SetItemShow ==== this.currApp', this.currApp)
+            e.isActive = (e.id === this.currApp)
           })
-          if (temp) {
-            item.isShow = true
-          }
         })
+        // let routeName = this.currFun.toLowerCase()
+        // this.treeData.forEach((item) => {
+        //   item.isShow = false
+        //   let temp = item.children.find(function (e) {
+        //     let routeId = e.routeId.split('/').pop()
+        //     return routeId.toLowerCase() === routeName
+        //   })
+        //   if (temp) {
+        //     item.isShow = true
+        //   }
+        // })
       },
       bindClass(e) {
         return e
       },
       showTree(e) {
-        console.log('KalixNavigate e:', e)
         this.clickedNode = e
-        this.treeData.forEach((item) => {
-          if (item !== e) {
-            item.isShow = false
-          } else {
-            item.isShow = !item.isShow
+        for (let key in this.treeListData) {
+          if (typeof (this.treeListData[key]) === 'object') {
+            this.treeListData[key].forEach((item) => {
+              if (item !== e) {
+                item.isShow = false
+              } else {
+                item.isShow = !item.isShow
+              }
+            })
           }
-        })
+        }
       },
       showIcon(e) {
         return e ? 'el-icon-caret-bottom' : 'el-icon-caret-right'
@@ -264,64 +253,68 @@
           line-height 45px
           cursor pointer
           color white
-          &:before
-            /*setBottomLine(#e0e3ec)*/
-        .tit_icon
-          margin-right 9px
-          font-size 12px
-      &.bd
-        li
-          .tit
-            padding-left 42px
-            padding-right 12px
-            position relative
-            transition color 0.5s
-          .txt, .arrow
-            transition opacity .2s
-          .txt
-            display inline-block
-            color white
-            &:hover,
-            &.active
-              /*background-color rgba(77,109,177,0.8)*/
-              color #eaf715
-              &:before
-                visibility visible
-          .arrow
-            width 12px
-            color #ffffff
-          &.active
-            .tit-txt
-              background-color rgba(77,109,177,0.8)
-              color #eaf715
-          .mn
-            .tit
-              padding-left 64px
-              color white
-              &:hover,
-              &.active
-                background-color rgba(77,109,177,0.8)
-                color #eaf715
-                &:before
-                  visibility visible
 
-      &.column
-        .column-item
-          .column-item-tt
-            font-size 16px
-            transition all .2s
-            &.active
-              color white
-            &.router-link-active
-              background-color #d9eceb
-            .tit_icon
-              font-size 14px
-              color #ffffff
-              margin-left 20px
-            &:hover,
-            &.active
-              background-color rgba(77,109,177,0.8)
-              color #eaf715
-              &:before
-                visibility visible
+  &
+  :
+  before
+    /*setBottomLine(#e0e3ec)*/
+  .tit_icon
+    margin-right 9px
+    font-size 12px
+
+  &.bd
+    li
+      .tit
+        padding-left 42px
+        padding-right 12px
+        position relative
+        transition color 0.5s
+      .txt, .arrow
+        transition opacity .2s
+      .txt
+        display inline-block
+        color white
+        &:hover,
+        &.active
+          /*background-color rgba(77,109,177,0.8)*/
+          color #eaf715
+          &:before
+            visibility visible
+      .arrow
+        width 12px
+        color #ffffff
+      &.active
+        .tit-txt
+          background-color rgba(77, 109, 177, 0.8)
+          color #eaf715
+      .mn
+        .tit
+          padding-left 64px
+          color white
+          &:hover,
+          &.active
+            background-color rgba(77, 109, 177, 0.8)
+            color #eaf715
+            &:before
+              visibility visible
+
+  &.column
+    .column-item
+      .column-item-tt
+        font-size 16px
+        transition all .2s
+        &.active
+          color white
+        &.router-link-active
+          background-color #d9eceb
+        .tit_icon
+          font-size 14px
+          color #ffffff
+          margin-left 20px
+        &:hover,
+        &.active
+          background-color rgba(77, 109, 177, 0.8)
+          color #eaf715
+          &:before
+            visibility visible
 </style>

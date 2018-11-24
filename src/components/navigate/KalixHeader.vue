@@ -108,8 +108,8 @@
     },
     activated() {
       this.userName = this.$KalixCatch.get('user_name')
-      this.initMenu()
-      if (this.singleLogin) {
+      // this.initMenu()
+      if (this.singleLogi1n) {
         this.checkLogin()
       }
     },
