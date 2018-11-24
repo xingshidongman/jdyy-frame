@@ -14,7 +14,7 @@
           div.error-message(v-if="error.flag") {{error.message}}
           el-form-item.kalix-form-item(prop="name")
             div.text 用户名:
-            el-input(v-model="loginForm.name" ref="loginFormName")
+            el-input(v-model="loginForm.name" ref="loginFormName" autocomplete="off")
           el-form-item.kalix-form-item(prop="pass")
             div.text.text1 密 码:
             el-input(type="password" v-model="loginForm.pass" ref="loginFormPass"  auto-complete="off")
@@ -60,7 +60,11 @@
       this.loginForm = {name: '', pass: ''}
       console.log('this.$KalixEventBus', this.$KalixEventBus)
     },
+    destroyed() {
+      console.log('Login destroyed')
+    },
     mounted() {
+      console.log('this.loginForm', this.loginForm)
       this.$http.get(logoutUrl)
         .then(res => {
           console.log('res', res)
@@ -86,6 +90,10 @@
           'password': that.loginForm.pass
         }).then(data => {
           if (data.success) {
+            this.loginForm = {
+              name: '',
+              pass: ''
+            }
             Cache.save('id', data.user.id)
             Cache.save('access_token', data.access_token)
             Cache.save('user_token', data.user.token)
