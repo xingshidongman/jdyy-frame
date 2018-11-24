@@ -84,7 +84,7 @@
         el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
           el-input.tst(v-model="formModel.parting")
         el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-          kalix-clansman-upload(v-model="formModel.photo" :action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+          kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
           kalix-img-upload(v-model="formModel.photo")
         div.btn
           el-button(v-on:click="CancelClick") 取 消
