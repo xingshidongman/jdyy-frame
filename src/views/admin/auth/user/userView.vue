@@ -28,7 +28,7 @@
         template(v-else)
           | 停用
       el-form-item(label="出生日期" prop="birthdate" v-bind:label-width="labelWidth")
-        el-date-picker(v-model="formModel.birthdate" type="date" placeholder="选择出生日期" value-format="yyyy-MM-dd" style="width: 100%;")
+        el-date-picker(v-model="formModel.birthdate" type="date" placeholder="选择出生日期" format="yyyy/M/d" style="width: 100%;" disabled)
       el-form-item(label="身份证号" prop="idNumber"  v-bind:label-width="labelWidth")
         el-input(v-model="formModel.idNumber" readonly)
       el-form-item(label="地址" prop="address"  v-bind:label-width="labelWidth")

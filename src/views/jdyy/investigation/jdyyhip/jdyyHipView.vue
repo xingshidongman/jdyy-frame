@@ -704,7 +704,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable1(scope.row)" type="text" size="large") 查看
       template(v-if="show1")
-        div.con2
+        div.con2(style="border: 1px solid #000;padding-top: 30px;")
           el-form-item.mini(label="日期")
             el-input(v-model="formModel1.harADate" readonly clearable)
           el-form-item.mini(label="术后第（）月")
@@ -731,26 +731,27 @@
             el-input(v-model="formModel1.harA11" readonly clearable)
           el-form-item.mini(label="总分")
             el-input(v-model="formModel1.harA12" readonly clearable)
-        div.con2
-          el-form-item.mini(label="大腿痛")
-            el-input(v-model="formModel1.harBDate" readonly clearable)
-          el-form-item.mini(label="Trendelenburg 征" label-width="150px")
-            el-input(v-model="formModel1.harB1" readonly clearable)
-          el-form-item.mini(label="活动度-伸直")
-            el-input(v-model="formModel1.harB2" readonly clearable)
-          el-form-item.mini(label="活动度-屈曲")
-            el-input(v-model="formModel1.harB3" readonly clearable)
-          el-form-item.mini(label="活动度-外展")
-            el-input(v-model="formModel1.harB4" readonly clearable)
-          el-form-item.mini(label="活动度-内收")
-            el-input(v-model="formModel1.harB5" readonly clearable)
-          el-form-item.mini(label="活动度-内旋")
-            el-input(v-model="formModel1.harB6" readonly clearable)
-          el-form-item.mini(label="活动度-外旋")
-            el-input(v-model="formModel1.harB7" readonly clearable)
-          el-form-item.mini(label="双下肢不等长")
-            el-input(v-model="formModel1.harB8" readonly clearable)
-        el-button.anniu(@click="closeTable1" type="primary") 关闭
+          div.con2
+            el-form-item.mini(label="大腿痛")
+              el-input(v-model="formModel1.harBDate" readonly clearable)
+            el-form-item.mini(label="Trendelenburg 征" label-width="150px")
+              el-input(v-model="formModel1.harB1" readonly clearable)
+            el-form-item.mini(label="活动度-伸直")
+              el-input(v-model="formModel1.harB2" readonly clearable)
+            el-form-item.mini(label="活动度-屈曲")
+              el-input(v-model="formModel1.harB3" readonly clearable)
+            el-form-item.mini(label="活动度-外展")
+              el-input(v-model="formModel1.harB4" readonly clearable)
+            el-form-item.mini(label="活动度-内收")
+              el-input(v-model="formModel1.harB5" readonly clearable)
+            el-form-item.mini(label="活动度-内旋")
+              el-input(v-model="formModel1.harB6" readonly clearable)
+            el-form-item.mini(label="活动度-外旋")
+              el-input(v-model="formModel1.harB7" readonly clearable)
+            el-form-item.mini(label="双下肢不等长")
+              el-input(v-model="formModel1.harB8" readonly clearable)
+            el-form-item(style="width:55%;")
+              el-button.anniu(@click="closeTable1" type="primary") 关闭
       div.art2
         h1.title 患者满意度
         div.con2
@@ -772,7 +773,7 @@
             template(slot-scope="scope")
               el-button(@click="viewTable2(scope.row)" type="text" size="large") 查看
         template(v-if="show2")
-          div.con2
+          div.con2(style="border: 1px solid #000;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-input(v-model="formModel2.harCDate" readonly clearable)
             el-form-item.mini(label="与术前相比")
@@ -785,7 +786,8 @@
               el-input(v-model="formModel2.harC4" readonly clearable)
             el-form-item.mini(label="总评")
               el-input(v-model="formModel2.harC5" readonly clearable)
-          el-button.anniu( @click="closeTable2" type="primary") 关闭
+            el-form-item(style="width:55%;")
+              el-button.anniu( @click="closeTable2" type="primary") 关闭
       div.art2
         h1.title 影像学评估
         div.con2
@@ -884,7 +886,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable3(scope.row)" type="text" size="large") 查看
       template(v-if="show3")
-        div.con2
+        div.con2(style="border: 1px solid #000;padding-top: 30px;")
           el-form-item.mini(label="日期")
             el-input(v-model="formModel3.harDDate" readonly clearable)
           el-form-item.mini(label="术后第（）月" label-width="150px")
@@ -913,7 +915,8 @@
             el-input(v-model="formModel3.harD12" readonly clearable)
           el-form-item.mini(label="涂层脱落*")
             el-input(v-model="formModel3.harD13" readonly clearable)
-        el-button.anniu(round @click="closeTable3" type="primary") 关闭
+          el-form-item(style="width:55%;")
+            el-button.anniu(@click="closeTable3" type="primary") 关闭
 </template>
 
 <script>

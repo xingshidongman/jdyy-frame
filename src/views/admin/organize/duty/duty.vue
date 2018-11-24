@@ -6,7 +6,7 @@
           kalix-org-tree(v-on:orgTreeClick="onOrgTreeClick")
         el-col.duty-col(:span="16")
           kalix-table.duty-wrapper(ref="kalixBaseTable"
-          bizKey='duty' title='职务列表1' v-bind:targetURL='targetURL'
+          bizKey='duty' title='职务列表' v-bind:targetURL='targetURL'
           v-bind:bizDialog='bizDialog' v-bind:btnList='btnList' v-bind:toolbarBtnList="toolBarBtnList" v-bind:customRender="customRender"
           v-bind:isFixedColumn="isFixedColumn" v-bind:dialogOptions="dialogOptions"
           v-bind:customTableTool="customTableTool")
