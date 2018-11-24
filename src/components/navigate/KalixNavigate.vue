@@ -77,9 +77,9 @@
     },
     mounted() {
       console.log('+++++++++++++= mounted =++++++++++++++++')
-      setTimeout(() => {
-        this.initColumn()
-      }, 5000)
+      // setTimeout(() => {
+      //   this.initColumn()
+      // }, 5000)
       this.fetchData()
     },
     watch: {
