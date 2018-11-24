@@ -704,7 +704,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable1(scope.row)" type="text" size="large") 查看
       template(v-if="show1")
-        div.con2(style="border: 1px solid #000;padding-top: 30px;")
+        div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
           el-form-item.mini(label="日期")
             el-input(v-model="formModel1.harADate" readonly clearable)
           el-form-item.mini(label="术后第（）月")
@@ -773,7 +773,7 @@
             template(slot-scope="scope")
               el-button(@click="viewTable2(scope.row)" type="text" size="large") 查看
         template(v-if="show2")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-input(v-model="formModel2.harCDate" readonly clearable)
             el-form-item.mini(label="与术前相比")
@@ -886,7 +886,7 @@
               template(slot-scope="scope")
                 el-button(@click="viewTable3(scope.row)" type="text" size="large") 查看
       template(v-if="show3")
-        div.con2(style="border: 1px solid #000;padding-top: 30px;")
+        div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
           el-form-item.mini(label="日期")
             el-input(v-model="formModel3.harDDate" readonly clearable)
           el-form-item.mini(label="术后第（）月" label-width="150px")

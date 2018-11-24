@@ -711,7 +711,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable1"  type="primary") 添加
         template(v-if="show1")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel1.harADate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="术后第（）月")
@@ -769,13 +769,13 @@
               td.long-td
                 div.con2-right
                   p 更差（1）/相同（2）/更好（3）/好很多（4）/接近完美（5）
-          el-table(:data="tableData2" style="width: 90%;margin:0 auto")
-            el-table-column(fixed prop="harCDate" label="日期" )
-            el-table-column(prop="harC1" label="与术前相比" )
-            el-table-column(prop="harC2" label="术后第（）月" )
-            el-table-column(prop="harC3" label="疼痛")
-            el-table-column(prop="harC4" label="功能" )
-            el-table-column(prop="harC5" label="总评" )
+          el-table(:data="tableData2" style="width: 100%;margin:0 auto")
+            el-table-column(fixed prop="harCDate" label="日期"  min-width="60")
+            el-table-column(prop="harC1" label="与术前相比"  min-width="60")
+            el-table-column(prop="harC2" label="术后第（）月"  min-width="60")
+            el-table-column(prop="harC3" label="疼痛" min-width="60")
+            el-table-column(prop="harC4" label="功能" min-width="60")
+            el-table-column(prop="harC5" label="总评" min-width="60")
             el-table-column(fixed="right" label="操作" width="60")
               template(slot-scope="scope")
                 el-button(type="text" size="small" @click="editTable2(scope.row)") 编辑
@@ -783,7 +783,7 @@
           div(style="width:100%;height: 63px;")
             el-button.anniu(@click="addTable2"  type="primary") 添加
         template(v-if="show2")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel2.harCDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="与术前相比")
@@ -900,7 +900,7 @@
           div(style="width:100%;height: 63px;")
             el-button.anniu( @click="addTable3"  type="primary") 添加
         template(v-if="show3")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             el-form-item.mini(label="日期")
               el-date-picker(type="date" placeholder="选择日期" v-model="formModel3.harDDate" style="width: 100%;" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
             el-form-item.mini(label="术后第（）月" label-width="150px")

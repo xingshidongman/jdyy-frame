@@ -685,7 +685,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable1"  type="primary") 添加
         template(v-if="show1")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -782,7 +782,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable2"  type="primary") 添加
         template(v-if="show2")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -846,7 +846,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable3"  type="primary") 添加
         template(v-if="show3")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
             el-form-item.mini(label="日期" style="float:left")
               el-col
@@ -972,7 +972,7 @@
         div(style="width:100%;height: 63px;")
           el-button.anniu( @click="addTable4"  type="primary") 添加
         template(v-if="show4")
-          div.con2(style="border: 1px solid #000;padding-top: 30px;")
+          div.con2(style="border: 1px solid #b3b3b3;padding-top: 30px;")
             div.con2-left
               el-form-item.short(label="日期" style="float:left" label-width="180px")
                 el-col

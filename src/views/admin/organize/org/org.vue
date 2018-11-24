@@ -11,7 +11,6 @@
     v-bind:targetURL="targetURL"
     v-bind:customTableTool="customTableTool"
     title="机构列表"
-    v-bind:bizSearch="'AdminOrgSearch'"
     v-bind:btnList="btnList"
     v-bind:bizDialog="bizDialog"
     v-bind:formModel="formModel"
