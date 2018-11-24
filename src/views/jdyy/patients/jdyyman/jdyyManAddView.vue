@@ -6,16 +6,16 @@
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
             el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" @select="handleSelect" style="width:100%")
-          el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
-            el-radio-group(v-model="formModel1.sex")
-              el-radio(label="男")
-              el-radio(label="女")
-          el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-            el-input(v-model="formModel1.age" )
-          el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
-            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
             el-input(v-model="formModel1.idCard" )
+          el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
+            el-radio-group(v-model="formModel1.sex" )
+              el-radio(label="男" disabled)
+              el-radio(label="女" disabled)
+          el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
+            el-input(v-model="formModel1.age" readonly)
+          el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
+            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;" readonly)
           el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
             el-input(v-model="formModel1.telephonePerson")
           el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
@@ -26,7 +26,7 @@
             el-date-picker(v-model="formModel1.dateAdmission" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
             el-date-picker(v-model="formModel1.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
-          el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-on:blur="validDoctor(value)")
+          el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-on:blur="validDoctor(value)" v-bind:rules="rules.directorDoctor")
             el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")
           el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
             el-input(v-model="formModel1.medicalRecords")
@@ -130,6 +130,7 @@
             callback(new Error('请输入正确姓名'))
           }
         } else {
+          // callback()
           callback(new Error('请输姓名'))
         }
       }
@@ -140,6 +141,12 @@
           let valTrim = value.replace(/^\s+|\s+$/g, '')
           let reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
           if (reg.test(valTrim)) {
+            var myDate = new Date()
+            var data = myDate.getFullYear()
+            var age = data - value.substr(6, 4)
+            this.formModel1.age = age + ''
+            this.formModel1.brith = value.substr(6, 4) + '-' + value.substr(10, 2) + '-' + value.substr(12, 2)
+            this.formModel1.sex = parseInt(value.substr(16, 1)) % 2 === 0 ? '女' : '男'
             callback()
           } else {
             callback(new Error('请输入正确身份证号码'))
@@ -148,80 +155,98 @@
           callback(new Error('请输入身份证号码'))
         }
       }
-      // var validatetelephone = (rule, value, callback) => {
+      var validatedirectorDoctor = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确姓名'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输姓名'))
+        }
+      }
+      var validatetelephone = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
+          if (reg.test(valTrim) && valTrim.length === 11) {
+            this.phoneNumberInfo = true
+            callback()
+          } else {
+            this.phoneNumberInfo = false
+            callback(new Error('请输入正确手机号码'))
+          }
+        } else {
+          this.phoneNumberInfo = false
+          callback()
+          // callback(new Error('请输入手机号码'))
+        }
+      }
+      // var validateage = (rule, value, callback) => {
       //   if (value !== undefined && value !== null && value !== '') {
       //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
-      //     if (reg.test(valTrim) && valTrim.length === 11) {
+      //     let reg = /^(?:[1-9]?\d|200)$/
+      //     if (reg.test(valTrim)) {
       //       this.phoneNumberInfo = true
       //       callback()
       //     } else {
       //       this.phoneNumberInfo = false
-      //       callback(new Error('请输入正确手机号码'))
+      //       callback(new Error('请输入正确年龄'))
       //     }
       //   } else {
       //     this.phoneNumberInfo = false
-      //     callback(new Error('请输入手机号码'))
+      //     callback(new Error('请输入年龄'))
       //   }
       // }
-      var validateage = (rule, value, callback) => {
+      var validatestature = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]?\d|200)$/
+          let reg = /^(?:[1-9]{1,2}\d|300)$/
           if (reg.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
           } else {
             this.phoneNumberInfo = false
-            callback(new Error('请输入正确年龄'))
+            callback(new Error('请输入正确身高'))
           }
         } else {
           this.phoneNumberInfo = false
-          callback(new Error('请输入年龄'))
+          callback()
+          // callback(new Error('请输入身高'))
         }
       }
-      // var validatestature = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^(?:[1-9]{1,2}\d|300)$/
-      //     if (reg.test(valTrim)) {
-      //       this.phoneNumberInfo = true
-      //       callback()
-      //     } else {
-      //       this.phoneNumberInfo = false
-      //       callback(new Error('请输入正确身高'))
-      //     }
-      //   } else {
-      //     this.phoneNumberInfo = false
-      //     callback(new Error('请输入身高'))
-      //   }
-      // }
-      // var validatecompleteAddress = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^([\u4e00-\u9fa5]){5,50}$/
-      //     if (reg.test(valTrim)) {
-      //       callback()
-      //     } else {
-      //       callback(new Error('请输入正确通讯地址'))
-      //     }
-      //   } else {
-      //     callback(new Error('请输通讯地址'))
-      //   }
-      // }
-      // var validatexinxi = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^([\u4e00-\u9fa5]){1,50}$/
-      //     if (reg.test(valTrim)) {
-      //       callback()
-      //     } else {
-      //       callback(new Error('请输入正确信息'))
-      //     }
-      //   } else {
-      //     callback(new Error('请输通讯信息'))
-      //   }
-      // }
+      var validatecompleteAddress = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){5,50}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确通讯地址'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输通讯地址'))
+        }
+      }
+      var validatexinxi = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){1,50}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确信息'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输通讯信息'))
+        }
+      }
       return {
         downloadURL: JdyypatientsURL,
         formModel1: Object.assign({}, FormModel1),
@@ -238,21 +263,21 @@
         // options: [],
         rules: {
           name: [{required: true, validator: validatename, trigger: 'blur'}],
-          sex: [{required: true, trigger: 'blur'}],
-          age: [{required: true, validator: validateage, trigger: 'blur'}],
-          idCard: [{required: true, validator: validateidCard, trigger: 'blur'}]
-          // directorDoctor: [{validator: validatename, trigger: 'change'}],
-          // stature: [{required: false, validator: validatestature, trigger: 'change'}],
-          // telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
-          // familyPhone: [{validator: validatetelephone, trigger: 'change'}],
-          // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
-          // medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
-          // currentSituation: [{validator: validatexinxi, trigger: 'change'}],
-          // specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
-          // descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
-          // allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
-          // typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          // remarks: [{validator: validatexinxi, trigger: 'change'}]
+          sex: [{trigger: 'blur'}],
+          age: [{trigger: 'blur'}], // validator: validateage,
+          idCard: [{required: true, validator: validateidCard, trigger: 'blur'}],
+          directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
+          telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
+          familyPhone: [{validator: validatetelephone, trigger: 'change'}],
+          completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
+          medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
+          remarks: [{validator: validatexinxi, trigger: 'change'}],
+          stature: [{validator: validatestature, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],

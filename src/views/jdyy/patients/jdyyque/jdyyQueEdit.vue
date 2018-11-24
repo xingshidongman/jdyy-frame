@@ -5,22 +5,22 @@
       el-form(v-bind:model="formModel" ref="formModel")
         el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
           el-autocomplete(v-model="formModel.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
+        el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
+          el-input(v-model="formModel.idCard")
         el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
           el-radio-group(v-model="formModel.sex")
             el-radio(label="男")
             el-radio(label="女")
         el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-          el-input(v-model="formModel.age" type="number")
+          el-input(v-model="formModel.age")
         el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
           el-date-picker(v-model="formModel.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
-        el-form-item(label="身份证号" prop="idCard" v-bind:label-width="labelWidth" v-bind:rules="rules.idCard")
-          el-input(v-model="formModel.idCard" type="number")
         el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
           el-input(v-model="formModel.telephonePerson")
         el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
-          el-input(v-model="formModel.stature" type="number")
+          el-input(v-model="formModel.stature" )
         el-form-item(label="体重" prop="weight" v-bind:label-width="labelWidth" v-bind:rules="rules.weight")
-          el-input(v-model="formModel.weight" type="number")
+          el-input(v-model="formModel.weight")
         el-form-item(label="入院日期" prop="dateAdmission" v-bind:label-width="labelWidth" v-bind:rules="rules.dateAdmission")
           el-date-picker(v-model="formModel.dateAdmission" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
@@ -32,7 +32,7 @@
         el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
           el-input(v-model="formModel.medicalRecordNumber")
         el-form-item(label="住院号" prop="hospitalNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.hospitalNumber")
-          el-input(v-model="formModel.hospitalNumber" type="number")
+          el-input(v-model="formModel.hospitalNumber")
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
           el-input(v-model="formModel.bedNumber")
         el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
@@ -46,9 +46,9 @@
         el-form-item.address(label="通讯地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
           el-input(v-model="formModel.completeAddress")
         el-form-item(label="BMI" prop="bmi" v-bind:label-width="labelWidth" v-bind:rules="rules.bmi")
-          el-input(v-model="formModel.bmi" type="number")
+          el-input(v-model="formModel.bmi")
         el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
-          el-input(v-model="formModel.bloodPressure" type="number")
+          el-input(v-model="formModel.bloodPressure")
         el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
           el-input(v-model="formModel.specialDisorders")
         el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
@@ -58,9 +58,9 @@
         el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
           el-input(v-model="formModel.medicalCategory")
         el-form-item(label="Harris评分" prop="harris" v-bind:label-width="labelWidth" v-bind:rules="rules.harris")
-          el-input(v-model="formModel.harris" type="number")
+          el-input(v-model="formModel.harris")
         el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
-          el-input(v-model="formModel.hss" type="number")
+          el-input(v-model="formModel.hss")
         el-form-item(label="是否出院" prop="whetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.whetherDischarge")
           el-radio-group(v-model="formModel.whetherDischarge" )
           el-radio(label="是")
@@ -84,9 +84,11 @@
         el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
           el-input.tst(v-model="formModel.parting")
         el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-          kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
-        el-button(v-on:click="CancelClick") 取 消
-        el-button(type="primary" v-on:click="SubmitClick") 提 交
+          kalix-clansman-upload(v-model="formModel.photo" :action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+          kalix-img-upload(v-model="formModel.photo")
+        div.btn
+          el-button(v-on:click="CancelClick") 取 消
+          el-button(type="primary" v-on:click="SubmitClick") 提 交
 </template>
 
 <script type="text/ecmascript-6">
@@ -116,6 +118,133 @@
       KalixFontCascader
     },
     data() {
+      var validatename = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确姓名'))
+          }
+        } else {
+          // callback()
+          callback(new Error('请输姓名'))
+        }
+      }
+      var validateidCard = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          // let idCard = require('idcard') // 身份证号码验证  加载身份验证插件命令： yarn add idcard
+          // this.formModel.idCard = ''
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/
+          if (reg.test(valTrim)) {
+            var myDate = new Date()
+            var data = myDate.getFullYear()
+            var age = data - value.substr(6, 4)
+            this.formModel1.age = age + ''
+            this.formModel1.brith = value.substr(6, 4) + '-' + value.substr(10, 2) + '-' + value.substr(12, 2)
+            this.formModel1.sex = parseInt(value.substr(16, 1)) % 2 === 0 ? '女' : '男'
+            callback()
+          } else {
+            callback(new Error('请输入正确身份证号码'))
+          }
+        } else {
+          callback(new Error('请输入身份证号码'))
+        }
+      }
+      var validatedirectorDoctor = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确姓名'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输姓名'))
+        }
+      }
+      var validatetelephone = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
+          if (reg.test(valTrim) && valTrim.length === 11) {
+            this.phoneNumberInfo = true
+            callback()
+          } else {
+            this.phoneNumberInfo = false
+            callback(new Error('请输入正确手机号码'))
+          }
+        } else {
+          this.phoneNumberInfo = false
+          callback()
+          // callback(new Error('请输入手机号码'))
+        }
+      }
+      // var validateage = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^(?:[1-9]?\d|200)$/
+      //     if (reg.test(valTrim)) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确年龄'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback(new Error('请输入年龄'))
+      //   }
+      // }
+      var validatestature = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^(?:[1-9]{1,2}\d|300)$/
+          if (reg.test(valTrim)) {
+            this.phoneNumberInfo = true
+            callback()
+          } else {
+            this.phoneNumberInfo = false
+            callback(new Error('请输入正确身高'))
+          }
+        } else {
+          this.phoneNumberInfo = false
+          callback()
+          // callback(new Error('请输入身高'))
+        }
+      }
+      var validatecompleteAddress = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){5,50}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确通讯地址'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输通讯地址'))
+        }
+      }
+      var validatexinxi = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^([\u4e00-\u9fa5]){1,50}$/
+          if (reg.test(valTrim)) {
+            callback()
+          } else {
+            callback(new Error('请输入正确信息'))
+          }
+        } else {
+          callback()
+          // callback(new Error('请输通讯信息'))
+        }
+      }
       return {
         modifyStaff: '',
         downloadURL: JdyypatientsURL,
@@ -128,17 +257,28 @@
         columnParam: undefined,
         formModel: Object.assign({}, FormModel),
         rules: {
-          name: [{required: true, message: '请输入姓名', trigger: 'change'}],
-          sex: [{required: true, message: '请输入性别', trigger: 'change'}],
-          age: [{required: true, message: '请输入年龄', trigger: 'change'}],
-          idCard: [{required: true, message: '请输入身份证号', trigger: 'blur'}]
+          name: [{required: true, validator: validatename, trigger: 'blur'}],
+          sex: [{trigger: 'blur'}],
+          age: [{trigger: 'blur'}], // validator: validateage,
+          idCard: [{required: true, validator: validateidCard, trigger: 'blur'}],
+          directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
+          telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
+          familyPhone: [{validator: validatetelephone, trigger: 'change'}],
+          completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
+          medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
+          remarks: [{validator: validatexinxi, trigger: 'change'}],
+          stature: [{validator: validatestature, trigger: 'change'}]
         },
         targetURL: JdyypatientsURL,
         diaCascader: [],
         surCascader: [],
         filePathArr: [],
-        fileNameArr: [],
-        bizKey: String
+        fileNameArr: []
       }
     },
     created() {
@@ -197,6 +337,102 @@
     // },
     methods: {
       init(dialogOption) {
+        if (!this.formModel.stature) {
+          this.formModel.stature = ''
+        }
+        if (!this.formModel.weight) {
+          this.formModel.weight = ''
+        }
+        if (!this.formModel.brith) {
+          this.formModel.brith = ''
+        }
+        if (!this.formModel.dateAdmission) {
+          this.formModel.dateAdmission = ''
+        }
+        if (!this.formModel.dischargeDate) {
+          this.formModel.dischargeDate = ''
+        }
+        if (!this.formModel.directorDoctor) {
+          this.formModel.directorDoctor = ''
+        }
+        if (!this.formModel.bedNumber) {
+          this.formModel.bedNumber = ''
+        }
+        if (!this.formModel.hospitalNumber) {
+          this.formModel.hospitalNumber = ''
+        }
+        if (!this.formModel.medicalRecordNumber) {
+          this.formModel.medicalRecordNumber = ''
+        }
+        if (!this.formModel.medicalRecords) {
+          this.formModel.medicalRecords = ''
+        }
+        if (!this.formModel.currentSituation) {
+          this.formModel.currentSituation = ''
+        }
+        if (!this.formModel.telephonePerson) {
+          this.formModel.telephonePerson = ''
+        }
+        if (!this.formModel.familyPhone) {
+          this.formModel.familyPhone = ''
+        }
+        if (!this.formModel.completeAddress) {
+          this.formModel.completeAddress = ''
+        }
+        if (!this.formModel.bmi) {
+          this.formModel.bmi = ''
+        }
+        if (!this.formModel.bloodPressure) {
+          this.formModel.bloodPressure = ''
+        }
+        if (!this.formModel.specialDisorders) {
+          this.formModel.specialDisorders = ''
+        }
+        if (!this.formModel.descriptionSpecialDisease) {
+          this.formModel.descriptionSpecialDisease = ''
+        }
+        if (!this.formModel.allergicHistory) {
+          this.formModel.allergicHistory = ''
+        }
+        if (!this.formModel.medicalCategory) {
+          this.formModel.medicalCategory = ''
+        }
+        if (!this.formModel.whetherDischarge) {
+          this.formModel.whetherDischarge = ''
+        }
+        if (!this.formModel.remarks) {
+          this.formModel.remarks = ''
+        }
+        if (!this.formModel.harris) {
+          this.formModel.harris = ''
+        }
+        if (!this.formModel.hss) {
+          this.formModel.hss = ''
+        }
+        if (!this.formModel.modifyStaff) {
+          this.formModel.modifyStaff = ''
+        }
+        if (!this.formModel.heavyTime) {
+          this.formModel.heavyTime = ''
+        }
+        if (!this.formModel.diagnosis) {
+          this.formModel.diagnosis = ''
+        }
+        if (!this.formModel.surgical) {
+          this.formModel.surgical = ''
+        }
+        if (!this.formModel.operationDate) {
+          this.formModel.operationDate = ''
+        }
+        if (!this.formModel.periodization) {
+          this.formModel.periodization = ''
+        }
+        if (!this.formModel.parting) {
+          this.formModel.parting = ''
+        }
+        if (!this.formModel.photo) {
+          this.formModel.photo = ''
+        }
         // this.formModel = this.aaa(this.formModel)
         console.log('---------0000000000000000------------', this.formModel)
         console.log('---------dialogOption------------', dialogOption)
@@ -238,7 +474,9 @@
           delete this.formModel['start']
         }
         console.log('---------this.formModel2222222222222222222------------', this.formModel)
-        console.log('===FilePath=================', this.filePathArr)
+        console.log('===this.formModel.hospitalNumber=================', this.formModel.hospitalNumber)
+        if (this.formModel.hospitalNumber) {
+        }
         let filePath = ''
         if (this.filePathArr.length) {
           this.filePathArr.forEach(e => {
@@ -410,4 +648,7 @@
 
   .tst
     max-width: 104%
+
+  .btn
+    text-align: right
 </style>
