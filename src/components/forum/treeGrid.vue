@@ -20,7 +20,7 @@
         template(v-if="isToolBarSelf")
           kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarSelfClick")
         template(v-else)
-          kalix-tool-bar(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
+          kalix-tool-bar.buttom(v-if="isShowToolBar" v-bind:toolbarBtnList="toolbarBtnList" v-on:onToolBarClick="onToolBarClick")
         div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:right;position: absolute;width: 94%;bottom: 0;top: 60px;border: 1px solid #3465cb;overflow-y: scroll;")
           div.autoTbale(v-bind:style="{width:tableWidth}")
             table.table.table-bordered(id="hl-tree-table")
@@ -674,8 +674,8 @@
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
-    width: 300px;
-    margin: 8px 25% 0 0;
+    width: 325px
+    margin 0 auto
   .tree-icon
     margin-right 8px
     color #3465cb

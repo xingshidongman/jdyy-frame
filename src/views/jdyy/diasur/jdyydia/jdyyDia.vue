@@ -55,7 +55,7 @@
         //   {id: 'refresh', isShow: true, icon: 'icon-refresh', title: '刷新'}
         // ],
         treeToolbarBtnList: [
-          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true},
+          // {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true},
           {id: 'edit', isShow: true, icon: 'icon-bianji', title: '编辑', isPermission: true},
           {id: 'delete', isShow: true, icon: 'icon-shanchu', title: '删除', isPermission: true}
         ],
