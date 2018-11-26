@@ -10,10 +10,10 @@
             el-input(v-model="formModel1.idCard" )
           el-form-item(label="性别" prop="sex" v-bind:label-width="labelWidth" v-bind:rules="rules.sex" )
             el-radio-group(v-model="formModel1.sex" )
-              el-radio(label="男" disabled)
-              el-radio(label="女" disabled)
+              el-radio(label="男")
+              el-radio(label="女")
           el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
-            el-input(v-model="formModel1.age" readonly)
+            el-input(v-model="formModel1.age")
           el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
             el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;" readonly)
           el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
@@ -152,7 +152,8 @@
             callback(new Error('请输入正确身份证号码'))
           }
         } else {
-          callback(new Error('请输入身份证号码'))
+          callback()
+          // callback(new Error('请输入身份证号码'))
         }
       }
       var validatedirectorDoctor = (rule, value, callback) => {
@@ -186,22 +187,22 @@
           // callback(new Error('请输入手机号码'))
         }
       }
-      // var validateage = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^(?:[1-9]?\d|200)$/
-      //     if (reg.test(valTrim)) {
-      //       this.phoneNumberInfo = true
-      //       callback()
-      //     } else {
-      //       this.phoneNumberInfo = false
-      //       callback(new Error('请输入正确年龄'))
-      //     }
-      //   } else {
-      //     this.phoneNumberInfo = false
-      //     callback(new Error('请输入年龄'))
-      //   }
-      // }
+      var validateage = (rule, value, callback) => {
+        if (value !== undefined && value !== null && value !== '') {
+          let valTrim = value.replace(/^\s+|\s+$/g, '')
+          let reg = /^(?:[1-9]?\d|200)$/
+          if (reg.test(valTrim)) {
+            this.phoneNumberInfo = true
+            callback()
+          } else {
+            this.phoneNumberInfo = false
+            callback(new Error('请输入正确年龄'))
+          }
+        } else {
+          this.phoneNumberInfo = false
+          callback(new Error('请输入年龄'))
+        }
+      }
       var validatestature = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -219,20 +220,20 @@
           // callback(new Error('请输入身高'))
         }
       }
-      var validatecompleteAddress = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^([\u4e00-\u9fa5]){5,50}$/
-          if (reg.test(valTrim)) {
-            callback()
-          } else {
-            callback(new Error('请输入正确通讯地址'))
-          }
-        } else {
-          callback()
-          // callback(new Error('请输通讯地址'))
-        }
-      }
+      // var validatecompleteAddress = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){5,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确通讯地址'))
+      //     }
+      //   } else {
+      //     callback()
+      //     // callback(new Error('请输通讯地址'))
+      //   }
+      // }
       var validatexinxi = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -264,12 +265,12 @@
         rules: {
           name: [{required: true, validator: validatename, trigger: 'blur'}],
           sex: [{trigger: 'blur'}],
-          age: [{trigger: 'blur'}], // validator: validateage,
-          idCard: [{required: true, validator: validateidCard, trigger: 'blur'}],
+          age: [{validator: validateage, trigger: 'blur'}], // validator: validateage,
+          idCard: [{required: false, validator: validateidCard, trigger: 'change'}],
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
           familyPhone: [{validator: validatetelephone, trigger: 'change'}],
-          completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
+          // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
           medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
           currentSituation: [{validator: validatexinxi, trigger: 'change'}],
           specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
