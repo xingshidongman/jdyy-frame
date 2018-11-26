@@ -85,10 +85,10 @@
           el-input.tst(v-model="formModel.parting")
         el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
           kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
-          kalix-img-upload(v-model="formModel.photo")
+          kalix-img-upload(v-model="formModel.photo" readonly="readonly")
         div.btn
           el-button(v-on:click="CancelClick") 取 消
-          el-button(type="primary" v-on:click="SubmitClick") 提 交
+          el-button(type="primary" v-on:click="onSubmitClick") 提 交
 </template>
 
 <script type="text/ecmascript-6">
@@ -277,6 +277,7 @@
         targetURL: JdyypatientsURL,
         diaCascader: [],
         surCascader: [],
+        photoArr: [],
         filePathArr: [],
         fileNameArr: []
       }
@@ -289,52 +290,6 @@
       this.getSurCascader() // 获取术式信息并以级联形式显示
       this.loadAll() // 获取病员信息
     },
-    // aaa(obj) {
-    //   this.formModel.id = obj.id
-    //   this.formModel.name = obj.name
-    //   this.formModel.sex = obj.sex
-    //   this.formModel.age = obj.age
-    //   this.formModel.stature = obj.stature
-    //   this.formModel.weight = obj.weight
-    //   this.formModel.brith = obj.brith
-    //   this.formModel.idCard = obj.idCard
-    //   this.formModel.dateAdmission = obj.dateAdmission
-    //   this.formModel.dischargeDate = obj.dischargeDate
-    //   this.formModel.directorDoctor = obj.directorDoctor
-    //   this.formModel.bedNumber = obj.bedNumber
-    //   this.formModel.hospitalNumber = obj.hospitalNumber
-    //   this.formModel.medicalRecordNumber = obj.medicalRecordNumber
-    //   this.formModel.medicalRecords = obj.medicalRecords
-    //   this.formModel.currentSituation = obj.currentSituation
-    //   this.formModel.telephonePerson = obj.telephonePerson
-    //   this.formModel.familyPhone = obj.familyPhone
-    //   this.formModel.completeAddress = obj.completeAddress
-    //   this.formModel.bmi = obj.bmi
-    //   this.formModel.bloodPressure = obj.bloodPressure
-    //   this.formModel.specialDisorders = obj.specialDisorders
-    //   this.formModel.completeAddress = obj.completeAddress
-    //   this.formModel.descriptionSpecialDisease = obj.descriptionSpecialDisease
-    //   this.formModel.allergicHistory = obj.allergicHistory
-    //   this.formModel.medicalCategory = obj.medicalCategory
-    //   this.formModel.whetherDischarge = obj.whetherDischarge
-    //   this.formModel.remarks = obj.remarks
-    //   this.formModel.harris = obj.harris
-    //   this.formModel.hss = obj.hss
-    //   this.formModel.buckling = obj.buckling
-    //   this.formModel.abduction = obj.abduction
-    //   this.formModel.adduction = obj.adduction
-    //   this.formModel.modifyStaff = obj.modifyStaff
-    //   this.formModel.heavyTime = obj.heavyTime
-    //   this.formModel.diagnosis = obj.diagnosis
-    //   this.formModel.surgical = obj.surgical
-    //   this.formModel.operationDate = obj.operationDate
-    //   this.formModel.periodization = obj.periodization
-    //   this.formModel.parting = obj.parting
-    //   this.formModel.photo = obj.photo
-    //   this.formModel.pid = obj.pid
-    //   this.formModel.vid = obj.vid
-    //   return this.formModel
-    // },
     methods: {
       init(dialogOption) {
         if (!this.formModel.stature) {
@@ -434,6 +389,7 @@
           this.formModel.photo = ''
         }
         // this.formModel = this.aaa(this.formModel)
+        this.getphoto()
         console.log('---------0000000000000000------------', this.formModel)
         console.log('---------dialogOption------------', dialogOption)
         // console.log('---------this.formModel4444444444444------------', this.aaa(this.formModel))
@@ -462,19 +418,17 @@
           }
         }
       },
+      getphoto() {
+        this.photoArr = this.formModel.photo.split(',')
+      },
       getFilePath(filePath, fileName) { // 图片上传路径
-        console.log('--getFilePath---', filePath)
-        console.log('--fileName---', fileName)
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
       },
       submitBefore(baseDialog, callBack) { // 多张图片拼路径
-        console.log('formModel=================uuuuuuuuuuu', this.formModel)
         if (this.formModel.start) {
           delete this.formModel['start']
         }
-        console.log('---------this.formModel2222222222222222222------------', this.formModel)
-        console.log('===this.formModel.hospitalNumber=================', this.formModel.hospitalNumber)
         if (this.formModel.hospitalNumber) {
         }
         let filePath = ''
@@ -589,6 +543,17 @@
       CancelClick() {
         this.$refs.kalixBizDialog.onCancelClick()
         EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
+      },
+      onSubmitClick() { // 重写多张图片上传方法
+        if (this.submitCustom && typeof (this.submitCustom) === 'function') {
+          this.submitCustom(this)
+        } else if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+          this.submitBefore(this, () => {
+            this.SubmitClick() // 执行提交方法
+          })
+        } else {
+          this.SubmitClick()
+        }
       },
       SubmitClick() {
         console.log('9999999999999999999999999999999999999999', this.formModel)

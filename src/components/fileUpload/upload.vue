@@ -34,7 +34,7 @@
         type: String
       },
       btnText: {
-        type: String, default: '保存图片'
+        type: String, default: '上传图片'
       },
       tipText: {
         type: String, default: ''

@@ -82,10 +82,10 @@
             el-table-column(prop="periodization" label="分期" min-width="120" :resizable="false")
             el-table-column(label="图片" min-width="360" :resizable="false")
               template(slot-scope="scope")
-                div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
-                  img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(index)")
+                div.picture(v-for="(img, filePathArr) in formModel.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")
+                  img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(filePathArr)" style="width:150px; height:150px")
                   el-dialog(:visible.sync="dialogVisible" :append-to-body="true")
-                    img.img-width(v-bind:src="item.val" v-for="(item, index) in formModel.imgs" v-show="index===mark" :key="index")
+                    img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.imgs" v-show="filePathArr===mark" :key="filePathArr")
                     img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
                     img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
         <!--view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")-->
@@ -101,10 +101,11 @@
   import KalixDatepickerSimple from '../../../../components/corelib/components/common/baseDatepicker'
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import ViewTable from '../../../../components/view/viewtable'
+  import KalixImgUpload from '../../../../components/corelib/components/common/imgUpload'
 
   export default {
     name: 'JdyyQueView',
-    components: {ViewTable, KalixFontCascader, KalixDatepickerSimple},
+    components: {ViewTable, KalixFontCascader, KalixImgUpload, KalixDatepickerSimple},
     data() {
       return {
         htmlTitle: '页面导出PDF文件名', // 这个是pdf文件的名字
@@ -113,21 +114,26 @@
         formModel: Object.assign({}, FormModel),
         labelWidth: '200px',
         tableData: [],
+        filePathArr: [],
         dialogVisible: false,
         dialogImageUrl: '',
         mark: ''
       }
     },
-    // mounted() {
-    //   this.getData()
-    // },
     methods: {
       change(i) {
         this.mark = i
         console.log('=====================', this.mark)
       },
+      getphoto() {
+        this.filePathArr = this.formModel.photo.split(',')
+        for (let i = 0; i < this.filePathArr.length; i++) {
+          this.img.src = this.filePathArr[i]
+          console.log('pppppppppppppppppppppppppppppppppppppppp', this.filePathArr[i])
+        }
+      },
       cut() {
-        if (this.mark === 1) {
+        if (this.mark === 0) {
           this.mark = this.formModel.imgs.length
         }
         this.mark--
@@ -136,10 +142,10 @@
         console.log('222222222', this.formModel.imgs.length)
       },
       add() {
+        this.mark++
         if (this.mark === this.formModel.imgs.length - 1) {
           this.mark = 0
         }
-        this.mark++
         console.log('=====================', this.mark)
       },
       convertImgToBase64 (url, callback, outputFormat) {
@@ -181,6 +187,7 @@
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
         console.log('address=========', this.formModel.completeAddress)
+        this.getphoto()
       }
     }
   }
@@ -217,7 +224,8 @@
     display none
 
   .img-width
-    height 50vh
+    max-width 80%
+    height auto
     display block
     margin 0 auto
 
