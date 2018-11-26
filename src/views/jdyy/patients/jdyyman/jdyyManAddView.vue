@@ -68,16 +68,7 @@
               el-radio(label="否")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
             el-input(v-model="formModel1.remarks")
-          <!--div.box-->
-            <!--ul.right_ul-->
-              <!--li.right_li-->
-                <!--el-button.btn-submit(v-on:click="reset" :disabled="forbidden" size="large") 保存-->
-                <!--el-button.btn-submit.btn-reset(v-on:click="showMessage" :disabled="forbidden"  size="large") 保存并继续-->
           div.clear
-        <!--el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")-->
-        <!--el-input(v-model="formModel.modifyStaff")-->
-        <!--el-form-item(label="患者" prop="pname" v-bind:rules="rules.pid" v-bind:label-width="labelWidth")-->
-          <!--el-autocomplete(v-model="formModel.pname" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect")-->
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
         el-form(v-bind:model="formModel2" ref="formModel2" v-bind:submitBefore="submitBefore")
@@ -475,7 +466,9 @@
               console.log('res======================', res.data.tag)
               if (res.data.success) {
                 Message.success(res.data.msg)
-                if (this.formModel2.diagnosis !== null) {
+                if (this.formModel2.diagnosis !== null || this.formModel2.surgical !== null ||
+                  this.formModel2.operationDate !== null || this.formModel2.parting !== null ||
+                  this.formModel2.periodization !== null || this.formModel2.photo !== null) {
                   this.formModel2.pid = res.data.tag
                   this.subMitFormModel2()
                 }
