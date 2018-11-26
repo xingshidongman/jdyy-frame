@@ -88,21 +88,26 @@
                 }
               }).then(res => {
                 this.tableData = res.data.data
-                console.log('viewtable _res===========', this.tableData.length)
+                console.log('viewtable _res===========', this.tableData)
                 // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
                 if (this.tableData.length > 0) {
-                  console.log('this.imgsthis.imgsthis.imgsthis.imgsthis.imgs', this.imgs)
                   if (this.imgs !== undefined) {
-                    this.imgs.splice(0, this.imgs.length)
+                    console.log('(this.imgs !== undefined)-----------:', this.imgs !== undefined)
+                    this.imgs.splice(0, 5)
                   }
                   if (this.tableData[0].photo !== null && this.tableData[0].photo !== '') {
-                    if (this.tableData[0].photo.indexOf('&')) {
+                    console.log('this.imgs-------------clear--------------:', this.imgs)
+                    if (this.tableData[0].photo.indexOf('&') !== -1) {
+                      console.log('this.tableData[0].photo.indexOf(\'&\')-----------------:', this.tableData[0].photo.indexOf('&'))
                       let arr = this.tableData[0].photo.split('&')
                       let imgObj = {}
                       for (let i = 0; i < arr.length; i++) {
+                        console.log('arr.length---------new-----------------:', arr.length)
                         imgObj.val = arr[i]
                         imgObj.key = 'img' + i
+                        console.log(' imgObj.key-------------------', imgObj.key)
                         this.imgs.push(imgObj)
+                        console.log('this.imgs--------------:', this.imgs)
                       }
                     } else {
                       let imgObj = {

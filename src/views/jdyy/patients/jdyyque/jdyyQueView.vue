@@ -83,11 +83,11 @@
             el-table-column(label="图片" min-width="360" :resizable="false")
               template(slot-scope="scope")
                 div.picture(v-for="(img, filePathArr) in formModel.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")
-                  img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(index)" style="width:150px; height:150px")
-                  <!--el-dialog(:visible.sync="dialogVisible" :append-to-body="true")-->
-                    <!--img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.imgs" v-show="filePathArr===mark" :key="filePathArr")-->
-                    <!--img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )-->
-                    <!--img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )-->
+                  img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(filePathArr)" style="width:150px; height:150px")
+                  el-dialog(:visible.sync="dialogVisible" :append-to-body="true")
+                    img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.imgs" v-show="filePathArr===mark" :key="filePathArr")
+                    img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                    img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
         <!--view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")-->
         <!--div.mark(ref="mark")-->
         <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
@@ -120,9 +120,6 @@
         mark: ''
       }
     },
-    // mounted() {
-    //   this.getData()
-    // },
     methods: {
       change(i) {
         this.mark = i
@@ -136,7 +133,7 @@
         }
       },
       cut() {
-        if (this.mark === 1) {
+        if (this.mark === 0) {
           this.mark = this.formModel.imgs.length
         }
         this.mark--
@@ -145,10 +142,10 @@
         console.log('222222222', this.formModel.imgs.length)
       },
       add() {
+        this.mark++
         if (this.mark === this.formModel.imgs.length - 1) {
           this.mark = 0
         }
-        this.mark++
         console.log('=====================', this.mark)
       },
       convertImgToBase64 (url, callback, outputFormat) {
@@ -227,7 +224,8 @@
     display none
 
   .img-width
-    height 50vh
+    max-width 80%
+    height auto
     display block
     margin 0 auto
 
