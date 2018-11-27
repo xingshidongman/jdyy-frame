@@ -44,6 +44,6 @@ const FormModel = {
   parting: null, // 分型
   xid: null, // id（未知）
   photo: null, // 图片
-  imgs: null
+  imgs: []
 }
 export default FormModel
