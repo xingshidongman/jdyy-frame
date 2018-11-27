@@ -87,8 +87,8 @@
           kalix-clansman-upload(:action="action" ref="clearUpload"
           v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
         <!--el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
-          <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
-          kalix-img-upload(v-model="formModel.photo" readonly="readonly")
+        <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
+        kalix-img-upload(v-model="formModel.photo" readonly="readonly" v-on:ImgDel="ImgDel")
         div.btn
           el-button(v-on:click="CancelClick") 取 消
           el-button(type="primary" v-on:click="onSubmitClick") 提 交
@@ -295,6 +295,28 @@
       this.loadAll() // 获取病员信息
     },
     methods: {
+      ImgDel(imgUrl) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          let arrImg = this.formModel.photo.split(',')
+          let idx = arrImg.indexOf(imgUrl)
+          arrImg.splice(idx, 1)
+          this.formModel.photo = arrImg.join(',')
+          this.message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
       init(dialogOption) {
         if (!this.formModel.stature) {
           this.formModel.stature = ''
@@ -450,10 +472,12 @@
           fileName = fileName.substr(0, fileName.length - 1)
         }
 
-        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
-        baseDialog.formModel.photo = photoStr + filePath
-        baseDialog.imgName = fileName
-        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        if (fileName.length > 0) {
+          let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+          baseDialog.formModel.photo = photoStr + filePath
+          baseDialog.imgName = fileName
+          this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        }
         callBack()
       },
       setGroup(item) {

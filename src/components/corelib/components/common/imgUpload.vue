@@ -9,12 +9,15 @@
     template(v-if="readonly")
       template(v-if="isImage")
         template(v-for="imageUrl in fileList")
-          img.avatars(v-if="imageUrl" v-bind:src="imageUrl")
-          img.avatars(v-else src="/static/images/default_attachment.png")
+          div
+            img.avatars(v-if="imageUrl" v-bind:src="imageUrl")
+            img.avatars(v-else src="/static/images/default_attachment.png")
+          div
+            div(v-on:click="onImgDel(imageUrl)") ×
       template(v-else)
         template 空
         <!--template(v-if="this.value")-->
-          <!--a(v-bind:href="this.value") {{this.fileName}}-->
+        <!--a(v-bind:href="this.value") {{this.fileName}}-->
         <!--template(v-else) 空-->
     template(v-else)
       el-upload(v-bind:class="{'avatars-uploader':isImage,'upload-demo':!isImage}" v-bind:action="action"
@@ -32,11 +35,11 @@
       <!--v-bind:on-change="handleChange" v-bind:before-upload="handleBeforeUpload"-->
       <!--v-bind:on-success="handleSuccess" v-bind:on-error="handleError"-->
       <!--v-bind:on-preview="handlePreview" v-bind:on-remove="handleRemove")-->
-        <!--template(v-if="isImage")-->
-          <!--img.avatar(v-if="imageUrl" v-bind:src="imageUrl")-->
-          <!--i.el-icon-plus.avatar-uploader-icon(v-else)-->
-        <!--template(v-else)-->
-          <!--el-button(size="small" type="primary") 点击上传-->
+      <!--template(v-if="isImage")-->
+      <!--img.avatar(v-if="imageUrl" v-bind:src="imageUrl")-->
+      <!--i.el-icon-plus.avatar-uploader-icon(v-else)-->
+      <!--template(v-else)-->
+      <!--el-button(size="small" type="primary") 点击上传-->
 </template>
 
 <script type="text/ecmascript-6">
@@ -70,12 +73,20 @@
         imageUrl: ''
       }
     },
-    mounted () {
+    mounted() {
       this.fentch()
     },
+    watch: {
+      value(n, o) {
+        this.fentch()
+      }
+    },
     methods: {
+      onImgDel(img) {
+        this.$emit('ImgDel', img)
+      },
       // 组件初始化
-      fentch () {
+      fentch() {
         if (this.value != null && this.value !== '') {
           // let pathParts = this.value.split('/')
           // let fileName = pathParts[pathParts.length - 1]
@@ -83,9 +94,12 @@
           // let obj = {'name': this.fileName, 'url': this.value}
           // this.fileList.push(obj)
           this.fileList = this.value.split(',')
+          console.log('fileList', this.fileList)
           if (this.isImage) {
             this.imageUrl = this.value
           }
+        } else {
+          this.fileList = []
         }
       },
       handleChange(file, fileList) {

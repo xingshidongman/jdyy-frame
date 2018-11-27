@@ -683,6 +683,7 @@
     cursor pointer
   .autoTbale {
     overflow: auto;
+    border-left 1px solid rgb(52, 101, 203)
   }
   table {
     width: 100%;

@@ -248,6 +248,7 @@
         overflow hidden
         transition width .2s
         background url('/static/images/top.png') no-repeat center
+        background-size 100% 100%
       .text
           font-size 2.5vw
           padding: 45px 0;
