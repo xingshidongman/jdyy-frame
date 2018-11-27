@@ -6,20 +6,21 @@
         div.con1
           div.con1-left
             el-form-item.toleft(label="姓名")
-              el-input(v-model="formModel.name" readonly)
+              <!--el-input(v-model="formModel.name" readonly)-->
+              el-autocomplete(v-model="formModel.name" :fetch-suggestions="querySearchAsync" placeholder="请输入患者姓名" @select="handleSelect" style="width:100%")
             el-form-item.toleft(label="性别")
-              el-radio-group(v-model="formModel.sex" disabled)
+              el-radio-group(v-model="formModel.sex")
                 el-radio(label="男")
                 el-radio(label="女")
             el-form-item.toleft(label="年龄")
-              el-input(v-model="formModel.age" readonly)
+              el-input(v-model="formModel.age" clearable)
             el-form-item.toleft(label="电话")
-              el-input(v-model="formModel.telephonePerson" readonly)
+              el-input(v-model="formModel.telephonePerson" clearable)
             el-form-item.toleft(label="地址")
-              el-input(v-model="formModel.address" readonly)
+              el-input(v-model="formModel.address" clearable)
           div.con1-right
             el-form-item.short.toleft(label="住院号")
-              el-input(v-model="formModel.hospitalNumber" readonly)
+              el-input(v-model="formModel.hospitalNumber" clearable)
             el-form-item.short(label="研究序号")
               el-input(v-model="formModel.orderNumber" clearable)
             el-form-item.toleft(label="日期")
@@ -42,7 +43,8 @@
             el-form-item.short.toleft(label="假体")
               el-input(v-model="formModel.prosthesis" clearable)
             el-form-item.short(label="医生")
-              el-input(v-model="formModel.doctor" clearable)
+              <!--el-input(v-model="formModel.doctor" clearable)-->
+              el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
       div.art2
         h1.title 术前及围手术期手术资料
         div.con2
@@ -1008,7 +1010,8 @@
   import FormModel2 from './model2'
   import FormModel3 from './model3'
   import FormModel4 from './model4'
-  import {JdyykneeURL, JdyykneeFunctionalScoreURL, JdyykneeImgEvaluationURL, JdyykneeKSSEvaluationURL, JdyykneeTKASpecialURL} from '../../config.toml'
+  import {JdyykneeURL, JdyypatientsURL, JdyykneeFunctionalScoreURL, JdyykneeImgEvaluationURL, JdyykneeKSSEvaluationURL, JdyykneeTKASpecialURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   import Message from '../../../../components/corelib/common/message'
   export default {
     name: 'jdyyKneeEdit',
@@ -1344,7 +1347,68 @@
       },
       closeTable4() { // 关闭影像学评估信息
         this.show4 = false
+      },
+      loadAll() { // 获取病员信息
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
+        }).then(res => {
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
+        })
+      },
+      querySearchAsync(queryString, cb) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilter(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelect(item) {
+        console.log('item===========================', item)
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/' + item.pid
+        }).then(res => {
+          console.log('handleSelect========================', res.data)
+          this.formModel.name = res.data.name
+          this.formModel.sex = res.data.sex
+          this.formModel.age = res.data.age
+          this.formModel.telephonePerson = res.data.telephonePerson
+          this.formModel.address = res.data.address
+          this.formModel.hospitalNumber = res.data.hospitalNumber
+        })
+      },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel.doctor = item.value
       }
+    },
+    mounted() {
+      this.loadAll() // 获取病员信息
+      this.loadAllDoc() // 获取医生信息
     },
     computed: {
       total1() {

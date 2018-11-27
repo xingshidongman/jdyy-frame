@@ -27,7 +27,8 @@
           el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
             el-date-picker(v-model="formModel1.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-on:blur="validDoctor(value)" v-bind:rules="rules.directorDoctor")
-            el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")
+            <!--el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")-->
+            el-autocomplete(v-model="formModel1.directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" style="width:100%")
           el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
             el-input(v-model="formModel1.medicalRecords")
           el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
@@ -98,6 +99,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL, JdyysurURL, JdyydiaURL, JdyyvisitURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   // import {noop} from 'element-ui/src/utils/util'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
@@ -290,6 +292,7 @@
       this.getDiaCascader() // 获取诊断信息并以级联形式显示
       this.getSurCascader() // 获取术式信息并以级联形式显示
       this.loadAll() // 获取病员信息
+      this.loadAllDoc() // 获取医生信息
     },
     methods: {
       validDoctor(val, callback) {
@@ -430,11 +433,7 @@
       querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          cb(results)
-        }, 3000 * Math.random())
+        cb(results)
       },
       createStateFilter(queryString) {
         return (state) => {
@@ -450,6 +449,29 @@
           console.log('handleSelect========================', res.data)
           this.formModel1 = res.data
         })
+      },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel1.directorDoctor = item.value
       },
       submitAction() { // 提交方法
         this.onSubmitClick() // 调用重写的图片上传方法
@@ -475,7 +497,7 @@
               } else {
                 Message.error(res.data.msg)
               }
-              this.$refs.formModel1.resetFields()
+              this.resetAll()
             })
           } else {
             Message.error('请检查输入项！')

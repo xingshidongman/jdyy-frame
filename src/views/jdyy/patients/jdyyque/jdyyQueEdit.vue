@@ -26,7 +26,8 @@
         el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
           el-date-picker(v-model="formModel.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-bind:rules="rules.directorDoctor")
-          el-input(v-model="formModel.directorDoctor")
+          <!--el-input(v-model="formModel.directorDoctor")-->
+          el-autocomplete(v-model="formModel.directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" style="width:100%")
         el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
           el-input(v-model="formModel.medicalRecords")
         el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
@@ -96,6 +97,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
@@ -293,6 +295,7 @@
       this.getDiaCascader() // 获取诊断信息并以级联形式显示
       this.getSurCascader() // 获取术式信息并以级联形式显示
       this.loadAll() // 获取病员信息
+      this.loadAllDoc() // 获取医生信息
     },
     methods: {
       init(dialogOption) {
@@ -459,14 +462,19 @@
       setGroup(item) {
         this.formModel.downlosd = item.albumname
       },
+      loadAll() { // 获取病员信息
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
+        }).then(res => {
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
+        })
+      },
       querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          cb(results)
-        }, 3000 * Math.random())
+        cb(results)
       },
       createStateFilter(queryString) {
         return (state) => {
@@ -482,6 +490,29 @@
           console.log('handleSelect========================', res.data)
           this.formModel = res.data
         })
+      },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel1.directorDoctor = item.value
       },
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
@@ -533,15 +564,6 @@
         }).then(res => {
           console.log('formModel.diagnosisCode==============================', res.data.data)
           this.formModel.surgical = res.data.data[0].content
-        })
-      },
-      loadAll() { // 获取病员信息
-        this.axios.request({
-          method: 'GET',
-          url: JdyypatientsURL + '/getPatientsByAutocomplete'
-        }).then(res => {
-          console.log('getPatientsByAutocomplete======================', res.data.data)
-          this.restaurants = res.data.data
         })
       },
       CancelClick() {

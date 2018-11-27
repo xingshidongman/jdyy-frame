@@ -2,10 +2,8 @@
   kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
-        el-input(v-model="formModel.doctor")
-        <!--el-select.border(v-model="formModel.doctor" filterable placeholder="请选择")-->
-          <!--el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")-->
-        <!--kalix-select.border(v-model="formModel.doctor" v-bind:requestUrl="userURL" appName="dutyDoctor" id="name" position="坐班医生" placeholder="请选择医生")-->
+        <!--el-input(v-model="formModel.doctor")-->
+        el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
       el-form-item.short(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
         el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" v-on:change="getDataByDate" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
@@ -28,17 +26,12 @@
   import {JdyystatURL} from '../../config.toml'
   import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
-  import KalixClansmanUpload from '../../../../components/fileUpload/upload'
   export default {
     name: 'JdyyStatAdd',
-    components: {KalixClansmanUpload},
     data() {
       return {
-        downloadURL: JdyystatURL,
         formModel: Object.assign({}, FormModel),
         labelWidth: '170px',
-        columnParam: undefined,
-        options: [],
         rules: {
           protoNum: [{required: true, message: '请输入原住院人数', trigger: 'change'}],
           outNum: [{required: true, message: '请输入出院人数', trigger: 'change'}],
@@ -50,13 +43,11 @@
           doctor: [{required: true, message: '请输入坐班医生', trigger: 'change'}],
           date: [{required: true, message: '请输入坐班日期', trigger: 'change'}]
         },
-        targetURL: JdyystatURL,
-        items: [],
-        userURL: usersURL
+        targetURL: JdyystatURL
       }
     },
     mounted() {
-      this.findByPosition()
+      this.loadAllDoc() // 获取医生信息
     },
     methods: {
       init(dialogOption) {
@@ -64,20 +55,6 @@
       },
       setGroup(val) {
         this.formModel.downlosd = val
-      },
-      findByPosition() {
-        console.log('findByPosition=================active')
-        this.axios.request({
-          method: 'GET',
-          url: usersURL + '/findByPosition',
-          params: {
-            position: '坐班医生'
-          }
-        }).then(res => {
-          console.log('findByPosition-res.data.data======================', res.data.data)
-          console.log('date============')
-          this.items = res.data.data
-        })
       },
       getDataByDate() {
         console.log('getDataByDate======================', this.formModel.date)
@@ -96,6 +73,29 @@
             this.formModel.date = null
           }
         })
+      },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel.doctor = item.value
       }
     }
   }
