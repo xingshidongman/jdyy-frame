@@ -66,8 +66,7 @@
         btnList: jdyyQueConfigBtnList,
         toolbarBtnList: [
           {id: 'add', isShow: false, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
-        ],
-        imgs: []
+        ]
       }
     },
     methods: {
@@ -91,30 +90,33 @@
                 console.log('viewtable _res===========', this.tableData)
                 // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
                 if (this.tableData.length > 0) {
-                  if (this.imgs !== undefined) {
-                    this.imgs.splice(0, this.imgs.length)
-                  }
-                  if (this.tableData[0].photo !== null && this.tableData[0].photo !== '') {
-                    if (this.tableData[0].photo.indexOf('&') !== -1) {
-                      let arr = this.tableData[0].photo.split('&')
-                      for (let i = 0; i < arr.length; i++) {
-                        let imgObj = {}
-                        imgObj.val = arr[i]
-                        imgObj.key = 'img' + i
-                        this.imgs.push(imgObj)
-                        console.log('this.imgs--------------:', this.imgs)
+                  for (let j = 0; j < this.tableData.length; j++) {
+                    this.tableData[j].imgs = []
+                    if (this.tableData[j].imgs !== undefined) {
+                      this.tableData[j].imgs.splice(0, this.tableData[j].imgs.length)
+                    }
+                    if (this.tableData[j].photo !== null && this.tableData[j].photo !== '') {
+                      if (this.tableData[j].photo.indexOf('&') !== -1) {
+                        let arr = this.tableData[j].photo.split('&')
+                        for (let i = 0; i < arr.length; i++) {
+                          let imgObj = {}
+                          imgObj.val = arr[i]
+                          imgObj.key = 'img' + i
+                          this.tableData[j].imgs.push(imgObj)
+                          console.log('this.imgs--------------:', this.tableData[j].imgs)
+                        }
+                      } else {
+                        let imgObj = {
+                          val: this.tableData[j].photo,
+                          key: 'img0'
+                        }
+                        console.log('imgObj--------------:', imgObj)
+                        this.tableData[j].imgs.push(imgObj)
                       }
-                    } else {
-                      let imgObj = {
-                        val: this.tableData[0].photo,
-                        key: 'img0'
-                      }
-                      console.log('imgObj--------------:', imgObj)
-                      this.imgs.push(imgObj)
                     }
                   }
                   row.tableData = this.tableData
-                  row.imgs = this.imgs
+                  // row.imgs = this.imgs
                   that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
                 } else {
                   row.tableData = []
