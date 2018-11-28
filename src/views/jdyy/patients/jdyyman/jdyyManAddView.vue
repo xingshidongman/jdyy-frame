@@ -491,9 +491,10 @@
               console.log('res======================', res.data.tag)
               if (res.data.success) {
                 Message.success(res.data.msg)
-                if (this.formModel2.diagnosis !== null || this.formModel2.surgical !== null ||
-                  this.formModel2.operationDate !== null || this.formModel2.parting !== null ||
-                  this.formModel2.periodization !== null || this.formModel2.photo !== null) {
+                console.log('this.formModel2.diagnosis...==============', this.formModel2.diagnosis)
+                if (this.formModel2.diagnosis != null || this.formModel2.surgical != null ||
+                  this.formModel2.operationDate != null || this.formModel2.parting != null ||
+                  this.formModel2.periodization != null || this.formModel2.photo !== '') {
                   this.formModel2.pid = res.data.tag
                   this.subMitFormModel2()
                 }
@@ -510,11 +511,25 @@
         })
       },
       subMitFormModel2() {
-        console.log('onSubmit-formModel2===========================', this.formModel2)
+        console.log('onSubmit-formModel2===========================', this.formModel2.diagnosis, this.formModel2.parting)
+        console.log('aaaaaaaaaaaaaaa', this.formModel2)
         this.axios.request({
           method: 'POST',
           url: JdyyvisitURL,
-          data: this.formModel2
+          data: {
+            id: null,
+            pid: this.formModel2.pid,
+            diagnosis: this.formModel2.diagnosis,
+            diagnosisCode: this.formModel2.diagnosisCode,
+            surgical: this.formModel2.surgical,
+            surgicalCode: this.formModel2.surgicalCode,
+            AOcode: this.formModel2.AOcode,
+            operationDate: this.formModel2.operationDate,
+            periodization: this.formModel2.periodization,
+            parting: this.formModel2.parting,
+            xid: this.formModel2.xid,
+            photo: this.formModel2.photo
+          }
         }).then(res => {
           console.log('subMitFormModel2-success==================', res.data.msg)
           this.$refs.formModel2.resetFields()
