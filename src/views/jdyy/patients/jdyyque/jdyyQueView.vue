@@ -83,11 +83,12 @@
             el-table-column(prop="imgs" label="图片" min-width="360" :resizable="false")
               template(slot-scope="scope")
                 div.picture(v-for="(img, filePathArr) in scope.row.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")
-                  img(v-bind:src="img.val" v-bind:ref="img.key" v-on:click="dialogVisible = true" @click="change(filePathArr)" style="width:150px; height:150px")
-                  el-dialog(:visible.sync="dialogVisible" :append-to-body="true")
-                    img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in scope.row.imgs" v-show="filePathArr===mark" :key="filePathArr")
-                    img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
-                    img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+                  img(v-bind:src="img.val" v-bind:ref="img.key" @click="change(filePathArr) ; handelClick(scope.$index)" style="width:150px; height:150px")
+                  el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
+                    div.img-height
+                      img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.tableData[rowNumber].imgs" v-show="filePathArr===mark" :key="filePathArr")
+                      img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                      img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
         <!--view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")-->
         <!--div.mark(ref="mark")-->
         <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
@@ -117,13 +118,14 @@
         filePathArr: [],
         dialogVisible: false,
         dialogImageUrl: '',
-        mark: ''
+        mark: '',
+        rowNumber: 0
       }
     },
     methods: {
       change(i) {
         this.mark = i
-        console.log('=====================', this.mark)
+        this.dialogVisible = true
       },
       getphoto() {
         this.filePathArr = this.formModel.photo.split(',')
@@ -132,18 +134,21 @@
           console.log('pppppppppppppppppppppppppppppppppppppppp', this.filePathArr[i])
         }
       },
-      cut() {
-        if (this.mark === 0) {
-          this.mark = this.formModel.imgs.length
-        }
-        this.mark--
-        console.log('=====================', this.mark)
-        console.log('111111111', this.formModel.imgs.length - 1)
-        console.log('222222222', this.formModel.imgs.length)
+      handelClick(index) {
+        this.rowNumber = index
+        console.log('3333333333333333333333', this.rowNumber)
       },
-      add() {
+      cut() {
+        this.mark--
+        if (this.mark < 0) {
+          this.mark = this.formModel.tableData[this.rowNumber].imgs.length - 1
+          // console.log(this.formModel.tableData[index])
+        }
+        console.log('=====================', this.mark)
+      },
+      add(index) {
         this.mark++
-        if (this.mark === this.formModel.imgs.length - 1) {
+        if (this.mark > this.formModel.tableData[this.rowNumber].imgs.length - 1) {
           this.mark = 0
         }
         console.log('=====================', this.mark)
@@ -213,22 +218,24 @@
     .el-input__inner
       border-radius 1px
 
-  .mark
-    position: fixed
-    z-index: 9
-    background: black
-    opacity: 0.5
-    top: 20%
-    width: 60%
-    text-align: center
-    display none
-
+  /*.mark*/
+    /*position: fixed*/
+    /*z-index: 9*/
+    /*background: black*/
+    /*opacity: 0.5*/
+    /*top: 20%*/
+    /*width: 60%*/
+    /*text-align: center*/
+    /*display none*/
   .img-width
-    max-width 80%
-    height auto
-    display block
-    margin 0 auto
-
+    max-width 90%
+    max-height 400px
+  .img-height
+    width 800px
+    height 400px
+    display table-cell
+    vertical-align middle
+    text-align center
   .prev
   .next
     background-color: rgba(0, 0, 0, 0.5)
@@ -237,8 +244,8 @@
     top 40%
 
   .prev
-    left 20px
+    left 0
 
   .next
-    right 20px
+    right 0
 </style>
