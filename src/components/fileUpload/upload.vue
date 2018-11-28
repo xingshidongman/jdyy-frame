@@ -16,8 +16,11 @@
       list-type="picture")
       el-button(size="small" type="primary") {{btnText}}
       div(slot="tip" class="el-upload__tip") {{tipText}}
-    el-dialog( :visible.sync="dialogVisible" :append-to-body='true')
-      img(width="100%" :src="dialogImageUrl" alt="")
+    el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
+      div.img-height
+        img.img-width(v-bind:src="dialogImageUrl" )
+        img(src="../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+        img(src="../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
 </template>
 <script type="text/ecmascript-6">
   import Cache from '../../../src/common/cache.js'
@@ -139,7 +142,7 @@
       handlePreview(file) {
         this.dialogVisible = true
         this.dialogImageUrl = file.url
-        console.log(file)
+        console.log('aaaaaaaaaaaa', file)
       },
       handleExceed(files, fileList) {
         Message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
