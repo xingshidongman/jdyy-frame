@@ -683,7 +683,6 @@
     cursor pointer
   .autoTbale {
     overflow: auto;
-    border-left 1px solid rgb(52, 101, 203)
   }
   table {
     width: 100%;
@@ -780,11 +779,6 @@
     .td-div
       flex 1
       word-break break-all
-  @media screen and (max-width: 1500px) and (min-width: 1200px){
-    .buttom{
-      width 300px
-      margin 8px 15% 0 0;
-    }
-  }
+
 </style>
 

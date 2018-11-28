@@ -8,12 +8,18 @@
   div.block
     template(v-if="readonly")
       template(v-if="isImage")
-        template(v-for="imageUrl in fileList")
-          div
-            img.avatars(v-if="imageUrl" v-bind:src="imageUrl")
+        template
+          div.img-cancel(v-for="(imageUrl, index) in fileList" :class="{ 'active':index===mark }" :key="index")
+            img.avatars(v-if="imageUrl" v-bind:src="imageUrl" v-bind:ref="imageUrl.key" @click="change(index)")
             img.avatars(v-else src="/static/images/default_attachment.png")
-          div
-            div(v-on:click="onImgDel(imageUrl)") ×
+            div
+              a.cancel(v-on:click="onImgDel(imageUrl)" href="#") ×
+            el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
+              div.img-height
+                img.img-width(v-bind:src="imageUrl" v-for="(imageUrl, index) in fileList" v-show="index===mark" :key="index")
+                img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+        div.clear
       template(v-else)
         template 空
         <!--template(v-if="this.value")-->
@@ -70,7 +76,9 @@
         // headers: {'access_token': Cache.get('access_token'), 'jsessionid': Cache.get('user_token')},
         fileList: [],
         fileName: '',
-        imageUrl: ''
+        imageUrl: '',
+        mark: '',
+        dialogVisible: false
       }
     },
     mounted() {
@@ -82,6 +90,27 @@
       }
     },
     methods: {
+      change(i) {
+        this.mark = i
+        this.dialogVisible = true
+        console.log(this.fileList)
+        console.log(this.mark)
+      },
+      cut() {
+        this.mark--
+        if (this.mark < 0) {
+          this.mark = this.fileList.length - 1
+          // console.log(this.formModel.tableData[index])
+        }
+        console.log('=====================', this.mark)
+      },
+      add() {
+        this.mark++
+        if (this.mark > this.fileList.length - 1) {
+          this.mark = 0
+        }
+        console.log('=====================', this.mark)
+      },
       onImgDel(img) {
         this.$emit('ImgDel', img)
       },
@@ -176,31 +205,79 @@
   }
 </script>
 
-<style>
-  .avatars-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
+<style lang="stylus">
+  .avatars-uploader
+    .el-upload
+      border: 1px dashed #d9d9d9
+      border-radius: 6px
+      cursor: pointer
+      position: relative
+      overflow: hidden
 
-  .avatars-uploader .el-upload:hover {
-    border-color: #20a0ff;
-  }
 
-  .avatars-uploader-icon {
+  .avatars-uploader
+    .el-upload:hover
+      border-color: #20a0ff;
+
+
+  .avatars-uploader-icon
     font-size: 28px;
     color: #8c939d;
     width: 178px;
     height: 178px;
     line-height: 178px;
     text-align: center;
-  }
 
-  .avatars {
+
+  .avatars
     width: 150px;
-    /*height: 150px;*/
+    height: 150px;
     margin: 5px;
-  }
+
+
+  .img-cancel
+    position: relative
+    width: 160px
+    float: left
+
+
+  .cancel
+    background-color: rgba(255, 255, 255, 0.4)
+    position: absolute
+    right: 5px
+    top: 5px
+    z-index: 100
+    font-size: 16px
+
+
+  a
+    color: black
+    text-decoration: none
+
+
+  .clear
+    clear: both
+
+  .img-width
+    max-width 90%
+    max-height 400px
+  .img-height
+    width 800px
+    height 400px
+    display table-cell
+    vertical-align middle
+    text-align center
+  .prev
+  .next
+    background-color: rgba(0, 0, 0, 0.5)
+    padding 20px 0
+    position absolute
+    top 40%
+
+  .prev
+    left 0
+
+  .next
+    right 0
+
 </style>

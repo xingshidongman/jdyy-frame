@@ -146,7 +146,7 @@
         }
         console.log('=====================', this.mark)
       },
-      add(index) {
+      add() {
         this.mark++
         if (this.mark > this.formModel.tableData[this.rowNumber].imgs.length - 1) {
           this.mark = 0
