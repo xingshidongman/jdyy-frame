@@ -38,7 +38,7 @@
           el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
             el-input(v-model="formModel1.bedNumber")
           el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-            el-input(v-model="formModel1.currentSituation")
+            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none")
           el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
             el-date-picker(v-model="formModel1.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -52,9 +52,9 @@
           el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
             el-input(v-model="formModel1.bloodPressure" )
           el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-            el-input(v-model="formModel1.specialDisorders")
+            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none")
           el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-            el-input(v-model="formModel1.descriptionSpecialDisease")
+            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none")
           el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
             el-input(v-model="formModel1.allergicHistory")
           el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -68,7 +68,7 @@
               el-radio(label="是")
               el-radio(label="否")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
-            el-input(v-model="formModel1.remarks")
+            el-input(v-model="formModel1.remarks" type="textarea" resize="none" rows="6")
           div.clear
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
@@ -166,13 +166,15 @@
       var validatetelephone = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
-          if (reg.test(valTrim) && valTrim.length === 11) {
+          let reg1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/
+          let reg2 = /^([0-9]{3,4}-)?[0-9]{7,8}$/
+          // let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/  && valTrim.length === 11
+          if (reg1.test(valTrim) || reg2.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
           } else {
             this.phoneNumberInfo = false
-            callback(new Error('请输入正确手机号码'))
+            callback(new Error('联系电话格式不正确，请输入正确的固定电话或手机号'))
           }
         } else {
           this.phoneNumberInfo = false
@@ -193,7 +195,8 @@
           }
         } else {
           this.phoneNumberInfo = false
-          callback(new Error('请输入年龄'))
+          callback()
+          // callback(new Error('请输入年龄'))
         }
       }
       var validatestature = (rule, value, callback) => {

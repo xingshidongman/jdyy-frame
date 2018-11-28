@@ -37,7 +37,7 @@
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
           el-input(v-model="formModel.bedNumber")
         el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-          el-input(v-model="formModel.currentSituation")
+          el-input(v-model="formModel.currentSituation" type="textarea" resize="none")
         el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
           el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -51,9 +51,9 @@
         el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
           el-input(v-model="formModel.bloodPressure")
         el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-          el-input(v-model="formModel.specialDisorders")
+          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none")
         el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-          el-input(v-model="formModel.descriptionSpecialDisease")
+          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none")
         el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
           el-input(v-model="formModel.allergicHistory")
         el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -63,13 +63,13 @@
         el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
           el-input(v-model="formModel.hss")
         el-form-item(label="是否出院" prop="whetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.whetherDischarge")
-          el-radio-group(v-model="formModel.whetherDischarge" )
+          el-radio-group(v-model="formModel.whetherDischarge")
             el-radio(label="是")
             el-radio(label="否")
         el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
           el-input(v-text="modifyStaff" readonly="readonly")
         el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
-          el-input(v-model="formModel.remarks")
+          el-input(v-model="formModel.remarks" type="textarea" resize="none" rows="6")
       div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
       el-form(v-bind:model="formModel" ref="formModel" )
         el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
@@ -108,8 +108,6 @@
   import EventBus from '../../../../components/corelib/common/eventbus'
   import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
   import Message from '../../../../components/corelib/common/message'
-  // import Vue from 'vue'
-
   export default {
     name: 'JdyyQueEdit',
     components: {
@@ -176,13 +174,15 @@
       var validatetelephone = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
-          if (reg.test(valTrim) && valTrim.length === 11) {
+          let reg1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/
+          let reg2 = /^([0-9]{3,4}-)?[0-9]{7,8}$/
+          // let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/  && valTrim.length === 11
+          if (reg1.test(valTrim) || reg2.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
           } else {
             this.phoneNumberInfo = false
-            callback(new Error('请输入正确手机号码'))
+            callback(new Error('联系电话格式不正确，请输入正确的固定电话或手机号'))
           }
         } else {
           this.phoneNumberInfo = false
@@ -321,6 +321,12 @@
         })
       },
       init(dialogOption) {
+        if (!this.formModel.idCard) {
+          this.formModel.idCard = ''
+        }
+        if (!this.formModel.age) {
+          this.formModel.age = ''
+        }
         if (!this.formModel.stature) {
           this.formModel.stature = ''
         }
