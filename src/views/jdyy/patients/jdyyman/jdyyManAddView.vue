@@ -273,7 +273,6 @@
           descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
           allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
           typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          remarks: [{validator: validatexinxi, trigger: 'change'}],
           stature: [{validator: validatestature, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],

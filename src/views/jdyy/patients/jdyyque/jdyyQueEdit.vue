@@ -277,7 +277,6 @@
           descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
           allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
           typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          remarks: [{validator: validatexinxi, trigger: 'change'}],
           stature: [{validator: validatestature, trigger: 'change'}]
         },
         targetURL: JdyypatientsURL,
@@ -598,7 +597,7 @@
       },
       CancelClick() {
         this.$refs.kalixBizDialog.onCancelClick()
-        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
+        // EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
       },
       onSubmitClick() { // 重写多张图片上传方法
         if (this.submitCustom && typeof (this.submitCustom) === 'function') {
@@ -626,13 +625,14 @@
               if (res.data.success) {
                 Message.success(res.data.msg)
                 this.visible = false
-                this.CancelClick()
+                this.$refs.kalixBizDialog.onCancelClick()
+                EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
                 // 关闭对话框
               } else {
                 Message.error(res.data.msg)
-                this.CancelClick()
+                this.$refs.kalixBizDialog.onCancelClick()
+                EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
               }
-              // 刷新列表
             })
           }
         })
