@@ -674,6 +674,7 @@
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
+    float none !important
     width: 325px
     margin 0 auto
   .tree-icon
