@@ -320,6 +320,9 @@
         })
       },
       init(dialogOption) {
+        if (!this.formModel.sex) {
+          this.formModel.sex = ''
+        }
         if (!this.formModel.idCard) {
           this.formModel.idCard = ''
         }
