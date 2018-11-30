@@ -10,7 +10,6 @@
       el-button.buttons(v-if="btn.isShow" v-on:click="toggle(btn.id)" v-bind:disabled="btn.isDisable")
         i.iconfont(v-bind:class="btn.icon" style="padding-right:3px;")
         |  {{btn.title}}
-      div.clear
 </template>
 
 <script type="text/ecmascript-6">
@@ -67,6 +66,4 @@
     background-color #3465cb
     border-color #e8e8e8
     color #ffffff
-  .clear
-    clear both
 </style>
