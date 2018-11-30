@@ -22,6 +22,7 @@
         v-on:onCheckBtnList="onCheckBtnList")
         div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle")
           el-table(:data="tableData"  style="width:100%" ref="kalixTable"
+          v-bind:header-row-class-name="tableHeaderClassName"
           v-bind:row-class-name="tableRowClassName"
           v-loading.body="loading" fit
           v-bind:height="tableHeight"
@@ -41,7 +42,7 @@
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*50+'px'"
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*34+'px'"
                 :sortable="true")
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
@@ -180,6 +181,9 @@
       tableRowClassName: { // 对table的一行数据进行样式定制
         type: Function
       },
+      tableHeaderClassName: {
+        type: Function
+      },
       deleteAllUrl: {
         type: String,
         default: ''
@@ -283,6 +287,12 @@
       this.setWrapperStyle()
     },
     methods: {
+      tableRowClassName({ row, rowIndex }) {
+        return 'table-row-th'
+      },
+      tableHeaderClassName({ row, rowIndex }) {
+        return 'table-header-th'
+      },
       setWrapperStyle() {
         if (!this.bizSearch) {
           this.wrapperTop = {'top': 0}

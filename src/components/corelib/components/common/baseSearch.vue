@@ -275,7 +275,7 @@
       .search-container
         margin-bottom -12px
     .el-form-item
-      margin-bottom 12px
+      margin-bottom 0
       display inline-block
       width 22%
       .el-form-item__label
