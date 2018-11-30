@@ -223,20 +223,6 @@
           // callback(new Error('请输入身高'))
         }
       }
-      // var validatecompleteAddress = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^([\u4e00-\u9fa5]){5,50}$/
-      //     if (reg.test(valTrim)) {
-      //       callback()
-      //     } else {
-      //       callback(new Error('请输入正确通讯地址'))
-      //     }
-      //   } else {
-      //     callback()
-      //     // callback(new Error('请输通讯地址'))
-      //   }
-      // }
       var validatexinxi = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -248,7 +234,6 @@
           }
         } else {
           callback()
-          // callback(new Error('请输通讯信息'))
         }
       }
       return {
@@ -270,7 +255,6 @@
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
           familyPhone: [{validator: validatetelephone, trigger: 'change'}],
-          // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
           medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
           currentSituation: [{validator: validatexinxi, trigger: 'change'}],
           specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
@@ -282,7 +266,6 @@
         targetURL: JdyypatientsURL,
         diaCascader: [],
         surCascader: [],
-        photoArr: [],
         filePathArr: [],
         fileNameArr: []
       }
@@ -425,11 +408,8 @@
         if (!this.formModel.photo) {
           this.formModel.photo = ''
         }
-        // this.formModel = this.aaa(this.formModel)
-        this.getphoto()
         console.log('---------0000000000000000------------', this.formModel)
         console.log('---------dialogOption------------', dialogOption)
-        // console.log('---------this.formModel4444444444444------------', this.aaa(this.formModel))
         delete this.formModel.rowNumber
         delete this.formModel.tableData
         let diaCode = this.formModel.diagnosisCode // 诊断级联回显
@@ -455,9 +435,6 @@
           }
         }
       },
-      getphoto() {
-        this.photoArr = this.formModel.photo.split(',')
-      },
       getFilePath(filePath, fileName) { // 图片上传路径
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
@@ -466,25 +443,22 @@
         if (this.formModel.start) {
           delete this.formModel['start']
         }
-        if (this.formModel.hospitalNumber) {
-        }
         let filePath = ''
-        if (this.filePathArr.length) {
+        if (this.filePathArr.length > 0) {
           this.filePathArr.forEach(e => {
             filePath += e + ','
           })
           filePath = filePath.substr(0, filePath.length - 1)
         }
         let fileName = ''
-        if (this.fileNameArr.length) {
+        if (this.fileNameArr.length > 0) {
           this.fileNameArr.forEach(e => {
             fileName += e + ','
           })
           fileName = fileName.substr(0, fileName.length - 1)
         }
-
         if (fileName.length > 0) {
-          let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
+          let photoStr = this.formModel.photo !== '' ? this.formModel.photo + ',' : ''
           baseDialog.formModel.photo = photoStr + filePath
           baseDialog.imgName = fileName
           this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
