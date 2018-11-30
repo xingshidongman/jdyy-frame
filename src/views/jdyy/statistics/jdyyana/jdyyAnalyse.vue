@@ -542,8 +542,8 @@
           console.log('getDiaData==============', res.data.data)
           if (res.data.data.length == 0) {
             this.open()
-            this.diaDate = null
-            this.getDiaData()
+            // this.diaDate = null
+            // this.getDiaData()
           }
           let diaColumn = ''
           for (let i = 0; i < res.data.data.length; i++) {
@@ -585,8 +585,8 @@
           console.log('getSurData==============', res.data.data)
           if (res.data.data.length == 0) {
             this.open()
-            this.surDate = null
-            this.getSurData()
+            // this.surDate = null
+            // this.getSurData()
           }
           let surColumn = ''
           for (let i = 0; i < res.data.data.length; i++) {

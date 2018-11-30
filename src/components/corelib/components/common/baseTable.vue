@@ -42,8 +42,11 @@
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:label="field.label" v-bind:min-width="field.label.length*34+'px'"
-                :sortable="true")
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:min-width="field.label.length*34+'px'"
+                v-bind:sortable="sortable"
+                )
+                  template(slot="header" slot-scope="scope")
+                    div(v-on:click="thClick(field.prop)") {{field.label}}
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮
@@ -152,10 +155,10 @@
       appendCondition: { // search组件之外的查询条件
         type: Array
       },
-      sort: {
-        type: String,
-        default: null
-      },
+      // sort: {
+      //   type: String,
+      //   default: null
+      // },
       tableFields: {
         type: Array
       },
@@ -218,6 +221,11 @@
       fileAccept: {
         type: String,
         default: '*'
+      },
+      // 是否对表格进行排序
+      sortable: {
+        type: Boolean,
+        default: false
       }
     },
     watch: {
@@ -245,7 +253,8 @@
         isShowToolBarB: true,
         currentRow: null,
         wrapperTop: {},
-        toolbarBtnListClone: []
+        toolbarBtnListClone: [],
+        sort: ''
       }
     },
     created() {
@@ -274,6 +283,8 @@
       EventBus.$off(this.bizKey + '-' + 'KalixDialogClose')
     },
     mounted() {
+      // 排序
+      this.orderByObj = {}
       // 注册事件接受
       const that = this
       window.addEventListener('resize', () => {
@@ -293,6 +304,28 @@
       tableHeaderClassName({ row, rowIndex }) {
         return 'table-header-th'
       },
+      thClick(key) {
+        console.log('thClick', key)
+        let currentKey = this.orderByObj[key]
+        if (!currentKey) {
+          this.orderByObj[key] = 'desc'
+        } else {
+          if (currentKey === 'asc') {
+            delete this.orderByObj[key]
+          } else {
+            this.orderByObj[key] = 'asc'
+          }
+        }
+        console.log('this.orderByObj', this.orderByObj)
+        let strs = []
+        for (let k in this.orderByObj) {
+          strs.push(`${k} ${this.orderByObj[k]}`)
+        }
+        console.log('strs', strs.join(','))
+        this.sort = strs.join(',')
+        this.getData()
+      },
+      /* ====== ===== */
       setWrapperStyle() {
         if (!this.bizSearch) {
           this.wrapperTop = {'top': 0}

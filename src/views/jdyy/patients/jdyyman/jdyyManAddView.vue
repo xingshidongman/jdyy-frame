@@ -27,7 +27,8 @@
           el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
             el-date-picker(v-model="formModel1.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-on:blur="validDoctor(value)" v-bind:rules="rules.directorDoctor")
-            el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")
+            <!--el-input(v-model="formModel1.directorDoctor" @change="validDoctor($event)")-->
+            el-autocomplete(v-model="formModel1.directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" style="width:100%")
           el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
             el-input(v-model="formModel1.medicalRecords")
           el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
@@ -37,7 +38,7 @@
           el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
             el-input(v-model="formModel1.bedNumber")
           el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-            el-input(v-model="formModel1.currentSituation")
+            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none")
           el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
             el-date-picker(v-model="formModel1.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -51,9 +52,9 @@
           el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
             el-input(v-model="formModel1.bloodPressure" )
           el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-            el-input(v-model="formModel1.specialDisorders")
+            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none")
           el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-            el-input(v-model="formModel1.descriptionSpecialDisease")
+            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none")
           el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
             el-input(v-model="formModel1.allergicHistory")
           el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -67,7 +68,7 @@
               el-radio(label="是")
               el-radio(label="否")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
-            el-input(v-model="formModel1.remarks")
+            el-input(v-model="formModel1.remarks" type="textarea" resize="none" rows="6")
           div.clear
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
@@ -98,6 +99,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL, JdyysurURL, JdyydiaURL, JdyyvisitURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   // import {noop} from 'element-ui/src/utils/util'
   import FormModel1 from './model1'
   import FormModel2 from './model2'
@@ -164,13 +166,15 @@
       var validatetelephone = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
-          if (reg.test(valTrim) && valTrim.length === 11) {
+          let reg1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/
+          let reg2 = /^([0-9]{3,4}-)?[0-9]{7,8}$/
+          // let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/  && valTrim.length === 11
+          if (reg1.test(valTrim) || reg2.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
           } else {
             this.phoneNumberInfo = false
-            callback(new Error('请输入正确手机号码'))
+            callback(new Error('联系电话格式不正确，请输入正确的固定电话或手机号'))
           }
         } else {
           this.phoneNumberInfo = false
@@ -191,7 +195,8 @@
           }
         } else {
           this.phoneNumberInfo = false
-          callback(new Error('请输入年龄'))
+          callback()
+          // callback(new Error('请输入年龄'))
         }
       }
       var validatestature = (rule, value, callback) => {
@@ -268,7 +273,6 @@
           descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
           allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
           typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          remarks: [{validator: validatexinxi, trigger: 'change'}],
           stature: [{validator: validatestature, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
@@ -290,6 +294,7 @@
       this.getDiaCascader() // 获取诊断信息并以级联形式显示
       this.getSurCascader() // 获取术式信息并以级联形式显示
       this.loadAll() // 获取病员信息
+      this.loadAllDoc() // 获取医生信息
     },
     methods: {
       validDoctor(val, callback) {
@@ -430,11 +435,7 @@
       querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          cb(results)
-        }, 3000 * Math.random())
+        cb(results)
       },
       createStateFilter(queryString) {
         return (state) => {
@@ -451,6 +452,29 @@
           this.formModel1 = res.data
         })
       },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel1.directorDoctor = item.value
+      },
       submitAction() { // 提交方法
         this.onSubmitClick() // 调用重写的图片上传方法
       },
@@ -466,16 +490,17 @@
               console.log('res======================', res.data.tag)
               if (res.data.success) {
                 Message.success(res.data.msg)
-                if (this.formModel2.diagnosis !== null || this.formModel2.surgical !== null ||
-                  this.formModel2.operationDate !== null || this.formModel2.parting !== null ||
-                  this.formModel2.periodization !== null || this.formModel2.photo !== null) {
+                console.log('this.formModel2.diagnosis...==============', this.formModel2.diagnosis)
+                if (this.formModel2.diagnosis != null || this.formModel2.surgical != null ||
+                  this.formModel2.operationDate != null || this.formModel2.parting != null ||
+                  this.formModel2.periodization != null || this.formModel2.photo !== '') {
                   this.formModel2.pid = res.data.tag
                   this.subMitFormModel2()
                 }
               } else {
                 Message.error(res.data.msg)
               }
-              this.$refs.formModel1.resetFields()
+              this.resetAll()
             })
           } else {
             Message.error('请检查输入项！')
@@ -485,11 +510,25 @@
         })
       },
       subMitFormModel2() {
-        console.log('onSubmit-formModel2===========================', this.formModel2)
+        console.log('onSubmit-formModel2===========================', this.formModel2.diagnosis, this.formModel2.parting)
+        console.log('aaaaaaaaaaaaaaa', this.formModel2)
         this.axios.request({
           method: 'POST',
           url: JdyyvisitURL,
-          data: this.formModel2
+          data: {
+            id: null,
+            pid: this.formModel2.pid,
+            diagnosis: this.formModel2.diagnosis,
+            diagnosisCode: this.formModel2.diagnosisCode,
+            surgical: this.formModel2.surgical,
+            surgicalCode: this.formModel2.surgicalCode,
+            AOcode: this.formModel2.AOcode,
+            operationDate: this.formModel2.operationDate,
+            periodization: this.formModel2.periodization,
+            parting: this.formModel2.parting,
+            xid: this.formModel2.xid,
+            photo: this.formModel2.photo
+          }
         }).then(res => {
           console.log('subMitFormModel2-success==================', res.data.msg)
           this.$refs.formModel2.resetFields()

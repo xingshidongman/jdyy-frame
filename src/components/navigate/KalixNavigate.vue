@@ -86,6 +86,7 @@
       '$route'(to, from) {
         if (to.path !== '/' && to.path !== '/login') {
           this.currApp = this.$route.params.app
+          // this.currFun = this.$route.params.fun
           // this.fetchData()
         }
       }
@@ -222,6 +223,7 @@
       selectItem(item) {
         this.$router.push({path: `/${this.currApp}/${item.routeId.split('/').pop()}`})
         this.$KalixCatch.save('currentTreeListItem', JSON.stringify(item))
+        this.currentCls(item)
       },
       currentCls(item) {
         return item.routeId.split('/').pop().toLowerCase() === this.currFun.toLowerCase() ? 'active' : ''

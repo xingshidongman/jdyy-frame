@@ -674,6 +674,7 @@
 <style scoped lang="stylus" type="text/stylus">
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
+    float none !important
     width: 325px
     margin 0 auto
   .tree-icon
@@ -779,11 +780,6 @@
     .td-div
       flex 1
       word-break break-all
-  @media screen and (max-width: 1500px) and (min-width: 1200px){
-    .buttom{
-      width 300px
-      margin 8px 15% 0 0;
-    }
-  }
+
 </style>
 

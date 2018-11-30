@@ -26,7 +26,8 @@
         el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth" v-bind:rules="rules.dischargeDate")
           el-date-picker(v-model="formModel.dischargeDate" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth" v-bind:rules="rules.directorDoctor")
-          el-input(v-model="formModel.directorDoctor")
+          <!--el-input(v-model="formModel.directorDoctor")-->
+          el-autocomplete(v-model="formModel.directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" style="width:100%")
         el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
           el-input(v-model="formModel.medicalRecords")
         el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
@@ -36,7 +37,7 @@
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
           el-input(v-model="formModel.bedNumber")
         el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-          el-input(v-model="formModel.currentSituation")
+          el-input(v-model="formModel.currentSituation" type="textarea" resize="none")
         el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
           el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -50,9 +51,9 @@
         el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
           el-input(v-model="formModel.bloodPressure")
         el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-          el-input(v-model="formModel.specialDisorders")
+          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none")
         el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-          el-input(v-model="formModel.descriptionSpecialDisease")
+          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none")
         el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
           el-input(v-model="formModel.allergicHistory")
         el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -62,13 +63,13 @@
         el-form-item(label="HSS评分" prop="hss" v-bind:label-width="labelWidth" v-bind:rules="rules.hss")
           el-input(v-model="formModel.hss")
         el-form-item(label="是否出院" prop="whetherDischarge" v-bind:label-width="labelWidth" v-bind:rules="rules.whetherDischarge")
-          el-radio-group(v-model="formModel.whetherDischarge" )
+          el-radio-group(v-model="formModel.whetherDischarge")
             el-radio(label="是")
             el-radio(label="否")
         el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
           el-input(v-text="modifyStaff" readonly="readonly")
         el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
-          el-input(v-model="formModel.remarks")
+          el-input(v-model="formModel.remarks" type="textarea" resize="none" rows="6")
       div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
       el-form(v-bind:model="formModel" ref="formModel" )
         el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
@@ -87,8 +88,8 @@
           kalix-clansman-upload(:action="action" ref="clearUpload"
           v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
         <!--el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
-          <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
-          kalix-img-upload(v-model="formModel.photo" readonly="readonly")
+        <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
+        kalix-img-upload(v-model="formModel.photo" readonly="readonly" v-on:ImgDel="ImgDel")
         div.btn
           el-button(v-on:click="CancelClick") 取 消
           el-button(type="primary" v-on:click="onSubmitClick") 提 交
@@ -96,6 +97,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyypatientsURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
+  import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
   import {baseURL} from '../../../../config/global.toml'
   import KalixClansmanUpload from '../../../../components/fileUpload/upload'
@@ -106,8 +108,6 @@
   import EventBus from '../../../../components/corelib/common/eventbus'
   import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
   import Message from '../../../../components/corelib/common/message'
-  // import Vue from 'vue'
-
   export default {
     name: 'JdyyQueEdit',
     components: {
@@ -174,13 +174,15 @@
       var validatetelephone = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/
-          if (reg.test(valTrim) && valTrim.length === 11) {
+          let reg1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[01678]|18[0-9]|14[57])[0-9]{8}$/
+          let reg2 = /^([0-9]{3,4}-)?[0-9]{7,8}$/
+          // let reg = /^1[3|4|5|6|7|8|9][0-9]\d{4,8}$/  && valTrim.length === 11
+          if (reg1.test(valTrim) || reg2.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
           } else {
             this.phoneNumberInfo = false
-            callback(new Error('请输入正确手机号码'))
+            callback(new Error('联系电话格式不正确，请输入正确的固定电话或手机号'))
           }
         } else {
           this.phoneNumberInfo = false
@@ -221,20 +223,6 @@
           // callback(new Error('请输入身高'))
         }
       }
-      // var validatecompleteAddress = (rule, value, callback) => {
-      //   if (value !== undefined && value !== null && value !== '') {
-      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
-      //     let reg = /^([\u4e00-\u9fa5]){5,50}$/
-      //     if (reg.test(valTrim)) {
-      //       callback()
-      //     } else {
-      //       callback(new Error('请输入正确通讯地址'))
-      //     }
-      //   } else {
-      //     callback()
-      //     // callback(new Error('请输通讯地址'))
-      //   }
-      // }
       var validatexinxi = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -246,7 +234,6 @@
           }
         } else {
           callback()
-          // callback(new Error('请输通讯信息'))
         }
       }
       return {
@@ -268,20 +255,17 @@
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
           familyPhone: [{validator: validatetelephone, trigger: 'change'}],
-          // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
           medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
           currentSituation: [{validator: validatexinxi, trigger: 'change'}],
           specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
           descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
           allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
           typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          remarks: [{validator: validatexinxi, trigger: 'change'}],
           stature: [{validator: validatestature, trigger: 'change'}]
         },
         targetURL: JdyypatientsURL,
         diaCascader: [],
         surCascader: [],
-        photoArr: [],
         filePathArr: [],
         fileNameArr: []
       }
@@ -293,9 +277,41 @@
       this.getDiaCascader() // 获取诊断信息并以级联形式显示
       this.getSurCascader() // 获取术式信息并以级联形式显示
       this.loadAll() // 获取病员信息
+      this.loadAllDoc() // 获取医生信息
     },
     methods: {
+      ImgDel(imgUrl) {
+        this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning',
+          center: true
+        }).then(() => {
+          let arrImg = this.formModel.photo.split(',')
+          let idx = arrImg.indexOf(imgUrl)
+          arrImg.splice(idx, 1)
+          this.formModel.photo = arrImg.join(',')
+          this.message({
+            type: 'success',
+            message: '删除成功!'
+          })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消删除'
+          })
+        })
+      },
       init(dialogOption) {
+        if (!this.formModel.sex) {
+          this.formModel.sex = ''
+        }
+        if (!this.formModel.idCard) {
+          this.formModel.idCard = ''
+        }
+        if (!this.formModel.age) {
+          this.formModel.age = ''
+        }
         if (!this.formModel.stature) {
           this.formModel.stature = ''
         }
@@ -392,11 +408,8 @@
         if (!this.formModel.photo) {
           this.formModel.photo = ''
         }
-        // this.formModel = this.aaa(this.formModel)
-        this.getphoto()
         console.log('---------0000000000000000------------', this.formModel)
         console.log('---------dialogOption------------', dialogOption)
-        // console.log('---------this.formModel4444444444444------------', this.aaa(this.formModel))
         delete this.formModel.rowNumber
         delete this.formModel.tableData
         let diaCode = this.formModel.diagnosisCode // 诊断级联回显
@@ -422,9 +435,6 @@
           }
         }
       },
-      getphoto() {
-        this.photoArr = this.formModel.photo.split(',')
-      },
       getFilePath(filePath, fileName) { // 图片上传路径
         this.filePathArr.push(filePath)
         this.fileNameArr.push(fileName)
@@ -433,40 +443,44 @@
         if (this.formModel.start) {
           delete this.formModel['start']
         }
-        if (this.formModel.hospitalNumber) {
-        }
         let filePath = ''
-        if (this.filePathArr.length) {
+        if (this.filePathArr.length > 0) {
           this.filePathArr.forEach(e => {
             filePath += e + ','
           })
           filePath = filePath.substr(0, filePath.length - 1)
         }
         let fileName = ''
-        if (this.fileNameArr.length) {
+        if (this.fileNameArr.length > 0) {
           this.fileNameArr.forEach(e => {
             fileName += e + ','
           })
           fileName = fileName.substr(0, fileName.length - 1)
         }
-
-        let photoStr = (this.formModel.photo !== null ? this.formModel.photo + ',' : '')
-        baseDialog.formModel.photo = photoStr + filePath
-        baseDialog.imgName = fileName
-        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        if (fileName.length > 0) {
+          let photoStr = this.formModel.photo !== '' ? this.formModel.photo + ',' : ''
+          baseDialog.formModel.photo = photoStr + filePath
+          baseDialog.imgName = fileName
+          this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
+        }
         callBack()
       },
       setGroup(item) {
         this.formModel.downlosd = item.albumname
       },
+      loadAll() { // 获取病员信息
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getPatientsByAutocomplete'
+        }).then(res => {
+          console.log('getPatientsByAutocomplete======================', res.data.data)
+          this.restaurants = res.data.data
+        })
+      },
       querySearchAsync(queryString, cb) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-
-        clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
-          cb(results)
-        }, 3000 * Math.random())
+        cb(results)
       },
       createStateFilter(queryString) {
         return (state) => {
@@ -482,6 +496,29 @@
           console.log('handleSelect========================', res.data)
           this.formModel = res.data
         })
+      },
+      loadAllDoc() { // 获取医生信息
+        this.axios.request({
+          method: 'GET',
+          url: usersURL + '/getDocsByAutocomplete'
+        }).then(res => {
+          console.log('getDocsByAutocomplete======================', res.data.data)
+          this.restaurantDocs = res.data.data
+        })
+      },
+      querySearchAsyncDoc(queryString, cb) {
+        var restaurants = this.restaurantDocs
+        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+        cb(results)
+      },
+      createStateFilterDoc(queryString) {
+        return (state) => {
+          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        }
+      },
+      handleSelectDoc(item) {
+        console.log('item===========================', item)
+        this.formModel1.directorDoctor = item.value
       },
       getModel(val) { // 三级联动地区参数区分
         this.formModel.completeAddress = val.join('')
@@ -535,18 +572,9 @@
           this.formModel.surgical = res.data.data[0].content
         })
       },
-      loadAll() { // 获取病员信息
-        this.axios.request({
-          method: 'GET',
-          url: JdyypatientsURL + '/getPatientsByAutocomplete'
-        }).then(res => {
-          console.log('getPatientsByAutocomplete======================', res.data.data)
-          this.restaurants = res.data.data
-        })
-      },
       CancelClick() {
         this.$refs.kalixBizDialog.onCancelClick()
-        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
+        // EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
       },
       onSubmitClick() { // 重写多张图片上传方法
         if (this.submitCustom && typeof (this.submitCustom) === 'function') {
@@ -574,13 +602,14 @@
               if (res.data.success) {
                 Message.success(res.data.msg)
                 this.visible = false
-                this.CancelClick()
+                this.$refs.kalixBizDialog.onCancelClick()
+                EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
                 // 关闭对话框
               } else {
                 Message.error(res.data.msg)
-                this.CancelClick()
+                this.$refs.kalixBizDialog.onCancelClick()
+                EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
               }
-              // 刷新列表
             })
           }
         })
