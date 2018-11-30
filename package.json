@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
-    "element-ui": "^2.3.4",
+    "element-ui": "^2.4.11",
     "html2canvas": "^1.0.0-alpha.12",
     "jspdf": "^1.4.1",
     "vue": "^2.5.16",
