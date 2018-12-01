@@ -10,7 +10,7 @@
   div.kalix-search
     div.kalix-search-hd
       div.line
-      i.iconfont.icon-chaxun1(style=" margin-left:1%;line-height: 28px;position: absolute;")
+      i.iconfont.icon-chaxun1(style=" margin-left:1%;line-height: 20px;position: absolute;")
       span.test {{title}}
     div.kalix-search-bd
       el-form.search-container(ref="searchForm" v-bind:model="form" v-bind:inline="true")
@@ -26,15 +26,15 @@
             kalix-query-datetime-picker(v-else-if="item.type==='datetime'" v-model="form[item.prop]")
             kalix-dict-select(v-else-if="item.type==='dict'" v-bind:appName="item.appName" v-bind:dictType="item.dictType" v-model="form[item.prop]")
             Kalix-map-select(v-else-if="item.type==='map'" v-bind:appName="item.appName" v-bind:prop="item.prop" v-bind:selectUrl="item.selectUrl" v-model="form[item.prop]"
-              v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
+            v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
             input.min(v-else-if="item.type==='age'" v-model="form[item.prop]" type="number" placeholder="开始年龄段" min="0")
-            input.min(v-else-if="item.type==='ages'" v-model="form[item.prop]" type="number" placeholder="结束年龄段" min="1")
+            input.min.end-time(v-else-if="item.type==='ages'" v-model="form[item.prop]" type="number" placeholder="结束年龄段" min="1")
             el-input(v-else v-model="form[item.prop]")
           el-form-item.right(style="margin-left: 1%;")
-            el-button(type="primary" v-on:click="onSubmitClick")
+            el-button.icon-search(type="primary" v-on:click="onSubmitClick")
               i.iconfont.icon-chaxun1(style="padding-right:3px;")
               span(style="font-size: 14px;") 查询
-            el-button(type="success" v-on:click="onResetClick")
+            el-button.icon-reset(type="success" v-on:click="onResetClick")
               i.iconfont.icon-zhongzhi(style="padding-right:3px;")
               span(style="font-size: 14px;") 重置
 </template>
@@ -235,8 +235,7 @@
       KalixDictSelect: BaseDictSelect,
       KalixMapSelect: BaseMapSelect
     },
-    computed: {
-    },
+    computed: {},
     watch: {
       // 'form[select]'() {
       //   if (this.form.date === '') {
@@ -259,15 +258,16 @@
     .kalix-search-hd
       padding 0 2px
       .line
-        width 0.8%
+        width 0.5%
         background-color #3465cb
-        height 28px
+        height 20px
         display: inline-block;
       .test
-          margin-left: 2.5%;
-          position: absolute;
-          height 28px
-          line-height 28px
+        margin-left: 2.5%;
+        position: absolute;
+        height 20px
+        line-height 20px
+        font-size 14px
     .kalix-search-bd
       font-size 0
       padding 8px 0px
@@ -281,43 +281,59 @@
       .el-form-item__label
         float: left;
         text-align: right
-        font-size: 14px;
-        color:  #3465cb
+        font-size: 12px;
+        color: #3465cb
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width 35%
+        line-height 31px
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
         width 65%
+        line-height 31px
       .el-input__inner
         border-radius: 1px;
         border: 1px solid #3465cb;
         -webkit-box-sizing: border-box;
-        display: inline-block;
-        font-size: inherit;
-        height: 30px;
-        line-height: 30px;
+        font-size: 12px;
+        height: 25px;
+        line-height: 25px;
         outline: 0;
-        padding: 0 25px;
-        -webkit-transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-        transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+        padding: 0 12px;
+        -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+        transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         width: 100%;
+      .el-input__icon
+        line-height 31px
+        width auto
       .min
-        width 100px
+        width 92%
         height 24px
         line-height 24px
         border: 1px solid #3465cb
         padding-left 10px
-        margin-left: 30px
+      .end-time
+        margin-left 12px
     .el-button
       padding: 8px 12px;
       .iconfont
         font-size 14px
+
   .short
     /*width 32%*/
+    height 31px
     display inline-block
-      .iconfont
+    .iconfont
         font-size 14px
+  .icon-search
+  .icon-reset
+    height 25px
+    padding 0 10px !important
+  .icon-search
+    margin-left 24%
+  .icon-reset
+    margin-top 5px
+
 
 </style>

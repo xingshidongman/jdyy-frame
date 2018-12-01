@@ -285,7 +285,7 @@
           this.$nextTick(() => {
             let kalixSearch = document.querySelector('.kalix-search-' + this.bizKey)
             console.log('===== kalixSearch =====', kalixSearch.clientHeight + 40 + 'px')
-            this.wrapperTop = {'top': kalixSearch.clientHeight + 40 + 'px'}
+            this.wrapperTop = {'top': kalixSearch.clientHeight + 30 + 'px'}
           })
         }
       },
