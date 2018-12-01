@@ -768,4 +768,6 @@
 
 <style scoped lang="stylus" type="text/stylus">
   @import "../../assets/stylus/baseTable.styl"
+  .el-table th div
+    cursor pointer
 </style>

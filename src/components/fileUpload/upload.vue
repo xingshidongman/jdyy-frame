@@ -133,6 +133,7 @@
           this.isUpload = false
           this.fileListData = []
         }
+        console.log('222222222222222222222', this.fileListData)
         return isJPG && isLt2M
       },
       handleSuccess(response, file, fileList) {
