@@ -66,12 +66,6 @@ ManagerUserDutyID = 104954
 #  name = "AttachmentDialog"
 # baseToolBar 的默认按钮定义
 [[GlobalToolBarButtonList]]
-  id = "add"
-  title = "添加"
-  icon = "icon-pinleizengjia"
-  isShow = true
-  isDisable = false
-[[GlobalToolBarButtonList]]
   id = "deleteChecked"
   icon = "icon-delete"
   title = "删除选中"

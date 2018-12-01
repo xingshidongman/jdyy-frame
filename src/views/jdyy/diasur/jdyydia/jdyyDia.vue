@@ -25,13 +25,7 @@
         v-bind:btnList="btnList"
         v-bind:buttonPermissionPrefix="buttonPermissionPrefix"
       )
-      <!--template(slot="tableColumnSlot") v-bind:btnSelfClick="btnClick"-->
-        <!--el-table-column(prop="username"  label="回复人姓名") v-bind:buttonPermissionPrefix="buttonPermissionPrefix"-->
-        <!--el-table-column(label="回复内容")  v-bind:optActions="optActions"-->
-          <!--template(slot-scope="scope")-->
-            <!--div.table-content(v-html="scope.row.content")-->
-        <!--el-table-column(prop="creationDate"  label="回复时间")-->
-        <!--el-table-column(prop="categoryName"  label="审核状态")-->
+
 </template>
 
 <script type="text/ecmascript-6">
@@ -55,9 +49,9 @@
         //   {id: 'refresh', isShow: true, icon: 'icon-refresh', title: '刷新'}
         // ],
         treeToolbarBtnList: [
-          // {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true},
+          {id: 'delete', isShow: true, icon: 'icon-shanchu', title: '删除', isPermission: true},
           {id: 'edit', isShow: true, icon: 'icon-bianji', title: '编辑', isPermission: true},
-          {id: 'delete', isShow: true, icon: 'icon-shanchu', title: '删除', isPermission: true}
+          {id: 'add', isShow: true, title: '添加', icon: 'icon-pinleizengjia', isPermission: true}
         ],
         // targetUrl: replyMenuURL,
         treeUrl: JdyydiaURL + '/getAllDiaByParentId?parentId=-1',
@@ -276,6 +270,7 @@
       margin 9px 0
       .kalix-wrapper
         bottom 0 !important
+
       label
         overflow hidden
         height 28px
