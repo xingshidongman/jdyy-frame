@@ -175,7 +175,9 @@
         type: Function
       },
       tableRowClassName: { // 对table的一行数据进行样式定制
-        type: Function
+        type: Function,
+        default: () => {
+        }
       },
       deleteAllUrl: {
         type: String,

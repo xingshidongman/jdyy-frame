@@ -182,10 +182,16 @@
         type: Function
       },
       tableRowClassName: { // 对table的一行数据进行样式定制
-        type: Function
+        type: Function,
+        default: ({row, rowIndex}) => {
+          return 'table-row-th'
+        }
       },
       tableHeaderClassName: {
-        type: Function
+        type: Function,
+        default: ({row, rowIndex}) => {
+          return 'table-header-th'
+        }
       },
       deleteAllUrl: {
         type: String,
@@ -298,12 +304,6 @@
       this.setWrapperStyle()
     },
     methods: {
-      tableRowClassName({ row, rowIndex }) {
-        return 'table-row-th'
-      },
-      tableHeaderClassName({ row, rowIndex }) {
-        return 'table-header-th'
-      },
       thClick(key) {
         console.log('thClick', key)
         let currentKey = this.orderByObj[key]
