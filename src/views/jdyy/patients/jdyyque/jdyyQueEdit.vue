@@ -193,7 +193,7 @@
       var validateage = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]?\d|200)$/
+          let reg = /^(?:[1-9][0-9]?|1[01][0-9]|120)$/
           if (reg.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()

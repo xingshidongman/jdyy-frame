@@ -38,7 +38,7 @@
       var validatenum = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]?\d)$/
+          let reg = /^[0-9]*\d$/
           if (reg.test(valTrim)) {
             this.phoneNumberInfo = true
             callback()
