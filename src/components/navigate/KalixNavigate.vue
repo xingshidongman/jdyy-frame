@@ -86,7 +86,7 @@
       '$route'(to, from) {
         if (to.path !== '/' && to.path !== '/login') {
           this.currApp = this.$route.params.app
-          // this.currFun = this.$route.params.fun
+          this.currFun = this.$route.params.fun || ''
           // this.fetchData()
         }
       }
@@ -257,9 +257,7 @@
           cursor pointer
           color white
 
-  &
-  :
-  before
+  &:before
     /*setBottomLine(#e0e3ec)*/
   .tit_icon
     margin-right 9px

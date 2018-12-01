@@ -80,7 +80,10 @@
       searchFields: { // 搜索查询的字段
         type: Array
       },
-      formRules: null
+      formRules: null,
+      submitBefore: {
+        type: Function
+      }
     },
     created() {
       this._currentForm()
@@ -118,6 +121,15 @@
       },
       // 提交查询
       onSubmitClick() {
+        if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+          this.submitBefore(this, () => {
+            this.submitAction()
+          })
+        } else {
+          this.submitAction()
+        }
+      },
+      submitAction() {
         this.$refs.searchForm.validate((valid) => {
           if (valid) {
             console.log('onSubmitClick')
