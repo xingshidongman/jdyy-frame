@@ -13,7 +13,7 @@
     div.kalix-wrapper(v-bind:style="wrapperTop")
       div.kalix-wrapper-hd
         div.line
-        i(v-bind:class="iconCls" style=" margin-left:1%;line-height: 28px; position: absolute;")
+        i(v-bind:class="iconCls" style=" margin-left:1%;line-height: 22px; position: absolute;")
         span.test {{title}}
       div.kalix-wrapper-bd
         kalix-tool-bar(v-if="isShowToolBarB"
@@ -36,8 +36,7 @@
             template(v-if="tableData && tableData.length > 0")
               el-table-column(v-if="hasTableSelection" type="selection" width="55" align="center")
               el-table-column(label="行号" width="90" align="center" prop="rowNumber"
-              v-bind:fixed="isFixedColumn"
-              :sortable="true")
+              v-bind:fixed="isFixedColumn")
                 template(slot-scope="scope")
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
@@ -333,7 +332,7 @@
           this.$nextTick(() => {
             let kalixSearch = document.querySelector('.kalix-search-' + this.bizKey)
             console.log('===== kalixSearch =====', kalixSearch.clientHeight + 20 + 'px')
-            this.wrapperTop = {'top': kalixSearch.clientHeight + 20 + 'px'}
+            this.wrapperTop = {'top': kalixSearch.clientHeight + 30 + 'px'}
           })
         }
       },
@@ -757,7 +756,7 @@
         return (1 + ((this.pager.currentPage - 1) * this.pager.limit)) // 返回当前行号
       },
       tableContainerStyle() {
-        return {'top': (this.isShowToolBarB ? '70px' : '50px')}
+        return {'top': (this.isShowToolBarB ? '70px' : '35px')}
       },
       pageCount() {
         return Math.floor((this.pager.totalCount + this.pager.limit - 1) / this.pager.limit)
@@ -770,4 +769,6 @@
   @import "../../assets/stylus/baseTable.styl"
   .el-table th div
     cursor pointer
+    line-height 23px
+    vertical-align middle
 </style>
