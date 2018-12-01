@@ -80,7 +80,10 @@
       searchFields: { // 搜索查询的字段
         type: Array
       },
-      formRules: null
+      formRules: null,
+      submitBefore: {
+        type: Function
+      }
     },
     created() {
       this._currentForm()
@@ -118,6 +121,15 @@
       },
       // 提交查询
       onSubmitClick() {
+        if (this.submitBefore && typeof (this.submitBefore) === 'function') {
+          this.submitBefore(this, () => {
+            this.submitAction()
+          })
+        } else {
+          this.submitAction()
+        }
+      },
+      submitAction() {
         this.$refs.searchForm.validate((valid) => {
           if (valid) {
             console.log('onSubmitClick')
@@ -300,7 +312,7 @@
         height: 25px;
         line-height: 25px;
         outline: 0;
-        padding: 0 12px;
+        padding: 0 22px;
         -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         width: 100%;

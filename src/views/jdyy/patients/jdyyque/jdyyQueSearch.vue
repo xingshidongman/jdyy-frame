@@ -1,5 +1,6 @@
 <template lang="pug">
-  kalix-search(:searchFields="searchFields" title="病员资料查询" bizKey="jdyyQue")
+  kalix-search(:searchFields="searchFields" title="病员资料查询" bizKey="jdyyQue"
+  v-bind:submitBefore="baseSearchSubmitBefore")
 </template>
 
 <script type="text/ecmascript-6">
@@ -23,6 +24,21 @@
           // {label: '手术日期', type: 'date', prop: 'operationDate'},
           {label: '是否出院', type: 'select', prop: 'whetherDischarge', options: [{value: '是', label: '是'}, {value: '否', label: '否'}]}
         ]
+      }
+    },
+    methods: {
+      baseSearchSubmitBefore(_baseSearch, callBack) {
+        console.log(' ==== baseSearchSubmitBefore ==== ', _baseSearch)
+        let dataStr = _baseSearch.form['date']
+        let dateAdmissionStr = _baseSearch.form['%dateAdmission%']
+        let dateDischargeDateStr = _baseSearch.form['%dischargeDate%']
+        console.log(' ==== baseSearchSubmitBefore ==== dataStr:', dataStr)
+        console.log(' ==== baseSearchSubmitBefore ==== dateAdmissionStr:', dateAdmissionStr)
+        if ((dateDischargeDateStr != null || dateAdmissionStr != null) && dataStr === null) {
+          this.$message.error('日期必填')
+        } else {
+          callBack()
+        }
       }
     }
   }
