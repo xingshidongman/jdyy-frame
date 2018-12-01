@@ -300,7 +300,7 @@
         height: 25px;
         line-height: 25px;
         outline: 0;
-        padding: 0 12px;
+        padding: 0 22px;
         -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
         width: 100%;

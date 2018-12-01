@@ -26,6 +26,7 @@
   import {JdyystatURL} from '../../config.toml'
   import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
+
   export default {
     name: 'JdyyStatAdd',
     data() {
@@ -122,8 +123,9 @@
     width 70%
     margin auto
     .short
-       width 45%
-       display inline-block
+      width 45%
+      display inline-block
+      height 40px
     .el-input
       width 70%
 </style>

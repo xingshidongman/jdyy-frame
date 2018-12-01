@@ -16,7 +16,7 @@
             kalix-tool-bar(v-bind:toolbarBtnList="toolbarBtnListClone" v-on:onToolBarClick="onToolBarSelfClick")
           template(v-else)
             kalix-tool-bar(v-bind:toolbarBtnList="toolbarBtnListClone" v-on:onToolBarClick="onToolBarClick")
-          div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle" style="overflow-y:auto;")
+          div.kalix-table-container(ref="kalixTableContainer" v-bind:style="tableContainerStyle")
             div.autoTbale(v-bind:style="{width:tableWidth}")
               table.table.table-bordered(id="hl-tree-table")
                 thead
@@ -823,7 +823,9 @@
       display: flex;
       flex-direction: column;
       .kalix-table-container
-        overflow-y: auto;
+        overflow-x: scroll
+        overflow-y: scroll
+        height 500px
         flex: 1;
         position: relative;
         top: 0;
@@ -835,10 +837,6 @@
     color #dd9e4a
     font-weight bold
     cursor pointer
-
-  .autoTbale {
-    overflow: auto;
-  }
 
   table {
     width: 100%;
@@ -904,7 +902,6 @@
   .table > thead > tr > th {
     border-bottom: 1px solid #DDD;
   }
-
   .table-bordered > thead > tr > td,
   .table-bordered > thead > tr > th {
     background-color #ebeef5
@@ -946,6 +943,7 @@
   #hl-tree-table th > label {
     margin: 0;
   }
+
 
 </style>
 
