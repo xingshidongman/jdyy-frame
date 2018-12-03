@@ -156,4 +156,7 @@
   }
 </script>
 <style scoped lang="stylus" type="text/stylus">
+  .img-width
+    max-width 760px
+    max-height 400px
 </style>

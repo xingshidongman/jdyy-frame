@@ -259,7 +259,7 @@
     clear: both
 
   .img-width
-    max-width 90%
+    max-width 760px
     max-height 400px
   .img-height
     width 800px
