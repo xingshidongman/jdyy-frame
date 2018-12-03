@@ -37,10 +37,10 @@
             el-input(v-model="formModel1.hospitalNumber" )
           el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
             el-input(v-model="formModel1.bedNumber")
-          el-form-item.long(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none" rows="4")
           el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
             el-date-picker(v-model="formModel1.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
+          el-form-item.long(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
+            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none" rows="4")
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
             el-input(v-model="formModel1.familyPhone")
           el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
@@ -546,6 +546,8 @@
 </script>
 
 <style scoped lang="stylus" type="text/stylus">
+  .el-input__inner,.el-input__inner:focus
+    border-color #dcdfe6
   .clear
     clear both
   .el-form
