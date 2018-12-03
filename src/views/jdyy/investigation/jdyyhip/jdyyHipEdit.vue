@@ -46,6 +46,7 @@
             el-form-item.short(label="医生")
               <!--el-input(v-model="formModel.doctor" clearable)-->
               el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
+          div.clear
       div.art2
         h1.title 术前及围手术期手术资料
         div.con2
@@ -292,7 +293,7 @@
                           template(slot="append") °
                   div.mark
                     div.sta 聚乙烯衬垫植入角度
-                    div.stb
+                    div.stb2
                       el-form-item.short.totoleft
                         el-input(v-model="formModel.inAngle" clearable)
                           template(slot="append") °
@@ -365,15 +366,15 @@
                   div.mark
                     div.sta 髋臼植骨
                     div.stb
-                      el-form-item.medium(label="结构性植骨")
+                      el-form-item.short(label="结构性植骨")
                         el-radio-group(v-model="formModel.structuralBone1")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.medium(label="螺钉固定")
+                      el-form-item.short(label="螺钉固定")
                         el-radio-group(v-model="formModel.screw")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.medium(label="打压植骨")
+                      el-form-item.short(label="打压植骨")
                         el-radio-group(v-model="formModel.suppress1")
                           el-radio(label="有")
                           el-radio(label="无")
@@ -396,13 +397,13 @@
                   div.mark
                     div.sta 后方稳定性
                     div.stb
-                      el-form-item.medium.totoleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.frontA" clearable)
                           template(slot="append") °屈曲
-                      el-form-item.medium.toleft
+                      el-form-item.short.toleft
                         el-input(v-model="formModel.frontB " clearable)
                           template(slot="append") °内收
-                      el-form-item.medium.toleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.frontC " clearable)
                           template(slot="append") °内旋
                   div.mark
@@ -422,10 +423,10 @@
                           el-radio(label="有")
                           el-radio(label="无")
                       template(v-if="formModel.resection === '无'")
-                        el-form-item.mini(label="外展" )
+                        el-form-item.short(label="外展" )
                           el-input(v-model="formModel.resectionAbduction" clearable)
                             template(slot="append") °
-                        el-form-item.mini(label="增加角度" )
+                        el-form-item.short(label="增加角度" )
                           el-input(v-model="formModel.resectionaAngle" clearable)
                             template(slot="append") °
             tr
@@ -433,7 +434,7 @@
                 div.con2-left 术后期
               td.long-td
                 div.con2-right
-                  el-form-item.short(label="术后总引流量")
+                  el-form-item.toleft.short(label="术后总引流量")
                     el-input(v-model="formModel.flow" clearable)
                       template(slot="append") ml
                   div.mark
@@ -1239,144 +1240,150 @@
 
 <style scoped lang="stylus" type="text/stylus">
   @import "~@/assets/stylus/color.styl"
-.back
-  .title
-    text-align center
-    font-size 24px
-    height 50px
-    line-height 50px
-    color br_color3
-  .art1
-    /*width 1160px*/
-    .con1
-      height 310px
-      .con1-left
-        border 1px solid black
-        display inline-block
-        width 40%
-        margin-right 2.5%
-        padding 0.5%
-      .con1-right
-        display inline-block
-        border 1px solid black
-        width 55%
-        padding 0.5%
-  .art2
-    /*width 1160px*/
-    margin-top 25px
-    .con2
-      margin-bottom 5px
-      table
-        word-break break-all
+  .clear
+    clear both
+  .back
+    .title
+      text-align center
+      font-size 24px
+      height 50px
+      line-height 50px
+      color br_color3
+    .art1
+      /*width 1160px*/
+      .con1
+        .con1-left
+          border 1px solid black
+          width 40%
+          height 310px
+          margin-right 2.5%
+          padding 0.5%
+          float left
+        .con1-right
+          border 1px solid black
+          width 55%
+          padding 0.5%
+          float left
+          height 310px
+    .art2
+      /*width 1160px*/
+      margin-top 25px
+      .con2
         margin-bottom 20px
-        border 1px solid black
-        border-collapse collapse
-        width 100%
-      tr
-        width 100%
-      .short-td
-        padding 10px
-        width 20%
-        text-align center
-        border 1px solid black
-      .long-td
-        border 1px solid black
-        padding 10px
-        width 80%
-      .con2-left
-        margin-top 5px
-      .con2-right
-        padding-left -80px
-        p
-          line-height 25px
-  .art3
-    .con3
-      table
-        word-break break-all
-        margin-bottom 20px
-        border 1px solid black
-        border-collapse collapse
-        width 100%
-      tr
-        border-top 1px solid black
-        width 100%
-      .a-td
-        padding 10px
-        width 20%
-        text-align center
-        word-break break-all
-      .b-td
-        padding 10px
-        padding-top 30px
-        width 67%
-        border-left 1px solid black
-        text-align center
-        word-break break-all
-      .c-td
-        padding 10px
-        padding-top 20px
-        width 13%
-        border-left 1px solid black
-        text-align center
-        word-break break-all
-      .con3-left
-        margin-top 15px
-      .con3-right
-        padding-left -80px
-  .btn-box
-    width 1160px
-    .btn
-      margin-left 38%
-      margin-top 20px
-  .mini
-    width 30%
-    display inline-block
-  .short
-    width 50%
-    display inline-block
-  .long
-    width 100%
-    display inline-block
-  .medium
-    width 40%
-    display inline-block
-  .toleft
-    margin-left -40px
-  /*margin-bottom 0*/
-  .totoleft
-    margin-left -80px
-  .mark
-    margin-left 30px
-  .sta
-    /*width 140px*/
-    /*height 40px*/
-    /*display inline-block*/
-    display inline-block
-    margin-top 13px
-    vertical-align top
-  .stb
-    width 80%
-    display inline-block
-    vertical-align top
-  .else
-    width 120px
-    display inline-block
-  .other
-    width 315px
-    display inline-block
-  .input-with-select .el-input-group__prepend
-    background-color: #fff
-  .harris
-    border-left 1px solid black
-    padding 10px
-  .har
-    padding:10px
-    width:95px
-    text-align:center
-  .anniu
-    float right
-    margin 1% 1%
-    padding: 6px 12px;
-  .chan
-    margin-left 0px
+        table
+          word-break break-all
+          margin-bottom 20px
+          border 1px solid black
+          border-collapse collapse
+          width 100%
+        tr
+          width 100%
+        .short-td
+          padding 10px
+          width 20%
+          text-align center
+          border 1px solid black
+        .long-td
+          border 1px solid black
+          padding 10px
+          width 80%
+        .con2-left
+          margin-top 5px
+        .con2-right
+          padding-left -80px
+          p
+            line-height 25px
+    .art3
+      .con3
+        table
+          word-break break-all
+          margin-bottom 20px
+          border 1px solid black
+          border-collapse collapse
+          width 100%
+        tr
+          border-top 1px solid black
+          width 100%
+        .a-td
+          padding 10px
+          width 20%
+          text-align center
+          word-break break-all
+        .b-td
+          padding 10px
+          padding-top 30px
+          width 67%
+          border-left 1px solid black
+          text-align center
+          word-break break-all
+        .c-td
+          padding 10px
+          padding-top 20px
+          width 13%
+          border-left 1px solid black
+          text-align center
+          word-break break-all
+        .con3-left
+          margin-top 15px
+        .con3-right
+          padding-left -80px
+    .btn-box
+      width 1160px
+      .btn
+        margin-left 38%
+        margin-top 20px
+    .mini
+      width 30%
+      display inline-block
+      margin-left 2%
+    .short
+      width 50%
+      display inline-block
+    .long
+      width 100%
+      display inline-block
+    .medium
+      width 40%
+      display inline-block
+    .toleft
+      margin-left -52px
+    /*margin-bottom 0*/
+    .totoleft
+      margin-left -80px
+    .mark
+      margin-left 30px
+    .sta
+      /*width 140px*/
+      /*height 40px*/
+      /*display inline-block*/
+      display inline-block
+      margin-top 13px
+      vertical-align top
+    .stb
+      width 85%
+      display inline-block
+      vertical-align top
+    .stb2
+      width 80%
+      display inline-block
+      vertical-align top
+    .else
+      width 120px
+      display inline-block
+    .other
+      width 315px
+      display inline-block
+    .input-with-select .el-input-group__prepend
+      background-color: #fff
+    .harris
+      border-left 1px solid black
+      padding 10px
+    .har
+      padding:10px
+      width:95px
+      text-align:center
+    .anniu
+      float right
+      margin 1% 1%
+      padding: 6px 12px;
 </style>

@@ -46,6 +46,7 @@
             el-form-item.short(label="医生")
               <!--el-input(v-model="formModel.doctor" clearable)-->
               el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
+          div.clear
       div.art2
         h1.title 术前及围手术期手术资料
         div.con2
@@ -292,7 +293,7 @@
                           template(slot="append") °
                   div.mark
                     div.sta 聚乙烯衬垫植入角度
-                    div.stb
+                    div.stb2
                       el-form-item.short.totoleft
                         el-input(v-model="formModel.inAngle" clearable)
                           template(slot="append") °
@@ -365,15 +366,15 @@
                   div.mark
                     div.sta 髋臼植骨
                     div.stb
-                      el-form-item.medium(label="结构性植骨")
+                      el-form-item.short(label="结构性植骨")
                         el-radio-group(v-model="formModel.structuralBone1")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.medium(label="螺钉固定")
+                      el-form-item.short(label="螺钉固定")
                         el-radio-group(v-model="formModel.screw")
                           el-radio(label="有")
                           el-radio(label="无")
-                      el-form-item.medium(label="打压植骨")
+                      el-form-item.short(label="打压植骨")
                         el-radio-group(v-model="formModel.suppress1")
                           el-radio(label="有")
                           el-radio(label="无")
@@ -396,13 +397,13 @@
                   div.mark
                     div.sta 后方稳定性
                     div.stb
-                      el-form-item.medium.totoleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.frontA" clearable)
                           template(slot="append") °屈曲
-                      el-form-item.medium.toleft
+                      el-form-item.short.toleft
                         el-input(v-model="formModel.frontB " clearable)
                           template(slot="append") °内收
-                      el-form-item.medium.toleft
+                      el-form-item.short.totoleft
                         el-input(v-model="formModel.frontC " clearable)
                           template(slot="append") °内旋
                   div.mark
@@ -422,10 +423,10 @@
                           el-radio(label="有")
                           el-radio(label="无")
                       template(v-if="formModel.resection === '无'")
-                        el-form-item.mini(label="外展" )
+                        el-form-item.short(label="外展" )
                           el-input(v-model="formModel.resectionAbduction" clearable)
                             template(slot="append") °
-                        el-form-item.mini(label="增加角度" )
+                        el-form-item.short(label="增加角度" )
                           el-input(v-model="formModel.resectionaAngle" clearable)
                             template(slot="append") °
             tr
@@ -433,7 +434,7 @@
                 div.con2-left 术后期
               td.long-td
                 div.con2-right
-                  el-form-item.short(label="术后总引流量")
+                  el-form-item.toleft.short(label="术后总引流量")
                     el-input(v-model="formModel.flow" clearable)
                       template(slot="append") ml
                   div.mark
@@ -1039,6 +1040,8 @@
 
 <style scoped lang="stylus" type="text/stylus">
   @import "~@/assets/stylus/color.styl"
+  .clear
+    clear both
   .back
     .title
       text-align center
@@ -1049,18 +1052,19 @@
     .art1
       /*width 1160px*/
       .con1
-        height 310px
         .con1-left
           border 1px solid black
-          display inline-block
           width 40%
+          height 310px
           margin-right 2.5%
           padding 0.5%
+          float left
         .con1-right
-          display inline-block
           border 1px solid black
           width 55%
           padding 0.5%
+          float left
+          height 310px
     .art2
       /*width 1160px*/
       margin-top 25px
@@ -1156,6 +1160,10 @@
       margin-top 13px
       vertical-align top
     .stb
+      width 85%
+      display inline-block
+      vertical-align top
+    .stb2
       width 80%
       display inline-block
       vertical-align top

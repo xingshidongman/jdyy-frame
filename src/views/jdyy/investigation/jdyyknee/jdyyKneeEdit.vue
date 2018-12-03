@@ -45,6 +45,7 @@
             el-form-item.short(label="医生")
               <!--el-input(v-model="formModel.doctor" clearable)-->
               el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
+          div.clear
       div.art2
         h1.title 术前及围手术期手术资料
         div.con2
@@ -588,8 +589,8 @@
               td.short-td
                 div.con2-left 术后
               td.long-td
-                div.con2-right.short
-                  el-form-item(label="总引流")
+                div.con2-right
+                  el-form-item.short(label="总引流")
                     el-input(v-model="formModel.drainage")
                       template(slot="append") ml
                 div
@@ -1449,6 +1450,8 @@
 
 <style scoped lang="stylus" type="text/stylus">
   @import "~@/assets/stylus/color.styl"
+  .clear
+    clear both
   .back
     .title
       text-align center
@@ -1461,13 +1464,15 @@
       .con1
         height 310px
         .con1-left
+          float left
+          height 310px
           border 1px solid black
-          display inline-block
           width 40%
           margin-right 2.5%
           padding 0.5%
         .con1-right
-          display inline-block
+          float left
+          height 310px
           border 1px solid black
           width 55%
           padding 0.5%

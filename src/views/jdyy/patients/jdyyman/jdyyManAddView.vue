@@ -2,7 +2,7 @@
   keep-alive
     div(class="back")
       div.base-message
-        div(style="width:98px;margin:20px auto;font-size: 20px;") 基 本 信 息
+        div(style="width:110px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
             el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" @select="handleSelect" style="width:100%")
@@ -37,8 +37,8 @@
             el-input(v-model="formModel1.hospitalNumber" )
           el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
             el-input(v-model="formModel1.bedNumber")
-          el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none")
+          el-form-item.long(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
+            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none" rows="4")
           el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
             el-date-picker(v-model="formModel1.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -51,10 +51,10 @@
             el-input(v-model="formModel1.bmi" )
           el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
             el-input(v-model="formModel1.bloodPressure" )
-          el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none")
-          el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none")
+          el-form-item.long(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
+            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none" rows="4")
+          el-form-item.long(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
+            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
           el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
             el-input(v-model="formModel1.allergicHistory")
           el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -571,4 +571,6 @@
     padding-bottom 50px
   .tst
     max-width: 217px
+  .long
+    width 100% !important
 </style>
