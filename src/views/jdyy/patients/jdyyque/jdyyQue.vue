@@ -22,14 +22,14 @@
       return {
         targetURL: JdyyvisitURL + '/getAllPatVis',
         tableFields: [
-          {prop: 'name', label: '姓名'},
+          {prop: 'name', label: ' 姓名'},
           {prop: 'sex', label: '性别'},
           {prop: 'age', label: '年龄'},
           {prop: 'bedNumber', label: '床位号'},
           {prop: 'medicalRecordNumber', label: '病历号'},
           {prop: 'dateAdmission', label: '住院日期'},
           {prop: 'dischargeDate', label: '出院日期'},
-          {prop: 'diagnosis', label: '诊断'},
+          {prop: 'diagnosis', label: ' 诊断 '},
           {prop: 'operationDate', label: '手术日期'},
           {prop: 'directorDoctor', label: '主管医生'}
           // {prop: 'stature', label: '身高'},

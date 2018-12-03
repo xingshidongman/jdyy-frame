@@ -19,10 +19,10 @@
           {label: '主管医生:', prop: 'directorDoctor'},
           {label: '病历号:', prop: 'medicalRecordNumber'},
           {label: '日期:', type: 'select', prop: 'date', options: [{value: '住院日期', label: '住院日期'}, {value: '出院日期', label: '出院日期'}, {value: '手术日期', label: '手术日期'}]},
-          {label: '开始日期', type: 'date', prop: '%dateAdmission%'},
-          {label: '结束日期', type: 'date', prop: '%dischargeDate%'},
+          {label: '开始日期:', type: 'date', prop: '%dateAdmission%'},
+          {label: '结束日期:', type: 'date', prop: '%dischargeDate%'},
           // {label: '手术日期', type: 'date', prop: 'operationDate'},
-          {label: '是否出院', type: 'select', prop: 'whetherDischarge', options: [{value: '是', label: '是'}, {value: '否', label: '否'}]}
+          {label: '是否出院:', type: 'select', prop: 'whetherDischarge', options: [{value: '是', label: '是'}, {value: '否', label: '否'}]}
         ]
       }
     },

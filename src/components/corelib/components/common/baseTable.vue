@@ -40,8 +40,8 @@
                 template(slot-scope="scope")
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
-                el-table-column(v-for="field in tableFields" align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:min-width="field.label.length*34+'px'"
+                el-table-column(v-for="field in tableFields"  align="center"
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:min-width="field.label.length*25+'px'"
                 v-bind:sortable="sortable"
                 )
                   template(slot="header" slot-scope="scope")

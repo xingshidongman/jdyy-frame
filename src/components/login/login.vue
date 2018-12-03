@@ -239,7 +239,7 @@
       font-size 1vw
       background-color #1c6086
     .btn-reset
-      margin-left 40%
+      margin-left 30%
     .icon-user,
     .icon-lock
       display block
@@ -270,7 +270,7 @@
         letter-spacing 3px
       .el-input__inner
         height 46px
-        width 300px
+        width 270px
         margin-left 80px
         box-shadow 0px 0px 6px rgba(188, 168, 120, 0.46)
         /*border-color #d8dce5 !important*/
