@@ -36,8 +36,8 @@
           el-input(v-model="formModel.hospitalNumber")
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
           el-input(v-model="formModel.bedNumber")
-        el-form-item(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-          el-input(v-model="formModel.currentSituation" type="textarea" resize="none")
+        el-form-item.tst(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
+          el-input(v-model="formModel.currentSituation" type="textarea" resize="none" rows="4")
         el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
           el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -50,10 +50,10 @@
           el-input(v-model="formModel.bmi")
         el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
           el-input(v-model="formModel.bloodPressure")
-        el-form-item(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none")
-        el-form-item(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none")
+        el-form-item.tst(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
+          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none" rows="4")
+        el-form-item.tst(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
+          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
         el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
           el-input(v-model="formModel.allergicHistory")
         el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -629,12 +629,13 @@
     .text
       width 100%
     .texttoo
-      width 33%
+      width 50%
       display inline-block
     .address
       width 100%
     .el-input__inner
       border-radius 1px
+
 
   .box
     float right
@@ -645,8 +646,9 @@
     padding-bottom 50px
 
   .tst
-    max-width: 104%
+    width: 100% !important
 
   .btn
     text-align: right
+
 </style>
