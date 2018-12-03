@@ -15,7 +15,7 @@
           el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
             el-input(v-model="formModel1.age")
           el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
-            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;" readonly)
+            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
             el-input(v-model="formModel1.telephonePerson")
           el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
@@ -199,23 +199,23 @@
           // callback(new Error('请输入年龄'))
         }
       }
-      var validatestature = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]{1,2}\d|300)$/
-          if (reg.test(valTrim)) {
-            this.phoneNumberInfo = true
-            callback()
-          } else {
-            this.phoneNumberInfo = false
-            callback(new Error('请输入正确身高'))
-          }
-        } else {
-          this.phoneNumberInfo = false
-          callback()
-          // callback(new Error('请输入身高'))
-        }
-      }
+      // var validatestature = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^(?:[1-9]{1,2}\d|300)$/
+      //     if (reg.test(valTrim)) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确身高'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback()
+      //     // callback(new Error('请输入身高'))
+      //   }
+      // }
       // var validatecompleteAddress = (rule, value, callback) => {
       //   if (value !== undefined && value !== null && value !== '') {
       //     let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -230,20 +230,20 @@
       //     // callback(new Error('请输通讯地址'))
       //   }
       // }
-      var validatexinxi = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^([\u4e00-\u9fa5]){1,50}$/
-          if (reg.test(valTrim)) {
-            callback()
-          } else {
-            callback(new Error('请输入正确信息'))
-          }
-        } else {
-          callback()
-          // callback(new Error('请输通讯信息'))
-        }
-      }
+      // var validatexinxi = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){1,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确信息'))
+      //     }
+      //   } else {
+      //     callback()
+      //     // callback(new Error('请输通讯信息'))
+      //   }
+      // }
       return {
         downloadURL: JdyypatientsURL,
         formModel1: Object.assign({}, FormModel1),
@@ -265,15 +265,15 @@
           idCard: [{required: false, validator: validateidCard, trigger: 'change'}],
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
-          familyPhone: [{validator: validatetelephone, trigger: 'change'}],
+          familyPhone: [{validator: validatetelephone, trigger: 'change'}]
           // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
-          medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
-          currentSituation: [{validator: validatexinxi, trigger: 'change'}],
-          specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
-          descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
-          allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
-          typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          stature: [{validator: validatestature, trigger: 'change'}]
+          // medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          // currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          // specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          // descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          // allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          // typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}]
+          // stature: [{validator: validatestature, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],
