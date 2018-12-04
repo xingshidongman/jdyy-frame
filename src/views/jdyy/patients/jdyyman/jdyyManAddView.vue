@@ -15,7 +15,7 @@
           el-form-item(label="年龄" prop="age" v-bind:label-width="labelWidth" v-bind:rules="rules.age")
             el-input(v-model="formModel1.age")
           el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth" v-bind:rules="rules.brith")
-            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;" )
+            el-date-picker(v-model="formModel1.brith" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
           el-form-item(label="本人联系方式" prop="telephonePerson" v-bind:label-width="labelWidth" v-bind:rules="rules.telephonePerson")
             el-input(v-model="formModel1.telephonePerson")
           el-form-item(label="身高" prop="stature" v-bind:label-width="labelWidth" v-bind:rules="rules.stature")
@@ -39,8 +39,6 @@
             el-input(v-model="formModel1.bedNumber")
           el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
             el-date-picker(v-model="formModel1.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
-          el-form-item.long(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none" rows="4")
           el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
             el-input(v-model="formModel1.familyPhone")
           el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
@@ -51,10 +49,6 @@
             el-input(v-model="formModel1.bmi" )
           el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
             el-input(v-model="formModel1.bloodPressure" )
-          el-form-item.long(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none" rows="4")
-          el-form-item.long(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
           el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
             el-input(v-model="formModel1.allergicHistory")
           el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -67,6 +61,12 @@
             el-radio-group(v-model="formModel1.whetherDischarge" )
               el-radio(label="是")
               el-radio(label="否")
+          el-form-item.long(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
+            el-input(v-model="formModel1.currentSituation" type="textarea" resize="none" rows="4")
+          el-form-item.long(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
+            el-input(v-model="formModel1.specialDisorders" type="textarea" resize="none" rows="4")
+          el-form-item.long(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
+            el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
             el-input(v-model="formModel1.remarks" type="textarea" resize="none" rows="6")
           div.clear
@@ -199,23 +199,23 @@
           // callback(new Error('请输入年龄'))
         }
       }
-      var validatestature = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]{1,2}\d|300)$/
-          if (reg.test(valTrim)) {
-            this.phoneNumberInfo = true
-            callback()
-          } else {
-            this.phoneNumberInfo = false
-            callback(new Error('请输入正确身高'))
-          }
-        } else {
-          this.phoneNumberInfo = false
-          callback()
-          // callback(new Error('请输入身高'))
-        }
-      }
+      // var validatestature = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^(?:[1-9]{1,2}\d|300)$/
+      //     if (reg.test(valTrim)) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确身高'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback()
+      //     // callback(new Error('请输入身高'))
+      //   }
+      // }
       // var validatecompleteAddress = (rule, value, callback) => {
       //   if (value !== undefined && value !== null && value !== '') {
       //     let valTrim = value.replace(/^\s+|\s+$/g, '')
@@ -230,20 +230,20 @@
       //     // callback(new Error('请输通讯地址'))
       //   }
       // }
-      var validatexinxi = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^([\u4e00-\u9fa5]){1,50}$/
-          if (reg.test(valTrim)) {
-            callback()
-          } else {
-            callback(new Error('请输入正确信息'))
-          }
-        } else {
-          callback()
-          // callback(new Error('请输通讯信息'))
-        }
-      }
+      // var validatexinxi = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){1,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确信息'))
+      //     }
+      //   } else {
+      //     callback()
+      //     // callback(new Error('请输通讯信息'))
+      //   }
+      // }
       return {
         downloadURL: JdyypatientsURL,
         formModel1: Object.assign({}, FormModel1),
@@ -265,15 +265,15 @@
           idCard: [{required: false, validator: validateidCard, trigger: 'change'}],
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
-          familyPhone: [{validator: validatetelephone, trigger: 'change'}],
+          familyPhone: [{validator: validatetelephone, trigger: 'change'}]
           // completeAddress: [{validator: validatecompleteAddress, trigger: 'change'}],
-          medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
-          currentSituation: [{validator: validatexinxi, trigger: 'change'}],
-          specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
-          descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
-          allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
-          typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          stature: [{validator: validatestature, trigger: 'change'}]
+          // medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          // currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          // specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          // descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          // allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          // typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}]
+          // stature: [{validator: validatestature, trigger: 'change'}]
           // diagnosis: [{required: true, message: '请选择就诊信息', trigger: 'blur'}]
           // bedNumber: [{required: true, message: '请输入床位号', trigger: 'change'}],
           // hospitalNumber: [{required: true, message: '请输入住院号', trigger: 'change'}],

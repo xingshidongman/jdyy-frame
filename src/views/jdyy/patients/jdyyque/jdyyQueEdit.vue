@@ -206,36 +206,36 @@
           callback(new Error('请输入年龄'))
         }
       }
-      var validatestature = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^(?:[1-9]{1,2}\d|300)$/
-          if (reg.test(valTrim)) {
-            this.phoneNumberInfo = true
-            callback()
-          } else {
-            this.phoneNumberInfo = false
-            callback(new Error('请输入正确身高'))
-          }
-        } else {
-          this.phoneNumberInfo = false
-          callback()
-          // callback(new Error('请输入身高'))
-        }
-      }
-      var validatexinxi = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^([\u4e00-\u9fa5]){1,50}$/
-          if (reg.test(valTrim)) {
-            callback()
-          } else {
-            callback(new Error('请输入正确信息'))
-          }
-        } else {
-          callback()
-        }
-      }
+      // var validatestature = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^(?:[1-9]{1,2}\d|300)$/
+      //     if (reg.test(valTrim)) {
+      //       this.phoneNumberInfo = true
+      //       callback()
+      //     } else {
+      //       this.phoneNumberInfo = false
+      //       callback(new Error('请输入正确身高'))
+      //     }
+      //   } else {
+      //     this.phoneNumberInfo = false
+      //     callback()
+      //     // callback(new Error('请输入身高'))
+      //   }
+      // }
+      // var validatexinxi = (rule, value, callback) => {
+      //   if (value !== undefined && value !== null && value !== '') {
+      //     let valTrim = value.replace(/^\s+|\s+$/g, '')
+      //     let reg = /^([\u4e00-\u9fa5]){1,50}$/
+      //     if (reg.test(valTrim)) {
+      //       callback()
+      //     } else {
+      //       callback(new Error('请输入正确信息'))
+      //     }
+      //   } else {
+      //     callback()
+      //   }
+      // }
       return {
         modifyStaff: '',
         downloadURL: JdyypatientsURL,
@@ -254,14 +254,14 @@
           idCard: [{required: false, validator: validateidCard, trigger: 'change'}],
           directorDoctor: [{required: false, validator: validatedirectorDoctor, trigger: 'change'}],
           telephonePerson: [{validator: validatetelephone, trigger: 'change'}],
-          familyPhone: [{validator: validatetelephone, trigger: 'change'}],
-          medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
-          currentSituation: [{validator: validatexinxi, trigger: 'change'}],
-          specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
-          descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
-          allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
-          typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
-          stature: [{validator: validatestature, trigger: 'change'}]
+          familyPhone: [{validator: validatetelephone, trigger: 'change'}]
+          // medicalRecords: [{validator: validatexinxi, trigger: 'change'}],
+          // currentSituation: [{validator: validatexinxi, trigger: 'change'}],
+          // specialDisorders: [{validator: validatexinxi, trigger: 'change'}],
+          // descriptionSpecialDisease: [{validator: validatexinxi, trigger: 'change'}],
+          // allergicHistory: [{validator: validatexinxi, trigger: 'change'}],
+          // typeMedicalTreatment: [{validator: validatexinxi, trigger: 'change'}],
+          // stature: [{validator: validatestature, trigger: 'change'}]
         },
         targetURL: JdyypatientsURL,
         diaCascader: [],

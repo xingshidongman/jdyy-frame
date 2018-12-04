@@ -417,6 +417,7 @@
         }, 20)
       },
       onRefreshClick() { // 刷新按钮点击事件
+        this.sort = null
         this.getData()
       },
       onDeleteChecked() {
