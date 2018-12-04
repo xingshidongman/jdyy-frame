@@ -259,7 +259,7 @@
         fileNameArr: [],
         // options: [],
         rules: {
-          name: [{required: true, validator: validatename, trigger: 'blur'}],
+          name: [{required: true, validator: validatename, trigger: 'change'}],
           sex: [{trigger: 'blur'}],
           age: [{validator: validateage, trigger: 'blur'}], // validator: validateage,
           idCard: [{required: false, validator: validateidCard, trigger: 'change'}],
