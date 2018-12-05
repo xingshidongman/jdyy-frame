@@ -1,19 +1,19 @@
 <template lang="pug">
   div
     el-upload(
-      ref="uploadClean"
-      :action="action"
-      :headers="headers"
-      :multiple="true"
-      :on-success="handleSuccess"
-      :on-preview="handlePreview"
-      :on-remove="handleRemove"
-      :before-remove="beforeRemove"
-      :before-upload="beforeUpload"
-      :limit="10"
-      :on-exceed="handleExceed"
-      :file-list="fileListData"
-      list-type="picture")
+    ref="uploadClean"
+    :action="action"
+    :headers="headers"
+    :multiple="true"
+    :on-success="handleSuccess"
+    :on-preview="handlePreview"
+    :on-remove="handleRemove"
+    :before-remove="beforeRemove"
+    :before-upload="beforeUpload"
+    :limit="10"
+    :on-exceed="handleExceed"
+    :file-list="fileListData"
+    list-type="picture")
       el-button(size="small" type="primary") {{btnText}}
       div(slot="tip" class="el-upload__tip") {{tipText}}
     el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
@@ -60,12 +60,31 @@
         dialogImageUrl: ''
       }
     },
+    mounted() {
+      this.currentfileList = []
+      this.currentIdx = 0
+    },
     methods: {
+      cut() {
+        this.currentIdx -= 1
+        if (this.currentIdx < 0) {
+          this.currentIdx = 0
+        }
+        this.dialogImageUrl = this.currentfileList[this.currentIdx].url
+      },
+      add() {
+        this.currentIdx += 1
+        if (this.currentIdx >= this.currentfileList.length) {
+          this.currentIdx = this.currentfileList.length - 1
+        }
+        this.dialogImageUrl = this.currentfileList[this.currentIdx].url
+      },
       uploadClean() {
         this.$refs.uploadClean.clearFiles()
       },
       handleRemove(file, fileList) {
         console.log(123)
+        this.currentfileList = fileList
         if (file.status === 'success') {
           let attachmentId = ''
           let rev = ''
@@ -137,13 +156,24 @@
         return isJPG && isLt2M
       },
       handleSuccess(response, file, fileList) {
+        this.currentfileList = fileList
         console.log('--file-status---', response.attachmentPath, response.attachmentName)
         this.$emit('filePath', response.attachmentPath, response.attachmentName)
+        console.log('fileList:', fileList)
       },
       handlePreview(file) {
-        this.dialogVisible = true
-        this.dialogImageUrl = file.url
+        this.currentIdx = 0
+        // this.dialogVisible = true
+        // this.dialogImageUrl = file.url
         console.log('aaaaaaaaaaaa', file.url)
+        console.log('aaaaaaaaaaaa file', file)
+        this.currentIdx = this.currentfileList.findIndex(e => {
+          return e.url === file.url
+        })
+        if (this.currentIdx > -1) {
+          this.dialogImageUrl = this.currentfileList[this.currentIdx].url
+          this.dialogVisible = true
+        }
       },
       handleExceed(files, fileList) {
         Message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)

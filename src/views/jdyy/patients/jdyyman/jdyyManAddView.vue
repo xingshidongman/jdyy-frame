@@ -548,6 +548,8 @@
 <style scoped lang="stylus" type="text/stylus">
   .el-input__inner,.el-input__inner:focus
     border-color #dcdfe6
+  .el-form-item.is-success .el-input__inner
+    border-color #dcdfe6
   .clear
     clear both
   .el-form
@@ -572,7 +574,34 @@
     margin 0 auto
     padding-bottom 50px
   .tst
-    max-width: 217px
+    max-width 217px
   .long
     width 100% !important
+  .img-width
+    max-width 760px
+    max-height 400px
+  .img-height
+    width 800px
+    height 400px
+    display table-cell
+    vertical-align middle
+    text-align center
+  .prev
+  .next
+    background-color rgba(0, 0, 0, 0.5)
+    padding 20px 0
+    position absolute
+    top 40%
+
+  .prev
+    left 0
+
+  .next
+    right 0
+  .picture
+    float left
+    margin 0 3px
+  .clear
+    clear both
+
 </style>

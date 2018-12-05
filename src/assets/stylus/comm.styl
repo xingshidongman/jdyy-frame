@@ -260,3 +260,67 @@ input:-webkit-autofill
     line-height 20px
 .el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus
   border-color #dcdfe6
+
+.img-width
+  max-width 760px
+  max-height 400px
+.img-height
+  width 800px
+  height 400px
+  display table-cell
+  vertical-align middle
+  text-align center
+.prev
+.next
+  background-color rgba(0, 0, 0, 0.5)
+  padding 20px 0
+  position absolute
+  top 40%
+
+.prev
+  left 0
+
+.next
+  right 0
+.picture
+  float left
+  margin 0 3px
+.el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name
+  position relative
+  left -86px
+  z-index 222
+  padding-left 86px
+
+
+.kalix-table-column-title
+  display inline-block
+  padding 0
+  .kalix-table-column-title--cnt
+    display flex
+    align-items center
+    cursor pointer
+  .kalix-table-column-title--mn
+    padding 0
+  .kalix-table-column-title--arrow-cnt
+    width 10px
+    display flex
+    flex-direction column
+    margin-left 6px
+  .kalix-table-column-title--arrow-up,
+  .kalix-table-column-title--arrow-down
+    display inline-block
+    width 0
+    height 0
+    border-left 5px solid transparent
+    border-right 5px solid transparent
+  .kalix-table-column-title--arrow-up
+    border-bottom 5px solid #aaaaaa
+    margin-bottom 2px
+  .kalix-table-column-title--arrow-down
+    border-top 5px solid #aaaaaa
+  &.asc
+    .kalix-table-column-title--arrow-up
+      border-bottom-color #2d8ac7
+  &.desc
+    .kalix-table-column-title--arrow-down
+      border-top-color #2d8ac7

@@ -45,7 +45,13 @@
                 v-bind:sortable="sortable"
                 )
                   template(slot="header" slot-scope="scope")
-                    div(v-on:click="thClick(field.prop)") {{field.label}}
+                    span.kalix-table-column-title(v-if="field.sortable" v-bind:class="columnOrder[field.prop]")
+                      span.kalix-table-column-title--cnt
+                        span.kalix-table-column-title--mn(v-on:click="handlerColumnTitleClick(field)") {{field.label}}
+                        span.kalix-table-column-title--arrow-cnt
+                          span.kalix-table-column-title--arrow-up(v-on:click="handlerColumnTitleClick(field, 'asc')")
+                          span.kalix-table-column-title--arrow-down(v-on:click="handlerColumnTitleClick(field, 'desc')")
+                    template(v-else) {{field.label}}
                   template(slot-scope="scope")
                     div(v-bind:class="field.prop" v-bind:data-val="scope.row[field.prop]") {{scope.row[field.prop]}}
               //  table的工具按钮
@@ -259,7 +265,11 @@
         currentRow: null,
         wrapperTop: {},
         toolbarBtnListClone: [],
-        sort: ''
+        sort: '',
+        // 排序对象
+        orderByArray: [],
+        // 列排序标识
+        columnOrder: {}
       }
     },
     created() {
@@ -288,6 +298,8 @@
       EventBus.$off(this.bizKey + '-' + 'KalixDialogClose')
     },
     mounted() {
+      // 排序字符串
+      this.orderByStr = ''
       // 排序
       this.orderByObj = {}
       // 注册事件接受
@@ -303,6 +315,41 @@
       this.setWrapperStyle()
     },
     methods: {
+      /**
+       * 列点击事件
+       */
+      handlerColumnTitleClick(_field, __orderStr) {
+        console.group('%c ===== handlerColumnTitleClick ===== ', 'background-color:#550000,color:#fffff')
+        // console.log('_field:', _field)
+        let idx = this.orderByArray.findIndex(e => {
+          return e.key === _field.prop
+        })
+        if (idx < 0) {
+          this.orderByArray.push({key: _field.prop, orderStr: __orderStr || 'asc'})
+        } else {
+          if (__orderStr) {
+            this.orderByArray[idx].orderStr = __orderStr
+          } else {
+            if (this.orderByArray[idx].orderStr === 'desc') {
+              this.orderByArray.splice(idx, 1)
+            } else {
+              this.orderByArray[idx].orderStr = 'desc'
+            }
+          }
+        }
+        // console.log('this.orderByArray:', this.orderByArray)
+        this.columnOrder = {}
+        let arr = []
+        this.orderByArray.forEach(e => {
+          arr.push(`${e.key} ${e.orderStr}`)
+          this.$set(this.columnOrder, e.key, e.orderStr)
+        })
+        // this.orderByStr = arr.join(' ')
+        console.log('orderByStr', this.orderByStr)
+        console.groupEnd()
+        this.sort = arr.join(',')
+        this.getData()
+      },
       thClick(key) {
         console.log('thClick', key)
         let currentKey = this.orderByObj[key]
