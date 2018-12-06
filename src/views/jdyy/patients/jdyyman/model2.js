@@ -9,7 +9,6 @@ const FormModel = {
   operationDate: null, // 手术日期
   periodization: null, // 分期
   parting: null, // 分型
-  xid: null, // id（未知）
-  photo: null // 图片
+  xid: null // id（未知）
 }
 export default FormModel

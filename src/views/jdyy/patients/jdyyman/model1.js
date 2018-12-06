@@ -32,7 +32,7 @@ const FormModel1 = {
   abduction: null, // 外展
   adduction: null, // 内收
   modifyStaff: null, // 修改人员
-  heavyTime: null // 重患时间
-
+  heavyTime: null, // 重患时间
+  photo: null // 图片
 }
 export default FormModel1

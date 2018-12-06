@@ -69,6 +69,9 @@
             el-input(v-model="formModel1.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
           el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
             el-input(v-model="formModel1.remarks" type="textarea" resize="none" rows="6")
+          el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
+            kalix-clansman-upload(v-model="formModel1.photo" :action="action" ref="clearUpload"
+            v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
           div.clear
       div.diagnose-message
         div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
@@ -85,9 +88,6 @@
               el-option(label="外科" value="外科")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
             el-input.tst(v-model="formModel2.parting")
-          el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-            kalix-clansman-upload(:action="action" ref="clearUpload"
-            v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
         div.box
           ul.right_ul
             li.right_li
@@ -349,12 +349,12 @@
           })
           fileName = fileName.substr(0, fileName.length - 1)
         }
-        baseDialog.formModel2.photo = filePath
-        baseDialog.formModel2.imgName = fileName
+        baseDialog.formModel1.photo = filePath
+        baseDialog.formModel1.imgName = fileName
         callBack()
       },
       setGroup(item) {
-        this.formModel2.photo = item.photo
+        this.formModel1.photo = item.photo
       },
       onSubmitClick() { // 重写多张图片上传方法
         if (this.submitCustom && typeof (this.submitCustom) === 'function') {
@@ -493,7 +493,7 @@
                 console.log('this.formModel2.diagnosis...==============', this.formModel2.diagnosis)
                 if (this.formModel2.diagnosis != null || this.formModel2.surgical != null ||
                   this.formModel2.operationDate != null || this.formModel2.parting != null ||
-                  this.formModel2.periodization != null || this.formModel2.photo !== '') {
+                  this.formModel2.periodization != null) {
                   this.formModel2.pid = res.data.tag
                   this.subMitFormModel2()
                 }
@@ -526,8 +526,7 @@
             operationDate: this.formModel2.operationDate,
             periodization: this.formModel2.periodization,
             parting: this.formModel2.parting,
-            xid: this.formModel2.xid,
-            photo: this.formModel2.photo
+            xid: this.formModel2.xid
           }
         }).then(res => {
           console.log('subMitFormModel2-success==================', res.data.msg)

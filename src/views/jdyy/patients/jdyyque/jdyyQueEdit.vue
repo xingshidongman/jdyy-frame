@@ -36,8 +36,6 @@
           el-input(v-model="formModel.hospitalNumber")
         el-form-item(label="床位号" prop="bedNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.bedNumber")
           el-input(v-model="formModel.bedNumber")
-        el-form-item.tst(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
-          el-input(v-model="formModel.currentSituation" type="textarea" resize="none" rows="4")
         el-form-item(label="重患时间" prop="heavyTime" v-bind:label-width="labelWidth" v-bind:rules="rules.heavyTime")
           el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
@@ -50,10 +48,6 @@
           el-input(v-model="formModel.bmi")
         el-form-item(label="血压" prop="bloodPressure" v-bind:label-width="labelWidth" v-bind:rules="rules.bloodPressure")
           el-input(v-model="formModel.bloodPressure")
-        el-form-item.tst(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
-          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none" rows="4")
-        el-form-item.tst(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
-          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
         el-form-item(label="过敏史" prop="allergicHistory" v-bind:label-width="labelWidth" v-bind:rules="rules.allergicHistory")
           el-input(v-model="formModel.allergicHistory")
         el-form-item(label="医疗类别" prop="medicalCategory" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalCategory")
@@ -68,8 +62,20 @@
             el-radio(label="否")
         el-form-item.address(label="修改人员" prop="modifyStaff" v-bind:label-width="labelWidth" v-bind:rules="rules.modifyStaff")
           el-input(v-text="modifyStaff" readonly="readonly")
+        el-form-item.tst(label="现况" prop="currentSituation" v-bind:label-width="labelWidth" v-bind:rules="rules.currentSituation")
+          el-input(v-model="formModel.currentSituation" type="textarea" resize="none" rows="4")
+        el-form-item.tst(label="特殊疾患" prop="specialDisorders" v-bind:label-width="labelWidth" v-bind:rules="rules.specialDisorders")
+          el-input(v-model="formModel.specialDisorders" type="textarea" resize="none" rows="4")
+        el-form-item.tst(label="特殊疾患描述" prop="descriptionSpecialDisease" v-bind:label-width="labelWidth" v-bind:rules="rules.descriptionSpecialDisease")
+          el-input(v-model="formModel.descriptionSpecialDisease" type="textarea" resize="none" rows="4")
         el-form-item.address(label="备注" prop="remarks" v-bind:label-width="labelWidth" v-bind:rules="rules.remarks")
           el-input(v-model="formModel.remarks" type="textarea" resize="none" rows="6")
+        el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
+          kalix-clansman-upload(:action="action" ref="clearUpload"
+          v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
+        <!--el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
+        <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
+        kalix-img-upload.img-margin(v-model="formModel.photo" readonly="readonly" v-on:ImgDel="ImgDel")
       div(style="width:98px;margin:20px auto;font-size: 20px;") 诊 断 信 息
       el-form(v-bind:model="formModel" ref="formModel" )
         el-form-item.texttoo(label="诊断" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
@@ -84,12 +90,6 @@
             el-option(label="外科" value="外科")
         el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
           el-input.tst(v-model="formModel.parting")
-        el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")
-          kalix-clansman-upload(:action="action" ref="clearUpload"
-          v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")
-        <!--el-form-item.text(label="图片" prop="photo" v-bind:label-width="labelWidth" v-bind:rules="rules.photo")-->
-        <!--kalix-clansman-upload(:action="action" ref="clearUpload" v-on:filePath="getFilePath" v-on:selectChange="setGroup" :fileList="fileList" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
-        kalix-img-upload(v-model="formModel.photo" readonly="readonly" v-on:ImgDel="ImgDel")
         div.btn
           el-button(v-on:click="CancelClick") 取 消
           el-button(type="primary" v-on:click="onSubmitClick") 提 交
@@ -412,26 +412,30 @@
         console.log('---------dialogOption------------', dialogOption)
         delete this.formModel.rowNumber
         delete this.formModel.tableData
-        let diaCode = this.formModel.diagnosisCode // 诊断级联回显
-        console.log('diaCode+++++', diaCode)
-        for (let i = 1; i <= diaCode.length / 2; i++) {
-          if (diaCode.substring((i - 1) * 2, i * 2) !== '00') {
-            let a = ''
-            for (let j = 0; j < (diaCode.length - i * 2); j++) {
-              a += '0'
+        console.log('diaCode+++++++', this.formModel.diagnosisCode)
+        if (this.formModel.diagnosisCode != null && this.formModel.diagnosisCode !== '') {
+          let diaCode = this.formModel.diagnosisCode // 诊断级联回显
+          for (let i = 1; i <= diaCode.length / 2; i++) {
+            if (diaCode.substring((i - 1) * 2, i * 2) !== '00') {
+              let a = ''
+              for (let j = 0; j < (diaCode.length - i * 2); j++) {
+                a += '0'
+              }
+              this.diaCascader.push(diaCode.substring(0, i * 2) + a)
             }
-            this.diaCascader.push(diaCode.substring(0, i * 2) + a)
           }
         }
         console.log('diaCascader+++++++++++++++++++++++', this.diaCascader)
-        let surCode = this.formModel.surgicalCode // 术式级联回显
-        for (let i = 1; i <= surCode.length / 2; i++) {
-          if (surCode.substring((i - 1) * 2, i * 2) !== '00') {
-            let a = ''
-            for (let j = 0; j < (surCode.length - i * 2); j++) {
-              a += '0'
+        if (this.formModel.surgicalCode != null && this.formModel.surgicalCode !== '') {
+          let surCode = this.formModel.surgicalCode // 术式级联回显
+          for (let i = 1; i <= surCode.length / 2; i++) {
+            if (surCode.substring((i - 1) * 2, i * 2) !== '00') {
+              let a = ''
+              for (let j = 0; j < (surCode.length - i * 2); j++) {
+                a += '0'
+              }
+              this.surCascader.push(surCode.substring(0, i * 2) + a)
             }
-            this.surCascader.push(surCode.substring(0, i * 2) + a)
           }
         }
       },
@@ -650,5 +654,6 @@
 
   .btn
     text-align: right
-
+  .img-margin
+    margin-left 150px
 </style>

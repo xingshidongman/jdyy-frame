@@ -24,8 +24,20 @@
           el-date-picker(v-model="formModel.dateAdmission" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)
         el-form-item(label="出院日期" prop="dischargeDate" v-bind:label-width="labelWidth")
           el-date-picker(v-model="formModel.dischargeDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)
-        el-form-item(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
+        el-form-item.block(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
           el-input(v-model="formModel.directorDoctor" readonly)
+        el-form-item.block(label="图片" prop="photo" v-bind:label-width="labelWidth")
+        <!--kalix-img-upload(v-model="formModel.photo" readonly="readonly")-->
+          <!--template(slot-scope="scope")-->
+          div.picture-box(style="margin-left:200px")
+            div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
+              img(v-bind:src="img.val" @click="change(index)"  style="width:144px; height:144px" v-bind:ref="img.key")
+              el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
+                div.img-height
+                  img.img-width(v-bind:src="item.val" v-for="(item, index) in formModel.imgs" v-show="index===mark" :key="index")
+                  img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                  img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+            div.clear
         <!--el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth")-->
         <!--el-date-picker(v-model="formModel.brith" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
         <!--el-form-item.address(label="通讯地址" prop="completeAddress" v-bind:label-width="labelWidth")-->
@@ -80,16 +92,16 @@
             el-table-column(prop="surgical" label="术式" min-width="150" :resizable="false")
             el-table-column(prop="operationDate" label="手术日期" min-width="120" :resizable="false")
             el-table-column(prop="periodization" label="分期" min-width="120" :resizable="false")
-            el-table-column(prop="imgs" label="图片" min-width="360" :resizable="false")
-              template(slot-scope="scope")
-                div.picture(v-for="(img, filePathArr) in scope.row.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")
-                  img(v-bind:src="img.val" v-bind:ref="img.key" @click="change(filePathArr) ; handelClick(scope.$index)" style="width:144px; height:144px")
-                  el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
-                    div.img-height
-                      img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.tableData[rowNumber].imgs" v-show="filePathArr===mark" :key="filePathArr")
-                      img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
-                      img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
-                div.clear
+            <!--el-table-column(prop="imgs" label="图片" min-width="360" :resizable="false")-->
+              <!--template(slot-scope="scope")-->
+                <!--div.picture(v-for="(img, filePathArr) in scope.row.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")-->
+                  <!--img(v-bind:src="img.val" v-bind:ref="img.key" @click="change(filePathArr) ; handelClick(scope.$index)" style="width:144px; height:144px")-->
+                  <!--el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")-->
+                    <!--div.img-height-->
+                      <!--img.img-width(v-bind:src="item.val" v-for="(item, filePathArr) in formModel.tableData[rowNumber].imgs" v-show="filePathArr===mark" :key="filePathArr")-->
+                      <!--img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )-->
+                      <!--img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )-->
+                <!--div.clear-->
         <!--view-table(v-bind:targetURL="visPatUrl" v-bind:userId="formModel.id" v-on:handleClick="handleClick")-->
         <!--div.mark(ref="mark")-->
         <!--div(v-for="img in imgs" v-bind:key="img.key" @click="markclose" )-->
@@ -142,14 +154,14 @@
       cut() {
         this.mark--
         if (this.mark < 0) {
-          this.mark = this.formModel.tableData[this.rowNumber].imgs.length - 1
+          this.mark = this.formModel.photo.split(',').length - 1
           // console.log(this.formModel.tableData[index])
         }
         console.log('=====================', this.mark)
       },
       add() {
         this.mark++
-        if (this.mark > this.formModel.tableData[this.rowNumber].imgs.length - 1) {
+        if (this.mark > this.formModel.photo.split(',').length - 1) {
           this.mark = 0
         }
         console.log('=====================', this.mark)
@@ -172,6 +184,7 @@
       },
       getBase64Pdf () {
         let _this = this
+        this.formModel.imgs = this.formModel.photo.split(',')
         console.log('this.formModel.imgs=--------------', this.formModel.imgs)
         let imgsArr = this.formModel.imgs
         console.log('imgsArr------------------', imgsArr)
@@ -249,9 +262,15 @@
 
   .next
     right 0
+  .block
+    display block !important
   .picture
     float left
     margin 0 3px
+    display block
   .clear
     clear both
+  .long
+    width 100% !important
+
 </style>

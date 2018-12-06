@@ -12,7 +12,7 @@ const FormModel = {
   directorDoctor: null, // 主管医生
   bedNumber: null, // 床位号
   hospitalNumber: null, // 住院号
-  medicalRecordNumber: null, // 病历号
+  medicalRecordNumber: null, // 病历
   medicalRecords: null, // 病历
   currentSituation: null, // 现况
   telephonePerson: null, // 本人联系方式

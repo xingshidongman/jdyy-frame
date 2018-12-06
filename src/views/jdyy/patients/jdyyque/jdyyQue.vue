@@ -81,47 +81,48 @@
             that.whichBizDialog = dig[0].dialog
             console.log('row.id---------------', row.id)
             setTimeout(() => {
-              this.$http.get('/camel/rest/jdyy/visits/getAllByUserId', {
+              this.$http.get('/camel/rest/jdyy/visits/getImgsByPhoto', {
                 params: {
-                  userId: row.id
+                  imgs: row.photo
                 }
               }).then(res => {
-                this.tableData = res.data.data
-                console.log('viewtable _res===========', this.tableData)
-                // console.log('this.tableData[0].photo===========', this.tableData[0].photo)
-                if (this.tableData.length > 0) {
-                  for (let j = 0; j < this.tableData.length; j++) {
-                    this.tableData[j].imgs = []
-                    if (this.tableData[j].imgs !== undefined) {
-                      this.tableData[j].imgs.splice(0, this.tableData[j].imgs.length)
+                console.log('base64=========================', res.data)
+                row.imgs = []
+                // row.imgs = res.data.tag
+                if (res.data.tag !== undefined) {
+                  if (res.data.tag.indexOf('&') !== -1) {
+                    let arr = res.data.tag.split('&')
+                    for (let i = 0; i < arr.length; i++) {
+                      let imgObj = {}
+                      imgObj.val = arr[i]
+                      imgObj.key = 'img' + i
+                      row.imgs.push(imgObj)
+                      console.log('this.imgs--------------:', row.imgs)
                     }
-                    if (this.tableData[j].photo !== null && this.tableData[j].photo !== '') {
-                      if (this.tableData[j].photo.indexOf('&') !== -1) {
-                        let arr = this.tableData[j].photo.split('&')
-                        for (let i = 0; i < arr.length; i++) {
-                          let imgObj = {}
-                          imgObj.val = arr[i]
-                          imgObj.key = 'img' + i
-                          this.tableData[j].imgs.push(imgObj)
-                          console.log('this.imgs--------------:', this.tableData[j].imgs)
-                        }
-                      } else {
-                        let imgObj = {
-                          val: this.tableData[j].photo,
-                          key: 'img0'
-                        }
-                        console.log('imgObj--------------:', imgObj)
-                        this.tableData[j].imgs.push(imgObj)
-                      }
+                  } else {
+                    let imgObj = {
+                      val: res.data.tag,
+                      key: 'img0'
                     }
+                    console.log('imgObj--------------:', imgObj)
+                    row.imgs.push(imgObj)
                   }
-                  row.tableData = this.tableData
-                  // row.imgs = this.imgs
-                  that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
-                } else {
-                  row.tableData = []
-                  that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
                 }
+                this.$http.get('/camel/rest/jdyy/visits/getAllByUserId', {
+                  params: {
+                    userId: row.id
+                  }
+                }).then(res => {
+                  this.tableData = res.data.data
+                  console.log('viewtable _res===========', this.tableData)
+                  if (this.tableData.length > 0) {
+                    row.tableData = this.tableData
+                    that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+                  } else {
+                    row.tableData = []
+                    that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+                  }
+                })
               })
             }, 20)
             break
