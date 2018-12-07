@@ -879,14 +879,13 @@
   .table > thead > tr > th {
     /*border-top: 1px solid #e7eaec;*/
     border: 0;
-    line-height: 1.42857;
     padding: 8px;
     vertical-align: middle;
-    font-family: Arial;
     color: #b18e60;
     font-size: 14px;
     line-height: 23px;
     font-family: inherit;
+    text-align left
   }
 
   .table-bordered > tbody > tr > td,
