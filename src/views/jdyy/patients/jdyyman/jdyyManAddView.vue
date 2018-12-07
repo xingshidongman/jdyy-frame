@@ -3,6 +3,10 @@
     div(class="back")
       div.base-message
         div(style="width:110px;margin:20px auto;font-size: 20px;") 基 本 信 息
+        el-form()
+          el-form-item(label="获取his数据" prop="hospitalNumber" v-bind:label-width="labelWidth")
+            el-input(v-model="hospitalNumber")
+          el-button.btn-submit(v-on:click="getHisData()" size="large") 获取
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
             el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" @select="handleSelect" style="width:100%")
@@ -83,9 +87,7 @@
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-            el-select(v-model="formModel2.periodization" placeholder="请选择分期")
-              el-option(label="内科" value="内科")
-              el-option(label="外科" value="外科")
+            el-input(v-model="formModel2.periodization" placeholder="请输入分期")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
             el-input.tst(v-model="formModel2.parting")
         div.box
@@ -576,31 +578,12 @@
     max-width 217px
   .long
     width 100% !important
-  .img-width
-    max-width 760px
-    max-height 400px
-  .img-height
-    width 800px
-    height 400px
-    display table-cell
-    vertical-align middle
-    text-align center
-  .prev
-  .next
-    background-color rgba(0, 0, 0, 0.5)
-    padding 20px 0
-    position absolute
-    top 40%
-
-  .prev
-    left 0
-
-  .next
-    right 0
   .picture
     float left
     margin 0 3px
   .clear
     clear both
+  .btn-submit
+    margin-left 40px
 
 </style>
