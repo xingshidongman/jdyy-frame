@@ -345,7 +345,7 @@
   .icon-search
     margin-left 24%
   .icon-reset
-    margin-top 2px
+    margin-top 4px
 
 
 </style>
