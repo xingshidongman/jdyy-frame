@@ -3,6 +3,10 @@
     div(class="back")
       div.base-message
         div(style="width:110px;margin:20px auto;font-size: 20px;") 基 本 信 息
+        el-form()
+          el-form-item(label="获取his数据" prop="hospitalNumber" v-bind:label-width="labelWidth")
+            el-input(v-model="hospitalNumber" placeholder="请输入住院号")
+          el-button.btn-submit(v-on:click="getHisData()" size="large") 获取
         el-form(v-bind:model="formModel1" ref="formModel1")
           el-form-item(label="姓名" prop="name" v-bind:label-width="labelWidth" v-bind:rules="rules.name")
             el-autocomplete(v-model="formModel1.name" :fetch-suggestions="querySearchAsync" @select="handleSelect" style="width:100%")
@@ -287,7 +291,8 @@
         targetURL: JdyypatientsURL,
         options: [],
         items: [],
-        dia: ''
+        dia: '',
+        hospitalNumber: null
       }
     },
     mounted() {
@@ -297,6 +302,19 @@
       this.loadAllDoc() // 获取医生信息
     },
     methods: {
+      getHisData() {
+        console.log('getHisData=================', this.hospitalNumber)
+        this.axios.request({
+          method: 'GET',
+          url: JdyypatientsURL + '/getPatientsByHospitalNumber',
+          params: {
+            HospitalNumber: this.hospitalNumber
+          }
+        }).then(res => {
+          console.log('res========================', res.data.data)
+          this.formModel1 = res.data.data[0]
+        })
+      },
       validDoctor(val, callback) {
         if (val !== undefined && val !== null && val !== '') {
           let valTrim = val.replace(/^\s+|\s+$/g, '')
@@ -602,5 +620,7 @@
     margin 0 3px
   .clear
     clear both
+  .btn-submit
+    margin-left 40px
 
 </style>
