@@ -6,6 +6,7 @@ import BaseDateColumn from './components/common/baseDateColumn'
 import BaseDictSelect from './components/common/baseDictSelect'
 import BaseMapSelect from './components/common/baseMapSelect'
 import BaseSelect from './components/common/baseSelect'
+import baseSelect2 from './components/common/baseSelect2'
 import Datepicker from './components/common/date/datepicker'
 import Datetimepicker from './components/common/date/datetimepicker'
 import DatepickerSimple from './components/common/baseDatepicker'
@@ -51,6 +52,7 @@ const components = [
   BaseDictSelect,
   BaseMapSelect,
   BaseSelect,
+  baseSelect2,
   Datepicker,
   Datetimepicker,
   DatepickerSimple,
