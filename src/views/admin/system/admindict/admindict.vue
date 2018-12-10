@@ -6,7 +6,7 @@
 
 <template lang="pug">
   keep-alive
-    kalix-base-dict(ref="baseTableRef" v-bind:bizKey="bizKey" v-bind:bizDialog="bizDialog" v-bind:btnList='btnList' v-bind:toolbarBtnList="toolBarBtnList" v-bind:dictComponent="dictComponent"
+    kalix-base-dict(ref="baseTableRef" v-bind:bizKey="bizKey" v-bind:bizDialog="bizDialog" v-bind:toolbarBtnList="toolBarBtnList" v-bind:dictComponent="dictComponent"
     v-bind:targetURL="targetURL" v-bind:dialogOptions="dialogOptions")
 </template>
 

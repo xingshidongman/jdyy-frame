@@ -16,11 +16,12 @@
     list-type="picture")
       el-button(size="small" type="primary") {{btnText}}
       div(slot="tip" class="el-upload__tip") {{tipText}}
-    el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
-      div.img-height
-        img.img-width(v-bind:src="dialogImageUrl" )
-        img(src="../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
-        img(src="../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+    el-dialog(:visible.sync="dialogVisible" :append-to-body="true"  fullscreen=true)
+      div.img-box
+        div.img-height
+          img.img-width(v-bind:src="dialogImageUrl" )
+          img(src="../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+          img(src="../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
 </template>
 <script type="text/ecmascript-6">
   import Cache from '../../../src/common/cache.js'
@@ -68,14 +69,14 @@
       cut() {
         this.currentIdx -= 1
         if (this.currentIdx < 0) {
-          this.currentIdx = 0
+          this.currentIdx = this.currentfileList.length - 1
         }
         this.dialogImageUrl = this.currentfileList[this.currentIdx].url
       },
       add() {
         this.currentIdx += 1
-        if (this.currentIdx >= this.currentfileList.length) {
-          this.currentIdx = this.currentfileList.length - 1
+        if (this.currentIdx > this.currentfileList.length - 1) {
+          this.currentIdx = 0
         }
         this.dialogImageUrl = this.currentfileList[this.currentIdx].url
       },
@@ -186,7 +187,18 @@
   }
 </script>
 <style scoped lang="stylus" type="text/stylus">
+
   .img-width
-    max-width 760px
-    max-height 400px
+    max-width 90%
+    max-height 650px
+    display inline-block
+  .img-height
+    width 100%
+    display table-cell
+    height 650px
+    vertical-align middle
+  .img-box
+    width 100%
+    display table
+    text-align center
 </style>

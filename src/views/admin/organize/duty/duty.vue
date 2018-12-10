@@ -15,7 +15,7 @@
               el-table-column(prop="comment" label="职务描述")
               el-table-column(prop="orgNameCol" label="组织机构")
               el-table-column(prop="createBy" label="创建人")
-              kalix-data-column(prop="creationDate" label="创建日期")
+              el-table-column(prop="creationDate" label="创建日期")
 </template>
 
 <script>

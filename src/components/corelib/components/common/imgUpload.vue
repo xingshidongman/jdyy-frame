@@ -14,11 +14,12 @@
             img.avatars(v-else src="/static/images/default_attachment.png")
             div
               a.cancel(v-on:click="onImgDel(imageUrl)" href="#") ×
-            el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
-              div.img-height
-                img.img-width(v-bind:src="imageUrl" v-for="(imageUrl, index) in fileList" v-show="index===mark" :key="index")
-                img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
-                img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+            el-dialog(:visible.sync="dialogVisible" :append-to-body="true"  fullscreen=true)
+              div.img-box
+                div.img-height
+                  img.img-width(v-bind:src="imageUrl" v-for="(imageUrl, index) in fileList" v-show="index===mark" :key="index")
+                  img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                  img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
         div.clear
       template(v-else)
         template 空
@@ -205,7 +206,7 @@
   }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
   .avatars-uploader
     .el-upload
       border: 1px dashed #d9d9d9
@@ -259,25 +260,20 @@
     clear: both
 
   .img-width
-    max-width 760px
-    max-height 400px
+    max-width 90%
+    max-height 650px
+    display inline-block
   .img-height
-    width 800px
-    height 400px
+    width 100%
     display table-cell
+    height 650px
     vertical-align middle
+  .img-box
+    width 100%
+    display table
     text-align center
-  .prev
-  .next
-    background-color: rgba(0, 0, 0, 0.5)
-    padding 20px 0
-    position absolute
-    top 40%
 
-  .prev
-    left 0
 
-  .next
-    right 0
+
 
 </style>

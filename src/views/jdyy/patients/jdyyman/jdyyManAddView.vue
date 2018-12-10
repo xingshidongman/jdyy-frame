@@ -87,9 +87,7 @@
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-            el-select(v-model="formModel2.periodization" placeholder="请选择分期")
-              el-option(label="内科" value="内科")
-              el-option(label="外科" value="外科")
+            el-input.tst(v-model="formModel2.periodization" placeholder="请输入分期")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
             el-input.tst(v-model="formModel2.parting")
         div.box
@@ -582,8 +580,7 @@
       display inline-block
     .address
       width 100%
-    .el-input__inner
-      border-radius 1px
+
   .box
     float right
   .back
@@ -592,29 +589,10 @@
     padding-bottom 50px
   .tst
     max-width 217px
+    .el-input__inner
+      border-radius 1px
   .long
     width 100% !important
-  .img-width
-    max-width 760px
-    max-height 400px
-  .img-height
-    width 800px
-    height 400px
-    display table-cell
-    vertical-align middle
-    text-align center
-  .prev
-  .next
-    background-color rgba(0, 0, 0, 0.5)
-    padding 20px 0
-    position absolute
-    top 40%
-
-  .prev
-    left 0
-
-  .next
-    right 0
   .picture
     float left
     margin 0 3px

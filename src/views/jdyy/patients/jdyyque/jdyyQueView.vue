@@ -32,11 +32,12 @@
           div.picture-box(style="margin-left:200px")
             div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
               img(v-bind:src="img.val" @click="change(index)"  style="width:144px; height:144px" v-bind:ref="img.key")
-              el-dialog(:visible.sync="dialogVisible" :append-to-body="true" width="800px")
-                div.img-height
-                  img.img-width(v-bind:src="item.val" v-for="(item, index) in formModel.imgs" v-show="index===mark" :key="index")
-                  img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
-                  img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
+              el-dialog(:visible.sync="dialogVisible" :append-to-body="true" fullscreen=true)
+                div.img-box
+                  div.img-height
+                    img.img-width(v-bind:src="item.val" v-for="(item, index) in formModel.imgs" v-show="index===mark" :key="index")
+                    img(src="../../../../../static/images/prev.png" height="50" width="50" class="prev" @click="cut()" )
+                    img(src="../../../../../static/images/next.png" height="50" width="50" class="next" @click="add()" )
             div.clear
         <!--el-form-item(label="出生日期" prop="brith" v-bind:label-width="labelWidth")-->
         <!--el-date-picker(v-model="formModel.brith" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;" readonly)-->
@@ -242,13 +243,17 @@
     /*text-align: center*/
     /*display none*/
   .img-width
-    max-width 760px
-    max-height 400px
+    max-width 90%
+    max-height 650px
+    display inline-block
   .img-height
-    width 800px
-    height 400px
+    width 100%
     display table-cell
+    height 650px
     vertical-align middle
+  .img-box
+    width 100%
+    display table
     text-align center
   .prev
   .next
