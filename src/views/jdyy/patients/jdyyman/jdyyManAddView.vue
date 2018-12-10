@@ -4,7 +4,7 @@
       div.base-message
         div(style="width:110px;margin:20px auto;font-size: 20px;") 基 本 信 息
         el-form()
-          el-form-item(label="获取his数据" prop="hospitalNumber" v-bind:label-width="labelWidth")
+          el-form-item(label="获取his数据"  v-bind:label-width="labelWidth")
             el-input(v-model="hospitalNumber")
           el-button.btn-submit(v-on:click="getHisData()" size="large") 获取
         el-form(v-bind:model="formModel1" ref="formModel1")
@@ -87,7 +87,7 @@
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
-            el-input(v-model="formModel2.periodization" placeholder="请输入分期")
+            el-input.tst(v-model="formModel2.periodization" placeholder="请输入分期")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
             el-input.tst(v-model="formModel2.parting")
         div.box
@@ -566,8 +566,7 @@
       display inline-block
     .address
       width 100%
-    .el-input__inner
-      border-radius 1px
+
   .box
     float right
   .back
@@ -576,6 +575,8 @@
     padding-bottom 50px
   .tst
     max-width 217px
+    .el-input__inner
+      border-radius 1px
   .long
     width 100% !important
   .picture
