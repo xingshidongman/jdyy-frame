@@ -26,7 +26,7 @@
           {prop: 'sex', label: '性别', sortable: true},
           {prop: 'age', label: '年龄', sortable: true},
           {prop: 'bedNumber', label: '床位号', sortable: true},
-          {prop: 'medicalRecordNumber', label: '病历号', sortable: true},
+          {prop: 'medicalRecordNumber', label: '病案号', sortable: true},
           {prop: 'dateAdmission', label: '住院日期', sortable: true},
           {prop: 'dischargeDate', label: '出院日期', sortable: true},
           {prop: 'diagnosis', label: ' 诊断 ', sortable: true},
