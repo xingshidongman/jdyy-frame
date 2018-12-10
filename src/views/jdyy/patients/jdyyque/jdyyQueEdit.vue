@@ -30,7 +30,7 @@
           el-autocomplete(v-model="formModel.directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" style="width:100%")
         el-form-item(label="病历" prop="medicalRecords" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecords")
           el-input(v-model="formModel.medicalRecords")
-        el-form-item(label="病历号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
+        el-form-item(label="病案号" prop="medicalRecordNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.medicalRecordNumber")
           el-input(v-model="formModel.medicalRecordNumber")
         el-form-item(label="住院号" prop="hospitalNumber" v-bind:label-width="labelWidth" v-bind:rules="rules.hospitalNumber")
           el-input(v-model="formModel.hospitalNumber")
