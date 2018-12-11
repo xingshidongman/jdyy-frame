@@ -21,6 +21,7 @@
             kalix-select2(v-else-if="item.type==='select2'" v-model="form[item.prop]" v-bind:optionsUrl="item.optionsUrl" v-bind:optionKey="item.optionValue" v-bind:label="item.optionLabel"
             v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
+            kalix-object-select2(v-else-if="item.type==='object2'" v-model="form[item.prop]" v-bind:objectsUrl="item.objectsUrl" v-bind:label="item.fieldName")
             org-tree.inline(v-else-if="item.type==='orgTree'" v-model="form[item.prop]" v-bind:isAll="item.isAll")
             kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]")
             <!--kalix-query-date-picker(v-else-if="show" v-model="form[item.prop]")-->
