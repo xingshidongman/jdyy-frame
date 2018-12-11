@@ -16,13 +16,29 @@
           {label: '床位号:', prop: 'bedNumber'},
           {label: '诊断:', prop: 'diagnosis'},
           {label: '术式:', prop: 'surgical'},
-          {label: '主管医生:', prop: 'directorDoctor'},
+          {
+            label: '主管医生:',
+            type: 'object2',
+            prop: 'directorDoctor',
+            objectsUrl: '/users/getDocsBySelect',
+            fieldName: 'userName' // 对应的返回字段
+          },
           {label: '病案号:', prop: 'medicalRecordNumber'},
-          {label: '日期:', type: 'select', prop: 'date', options: [{value: '住院日期', label: '住院日期'}, {value: '出院日期', label: '出院日期'}, {value: '手术日期', label: '手术日期'}]},
+          {
+            label: '日期:',
+            type: 'select',
+            prop: 'date',
+            options: [{value: '住院日期', label: '住院日期'}, {value: '出院日期', label: '出院日期'}, {value: '手术日期', label: '手术日期'}]
+          },
           {label: '开始日期:', type: 'date', prop: '%dateAdmission%'},
           {label: '结束日期:', type: 'date', prop: '%dischargeDate%'},
           // {label: '手术日期', type: 'date', prop: 'operationDate'},
-          {label: '是否出院:', type: 'select', prop: 'whetherDischarge', options: [{value: '是', label: '是'}, {value: '否', label: '否'}]}
+          {
+            label: '是否出院:',
+            type: 'select',
+            prop: 'whetherDischarge',
+            options: [{value: '是', label: '是'}, {value: '否', label: '否'}]
+          }
         ]
       }
     },
