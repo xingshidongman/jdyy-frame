@@ -31,7 +31,8 @@
           <!--template(slot-scope="scope")-->
           div.picture-box(style="margin-left:200px")
             div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
-              img(v-bind:src="img.val" @click="change(index)"  style="width:144px; height:144px" v-bind:ref="img.key")
+              img(v-bind:src="img.val" @click="change(index)"  style="width:144px; height:144px" v-bind:ref="img.key" v-if="img.val")
+
               el-dialog(:visible.sync="dialogVisible" :append-to-body="true" fullscreen=true)
                 div.img-box
                   div.img-height
@@ -139,6 +140,7 @@
     methods: {
       change(i) {
         this.mark = i
+        console.log('mark================', this.formModel.photo)
         this.dialogVisible = true
       },
       getphoto() {
@@ -148,10 +150,10 @@
           console.log('pppppppppppppppppppppppppppppppppppppppp', this.filePathArr[i])
         }
       },
-      handelClick(index) {
-        this.rowNumber = index
-        console.log('3333333333333333333333', this.rowNumber)
-      },
+      // handelClick(index) {
+      //   this.rowNumber = index
+      //   console.log('3333333333333333333333', this.rowNumber)
+      // },
       cut() {
         this.mark--
         if (this.mark < 0) {
@@ -233,15 +235,6 @@
     .el-input__inner
       border-radius 1px
 
-  /*.mark*/
-    /*position: fixed*/
-    /*z-index: 9*/
-    /*background: black*/
-    /*opacity: 0.5*/
-    /*top: 20%*/
-    /*width: 60%*/
-    /*text-align: center*/
-    /*display none*/
   .img-width
     max-width 90%
     max-height 650px
