@@ -18,6 +18,8 @@
           el-form-item.short(v-for="item in searchFields" v-bind:label="item.label" v-bind:prop="item.prop" v-bind:key="item.prop")
             el-select(v-if="item.type==='select'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType" v-bind:clearable="item.clearable" style="width: 100%;")
               el-option(v-for="option in item.options" v-bind:key="option.value" v-bind:label="option.label" v-bind:value="option.value"  :key="option.value")
+            kalix-select2(v-else-if="item.type==='select2'" v-model="form[item.prop]" v-bind:optionsUrl="item.optionsUrl" v-bind:optionKey="item.optionValue" v-bind:label="item.optionLabel"
+            v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             org-tree.inline(v-else-if="item.type==='orgTree'" v-model="form[item.prop]" v-bind:isAll="item.isAll")
             kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]")
