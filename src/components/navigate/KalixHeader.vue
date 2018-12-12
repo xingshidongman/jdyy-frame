@@ -44,7 +44,7 @@
           div.s-flex_item
             ul.aside
               li
-                el-dropdown(v-on:command="handleCommand" style="min-width:120px margin-top 200px")
+                el-dropdown(v-on:command="handleCommand")
                   div.s-flex.el-dropdown-link
                     div.avatar-wrapper
                       i.iconfont.icon-user-5.avatar(v-bind:style="styleObject")
@@ -361,26 +361,22 @@
               .el-icon-caret-bottom
                 &.el-icon--right
                   color #5d6266
-    .avatar-wrapper
-      /*height 36px*/
-      /*line-height 36px*/
-      width 90px
-      .avatar
-        float left
-        font-size 2.5vm
-        border-radius 50%
-        background-color transparent
-        margin-right 10px
-        box-sizing border-box
-      .user-name
-        /*float left*/
-        font-size 16px
-        margin-right 7px
-        color #ffffff
+  .avatar-wrapper
+    /*height 36px*/
+    /*line-height 36px*/
     .avatar
-      /*background url('/static/images/default_user.png') 50% 50% no-repeat*/
-      background-size cover
-      overflow height
+      float left
+      font-size 2.5vm
+      border-radius 50%
+      background-color transparent
+      margin-right 10px
+      box-sizing border-box
+    .user-name
+      float left
+      font-size 16px
+      margin-right 7px
+      color #ffffff
+
   .exit
     color white
     float left
