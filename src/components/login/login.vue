@@ -35,7 +35,7 @@
     name: 'LoginForm',
     data() {
       return {
-        msg: '吉林大学第一医院骨关节外科临床资料登记系统',
+        msg: '吉林大学第一医院骨关节外科医疗数据分析管理系统',
         radio: '',
         loginForm: {
           name: '',

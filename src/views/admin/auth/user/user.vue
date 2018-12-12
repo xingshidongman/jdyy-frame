@@ -66,7 +66,7 @@
         }],
         btnList: userBtnList,
         buttonPermissionPrefix: userBtnPermissionPrefix,
-        targetURL: usersURL,
+        // targetURL: usersURL,
         tableFields: [
           // {prop: 'userTypeName', label: '用户类型'},
           {prop: 'name', label: '姓名'},
