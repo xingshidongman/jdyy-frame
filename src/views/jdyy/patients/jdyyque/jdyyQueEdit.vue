@@ -289,7 +289,7 @@
           let idx = arrImg.indexOf(imgUrl)
           arrImg.splice(idx, 1)
           this.formModel.photo = arrImg.join(',')
-          this.message({
+          this.$message({
             type: 'success',
             message: '删除成功!'
           })
