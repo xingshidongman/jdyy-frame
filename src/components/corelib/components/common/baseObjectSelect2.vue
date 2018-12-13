@@ -12,15 +12,16 @@
         el-option(v-for='object in objects' v-bind:key='object[id]' v-bind:label='object[label]'
         v-bind:value='object[id]')
     template(v-else)
+      div currentValue:{{currentValue}}
       el-select(v-model='currentValue' v-bind:placeholder='placeholder' v-bind:disabled="disabled" filterable clearable
       v-on:change="onChange")
-        el-option(v-for='object in objects' v-bind:key='object[id]' v-bind:label='object[label]'
-        v-bind:value='object[id]')
+        el-option(v-for='(object,index) in objects' v-bind:key='index' v-bind:label='object[label]'
+        v-bind:value='index')
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'kalix-object-select-2',
+    name: 'kalix-object-select2',
     props: {
       objectsUrl: '', // 对象字典请求服务地址(如：'/camel/rest/users')
       id: {
@@ -87,11 +88,12 @@
         }).then(response => {
           if (response.data.data) {
             this.objects = response.data.data
+            console.log('objects', this.objects)
           }
         })
       },
       // 初始值绑定
-      initCurrentValue () {
+      initCurrentValue() {
         if (this.value) {
           if (this.multiple) {
             // 将初始值转换为数组
@@ -140,6 +142,7 @@
         this.$emit('objectSelected', _selectObject)
         // 设置model的数值
         this.$emit('input', _objectIds)
+        console.log('input _objectIds:', _objectIds)
       }
     }
   }

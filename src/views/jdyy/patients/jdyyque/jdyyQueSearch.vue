@@ -18,10 +18,10 @@
           {label: '术式:', prop: 'surgical'},
           {
             label: '主管医生:',
-            type: 'object2',
+            type: 'docsObject',
             prop: 'directorDoctor',
-            objectsUrl: '/users/getDocsBySelect',
-            fieldName: 'userName' // 对应的返回字段
+            objectsUrl: '/camel/rest/users/getDocsBySelect',
+            fieldName: 'value' // 对应的返回字段
           },
           {label: '病案号:', prop: 'medicalRecordNumber'},
           {

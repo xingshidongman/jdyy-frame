@@ -21,7 +21,8 @@
             kalix-select2(v-else-if="item.type==='select2'" v-model="form[item.prop]" v-bind:optionsUrl="item.optionsUrl" v-bind:optionKey="item.optionValue" v-bind:label="item.optionLabel"
             v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
             el-input-number(v-else-if="item.type==='number'" v-model="form[item.prop]" v-bind:class="bindCls(item.cls)" v-bind:data-type="item.dataType")
-            kalix-object-select2(v-else-if="item.type==='object2'" v-model="form[item.prop]" v-bind:objectsUrl="item.objectsUrl" v-bind:label="item.fieldName")
+            kalix-object-select2(v-else-if="item.type==='object2'" v-model="form[item.prop]" v-bind:objectsUrl="item.objectsUrl" v-bind:id="item.fieldName" v-bind:label="item.fieldName")
+            kalix-docs-object-select(v-else-if="item.type==='docsObject'" v-model="form[item.prop]" v-bind:objectsUrl="item.objectsUrl" v-bind:value="item.fieldName" v-bind:label="item.fieldName")
             org-tree.inline(v-else-if="item.type==='orgTree'" v-model="form[item.prop]" v-bind:isAll="item.isAll")
             kalix-query-date-picker(v-else-if="item.type==='date'" v-model="form[item.prop]")
             <!--kalix-query-date-picker(v-else-if="show" v-model="form[item.prop]")-->
@@ -135,7 +136,7 @@
       submitAction() {
         this.$refs.searchForm.validate((valid) => {
           if (valid) {
-            console.log('onSubmitClick')
+            console.log('onSubmitClick', this.form)
             let requestDatas = []
             for (let item in this.form) {
               const itemVal = this.form[item]
@@ -340,13 +341,16 @@
     height 31px
     display inline-block
     .iconfont
-        font-size 14px
+      font-size 14px
+
   .icon-search
   .icon-reset
     height 25px
     padding 0 10px !important
+
   .icon-search
     margin-left 24%
+
   .icon-reset
     margin-top 4px
 
