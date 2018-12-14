@@ -118,7 +118,8 @@
       var validatename = (rule, value, callback) => {
         if (value !== undefined && value !== null && value !== '') {
           let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          // let reg = /^([\u4e00-\u9fa5]){2,7}$/
+          let reg = /^[a-zA-Z\u4e00-\u9fa5]+$/
           if (reg.test(valTrim)) {
             callback()
           } else {
