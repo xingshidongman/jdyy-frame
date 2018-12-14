@@ -697,7 +697,6 @@
   .table > tbody > tr > td,
   .table > tbody > tr > th {
     border-top: 1px solid #e7eaec;
-    line-height: 1.42857;
     padding: 5px;
     vertical-align: middle;
     font-size: 14px;
@@ -746,9 +745,7 @@
   .table-bordered > thead > tr > th {
     background-color: #F5F5F6;
   }
-  #hl-tree-table > tbody > tr {
-    background-color: #fbfbfb;
-  }
+
   #hl-tree-table > tbody > tr.active {
     /*background-color #ffefbb*/
     background-color rgba(255, 239, 187, 0.5)
