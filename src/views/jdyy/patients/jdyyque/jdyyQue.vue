@@ -89,7 +89,7 @@
                 console.log('base64=========================', res.data)
                 row.imgs = []
                 // row.imgs = res.data.tag
-                if (res.data.tag !== undefined) {
+                if (res.data.tag !== undefined && res.data.tag !== null) {
                   if (res.data.tag.indexOf('&') !== -1) {
                     let arr = res.data.tag.split('&')
                     for (let i = 0; i < arr.length; i++) {
