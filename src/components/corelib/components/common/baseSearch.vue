@@ -271,6 +271,7 @@
   .kalix-search
     margin: 8px 25px;
     background-color $background-color-1
+    margin-right 0
     .kalix-search-hd
       padding 0 2px
       .line
@@ -293,7 +294,7 @@
     .el-form-item
       margin-bottom 0
       display inline-block
-      width 22%
+      width 23%
       .el-form-item__label
         float: left;
         text-align: right
@@ -301,12 +302,12 @@
         color: #3465cb
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
-        width 35%
+        width 37%
         line-height 31px
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
-        width 65%
+        width 63%
         line-height 31px
       .el-input__inner
         border-radius: 1px;
@@ -324,7 +325,7 @@
         line-height 31px
         width auto
       .min
-        width 92%
+        width 89%
         height 24px
         line-height 24px
         border: 1px solid #3465cb

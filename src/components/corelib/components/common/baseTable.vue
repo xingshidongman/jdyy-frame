@@ -35,13 +35,13 @@
             //table的字段
             template(v-if="tableData && tableData.length > 0")
               el-table-column(v-if="hasTableSelection" type="selection" width="55" align="center")
-              el-table-column(label="行号" width="90" align="center" prop="rowNumber"
+              el-table-column(label="行号" width="50" align="center" prop="rowNumber"
               v-bind:fixed="isFixedColumn")
                 template(slot-scope="scope")
                   div(style="text-align: center") {{ scope.row.rowNumber }}
               slot(name="tableColumnSlot")
                 el-table-column(v-for="field in tableFields"  align="center"
-                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:min-width="field.label.length*25+'px'"
+                v-bind:key="field.prop" v-bind:prop="field.prop" v-bind:min-width="field.label.length*24+'px'"
                 v-bind:sortable="sortable"
                 )
                   template(slot="header" slot-scope="scope")
@@ -57,7 +57,7 @@
               //  table的工具按钮
               el-table-column(v-if="isShowOperate" label="操作" align="center"
               fixed="right"
-              v-bind:width="columnWidth(true)"
+              v-bind:min-width="columnWidth(true)"
               class-name="base-teble-operation")
                 template(slot-scope="scope")
                   slot(name="tableToolSlot" slot-scope="scope")
