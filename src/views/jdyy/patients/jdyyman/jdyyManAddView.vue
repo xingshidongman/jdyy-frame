@@ -86,6 +86,10 @@
             el-cascader(ref="cascader2" placeholder="请选择术式信息" :options="items" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
           el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
             el-date-picker.tst(v-model="formModel2.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
+          el-form-item.texttoo(label="" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
+            el-input.tst(v-model="formModel2.diagnosis" placeholder="请输入诊断信息")
+          el-form-item.texttoo(label="" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
+            el-input.tst(v-model="formModel2.surgical" placeholder="请输入术式信息")
           el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
             el-input.tst(v-model="formModel2.periodization" placeholder="请输入分期")
           el-form-item.texttoo(label="分型" prop="parting" v-bind:label-width="labelWidth" v-bind:rules="rules.parting")
@@ -95,7 +99,14 @@
             li.right_li
               el-button.btn-submit(v-on:click="submitAction()" size="large") 保存
               el-button.btn-submit.btn-reset( v-on:click="resetAll()" size="large") 重置
-        div.clear
+        <!--div.clear-->
+        <!--div-->
+          <!--div(style="width:98px;margin:20px auto;font-size: 20px;") 图片上传-->
+          <!--el-form()-->
+            <!--el-form-item.text(label="图片" prop="picture" v-bind:label-width="labelWidth")-->
+              <!--kalix-clansman-upload(v-model="pictures" :action="action" ref="clearUpload1"-->
+              <!--v-on:filePath="getFilePath1" v-on:selectChange="setGroup1" :fileList="fileList1" fileType="img" tipText="只能上传jpg/png文件，且不超过2MB")-->
+            <!--el-button.btn-submit(v-on:click="submitPictures()" size="large") 保存-->
 
 </template>
 
@@ -291,7 +302,11 @@
         options: [],
         items: [],
         dia: '',
-        hospitalNumber: null
+        hospitalNumber: null,
+        pictures: null,
+        fileList1: [],
+        filePathArr1: [],
+        fileNameArr1: []
       }
     },
     mounted() {
@@ -334,7 +349,8 @@
         this.$refs.formModel1.resetFields() // 表单一重置
         this.$refs.formModel2.resetFields() // 表单二重置
         let obj = {}
-        obj.stopPropagation = () => {}
+        obj.stopPropagation = () => {
+        }
         this.$refs.cascader1.clearValue(obj) // 诊断级联选择器重置
         this.$refs.cascader2.clearValue(obj) // 术式级联选择器重置
         this.$refs.clearUpload.uploadClean() // 上传图片清空
@@ -550,6 +566,66 @@
           this.$refs.formModel2.resetFields()
         })
       }
+      //   getFilePath1(filePath, fileName) { // 图片上传路径
+      //     this.filePathArr1.push(filePath)
+      //     this.fileNameArr1.push(fileName)
+      //   },
+      //   setGroup1(item) {
+      //     this.pictures = item.photo
+      //   },
+      //   submitPictures() {
+      //     this.onSubmitClick1() // 调用重写的图片上传方法
+      //   },
+      //   onSubmitClick1() { // 重写多张图片上传方法
+      //     if (this.submitCustom && typeof (this.submitCustom) === 'function') {
+      //       this.submitCustom(this)
+      //     } else if (this.submitBefore1 && typeof (this.submitBefore1) === 'function') {
+      //       this.submitBefore1(this, () => {
+      //         this.onSubmit1() // 执行提交方法
+      //       })
+      //     } else {
+      //       this.onSubmit1()
+      //     }
+      //   },
+      //   submitBefore1(baseDialog, callBack) {
+      //     console.log('===1111111111111111=================', this.filePathArr1)
+      //     let filePath = ''
+      //     if (this.filePathArr1.length) {
+      //       this.filePathArr1.forEach(e => {
+      //         filePath += e + ','
+      //       })
+      //       filePath = filePath.substr(0, filePath.length - 1)
+      //     }
+      //     // let fileName = ''
+      //     // if (this.fileNameArr1.length) {
+      //     //   this.fileNameArr1.forEach(e => {
+      //     //     fileName += e + ','
+      //     //   })
+      //     //   fileName = fileName.substr(0, fileName.length - 1)
+      //     // }
+      //     baseDialog.pictures = filePath
+      //     // baseDialog.imgName = fileName
+      //     callBack()
+      //   },
+      //   onSubmit1() {
+      //     console.log('onSubmit1=====================', this.pictures)
+      //     this.axios.request({
+      //       method: 'GET',
+      //       url: JdyypatientsURL + '/getPictures',
+      //       params: {
+      //         pictures: this.pictures
+      //       }
+      //     }).then(res => {
+      //       console.log('res-data======================', res.data)
+      //       if (res.data.success) {
+      //         Message.success(res.data.msg)
+      //       } else {
+      //         Message.error(res.data.msg)
+      //       }
+      //       this.$refs.clearUpload1.uploadClean() // 上传图片清空
+      //     })
+      //   }
+      // },
     },
     watch: {
       'formModel1.name'() {

@@ -145,14 +145,14 @@
                 div
                   div.left-align
                     p 术前活动度
-                  el-form-item.mini.toleft-p(label="伸直")
+                  el-form-item.mini(label="伸直" label-width="40px")
                     el-input(v-model="formModel.unwind" clearable)
                       template(slot="append") °
-                  el-form-item.mini
+                  el-form-item.mini(label-width="60px")
                     el-select.long.toleft(v-model="formModel.overextension" placeholder="请选择")
                       el-option(label="屈曲挛缩" value="屈曲挛缩")
                       el-option(label="过伸" value="过伸")
-                  el-form-item.mini.toleft(label="屈曲" )
+                  el-form-item.mini.toleft(label="屈曲" label-width="60px")
                     el-input(v-model="formModel.buckling" clearable)
                       template(slot="append") °
                 div
@@ -210,7 +210,7 @@
                   el-form-item.short(label="体重")
                     el-input(v-model="formModel.weight" clearable)
                       template(slot="append") kg
-                  el-form-item.short(label="机械轴（前后位X线片）" label-width="50%")
+                  el-form-item.short(label="机械轴（前后位X线片）" label-width="170px")
                     el-input(v-model="formModel.machine" clearable)
                       template(slot="append") °
                   el-form-item.short()
@@ -231,13 +231,13 @@
                 div.con2-left 电动驱血带
               td.long-td
                 div.con2-right
-                  el-form-item.unit-width(label="第一次充气")
+                  el-form-item.short(label="第一次充气")
                     el-input(v-model="formModel.firstInflation" clearable)
                       template(slot="append") 分
-                  el-form-item.unit-width(label="放气" )
+                  el-form-item.short(label="放气" )
                     el-input(v-model="formModel.deFlation" clearable)
                       template(slot="append") 分
-                  el-form-item.unit-width(label="第二次充气")
+                  el-form-item.short(label="第二次充气")
                     el-input(v-model="formModel.secondInflation" clearable)
                       template(slot="append") 分
             tr
@@ -283,17 +283,17 @@
                 div.con2-left 软组织
               td.long-td
                 div.con2-right
-                  el-form-item.mini(label="脂肪垫")
+                  el-form-item.unit-width(label="脂肪垫")
                     el-select(v-model="formModel.fatPad" placeholder="请选择")
                       el-option(label="保留" value="保留")
                       el-option(label="修剪" value="修剪")
                       el-option(label="切除" value="切除")
-                  el-form-item.mini(label="滑膜切除")
+                  el-form-item.unit-width(label="滑膜切除")
                     el-select(v-model="formModel.synovectomy" placeholder="请选择")
                       el-option(label="少量" value="少量")
                       el-option(label="中等" value="中等")
                       el-option(label="完整" value="完整")
-                  el-form-item.mini(label="髌韧带")
+                  el-form-item.unit-width(label="髌韧带")
                     el-select(v-model="formModel.ligament" placeholder="请选择")
                       el-option(label="完整" value="完整")
                       el-option(label="轻度撕脱" value="轻度撕脱")
@@ -349,14 +349,15 @@
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
                 div.con2-right
-                  el-form-item.short(label="旋转")
+                  el-form-item.float-short(label="旋转")
                     el-select(v-model="formModel.spin" placeholder="请选择")
                       el-option(label="内旋" value="内旋")
                       el-option(label="外旋" value="外旋")
                       el-option(label="中立" value="中立")
-                  el-form-item.short.toleft-more
-                    el-input(v-model="formModel.angle" v-if="formModel.spin!=='中立'" clearable)
+                  el-form-item.float-short(label-width="20px")
+                    el-input(v-model="formModel.angle" v-show="formModel.spin!=='中立'" clearable)
                       template(slot="append") °
+                  div.clear
                 div.con2-right
                   el-form-item.short.toleft(label="股骨前方截骨" label-width="130px")
                     el-select(v-model="formModel.thighbone" placeholder="请选择")
@@ -368,10 +369,10 @@
                     el-select(v-model="formModel.longHandle" placeholder="请选择")
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
-                  el-form-item.unit-width.toleft(label="长度"  v-if="formModel.longHandle==='是'")
+                  el-form-item.unit-width(label="长度"  v-if="formModel.longHandle==='是'" label-width="60px")
                     el-input(v-model="formModel.longness" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'")
+                  el-form-item.unit-width(label="直径"  v-if="formModel.longHandle==='是'" label-width="60px")
                     el-input(v-model="formModel.diameter" clearable)
                       template(slot="append") mm
                 div.con2-right
@@ -394,14 +395,15 @@
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
                 div.con2-right
-                  el-form-item.short(label="旋转")
+                  el-form-item.float-short(label="旋转")
                     el-select(v-model="formModel.spin2" placeholder="请选择")
                       el-option(label="内旋" value="内旋")
                       el-option(label="外旋" value="外旋")
                       el-option(label="中立" value="中立")
-                  el-form-item.short.toleft-more
+                  el-form-item.float-short(label-width="20px")
                     el-input(v-model="formModel.angle2" v-if="formModel.spin2!=='中立'" clearable)
                       template(slot="append") °
+                  div.clear
                 div.con2-right
                   el-form-item.short(label="侧位")
                     el-select(v-model="formModel.lateralPosition1" placeholder="请选择")
@@ -427,10 +429,10 @@
                     el-select(v-model="formModel.longHandle2" placeholder="请选择")
                       el-option(label="是" value="是")
                       el-option(label="否" value="否")
-                  el-form-item.unit-width.toleft(label="长度" v-if="formModel.longHandle2==='是'")
+                  el-form-item.unit-width(label="长度" v-if="formModel.longHandle2==='是'" label-width="60px")
                     el-input(v-model="formModel.longness2" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width(label="直径" v-if="formModel.longHandle2==='是'")
+                  el-form-item.unit-width(label="直径" v-if="formModel.longHandle2==='是'" label-width="60px")
                     el-input(v-model="formModel.diameter2" clearable)
                       template(slot="append") mm
             tr
@@ -477,13 +479,13 @@
                 div(v-if="formModel.vitium==='有'")
                   div.left-align
                     p 区域
-                  el-form-item.unit-width.toleft-p
-                    el-input.toleft(v-model="formModel.length" clearable)
+                  el-form-item.mini(label-width="0px")
+                    el-input(v-model="formModel.length" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width.toleft-more(label="x")
+                  el-form-item.mini(label="x" label-width="30px")
                     el-input(v-model="formModel.wide" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width.toleft(label="深度")
+                  el-form-item.short(label="深度")
                     el-input(v-model="formModel.depth" clearable)
                       template(slot="append") mm
             tr
@@ -508,13 +510,13 @@
                 div(v-if="formModel.vitium2==='有'")
                   div.left-align
                     p 区域
-                  el-form-item.unit-width.toleft-p
-                    el-input.toleft(v-model="formModel.length2" clearable)
+                  el-form-item.mini(label-width="0px")
+                    el-input(v-model="formModel.length2" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width.toleft-more(label="x")
+                  el-form-item.mini(label="x" label-width="30px")
                     el-input(v-model="formModel.wide2" clearable)
                       template(slot="append") mm
-                  el-form-item.unit-width.toleft(label="深度")
+                  el-form-item.short(label="深度")
                     el-input(v-model="formModel.depth2" clearable)
                       template(slot="append") mm
                 div.con2-right(v-if="formModel.vitium2==='有'")
@@ -595,21 +597,21 @@
                   div.left-align
                     p 屈曲达到90°
                   el-form-item.short.toleft-p(label="术后")
-                    el-input.mini(v-model="formModel.postoperationDay" clearable)
+                    el-input.short(v-model="formModel.postoperationDay" clearable)
                     span.p-left 天
                 div.flex
                   div.left-align.top-align
                     p 术后两周活动度
-                  div.mini.toleft-p
-                    el-form-item(label="伸直")
+                  div.mini
+                    el-form-item(label="伸直" label-width="40px")
                       el-input(v-model="formModel.unwind2" clearable)
                         template(slot="append") °
-                  div.mini.toleft
-                    el-form-item(label="屈曲")
+                  div.mini
+                    el-form-item(label="屈曲" label-width="50px")
                       el-input(v-model="formModel.buckling2" clearable)
                         template(slot="append") °
                   div.mini.toleft
-                    el-form-item
+                    el-form-item(label-width="50px")
                       el-select(v-model="formModel.debonding" placeholder="麻醉下松解")
                         el-option(label="麻醉下松解" value="麻醉下松解")
                         el-option(label="无麻醉下松解" value="无麻醉下松解")
@@ -672,13 +674,13 @@
               el-date-picker.long(type="date" placeholder="选择日期" v-model="formModel1.date3" value-format="yyyy/M/d" format="yyyy/M/d" clearable)
           el-form-item.mini(label="术后第（）个月" label-width="120px")
             el-input(v-model="formModel1.postoperationMonth" type="number" :min="0" clearable)
-          el-form-item.mini(label="疼痛" label-width="160px")
+          el-form-item.mini(label="疼痛" label-width="150px")
             el-input(v-model="formModel1.pain2" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="活动度")
             el-input(v-model="formModel1.activity" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="稳定性" label-width="120px")
             el-input(v-model="formModel1.stability" type="number" :min="0" :max="100" clearable)
-          el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="160px")
+          el-form-item.mini(label="固定屈曲挛缩（FFC）" label-width="150px")
             el-input(v-model="formModel1.fixedFlexionContracture2" type="number" :min="0" :max="100" clearable)
           el-form-item.mini(label="伸直位松弛")
             el-input(v-model="formModel1.extensionRelaxation" type="number" :min="0" :max="100" clearable)
@@ -908,7 +910,7 @@
             el-form-item.short(label="骨溶解" label-width="180px")
               el-input(v-model="formModel4.osteolysis" clearable)
             div.btn-box
-            div.btn(style="width:20%; margin:auto;")
+            div.btn(style="width:40%; margin:auto;")
               el-form-item
                 el-button(type="primary" @click="onSubmit") 保存
                 el-button(type="primary" @click="onCancel") 取消
@@ -1181,6 +1183,14 @@
 
 <style scoped lang="stylus" type="text/stylus">
   @import "~@/assets/stylus/color.styl"
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none !important;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
   .clear
     clear both
   .back
@@ -1198,7 +1208,7 @@
           float left
           border 1px solid black
           width 40%
-          margin-right 2.5%
+          margin-right 2.4%
           padding 0.5%
           height 310px
         .con1-right
@@ -1305,6 +1315,9 @@
       img
         width 80%
         height auto
+    .float-short
+      width 50%
+      float left
 
   /*margin-bottom 0*/
 </style>

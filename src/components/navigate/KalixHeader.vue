@@ -326,7 +326,7 @@
           text-align left
           li
             display inline-block
-            margin 0 10px
+            margin 0 5px
             cursor pointer
           &.menu
             flex 1

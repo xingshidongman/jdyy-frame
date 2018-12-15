@@ -265,7 +265,6 @@
         color white
         font-size 1.2vw
         margin-left 80px
-
       .text1
         letter-spacing 3px
       .el-input__inner

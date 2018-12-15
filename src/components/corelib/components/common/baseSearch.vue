@@ -31,8 +31,8 @@
             kalix-dict-select(v-else-if="item.type==='dict'" v-bind:appName="item.appName" v-bind:dictType="item.dictType" v-model="form[item.prop]")
             Kalix-map-select(v-else-if="item.type==='map'" v-bind:appName="item.appName" v-bind:prop="item.prop" v-bind:selectUrl="item.selectUrl" v-model="form[item.prop]"
             v-bind:selectedOptions="item.options" v-on:getProp="getProp" v-on:input="getSelectValue" v-bind:stopChange="item.stopChange")
-            input.min(v-else-if="item.type==='age'" v-model="form[item.prop]" type="number" placeholder="开始年龄段" min="0")
-            input.min.end-time(v-else-if="item.type==='ages'" v-model="form[item.prop]" type="number" placeholder="结束年龄段" min="1")
+            el-input.min(v-else-if="item.type==='age'" v-model="form[item.prop]" type="number" placeholder="开始年龄段" min="0")
+            el-input.min.end-time(v-else-if="item.type==='ages'" v-model="form[item.prop]" type="number" placeholder="结束年龄段" min="1")
             el-input(v-else v-model="form[item.prop]")
           el-form-item.right(style="margin-left: 1%;")
             el-button.icon-search(type="primary" v-on:click="onSubmitClick")
@@ -325,13 +325,10 @@
         line-height 31px
         width auto
       .min
-        width 89%
         height 24px
         line-height 24px
-        border: 1px solid #3465cb
-        padding-left 10px
       .end-time
-        margin-left 12px
+        margin-left 26%
     .el-button
       padding: 8px 12px;
       .iconfont
