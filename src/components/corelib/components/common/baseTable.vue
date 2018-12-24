@@ -465,7 +465,8 @@
       },
       onRefreshClick() { // 刷新按钮点击事件
         this.sort = null
-        this.getData()
+        this.columnOrder = {}
+        this.refresh()
       },
       onDeleteChecked() {
         // 删除选中
