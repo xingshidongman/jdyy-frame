@@ -1,8 +1,7 @@
 <template lang="pug">
   div.wrap
     div(id="message-box")
-      div(id="marquee") {{text}}
-      div(id="copy") {{text}}
+      div(id="marquee") {{text}}{{text}}
     div(id="node") {{text}}
 </template>
 
@@ -62,33 +61,22 @@
             }
           }
           console.log('this.text', this.text)
-          this.move()
+          this.$nextTick(() => {
+            this.move()
+          })
         })
       },
       move() {
         clearInterval(this.moveMt)
-        console.log(' move move move ')
         // 获取文字text 的计算后宽度  （由于overflow的存在，直接获取不到，需要独立的node计算）
         let width = document.getElementById('node').getBoundingClientRect().width
         let box = document.getElementById('marquee')
-        let copy = document.getElementById('copy')
-        // copy.innerText = this.text // 文字副本填充
-        let bodyWith = document.body.clientWidth
-        let distance = bodyWith // 位移距离
-        let copyDistance = bodyWith + 16 // 位移距离
-
-        // 设置位移
-        // let n = 1
+        let distance = 0 // 位移距离
         this.moveMt = setInterval(function () {
-          distance = distance - 1
-          copyDistance = copyDistance - 1
-          box.style.transform = 'translateX(' + distance + 'px)'// 如果位移超过文字宽度，则回到起点
-          copy.style.transform = 'translateX(' + copyDistance + 'px)'// 如果位移超过文字宽度，则回到起点
-          if (-distance >= width) {
-            distance = width + 32
-          }
-          if (-copyDistance >= width * 2) {
-            copyDistance = 32
+          distance -= 1
+          box.style.transform = 'translateX(' + distance + 'px)'
+          if (Math.abs(distance) >= width) {
+            distance = 0
           }
         }, 10)
       }
