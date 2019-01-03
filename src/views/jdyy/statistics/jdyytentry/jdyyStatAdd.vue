@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
+  kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:submitAfter="submitAfter")
     div.el-form(slot="dialogFormSlot")
       el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
         el-input(v-model="formModel.doctor")
@@ -27,8 +27,11 @@
 
 <script type="text/ecmascript-6">
   import {JdyystatURL} from '../../config.toml'
+  import EventBus from '../../../../components/corelib/common/eventbus'
   // import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
+  // import BaseMessage from '../../../../components/corelib/components/common/baseMessage'
+  // var baseMessage = BaseMessage
 
   export default {
     name: 'JdyyStatAdd',
@@ -72,6 +75,16 @@
     //   this.loadAllDoc() // 获取医生信息
     // },
     methods: {
+      submitAfter() {
+        console.log('+++++++++++++++++++')
+        // BaseMessage.methods.getBedData()
+        // BaseMessage.methods.reload()
+        // BaseMessage.reload()
+        // BaseMessage.getBedData()
+        this.$nextTick(() => {
+          EventBus.$emit('mess')
+        })
+      },
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
       },
@@ -79,18 +92,18 @@
         this.formModel.downlosd = val
       },
       getDataByDate() {
-        let searchDate = {'%date%': this.formModel.date, '%duty%': this.formModel.duty}
-        console.log('searchDate=====================', searchDate)
+        // let searchDate = {'%date%': this.formModel.date, '%duty%': this.formModel.duty}
+        // console.log('searchDate=====================', searchDate)
         this.axios.request({
           method: 'GET',
-          url: JdyystatURL,
+          url: JdyystatURL + '/getAllByDate',
           params: {
-            jsonStr: searchDate
+            date: this.formModel.date,
+            duty: this.formModel.duty
           }
         }).then(res => {
           console.log('res.data============================', res.data.data)
           if (res.data.data.length !== 0) {
-            // this.formModel = res.data.data[0]
             this.$alert('所选日期或早晚班已存在，请重新选择！')
             this.formModel.date = null
           }

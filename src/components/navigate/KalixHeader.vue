@@ -59,7 +59,7 @@
                 div.clear
               li
                 i.el-icon-refresh.exit-img
-                div.exit(v-on:click="") 刷新
+                div.exit(v-on:click="doRefresh") 刷新
                 div.clear
             div.clear
 </template>
@@ -118,6 +118,10 @@
       }
     },
     methods: {
+      doRefresh() {
+        location.reload() // 刷新当前页面
+        // this.$router.go(0)
+      },
       initMenu() {
         console.log(' ++++++++++ Kalix - Header')
         let toolListData = {}
