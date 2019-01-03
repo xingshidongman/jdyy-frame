@@ -2,10 +2,13 @@
   kalix-dialog.user-add(title='添加' bizKey="jdyyStat" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL")
     div.el-form(slot="dialogFormSlot")
       el-form-item.short(label="坐班医生" prop="doctor" v-bind:label-width="labelWidth" v-bind:rules="rules.doctor")
-        <!--el-input(v-model="formModel.doctor")-->
-        el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)
+        el-input(v-model="formModel.doctor")
+        <!--el-autocomplete(v-model="formModel.doctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" clearable)-->
       el-form-item.short(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
         el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" v-on:change="getDataByDate" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;")
+      el-radio-group.radio(v-model="formModel.duty")
+        el-radio(label="白班")
+        el-radio(label="夜班")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
         el-input(v-model="formModel.protoNum")
       el-form-item(label="出院人数" prop="outNum" v-bind:label-width="labelWidth" v-bind:rules="rules.outNum")
@@ -24,7 +27,7 @@
 
 <script type="text/ecmascript-6">
   import {JdyystatURL} from '../../config.toml'
-  import {usersURL} from '../../../admin/config.toml'
+  // import {usersURL} from '../../../admin/config.toml'
   import FormModel from './model'
 
   export default {
@@ -59,14 +62,15 @@
           nowNum: [{required: true, validator: validatenum, message: '请输入现住院人数', trigger: 'change'}],
           illNum: [{required: true, validator: validatenum, message: '请输入重病人数', trigger: 'change'}],
           doctor: [{required: true, message: '请输入坐班医生', trigger: 'change'}],
-          date: [{required: true, message: '请输入坐班日期', trigger: 'change'}]
+          date: [{required: true, message: '请输入坐班日期', trigger: 'change'}],
+          duty: [{required: true, message: '请选择早晚班', trigger: 'change'}]
         },
         targetURL: JdyystatURL
       }
     },
-    mounted() {
-      this.loadAllDoc() // 获取医生信息
-    },
+    // mounted() {
+    //   this.loadAllDoc() // 获取医生信息
+    // },
     methods: {
       init(dialogOption) {
         console.log('---------dialogOption------------', dialogOption)
@@ -75,8 +79,8 @@
         this.formModel.downlosd = val
       },
       getDataByDate() {
-        console.log('getDataByDate======================', this.formModel.date)
-        let searchDate = {'%date%': this.formModel.date}
+        let searchDate = {'%date%': this.formModel.date, '%duty%': this.formModel.duty}
+        console.log('searchDate=====================', searchDate)
         this.axios.request({
           method: 'GET',
           url: JdyystatURL,
@@ -87,34 +91,34 @@
           console.log('res.data============================', res.data.data)
           if (res.data.data.length !== 0) {
             // this.formModel = res.data.data[0]
-            this.$alert('所选日期已存在统计数据，请重新选择！')
+            this.$alert('所选日期或早晚班已存在，请重新选择！')
             this.formModel.date = null
           }
         })
-      },
-      loadAllDoc() { // 获取医生信息
-        this.axios.request({
-          method: 'GET',
-          url: usersURL + '/getDocsByAutocomplete'
-        }).then(res => {
-          console.log('getDocsByAutocomplete======================', res.data.data)
-          this.restaurantDocs = res.data.data
-        })
-      },
-      querySearchAsyncDoc(queryString, cb) {
-        var restaurants = this.restaurantDocs
-        var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
-        cb(results)
-      },
-      createStateFilterDoc(queryString) {
-        return (state) => {
-          return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
-        }
-      },
-      handleSelectDoc(item) {
-        console.log('item===========================', item)
-        this.formModel.doctor = item.value
       }
+      // loadAllDoc() { // 获取医生信息
+      //   this.axios.request({
+      //     method: 'GET',
+      //     url: usersURL + '/getDocsByAutocomplete'
+      //   }).then(res => {
+      //     console.log('getDocsByAutocomplete======================', res.data.data)
+      //     this.restaurantDocs = res.data.data
+      //   })
+      // },
+      // querySearchAsyncDoc(queryString, cb) {
+      //   var restaurants = this.restaurantDocs
+      //   var results = queryString ? restaurants.filter(this.createStateFilterDoc(queryString)) : restaurants
+      //   cb(results)
+      // },
+      // createStateFilterDoc(queryString) {
+      //   return (state) => {
+      //     return (state.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+      //   }
+      // },
+      // handleSelectDoc(item) {
+      //   console.log('item===========================', item)
+      //   this.formModel.doctor = item.value
+      // }
     }
   }
 </script>
@@ -124,9 +128,16 @@
     width 70%
     margin auto
     .short
-      width 45%
+      width 38%
       display inline-block
       height 40px
     .el-input
       width 70%
+    .radio
+      margin-left 20px
+      .el-radio
+        color: #3465cb
+        font-weight: bold
+        font-size: 14px
+
 </style>

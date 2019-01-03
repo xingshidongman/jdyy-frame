@@ -19,6 +19,8 @@ import * as typeFormat from './common/typeFormat.js'
 
 // html转pdf
 import htmlToPdf from './components/corelib/components/common/htmlToPdf'
+import KalixDialogImgPreview from './components/KalixDialogImgPreview/index.js'
+
 Vue.use(htmlToPdf)
 
 Es6Promise.polyfill()
@@ -28,6 +30,7 @@ Vue.use(VueAxios, axios)
 Vue.use(KalixVueLib)
 Vue.use(KalixVueBiz)
 Vue.use(KalixVueNavigate)
+Vue.use(KalixDialogImgPreview)
 
 // const router = KalixRouter(Vue)
 

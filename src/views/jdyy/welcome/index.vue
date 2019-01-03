@@ -7,7 +7,10 @@
         div.left-line
           div.text-box.text 今日数据指标
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy/M/d" format="yyyy/M/d"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" type="date" v-on:change="getDataByDate" value-format="yyyy/M/d" format="yyyy/M/d"  placeholder="选择日期")
+          el-radio-group.radio(v-model="duty")
+            el-radio(label="白班")
+            el-radio(label="夜班")
           div.left-block
             ul(v-for="item in items")
               li.block-box
@@ -36,12 +39,14 @@
 </template>
 
 <script>
+  import {JdyystatURL} from '../config.toml'
   export default {
     name: 'kalix-jdyy-welcome',
     data() {
       return {
         chooseDate: '', // 定义今日数据指标时间插件时间
-        items: [] // 定义今日数据指标数据集合
+        items: [], // 定义今日数据指标数据集合
+        duty: '白班'
       }
     },
     mounted() {
@@ -53,21 +58,23 @@
         let date = new Date()
         let year = date.getFullYear()
         let month = date.getMonth() + 1
-        let day = date.getDate()
+        let day = date.getDate() - 1
         // if (month >= 1 && month <= 9) {
         //   month = "0" + month;
         // }
         let nowDate = year + '/' + month + '/' + day
         console.log('date .toLocaleDateString()==================', date.toLocaleDateString())
-        this.getData(nowDate)// 根据当前时间查找今日数据指标相应数据
+        this.chooseDate = nowDate
+        this.getData()// 根据当前时间查找今日数据指标相应数据
       },
-      getData(nowDate) {// 根据时间查找今日数据指标
-        console.log('nowDate==================', nowDate)
+      getData() {// 根据时间查找今日数据指标
+        let searchData = {'%date%': this.chooseDate, '%duty%': this.duty}
+        console.log('searchData====================', searchData)
         this.$http.request({// 向后台发送请求
-          method: 'get',
-          url: '/camel/rest/jdyy/statisticss/getAllByDate',
+          method: 'GET',
+          url: JdyystatURL,
           params: {
-            date: nowDate
+            jsonStr: searchData
           }
         }).then(response => {
           console.log('response.data=================', response.data.data)
@@ -85,12 +92,22 @@
         if (selectDate === null || selectDate === "") {
           this.getDate()// 当选择的时间为空时，自动显示当前时间的数据
         } else {
-          this.getData(selectDate)// 根据当前时间查找相应数据
+          this.getData()// 根据当前时间查找相应数据
         }
       },
     },
     components: {},
-    computed: {}
+    computed: {},
+    watch:{
+      duty: function () {
+        console.log('duty============', this.duty)
+        if (this.chooseDate === null || this.chooseDate === "") {
+          this.$alert('请选择日期！')
+        }else {
+          this.getData()
+        }
+      }
+    }
   }
 
 </script>
@@ -108,7 +125,7 @@
     .left
       width 65%
       position absolute
-      height 390px
+      height 555px
       top: 0
       left 0
       right 0
@@ -121,7 +138,7 @@
         border 2px solid #23769a
       .left-line
         width 98%
-        min-height 370px
+        min-height 530px
         margin 10px auto
         border 0.3px solid #23769a
         border-radius 5px
@@ -163,7 +180,14 @@
         margin 0 -1px 0 0
       .block
         float right
-        margin-right: -20px;
+        margin-right: 100px
+      .radio
+        position absolute
+        right 30px
+        top 48px
+        .el-radio
+          font-weight bold
+          font-size 14px
       .input-time
         width 70%
         margin-top 5px
@@ -180,11 +204,11 @@
         height 280px
         .block-box
           width 90%
-          height 25px
-          line-height 25px
+          height 50px
+          line-height 50px
           background-color #f2f2f2
           margin 15px auto
-          font-size 1vw
+          font-size 3vw
           .block-span
             width 70%
             color rgb(77,109,177)

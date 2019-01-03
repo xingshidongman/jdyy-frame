@@ -23,7 +23,7 @@ qbefore, qafter
   content ''
 
 table
-  border-collapse collaps
+  border-collapse collapse
   border-spacing 0
 
 html, body
@@ -144,10 +144,12 @@ input:-webkit-autofill
     color #303133
     background-color #ebeef5
     border none !important
-    font-size 12px
-    font-weight normal
+    font-size 18px
+    font-weight bold
     padding 8px 0
   .base-table-cell
+    font-size 18px
+    font-weight bold
     color #3465cb
     border-bottom-color #fdf4e8 !important
     padding 8px 0
@@ -209,24 +211,22 @@ input:-webkit-autofill
       &.selected
         color #3465cb
   .el-button--primary
-    background-color #f3f3f3
+    background-color #3465cb
     border-color #dfdfdf
-    color #3465cb
-    &:focus,
+    color #fff
     &:hover
-      background-color #3465cb
+      background-color #40b5ff
       border-color #e8e8e8
-      color #ffffff
+      color #3465cb
   .el-button--success
-    background-color #f3f3f3
+    background-color #3465cb
     border-color #dfdfdf
-    color #3465cb
+    color #fff
     position: absolute;
-    &:focus,
     &:hover
-      background-color #3465cb
+      background-color #40b5ff
       border-color #e8e8e8
-      color #ffffff
+      color #3465cb
   .kalix-article
     padding 10px
   .el-input.is-active .el-input__inner,
@@ -242,6 +242,7 @@ input:-webkit-autofill
       .article
         overflow-y scroll
 .el-form-item__label
+  font-weight bold
   text-align: right;
   float: left;
   font-size: 14px;
@@ -250,20 +251,20 @@ input:-webkit-autofill
   padding: 0 12px 0 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-.block
+.el-form-item
   .el-input__inner
-    border-radius: 1px;
-    font-size 12px
-    height 28px
-    line-height 28px
+    border-radius: 5px;
+    border 2px solid #909090
+    font-size 16px
   .el-input__icon
     line-height 20px
+  .el-textarea
+    border 2px solid #909090
+    border-radius: 5px;
 .el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus
   border-color #dcdfe6
 
-.img-width
-  max-width 760px
-  max-height 400px
+
 .img-height
   width 800px
   height 400px
@@ -274,14 +275,14 @@ input:-webkit-autofill
 .next
   background-color rgba(0, 0, 0, 0.5)
   padding 20px 0
-  position absolute
+  position fixed
   top 40%
 
 .prev
-  left 0
+  left 20px
 
 .next
-  right 0
+  right 20px
 .picture
   float left
   margin 0 3px

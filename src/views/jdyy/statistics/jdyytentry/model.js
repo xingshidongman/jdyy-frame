@@ -8,6 +8,7 @@ const FormModel = {
   nowNum: null,
   illNum: null,
   doctor: null,
-  date: null
+  date: null,
+  duty: '白班'
 }
 export default FormModel

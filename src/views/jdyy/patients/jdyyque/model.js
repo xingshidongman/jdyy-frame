@@ -34,6 +34,7 @@ const FormModel = {
   adduction: null, // 内收
   modifyStaff: null, // 修改人员
   heavyTime: null, // 重患时间
+  vid: null, // 就诊信息id
   diagnosis: null, // 诊断
   surgical: null, // 术式
   diagnosisCode: null, // 诊断代码

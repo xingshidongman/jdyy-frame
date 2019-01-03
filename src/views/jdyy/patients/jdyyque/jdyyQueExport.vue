@@ -1,8 +1,8 @@
 <template lang="pug">
   kalix-dialog.user-add.search-more(title='查询详情页' bizKey="jdyyque" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
     div.el-form(slot="dialogFormSlot")
-      <!--button(type="button" v-on:click="getBase64Pdf()") 导出PDF-->
-      <!--div.row(id="pdfDom" ref="pdfDom" style="padding-top: 30px;")-->
+      button(type="button" v-on:click="getBase64Pdf()") 导出PDF
+      div.row(id="pdfDom" ref="pdfDom" style="padding-top: 30px;")
         div(style="margin:20px auto;font-size: 30px;text-align:center;font-weight:bold;") 基 本 信 息
         el-form-item.block(label="病案号" prop="medicalRecordNumber" v-bind:label-width="labelWidth")
           el-input(v-model="formModel.medicalRecordNumber" readonly)
@@ -94,7 +94,7 @@
             el-table-column(prop="diagnosis" label="诊断" min-width="150" :resizable="false")
             el-table-column(prop="surgical" label="术式" min-width="150" :resizable="false")
             el-table-column(prop="operationDate" label="手术日期" min-width="120" :resizable="false")
-            el-table-column(prop="periodization" label="分期" min-width="120" :resizable="false")
+            el-table-column(prop="periodization" label="分期" min-width="60" :resizable="false")
             <!--el-table-column(prop="imgs" label="图片" min-width="360" :resizable="false")-->
             <!--template(slot-scope="scope")-->
             <!--div.picture(v-for="(img, filePathArr) in scope.row.imgs" :class="{ 'active':filePathArr===mark }" :key="filePathArr")-->
@@ -121,11 +121,11 @@
   import KalixImgUpload from '../../../../components/corelib/components/common/imgUpload'
 
   export default {
-    name: 'JdyyQueView',
+    name: 'jdyyQueExport',
     components: {ViewTable, KalixFontCascader, KalixImgUpload, KalixDatepickerSimple},
     data() {
       return {
-        // htmlTitle: '页面导出PDF文件名', // 这个是pdf文件的名字
+        htmlTitle: '页面导出PDF文件名', // 这个是pdf文件的名字
         visPatUrl: visPatUrl,
         targetURL: JdyypatientsURL,
         formModel: Object.assign({}, FormModel),
@@ -138,7 +138,6 @@
         rowNumber: 0
       }
     },
-    mounted() {},
     methods: {
       change(item) {
         console.log('this.formModel.imgs:', this.formModel.imgs)
@@ -157,10 +156,8 @@
       },
       getphoto() {
         this.filePathArr = this.formModel.photo.split(',')
-        console.log('this.formModel.photo------------:', this.formModel.photo)
-        console.log('this.formModel.photo------------:', this.filePathArr)
         for (let i = 0; i < this.filePathArr.length; i++) {
-          this.img.val = this.filePathArr[i]
+          this.img.src = this.filePathArr[i]
           console.log('pppppppppppppppppppppppppppppppppppppppp', this.filePathArr[i])
         }
       },
@@ -182,44 +179,49 @@
           this.mark = this.formModel.photo.split(',').length - 1
         }
         console.log('=====================', this.mark)
+      },
+      convertImgToBase64(url, callback, outputFormat) {
+        let canvas = document.createElement('CANVAS')
+        let ctx = canvas.getContext('2d')
+        let img = new Image()
+        img.crossOrigin = '*'
+        // img.crossOrigin = 'Anonymous'
+        img.onload = function () {
+          canvas.height = img.height
+          canvas.width = img.width
+          ctx.drawImage(img, 0, 0)
+          let dataURL = canvas.toDataURL(outputFormat || 'image/jpeg')
+          callback.call(this, dataURL)
+          canvas = null
+        }
+        img.src = url
+      },
+      getBase64Pdf() {
+        let _this = this
+        this.formModel.imgs = this.formModel.photo.split(',')
+        console.log('this.formModel.imgs=--------------', this.formModel.imgs)
+        let imgsArr = this.formModel.imgs
+        console.log('imgsArr------------------', imgsArr)
+        if (imgsArr !== undefined) {
+          for (let i = 0; i < imgsArr.length; i++) {
+            console.log('base64I========================', imgsArr[0].val)
+            this.convertImgToBase64(imgsArr[0].val, function (base64ImgSrc) {
+              console.log('base64ImgSrc========================', base64ImgSrc)
+              imgsArr[0].val = base64ImgSrc
+            })
+          }
+          let pdfDom = _this.$refs.pdfDom
+          _this.getPdf(pdfDom)
+        } else {
+          let pdfDom = _this.$refs.pdfDom
+          _this.getPdf(pdfDom)
+        }
+      },
+      getModel(val) { // 三级联动地区参数区分
+        this.formModel.completeAddress = val.join('')
+        console.log('address=========', this.formModel.completeAddress)
+        this.getphoto()
       }
-      // convertImgToBase64(url, callback, outputFormat) {
-      //   let canvas = document.createElement('CANVAS')
-      //   let ctx = canvas.getContext('2d')
-      //   let img = new Image()
-      //   img.crossOrigin = '*'
-      //   // img.crossOrigin = 'Anonymous'
-      //   img.onload = function () {
-      //     canvas.height = img.height
-      //     canvas.width = img.width
-      //     ctx.drawImage(img, 0, 0)
-      //     let dataURL = canvas.toDataURL(outputFormat || 'image/jpeg')
-      //     callback.call(this, dataURL)
-      //     canvas = null
-      //   }
-      //   img.src = url
-      // },
-      // getBase64Pdf() {
-      //   let _this = this
-      //   this.formModel.imgs = this.formModel.photo.split(',')
-      //   console.log('this.formModel.imgs=--------------', this.formModel.imgs)
-      //   let imgsArr = this.formModel.imgs
-      //   console.log('imgsArr------------------', imgsArr)
-      //   if (imgsArr !== undefined) {
-      //     for (let i = 0; i < imgsArr.length; i++) {
-      //       console.log('base64I========================', imgsArr[0].val)
-      //       this.convertImgToBase64(imgsArr[0].val, function (base64ImgSrc) {
-      //         console.log('base64ImgSrc========================', base64ImgSrc)
-      //         imgsArr[0].val = base64ImgSrc
-      //       })
-      //     }
-      //     let pdfDom = _this.$refs.pdfDom
-      //     _this.getPdf(pdfDom)
-      //   } else {
-      //     let pdfDom = _this.$refs.pdfDom
-      //     _this.getPdf(pdfDom)
-      //   }
-      // }
     }
   }
 </script>
@@ -308,6 +310,8 @@
       border 2px solid #909090 !important
       color #3465cb
       font-weight bold
-      font-size 22px
+      font-size 30px
+      .cell
+        line-height 36px
 
 </style>

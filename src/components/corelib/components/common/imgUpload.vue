@@ -10,10 +10,10 @@
       template(v-if="isImage")
         template
           div.img-cancel(v-for="(imageUrl, index) in fileList" :class="{ 'active':index===mark }" :key="index")
-            img.avatars(v-if="imageUrl" v-bind:src="imageUrl" v-bind:ref="imageUrl.key" @click="change(index)")
+            img.avatars(v-if="imageUrl" v-bind:src="imageUrl" v-bind:ref="imageUrl.key" @click="change(imageUrl)")
             img.avatars(v-else src="/static/images/default_attachment.png")
             div
-              a.cancel(v-on:click="onImgDel(imageUrl)" href="#") ×
+              a.cancel(v-on:click.stop="onImgDel(imageUrl)" href="#") ×
             el-dialog(:visible.sync="dialogVisible" :append-to-body="true"  fullscreen=true)
               div.img-box
                 div.img-height
@@ -91,16 +91,20 @@
       }
     },
     methods: {
-      change(i) {
-        this.mark = i
-        this.dialogVisible = true
-        console.log(this.fileList)
-        console.log(this.mark)
+      change(item) {
+        this.$KalixDialogImgPreview({
+          imgs: this.fileList,
+          selectItem: item
+        })
+        // this.mark = i
+        // this.dialogVisible = true
+        // console.log(this.fileList)
+        // console.log(this.mark)
       },
       cut() {
         this.mark--
         if (this.mark < 0) {
-          this.mark = this.fileList.length - 1
+          this.mark = 0
           // console.log(this.formModel.tableData[index])
         }
         console.log('=====================', this.mark)
@@ -108,7 +112,7 @@
       add() {
         this.mark++
         if (this.mark > this.fileList.length - 1) {
-          this.mark = 0
+          this.mark = this.fileList.length - 1
         }
         console.log('=====================', this.mark)
       },
@@ -215,11 +219,9 @@
       position: relative
       overflow: hidden
 
-
   .avatars-uploader
     .el-upload:hover
       border-color: #20a0ff;
-
 
   .avatars-uploader-icon
     font-size: 28px;
@@ -229,18 +231,15 @@
     line-height: 178px;
     text-align: center;
 
-
   .avatars
     width: 150px;
     height: 150px;
     margin: 5px;
 
-
   .img-cancel
     position: relative
     width: 160px
     float: left
-
 
   .cancel
     background-color: rgba(255, 255, 255, 0.4)
@@ -248,32 +247,31 @@
     right: 5px
     top: 5px
     z-index: 100
-    font-size: 16px
-
+    font-size: 20px
 
   a
     color: black
     text-decoration: none
 
-
   .clear
     clear: both
 
   .img-width
-    max-width 90%
-    max-height 650px
+    margin-top -50px
+    max-width 100%
+    max-height 820px
     display inline-block
+
   .img-height
-    width 100%
+    width 90%
     display table-cell
-    height 650px
     vertical-align middle
+
   .img-box
     width 100%
     display table
     text-align center
 
-
-
-
+  .el-dialog__body
+    padding 0 !important
 </style>

@@ -36,6 +36,7 @@ import EventBus from './common/eventbus'
 import Message from './common/message'
 import PrettyBytes from './common/pretty-bytes'
 import baseDocsObjectSelect from './components/common/baseDocsObjectSelect'
+import baseMessage from './components/common/baseMessage'
 // import ModuleUtil from '../common/moduleUtil'
 // import {SearchDataMixin} from '../common/searchmixin'
 import {CacheKeyObject, KeyValueObject, DictKeyValueObject} from './common/keyValueObject'
@@ -76,7 +77,8 @@ const components = [
   BasePagedTable,
   BaseTree,
   BaseTree2,
-  baseDocsObjectSelect
+  baseDocsObjectSelect,
+  baseMessage
 ]
 
 // const filters = [

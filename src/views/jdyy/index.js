@@ -9,7 +9,8 @@ import Jdyysur from './diasur/Jdyysur' // 术式
 import Jdyydia from './diasur/Jdyydia' // 诊断
 import Jdyyhip from './investigation/Jdyyhip' // 全髋术后调查
 import Jdyyknee from './investigation/Jdyyknee' // 全髋术后调查
-import Welcome from './welcome'
+import Welcome from './welcome' // 登记系统的欢迎页
+import Jdyystatview from './statistics/jdyystatview' // 值班记录的信息查看
 
 Jdyytentry.install(Vue)
 Jdyyana.install(Vue)
@@ -21,3 +22,4 @@ Jdyydia.install(Vue)
 Jdyyhip.install(Vue)
 Jdyyknee.install(Vue)
 Welcome.install(Vue)
+Jdyystatview.install(Vue)

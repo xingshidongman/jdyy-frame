@@ -1,13 +1,15 @@
 import JdyyQue from './jdyyQue.vue'
 import JdyyQueSearch from './jdyyQueSearch.vue'
-import JdyyQueView from './jdyyQueView.vue'
+import jdyyQueExport from './jdyyQueExport.vue'
 import JdyyQueEdit from './jdyyQueEdit.vue'
+import JdyyQueView from './JdyyQueView.vue'
 
 const components = [
   JdyyQue,
   JdyyQueSearch,
   JdyyQueView,
-  JdyyQueEdit
+  JdyyQueEdit,
+  jdyyQueExport
 ]
 
 const main = {

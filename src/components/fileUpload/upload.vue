@@ -10,7 +10,7 @@
     :on-remove="handleRemove"
     :before-remove="beforeRemove"
     :before-upload="beforeUpload"
-    :limit="10"
+    :limit="100"
     :on-exceed="handleExceed"
     :file-list="fileListData"
     list-type="picture")
@@ -69,14 +69,14 @@
       cut() {
         this.currentIdx -= 1
         if (this.currentIdx < 0) {
-          this.currentIdx = this.currentfileList.length - 1
+          this.currentIdx = 0
         }
         this.dialogImageUrl = this.currentfileList[this.currentIdx].url
       },
       add() {
         this.currentIdx += 1
         if (this.currentIdx > this.currentfileList.length - 1) {
-          this.currentIdx = 0
+          this.currentIdx = this.currentfileList.length - 1
         }
         this.dialogImageUrl = this.currentfileList[this.currentIdx].url
       },
@@ -116,7 +116,7 @@
         let isLt2M = false
         if (this.fileType === 'img') {
           isJPG = file.type === 'image/jpeg' || file.type === 'image/png'
-          isLt2M = file.size / 1024 / 1024 < 2
+          isLt2M = file.size / 1024 / 1024 < 50
           if (!isJPG) {
             Message.error('上传图片只能是 JPG 或 PNG 格式!')
             this.fileListData = []
@@ -163,18 +163,26 @@
         console.log('fileList:', fileList)
       },
       handlePreview(file) {
-        this.currentIdx = 0
-        // this.dialogVisible = true
-        // this.dialogImageUrl = file.url
-        console.log('aaaaaaaaaaaa', file.url)
-        console.log('aaaaaaaaaaaa file', file)
-        this.currentIdx = this.currentfileList.findIndex(e => {
-          return e.url === file.url
+        let _imgs = []
+        this.currentfileList.forEach(e => {
+          _imgs.push(e.url)
         })
-        if (this.currentIdx > -1) {
-          this.dialogImageUrl = this.currentfileList[this.currentIdx].url
-          this.dialogVisible = true
-        }
+        this.$KalixDialogImgPreview({
+          imgs: _imgs,
+          selectItem: file.url
+        })
+        // this.currentIdx = 0
+        // // this.dialogVisible = true
+        // // this.dialogImageUrl = file.url
+        // console.log('aaaaaaaaaaaa', file.url)
+        // console.log('aaaaaaaaaaaa file', file)
+        // this.currentIdx = this.currentfileList.findIndex(e => {
+        //   return e.url === file.url
+        // })
+        // if (this.currentIdx > -1) {
+        //   this.dialogImageUrl = this.currentfileList[this.currentIdx].url
+        //   this.dialogVisible = true
+        // }
       },
       handleExceed(files, fileList) {
         Message.warning(`当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`)
@@ -189,16 +197,21 @@
 <style scoped lang="stylus" type="text/stylus">
 
   .img-width
-    max-width 90%
-    max-height 650px
+    max-width 100%
+    max-height 820px
+    margin-top -50px
     display inline-block
+
   .img-height
     width 100%
     display table-cell
-    height 650px
     vertical-align middle
+
   .img-box
     width 100%
     display table
     text-align center
+
+  .el-dialog__body
+    padding 0 !important
 </style>

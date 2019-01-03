@@ -7,7 +7,7 @@
         div.left-line
           div.text-box.text 今日数据指标
           div.block
-            el-date-picker.input-time(v-model="chooseDate" v-on:change="getDataByDate" type="date" value-format="yyyy/M/d" format="yyyy/M/d"  placeholder="选择日期")
+            el-date-picker.input-time(v-model="chooseDate" type="date" v-on:change="getDataByDate" value-format="yyyy/M/d" format="yyyy/M/d"  placeholder="选择日期")
           el-radio-group.radio(v-model="duty")
             el-radio(label="白班")
             el-radio(label="夜班")
@@ -39,9 +39,9 @@
 </template>
 
 <script>
-  import {JdyystatURL} from '../../jdyy/config.toml'
+  import {JdyystatURL} from '../../config.toml'
   export default {
-    name: 'kalix-admin-welcome',
+    name: 'kalix-jdyy-jdyystatview',
     data() {
       return {
         chooseDate: '', // 定义今日数据指标时间插件时间
@@ -138,7 +138,7 @@
         border 2px solid #23769a
       .left-line
         width 98%
-        min-height 555px
+        min-height 530px
         margin 10px auto
         border 0.3px solid #23769a
         border-radius 5px
@@ -189,7 +189,7 @@
           font-weight bold
           font-size 14px
       .input-time
-        width 60%
+        width 70%
         margin-top 5px
         border 1px solid #dfdfdf
         color #23769a

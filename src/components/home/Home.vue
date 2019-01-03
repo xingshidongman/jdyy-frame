@@ -5,6 +5,7 @@
     ref="kalixHeader"
     v-on:onClickChangePwd="changePwd"
     v-on:onClickUpdateUserInfo="updateUserInfo")
+    kalix-message
     admin-user-editpwd(ref="userEditpwd")
     admin-user-edit(ref="userEdit")
     div.s-flex.container

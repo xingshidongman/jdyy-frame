@@ -1,5 +1,5 @@
 <template lang="pug">
-  keep-alive
+  keep-alive.que
     kalix-table(bizKey="jdyyQue" title='查询列表' ref="kalixTable"
     v-bind:tableFields="tableFields"
     v-bind:targetURL="targetURL"
@@ -7,7 +7,8 @@
     v-bind:btnList="btnList"
     v-bind:toolbarBtnList="toolbarBtnList"
     v-bind:customTableTool="callCustomTableTool"
-    bizSearch="jdyyQueSearch")
+    bizSearch="jdyyQueSearch"
+    v-loading.fullscreen="loading")
 </template>
 
 <script type="text/ecmascript-6">
@@ -21,15 +22,17 @@
     data() {
       return {
         targetURL: JdyyvisitURL + '/getAllPatVis',
+        loading: false,
         tableFields: [
           {prop: 'name', label: ' 姓名', sortable: true},
           {prop: 'sex', label: ' 性别', sortable: true},
           {prop: 'age', label: ' 年龄', sortable: true},
-          {prop: 'bedNumber', label: '床位号', sortable: true},
-          {prop: 'medicalRecordNumber', label: '病案号', sortable: true},
+          // {prop: 'bedNumber', label: '床位号', sortable: true},
+          // {prop: 'medicalRecordNumber', label: '病案号', sortable: true},
           {prop: 'dateAdmission', label: '住院日期', sortable: true},
-          {prop: 'dischargeDate', label: '出院日期', sortable: true},
-          {prop: 'diagnosis', label: ' 诊断 ', sortable: true},
+          // {prop: 'dischargeDate', label: '出院日期', sortable: true},
+          {prop: 'diagnosis', label: '  诊断   ', sortable: true},
+          {prop: 'surgical', label: '  术式   ', sortable: true},
           {prop: 'operationDate', label: '手术日期', sortable: true},
           {prop: 'directorDoctor', label: '主管医生', sortable: true}
           // {prop: 'stature', label: '身高'},
@@ -59,7 +62,8 @@
           // {prop: 'heavyTime', label: '重患时间'}
         ],
         jdyyQueDialog: [
-          {id: 'viewPdf', dialog: 'JdyyQueView'},
+          {id: 'viewAll', dialog: 'JdyyQueView'},
+          {id: 'viewPdf', dialog: 'jdyyQueExport'},
           {id: 'edit', dialog: 'JdyyQueEdit'}
           // {id: 'delPatVis'}
         ],
@@ -72,7 +76,53 @@
     methods: {
       callCustomTableTool(row, btnId, that) {
         switch (btnId) {
+          case 'viewAll': {
+            that.whichBizDialog = ''
+            let dig =
+              that.bizDialog.filter((item) => {
+                return item.id === 'viewAll'
+              })
+            that.whichBizDialog = dig[0].dialog
+            console.log('row.photo---------------', row.photo)
+            row.imgs = []
+            if (row.photo !== undefined && row.photo !== null) {
+              if (row.photo.indexOf(',') !== -1) {
+                let arr = row.photo.split(',')
+                for (let i = 0; i < arr.length; i++) {
+                  let imgObj = {}
+                  imgObj.val = arr[i]
+                  imgObj.key = 'img' + i
+                  row.imgs.push(imgObj)
+                }
+                console.log('this.imgs--------------:', row.imgs)
+              } else {
+                let imgObj = {}
+                imgObj.val = row.photo
+                imgObj.key = 'img' + 1
+                row.imgs.push(imgObj)
+              }
+            }
+            this.$http.get('/camel/rest/jdyy/visits/getAllByUserId', {
+              params: {
+                userId: row.id
+              }
+            }).then(res => {
+              this.tableData = res.data.data
+              console.log('viewtable _res===========', this.tableData)
+              if (this.tableData.length > 0) {
+                row.tableData = this.tableData
+                this.loading = false
+                that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+              } else {
+                row.tableData = []
+                this.loading = false
+                that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+              }
+            })
+            break
+          }
           case 'viewPdf': {
+            this.loading = true
             that.whichBizDialog = ''
             let dig =
               that.bizDialog.filter((item) => {
@@ -117,9 +167,11 @@
                   console.log('viewtable _res===========', this.tableData)
                   if (this.tableData.length > 0) {
                     row.tableData = this.tableData
+                    this.loading = false
                     that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
                   } else {
                     row.tableData = []
+                    this.loading = false
                     that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
                   }
                 })
@@ -138,6 +190,5 @@
   }
 </script>
 
-<style scoped lang="stylus">
 
-</style>
+

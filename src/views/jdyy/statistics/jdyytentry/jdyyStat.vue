@@ -23,6 +23,7 @@
         jdyystatURL: JdyystatURL,
         tableFields: [
           {prop: 'date', type: 'date', label: '坐班日期'},
+          {prop: 'duty', label: '白班/夜班'},
           {prop: 'doctor', label: '坐班医生'},
           {prop: 'protoNum', label: '原住院人数'},
           {prop: 'outNum', label: '出院人数'},

@@ -708,7 +708,7 @@
       div.con2
         el-form-item.mini(label="大腿痛" label-width="100px")
           el-input(v-model="formModel1.harBDate" clearable)
-        el-form-item.mini(label="Trendelenburg 征"  label-width="130px")
+        el-form-item.mini(label="Trendelenburg 征"  label-width="140px")
           el-input(v-model="formModel1.harB1" clearable)
         el-form-item.mini(label="活动度-伸直" label-width="100px")
           el-input(v-model="formModel1.harB2" clearable)
@@ -1186,3 +1186,4 @@
       margin 1% 1%
       padding: 6px 12px;
 </style>
+

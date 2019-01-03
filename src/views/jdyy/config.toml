@@ -5,9 +5,11 @@ JdyyDictsTypesListURL = "/camel/rest/jdyy/dicts/types/list"
 #统计录入
 JdyystatURL = "/camel/rest/jdyy/statisticss"
 jdyyStatBtnPermissionPrefix = "jdyy:jdyyIupModule:jdyyTenMenu:"
+#his信息
+JdyyhisURL = "/camel/rest/jdyy/hiss"
 #病员信息
 JdyypatientsURL = "/camel/rest/jdyy/patientss"
-jdyyPatientsBtnPermissionPrefix = "jdyy:jdyyIupModule:jdyyTenMenu:"
+jdyyPatientsBtnPermissionPrefix = "jdyy:jdyyIupModule:jdyyPatModule:"
 #就诊信息
 JdyyvisitURL = "/camel/rest/jdyy/visits"
 #就诊信息图片

@@ -57,6 +57,10 @@
                 i.iconfont.icon-tuichu.exit-img
                 div.exit(v-on:click="doLogout") 退出
                 div.clear
+              li
+                i.el-icon-refresh.exit-img
+                div.exit(v-on:click="") 刷新
+                div.clear
             div.clear
 </template>
 

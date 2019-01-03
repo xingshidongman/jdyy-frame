@@ -298,24 +298,27 @@
       .el-form-item__label
         float: left;
         text-align: right
-        font-size: 12px;
-        color: #3465cb
+        font-size: 22px;
+        color: #606266
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
         width 37%
         line-height 31px
+        font-weight bold
       .el-form-item__content
         display: inline-block;
         vertical-align: top;
         width 63%
-        line-height 31px
+        line-height 30px
       .el-input__inner
-        border-radius: 1px;
-        border: 1px solid #3465cb;
+        color #3465cb;
+        border-radius: 3px;
+        border: 2px solid #3465cb;
         -webkit-box-sizing: border-box;
-        font-size: 12px;
-        height: 25px;
-        line-height: 25px;
+        font-size: 20px;
+        font-weight bold
+        height: 30px;
+        line-height: 30px;
         outline: 0;
         padding: 0 22px;
         -webkit-transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
@@ -336,7 +339,7 @@
 
   .short
     /*width 32%*/
-    height 31px
+    height 34px
     display inline-block
     .iconfont
       font-size 14px
@@ -348,9 +351,10 @@
 
   .icon-search
     margin-left 24%
+    background-color #1c6086
+    color white
 
   .icon-reset
-    margin-top 4px
-
-
+    margin-top 4px !important
 </style>
+

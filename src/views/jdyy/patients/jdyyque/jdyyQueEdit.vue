@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add(bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:submitBefore='submitBefore' v-bind:isNoView="true")
+  kalix-dialog.user-add(bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" v-bind:targetURL="targetURL" v-bind:isNoView="true")
     div.el-form(slot="dialogFormSlot" style="width:80%;margin:auto;")
       div(style="margin:20px auto;font-size: 20px;text-align:center;") 基 本 信 息
       el-form(v-bind:model="formModel" ref="formModel")
@@ -40,8 +40,8 @@
           el-date-picker(v-model="formModel.heavyTime" type="date" placeholder="选择日期" format="yyyy/M/d" value-format="yyyy/M/d" style="width: 100%;")
         el-form-item(label="家属联系方式" prop="familyPhone" v-bind:label-width="labelWidth" v-bind:rules="rules.familyPhone")
           el-input(v-model="formModel.familyPhone")
-        el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")
-          kalix-font-cascader.Border(v-on:change="getModel")
+        <!--el-form-item(label="省市区" prop="address" v-bind:label-width="labelWidth" v-bind:rules="rules.address")-->
+        <!--kalix-font-cascader.Border(v-on:change="getModel")-->
         el-form-item.address(label="通讯地址" prop="completeAddress" v-bind:label-width="labelWidth" v-bind:rules="rules.completeAddress")
           el-input(v-model="formModel.completeAddress")
         el-form-item(label="BMI" prop="bmi" v-bind:label-width="labelWidth" v-bind:rules="rules.bmi")
@@ -82,10 +82,6 @@
           el-cascader(v-model="diaCascader" placeholder="请选择诊断信息" :options="options" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
         el-form-item.texttoo(label="术式" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.surgical"  )
           el-cascader(v-model="surCascader" placeholder="请选择术式信息" :options="items" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
-        el-form-item.texttoo(label="" prop="diagnosis" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-          el-input.tst(v-model="formModel.diagnosis" placeholder="请输入诊断信息")
-        el-form-item.texttoo(label="" prop="surgical" v-bind:label-width="labelWidth" v-bind:rules="rules.diagnosis" )
-          el-input.tst(v-model="formModel.surgical" placeholder="请输入术式信息")
         el-form-item.texttoo(label="手术日期" prop="operationDate" v-bind:label-width="labelWidth" v-bind:rules="rules.operationDate")
           el-date-picker.tst(v-model="formModel.operationDate" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d")
         el-form-item.texttoo(label="分期" prop="periodization" v-bind:label-width="labelWidth" v-bind:rules="rules.periodization")
@@ -110,6 +106,7 @@
   import EventBus from '../../../../components/corelib/common/eventbus'
   import {ON_REFRESH_DATA} from '../../../../components/corelib/components/common/event.toml'
   import Message from '../../../../components/corelib/common/message'
+
   export default {
     name: 'JdyyQueEdit',
     components: {
@@ -290,9 +287,12 @@
           center: true
         }).then(() => {
           let arrImg = this.formModel.photo.split(',')
+          console.log('arrImg++++++++++++++', arrImg)
           let idx = arrImg.indexOf(imgUrl)
           arrImg.splice(idx, 1)
           this.formModel.photo = arrImg.join(',')
+          console.log('this.formModel.photo++++++++++++++', this.formModel.photo)
+          // this.filePathArr = arrImg
           this.$message({
             type: 'success',
             message: '删除成功!'
@@ -414,6 +414,7 @@
         console.log('---------dialogOption------------', dialogOption)
         delete this.formModel.rowNumber
         delete this.formModel.tableData
+        delete this.formModel.imgs
         console.log('diaCode+++++++', this.formModel.diagnosisCode)
         if (this.formModel.diagnosisCode != null && this.formModel.diagnosisCode !== '') {
           let diaCode = this.formModel.diagnosisCode // 诊断级联回显
@@ -446,9 +447,7 @@
         this.fileNameArr.push(fileName)
       },
       submitBefore(baseDialog, callBack) { // 多张图片拼路径
-        if (this.formModel.start) {
-          delete this.formModel['start']
-        }
+        console.log('this.filePathArr+++++++++++++++++', this.filePathArr)
         let filePath = ''
         if (this.filePathArr.length > 0) {
           this.filePathArr.forEach(e => {
@@ -456,23 +455,21 @@
           })
           filePath = filePath.substr(0, filePath.length - 1)
         }
-        let fileName = ''
-        if (this.fileNameArr.length > 0) {
-          this.fileNameArr.forEach(e => {
-            fileName += e + ','
-          })
-          fileName = fileName.substr(0, fileName.length - 1)
+        console.log('filePath+++++++++++++++++', filePath)
+        // let photoStr = this.formModel.photo !== '' ? this.formModel.photo : ''
+        if (filePath.length > 0) {
+          if (this.formModel.photo === '') {
+            baseDialog.formModel.photo = filePath
+          } else {
+            baseDialog.formModel.photo = this.formModel.photo + ',' + filePath
+          }
         }
-        if (fileName.length > 0) {
-          let photoStr = this.formModel.photo !== '' ? this.formModel.photo + ',' : ''
-          baseDialog.formModel.photo = photoStr + filePath
-          baseDialog.imgName = fileName
-          this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
-        }
+        this.formModel.modifyStaff = this.$KalixCatch.get('user_name')
         callBack()
       },
       setGroup(item) {
-        this.formModel.downlosd = item.albumname
+        // this.formModel.downlosd = item.albumname
+        this.formModel1.photo = item.photo
       },
       loadAll() { // 获取病员信息
         this.axios.request({
@@ -526,10 +523,10 @@
         console.log('item===========================', item)
         this.formModel1.directorDoctor = item.value
       },
-      getModel(val) { // 三级联动地区参数区分
-        this.formModel.completeAddress = val.join('')
-        console.log('address=========', this.formModel.completeAddress)
-      },
+      // getModel(val) { // 三级联动地区参数区分
+      //   this.formModel.completeAddress = val.join('')
+      //   console.log('address=========', this.formModel.completeAddress)
+      // },
       getDiaCascader() { // 获取诊断信息并以级联形式显示
         console.log('getDiaCascader========================')
         this.axios.request({
@@ -580,7 +577,7 @@
       },
       CancelClick() {
         this.$refs.kalixBizDialog.onCancelClick()
-        // EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
+        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel) // 页面刷新
       },
       onSubmitClick() { // 重写多张图片上传方法
         if (this.submitCustom && typeof (this.submitCustom) === 'function') {
@@ -642,7 +639,6 @@
     .el-input__inner
       border-radius 1px
 
-
   .box
     float right
 
@@ -656,6 +652,8 @@
 
   .btn
     text-align: right
+
   .img-margin
     margin-left 150px
 </style>
+

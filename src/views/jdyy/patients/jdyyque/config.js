@@ -5,6 +5,12 @@
 const jdyyQueConfigBtnList = [
   {
     id: 'viewPdf',
+    title: '导出',
+    icon: 'icon-wenjuandiaocha',
+    isShow: true, // 是否显示
+    isPermission: true // 是否进行权限认证
+  }, {
+    id: 'viewAll',
     title: '查看',
     icon: 'icon-chakan',
     isShow: true, // 是否显示

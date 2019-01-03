@@ -35,7 +35,7 @@
             //table的字段
             template(v-if="tableData && tableData.length > 0")
               el-table-column(v-if="hasTableSelection" type="selection" width="55" align="center")
-              el-table-column(label="行号" width="50" align="center" prop="rowNumber"
+              el-table-column(label="行号" width="60" align="center" prop="rowNumber"
               v-bind:fixed="isFixedColumn")
                 template(slot-scope="scope")
                   div(style="text-align: center") {{ scope.row.rowNumber }}
@@ -465,7 +465,10 @@
       },
       onRefreshClick() { // 刷新按钮点击事件
         this.sort = null
-        this.getData()
+        this.pager.currentPage = 1
+        this.columnOrder = {}
+        this.orderByArray = []
+        this.refresh()
       },
       onDeleteChecked() {
         // 删除选中

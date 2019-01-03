@@ -1384,5 +1384,5 @@
       margin 1% 1%
       padding: 6px 12px;
   .chan
-    margin-left 0
+    margin-left 0 !important
 </style>

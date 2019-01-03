@@ -1581,7 +1581,7 @@
       margin 1% 1%
       padding: 6px 12px;
     .chan
-      margin-left 0px
+      margin-left 0px !important
     .float-short
       width 50%
       float left

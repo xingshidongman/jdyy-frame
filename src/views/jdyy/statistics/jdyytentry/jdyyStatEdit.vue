@@ -8,6 +8,9 @@
           <!--el-option(v-for="item in items" :key="items.index" :label="item.value" :value="item.value")-->
       el-form-item(label="坐班日期" prop="date" v-bind:label-width="labelWidth" v-bind:rules="rules.date")
         el-date-picker(v-model="formModel.date" type="date" placeholder="选择日期" value-format="yyyy/M/d" format="yyyy/M/d" style="width: 100%;")
+      el-radio-group.radio(v-model="formModel.duty")
+        el-radio(label="白班")
+        el-radio(label="夜班")
       el-form-item(label="原住院人数" prop="protoNum" v-bind:label-width="labelWidth" v-bind:rules="rules.protoNum")
         el-input(v-model="formModel.protoNum")
       el-form-item(label="出院人数" prop="outNum" v-bind:label-width="labelWidth" v-bind:rules="rules.outNum")
@@ -35,35 +38,19 @@
     name: 'JdyyStatEdit',
     components: {KalixSelect, KalixClansmanUpload},
     data() {
-      var validatenum = (rule, value, callback) => {
-        if (value !== undefined && value !== null && value !== '') {
-          let valTrim = value.replace(/^\s+|\s+$/g, '')
-          let reg = /^[0-9]*\d$/
-          if (reg.test(valTrim)) {
-            this.phoneNumberInfo = true
-            callback()
-          } else {
-            this.phoneNumberInfo = false
-            callback(new Error('请输入正确数字'))
-          }
-        } else {
-          this.phoneNumberInfo = false
-          callback(new Error('请输入数字'))
-        }
-      }
       return {
         downloadURL: JdyystatURL,
         labelWidth: '150px',
         columnParam: undefined,
         formModel: Object.assign({}, FormModel),
         rules: {
-          protoNum: [{required: true, alidator: validatenum, message: '请输入原住院人数', trigger: 'change'}],
-          outNum: [{required: true, alidator: validatenum, message: '请输入出院人数', trigger: 'change'}],
-          inNum: [{required: true, alidator: validatenum, message: '请输入入院（转）入人数', trigger: 'change'}],
-          surgeryNum: [{required: true, alidator: validatenum, message: '请输入手术人数', trigger: 'change'}],
-          deathNum: [{required: true, alidator: validatenum, message: '请输入死亡人数', trigger: 'change'}],
-          nowNum: [{required: true, alidator: validatenum, message: '请输入现住院人数', trigger: 'change'}],
-          illNum: [{required: true, alidator: validatenum, message: '请输入重病人数', trigger: 'change'}],
+          protoNum: [{required: true, message: '请输入原住院人数', trigger: 'change'}],
+          outNum: [{required: true, message: '请输入出院人数', trigger: 'change'}],
+          inNum: [{required: true, message: '请输入入院（转）入人数', trigger: 'change'}],
+          surgeryNum: [{required: true, message: '请输入手术人数', trigger: 'change'}],
+          deathNum: [{required: true, message: '请输入死亡人数', trigger: 'change'}],
+          nowNum: [{required: true, message: '请输入现住院人数', trigger: 'change'}],
+          illNum: [{required: true, message: '请输入重病人数', trigger: 'change'}],
           doctor: [{required: true, message: '请输入坐班医生', trigger: 'change'}],
           date: [{required: true, message: '请输入坐班日期', trigger: 'change'}]
         },
@@ -103,4 +90,11 @@
   .el-form
     width 50%
     margin auto
+    .radio
+      margin-left 150px
+      margin-bottom 20px
+      .el-radio
+        color: #3465cb
+        font-weight: bold
+        font-size: 14px
 </style>

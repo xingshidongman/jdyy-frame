@@ -5,7 +5,7 @@
         h1.title 全髋关节置换术
         div.con1
           div.con1-left
-            el-form-item.toleft(label="姓名" @change="getData()" label-width="60px")
+            el-form-item(label="姓名" @change="getData()" label-width="60px")
               el-input(v-model="formModel.name" readonly)
             el-form-item(label="性别" label-width="60px")
               el-radio-group(v-model="formModel.sex" disabled)
