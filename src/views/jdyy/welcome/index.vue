@@ -72,9 +72,10 @@
         console.log('searchData====================', searchData)
         this.$http.request({// 向后台发送请求
           method: 'GET',
-          url: JdyystatURL,
+          url: JdyystatURL + '/getAllByDate',
           params: {
-            jsonStr: searchData
+            date: this.chooseDate,
+            duty: this.duty
           }
         }).then(response => {
           console.log('response.data=================', response.data.data)
