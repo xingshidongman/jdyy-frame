@@ -43,8 +43,12 @@ if (navigator.userAgent.indexOf('Firefox') === -1) {
     // 响应成功关闭loading
     // loadinginstace.close()
     console.log(`[kalix]-[axios.js] axios interceptor response data is `, res)
+    if (res.headers.new_token && res.headers.new_token.length > 0) {
+      Cache.save('access_token', res.headers.new_token)
+    }
     if (res.data.code === 401) {
       Cache.clear()
+      Cache._clearLocal()
       Router.push({path: '/login'})
       return
     }

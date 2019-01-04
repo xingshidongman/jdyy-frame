@@ -67,10 +67,13 @@
     },
     mounted() {
       console.log('this.loginForm', this.loginForm)
-      this.$http.get(logoutUrl)
-        .then(res => {
-          console.log('res', res)
-        })
+      let accessToken = this.$KalixCatch.get('access_token')
+      if (accessToken && accessToken.length) {
+        this.$http.get(logoutUrl)
+          .then(res => {
+            console.log('res', res)
+          })
+      }
       this.tabInput()
     },
     methods: {

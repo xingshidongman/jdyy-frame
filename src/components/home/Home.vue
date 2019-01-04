@@ -9,7 +9,7 @@
     admin-user-editpwd(ref="userEditpwd")
     admin-user-edit(ref="userEdit")
     div.s-flex.container
-      kalix-navigate(v-bind:cacheTime="7200000" v-bind:url="systemApplicationsBaseURL")
+      kalix-navigate(v-bind:cacheTime="cacheTime" v-bind:url="systemApplicationsBaseURL")
       div.s-flex_item.article
         component(v-bind:is="which_to_show")
 </template>
@@ -43,6 +43,7 @@
     methods: {
       initTheme() {
         this.themeValue = Cache.get('styleTheme')
+        /**
         if (!this.themeValue) {
           let url = `/camel/rest/system/preferences/${Cache.get('loginname')}`
           this.$http.get(url).then(res => {
@@ -59,6 +60,7 @@
           Cache.save('styleTheme', this.themeValue)
           // this.$refs.kalixHeader.setTheme(this.themeValue)
         }
+         **/
       },
       setSmall(e) {
         this.isSmall = e
