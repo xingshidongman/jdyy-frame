@@ -1,6 +1,7 @@
 # 全局变量配置文件
 
-cacheTime = 7200000 #缓存校验时间
+#cacheTime = 7200000 #缓存校验时间
+cacheTime = 1800000
 baseURL = "http://localhost:8181"
 
 systemApplicationsBaseURL = "/camel/rest/system/applications/"
