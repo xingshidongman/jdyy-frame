@@ -8,7 +8,7 @@
 <template lang="pug">
   transition(name="down-in")
     el-dialog.dialog-form(v-bind:title="dialogTitle" v-bind:visible="visible"
-    v-bind:before-close="close"
+    v-on:close="close"
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
       el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
@@ -16,6 +16,8 @@
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
+          <!--el-button(v-on:click="prev" v-show="showBtnPrev") 上一个-->
+          <!--el-button(v-on:click="next" v-show="showBtnNext") 下一个-->
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
         template(v-else-if="isYesNoView")
           el-button(type="primary" v-on:click="onYesClick") {{yesText}}
@@ -96,10 +98,77 @@
       return {
         privateTitle: '',
         visible: false,
-        isEdit: false
+        isEdit: false,
+        currentIndex: null,
+        showBtnPrev: false,
+        showBtnNext: false
       }
     },
     methods: {
+      prev() {
+        this._getRowIndex(() => {
+          if (this.currentIndex > 0) {
+            this.currentRow = this.tableData[this.currentIndex - 1]
+            this._resetFormModel()
+          }
+          this._setBtn()
+        })
+      },
+      next() {
+        this._getRowIndex(() => {
+          if (this.currentIndex < this.tableData.length - 1) {
+            this.currentRow = this.tableData[this.currentIndex + 1]
+            this._resetFormModel()
+          }
+          this._setBtn()
+        })
+      },
+      _getRowIndex(callBack) {
+        if (this.tableData && this.currentRow.rowNumber) {
+          this.currentIndex = this.tableData.findIndex(e => {
+            return e.rowNumber === this.currentRow.rowNumber
+          })
+          callBack()
+        }
+      },
+      _resetFormModel() {
+        this.$http.get('/camel/rest/jdyy/visits/getAllByUserId', {
+          params: {
+            userId: this.currentRow.id
+          }
+        }).then(res => {
+          let row = this.currentRow
+          row.imgs = []
+          if (row.photo !== undefined && row.photo !== null) {
+            if (row.photo.indexOf(',') !== -1) {
+              let arr = row.photo.split(',')
+              for (let i = 0; i < arr.length; i++) {
+                let imgObj = {}
+                imgObj.val = arr[i]
+                imgObj.key = 'img' + i
+                row.imgs.push(imgObj)
+              }
+            } else {
+              let imgObj = {}
+              imgObj.val = row.photo
+              imgObj.key = 'img' + 1
+              row.imgs.push(imgObj)
+            }
+          }
+          let _tableData = res.data.data
+          this.currentRow.tableData = []
+          if (_tableData.length > 0) {
+            this.currentRow.tableData = _tableData
+          }
+          this.$emit('update:formModel', this.currentRow)
+        })
+      },
+      _setBtn() {
+        this._getRowIndex(() => {
+          this.showBtnPrev = this.currentIndex > 0
+          this.showBtnNext = this.currentIndex < this.tableData.length - 1
+        })
+      },
       submitComplete(_flag) { // 提交完成后执行
         if (this.submitAfter && typeof (this.submitAfter) === 'function') {
           this.submitAfter(this)
@@ -147,7 +216,7 @@
         })
       },
       onCancelClick() {
-        this.$emit('KalixDialogClose')
+        // EventBus.$emit(this.bizKey + '-KalixDialogClose')
         console.log('dialog cancel button clicked !')
         this.visible = false
         if (!this.isView && !this.isYesNoView) {
@@ -186,13 +255,17 @@
         this.onCancelClick()
       },
       open(_title, isEdit = false, row) {
+        this.tableData = this.$store.state.tableData
         this.privateTitle = _title
         this.visible = true
         this.isEdit = isEdit
+        console.log(' 2019年1月5日15:13:23：_title', _title)
         // 树表结构json解析会报错,后面没有用到这个解析,注释掉
         // let beforeFormModel = JSON.parse(JSON.stringify(this.formModel))
         // console.log(`open before formModel :`, beforeFormModel)
         if (row) {
+          this.currentRow = row
+          this._setBtn()
           this.$emit('update:formModel', row)
         } else {
           this.$emit('update:formModel', JSON.parse(this.tempFormModel))
@@ -201,7 +274,7 @@
         console.log('open formModel', this.formModel)
         console.log('open row', row)
 
-        this.$emit('KalixDialogOpen')
+        // this.$emit('KalixDialogOpen')
       },
       initData(row) {
         console.log(`[kalix] init base dialog ${this.bizKey}`)

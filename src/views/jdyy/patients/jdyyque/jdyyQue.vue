@@ -24,6 +24,7 @@
         targetURL: JdyyvisitURL + '/getAllPatVis',
         loading: false,
         tableFields: [
+          {prop: 'id', label: ' id', sortable: true},
           {prop: 'name', label: ' 姓名', sortable: true},
           {prop: 'sex', label: ' 性别', sortable: true},
           {prop: 'age', label: ' 年龄', sortable: true},

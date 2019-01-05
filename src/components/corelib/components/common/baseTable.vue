@@ -103,6 +103,7 @@
     ON_SEARCH_BUTTON_CLICK,
     ON_REFRESH_DATA
   } from './event.toml'
+  import {mapMutations} from 'vuex'
 
   export default {
     name: 'kalix-table',
@@ -315,6 +316,9 @@
       this.setWrapperStyle()
     },
     methods: {
+      ...mapMutations({
+        saveTableData: 'saveTableData'
+      }),
       /**
        * 列点击事件
        */
@@ -512,10 +516,8 @@
         this.getData()
       },
       btnClick(row, btnId) { // table工具栏点击事件
-        console.log(row, btnId)
         switch (btnId) {
           case 'view': {
-            let that = this
             let dig =
               this.bizDialog.filter((item) => {
                 return item.id === 'view'
@@ -528,7 +530,7 @@
                   this.$refs.kalixDialog.initPropertis = row
                 }
               }
-              that.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
+              this.$refs.kalixDialog.$refs.kalixBizDialog.open('查看', false, row)
               if (typeof (this.$refs.kalixDialog.init) === 'function') {
                 // 添加初始化模型赋值参数
                 if (this.dialogOptions && this.dialogOptions.row) {
@@ -679,6 +681,7 @@
               console.log(item.rowNumber)
               return item
             })
+            this.saveTableData(this.tableData)
             // 添加表格查询后的处理事件
             if (this.isAfterSearch === true) {
               this.$emit('handleAfterSearch', this.bizKey, this.tableData)
