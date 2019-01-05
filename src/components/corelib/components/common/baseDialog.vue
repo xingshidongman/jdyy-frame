@@ -16,8 +16,8 @@
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
-          <!--el-button(v-on:click="prev" v-show="showBtnPrev") 上一个-->
-          <!--el-button(v-on:click="next" v-show="showBtnNext") 下一个-->
+          el-button(v-on:click="prev" v-show="showBtnPrev") 上一个
+          el-button(v-on:click="next" v-show="showBtnNext") 下一个
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
         template(v-else-if="isYesNoView")
           el-button(type="primary" v-on:click="onYesClick") {{yesText}}
