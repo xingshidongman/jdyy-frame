@@ -24,6 +24,8 @@
           el-button(v-on:click="prev" v-show="showBtnPrev") 上一个
           el-button(v-on:click="next" v-show="showBtnNext") 下一个
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
+        template(v-else-if="isView")
+          el-button(type="primary" v-on:click="onCancelClick") 关 闭
         template(v-else-if="isYesNoView")
           el-button(type="primary" v-on:click="onYesClick") {{yesText}}
           el-button(type="primary" v-on:click="onNoClick") {{noText}}
@@ -72,6 +74,7 @@
         type: String
       },
       isSearchView: false,
+      isView: false,
       isNoView: false,
       isYesNoView: {
         type: Boolean,
