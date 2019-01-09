@@ -11,7 +11,7 @@
     v-on:close="close"
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
-      template(v-if="isView")
+      template(v-if="isSearchView")
         a(href="#" v-on:click="prev" v-show="showBtnPrev")
           img.prev(src="../../../../../static/images/prev.png" height="120" width="100" )
         a(href="#" v-on:click="next" v-show="showBtnNext")
@@ -20,7 +20,7 @@
         <!--div formModel.limit：{{formModel.limit}}-->
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
-        template(v-if="isView")
+        template(v-if="isSearchView")
           el-button(v-on:click="prev" v-show="showBtnPrev") 上一个
           el-button(v-on:click="next" v-show="showBtnNext") 下一个
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
@@ -71,7 +71,7 @@
       targetURL: {
         type: String
       },
-      isView: false,
+      isSearchView: false,
       isNoView: false,
       isYesNoView: {
         type: Boolean,
@@ -224,7 +224,7 @@
         // EventBus.$emit(this.bizKey + '-KalixDialogClose')
         console.log('dialog cancel button clicked !')
         this.visible = false
-        if (!this.isView && !this.isYesNoView) {
+        if (!this.isSearchView && !this.isYesNoView) {
           this.$refs.dialogForm.resetFields()
         }
         this._afterDialogClose()
