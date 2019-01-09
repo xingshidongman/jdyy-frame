@@ -287,6 +287,7 @@
       _afterDialogClose(closeParam) {
         console.log(` =========== bizKey ======`, this.bizKey)
         EventBus.$emit(this.bizKey + '-' + 'KalixDialogClose', closeParam)
+        EventBus.$emit(ON_REFRESH_DATA, this.bizKey, this.formModel)
       }
     },
     created() {
