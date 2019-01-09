@@ -72,7 +72,7 @@
             v-on:current-change="pagerCurrentChange"
             v-bind:current-page="pager.currentPage"
             v-bind:page-sizes="pager.pageSizes"
-            v-bind:page-size="1"
+            v-bind:page-size="50"
             layout="total, sizes, prev, next, slot, jumper,->"
             v-bind:total="pager.totalCount"
             prev-text="上一页"
@@ -438,6 +438,7 @@
         console.log('[kalix] base table search clicked')
         // 设置searchparam
         this.noSearchParam = false
+        this.pager.currentPage = 1
         // 兼容多个baseTable同时使用情况，用bizKey区分具体查询
         if (_searchParam.bizKey) {
           this.searchParam = _searchParam.searchObj
