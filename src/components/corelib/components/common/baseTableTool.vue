@@ -32,7 +32,6 @@
 
 <script type="text/ecmascript-6">
   import {ON_TABLE_TOOLBAR_CLICK} from './event.toml'
-
   export default {
     name: 'kalix-table-tool',
     props: {

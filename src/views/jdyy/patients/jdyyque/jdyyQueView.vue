@@ -28,12 +28,12 @@
       el-form-item.block.short(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.directorDoctor" readonly)
       el-form-item.block(label="图片" prop="photo" v-bind:label-width="labelWidth")
+        el-button.download() 点击下载
       <!--kalix-img-upload(v-model="formModel.photo" readonly="readonly")-->
       <!--template(slot-scope="scope")-->
       div.picture-box(style="margin-left:200px")
         div.picture(v-for="(img, index) in formModel.imgs" :class="{ 'active':index===mark }" :key="index")
           img(v-bind:src="img.val" @click="change(img.val)"  style="width:144px; height:144px" v-bind:ref="img.key" v-if="img.val")
-
           el-dialog(:visible.sync="dialogVisible" :append-to-body="true" fullscreen=true)
             div.img-box
               div.img-height
@@ -295,6 +295,11 @@
 
   .el-table
     font-size 20px
+  .download
+    background-color #3465cb
+    color white
+  .download:hover
+    background-color #1047cb
 </style>
 <style lang="stylus" type="text/stylus">
   .search-more

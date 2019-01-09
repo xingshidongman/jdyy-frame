@@ -72,7 +72,7 @@
             v-on:current-change="pagerCurrentChange"
             v-bind:current-page="pager.currentPage"
             v-bind:page-sizes="pager.pageSizes"
-            v-bind:page-size="1"
+            v-bind:page-size="50"
             layout="total, sizes, prev, next, slot, jumper,->"
             v-bind:total="pager.totalCount"
             prev-text="上一页"
@@ -99,10 +99,7 @@
   import EventBus from '../../common/eventbus'
   import Cache from '../../common/cache'
   import {DictKeyValueObject} from '../../common/keyValueObject'
-  import {
-    ON_SEARCH_BUTTON_CLICK,
-    ON_REFRESH_DATA
-  } from './event.toml'
+  import {ON_SEARCH_BUTTON_CLICK, ON_REFRESH_DATA} from './event.toml'
   import {mapMutations} from 'vuex'
 
   export default {

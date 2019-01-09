@@ -675,7 +675,7 @@
   /*@import "../../assets/stylus/baseTable.styl"*/
   .buttom
     float none !important
-    width: 325px
+    width: 285px
     margin 0 auto
   .tree-icon
     margin-right 8px

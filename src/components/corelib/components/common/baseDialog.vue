@@ -11,17 +11,18 @@
     v-on:close="close"
     v-bind:close-on-click-modal="false" v-bind:size="size"
     v-bind:append-to-body="true" width="80%")
-      a(href="#" v-on:click="prev" v-show="showBtnPrev")
-        img.prev(src="../../../../../static/images/prev.png" height="120" width="100")
-      a(href="#" v-on:click="next" v-show="showBtnNext")
-        img.next(src="../../../../../static/images/next.png" height="120" width="100")
+      template(v-if="isView")
+        a(href="#" v-on:click="prev" v-show="showBtnPrev")
+          img.prev(src="../../../../../static/images/prev.png" height="120" width="100" )
+        a(href="#" v-on:click="next" v-show="showBtnNext")
+          img.next(src="../../../../../static/images/next.png" height="120" width="100" )
       el-form(ref="dialogForm" v-bind:model="formModel" :label-width="labelWidth" :label-position="labelPosition")
         <!--div formModel.limit：{{formModel.limit}}-->
         slot(name="dialogFormSlot")
       div.dialog-footer(slot="footer")
         template(v-if="isView")
-          <!--el-button(v-on:click="prev" v-show="showBtnPrev") 上一个-->
-          <!--el-button(v-on:click="next" v-show="showBtnNext") 下一个-->
+          el-button(v-on:click="prev" v-show="showBtnPrev") 上一个
+          el-button(v-on:click="next" v-show="showBtnNext") 下一个
           el-button(type="primary" v-on:click="onCancelClick") 关 闭
         template(v-else-if="isYesNoView")
           el-button(type="primary" v-on:click="onYesClick") {{yesText}}

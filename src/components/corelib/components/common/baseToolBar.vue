@@ -56,18 +56,18 @@
     }
   }
 </script>
-<style lang="stylus" type="text/stylus">
+<style scoped lang="stylus" type="text/stylus">
   .buttons
-    background-color #f3f3f3
-    border-color #dfdfdf
-    color #3465cb
-    padding: 8px 12px;
-    margin 0 20px
+    background-color #f3f3f3 !important
+    border-color #dfdfdf !important
+    color #3465cb !important
+    padding 8px 12px !important
+    margin 0 10px !important
     float right
   .buttons:hover
-    background-color #3465cb
-    border-color #e8e8e8
-    color #ffffff
+    background-color #3465cb !important
+    border-color #e8e8e8 !important
+    color #ffffff !important
   .clear
     clear both
 </style>
