@@ -1,5 +1,5 @@
 <template lang="pug">
-  kalix-dialog.user-add.search-more(title='查询详情页' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isView)
+  kalix-dialog.user-add.search-more(title='查询详情页' bizKey="jdyyQue" ref="kalixBizDialog" v-bind:formModel.sync="formModel" isSearchView)
     div.el-form(slot="dialogFormSlot")
       <!--button(type="button" v-on:click="getBase64Pdf()") 导出PDF-->
       <!--div.row(id="pdfDom" ref="pdfDom" style="padding-top: 30px;")-->
