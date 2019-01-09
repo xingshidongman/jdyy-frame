@@ -435,6 +435,7 @@
         console.log('[kalix] base table search clicked')
         // 设置searchparam
         this.noSearchParam = false
+        this.pager.currentPage = 1
         // 兼容多个baseTable同时使用情况，用bizKey区分具体查询
         if (_searchParam.bizKey) {
           this.searchParam = _searchParam.searchObj
