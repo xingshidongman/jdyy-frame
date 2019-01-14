@@ -28,7 +28,7 @@
       el-form-item.block.short(label="主管医生" prop="directorDoctor" v-bind:label-width="labelWidth")
         el-input(v-model="formModel.directorDoctor" readonly)
       el-form-item.block(label="图片" prop="photo" v-bind:label-width="labelWidth")
-        el-button.download() 点击下载
+        el-button.download(v-on:click="downloadPhotos") 点击下载
       <!--kalix-img-upload(v-model="formModel.photo" readonly="readonly")-->
       <!--template(slot-scope="scope")-->
       div.picture-box(style="margin-left:200px")
@@ -119,6 +119,7 @@
   import KalixFontCascader from '../../../../components/cascader/ThreeCascader'
   import ViewTable from '../../../../components/view/viewtable'
   import KalixImgUpload from '../../../../components/corelib/components/common/imgUpload'
+  import Message from '../../../../components/corelib/common/message'
 
   export default {
     name: 'JdyyQueView',
@@ -141,6 +142,26 @@
     mounted() {
     },
     methods: {
+      downloadPhotos() {
+        if (this.formModel.imgs.length > 0) {
+          this.axios.request({
+            method: 'GET',
+            url: JdyypatientsURL + '/getZipByPictures',
+            params: {
+              id: this.formModel.id
+            }
+          }).then(res => {
+            console.log('11111111111111', res.data)
+            if (res.data.success) {
+              Message.success(res.data.msg)
+            } else {
+              Message.error(res.data.msg)
+            }
+          })
+        } else {
+          Message.info('无图片')
+        }
+      },
       prev() {
         this.$emit('onGetPrevRow')
       },

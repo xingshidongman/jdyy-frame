@@ -72,7 +72,7 @@ if (navigator.userAgent.indexOf('Firefox') === -1) {
           err.message = '请求超时(408)'
           break
         case 500:
-          err.message = '服务器错误(500)'
+          err.message = '未授权，请重新登录(500)'
           break
         case 501:
           err.message = '服务未实现(501)'
