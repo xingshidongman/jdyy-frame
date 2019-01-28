@@ -1,7 +1,7 @@
 <template lang="pug">
   div.start
     div.analyse-buttons
-      el-button(@click="monthClick" autofocus= true) 月份数据对比
+      el-button(@click="monthClick" autofocus= true) 数据对比
       el-button(@click="surClick") 术式分析
       el-button(@click="diaClick") 诊断分析
       el-button(@click="operationClick") 手术率
@@ -12,13 +12,20 @@
         div.text-box.text 月份数据对比
         div.left-sx
         div.block
-          el-date-picker.input-time.chose-first(v-model="chooseYear" type="year" value-format="yyyy"
+          el-date-picker.input-year.chose-first(v-model="chooseYear" type="year" value-format="yyyy"
           placeholder="选择年份")
-          el-date-picker.input-time.left-margin(v-model="chooseStartDate" type="date" format="yyyy/M/d" value-format="yyyy/M/d" placeholder="开始日期")
+          el-date-picker.input-date.left-margin(v-model="chooseStartDate" type="date" format="yyyy/M/d" value-format="yyyy/M/d" placeholder="开始日期")
           span.to ~
-          el-date-picker.input-time(v-model="chooseEndDate" type="date" format="yyyy/M/d" value-format="yyyy/M/d" placeholder="结束日期")
+          el-date-picker.input-date(v-model="chooseEndDate" type="date" format="yyyy/M/d" value-format="yyyy/M/d" placeholder="结束日期")
           el-autocomplete.input-time.left-margin.doctor(v-model="directorDoctor" :fetch-suggestions="querySearchAsyncDoc" @select="handleSelectDoc" placeholder="请输入主管医生")
-          el-cascader.input-time.left-margin(ref="cascader" placeholder="请选择术式信息" :options="options" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+          el-cascader.input-time.left-margin.doctor1(ref="cascaderSur" placeholder="请选择术式信息" :options="options" filterable @change="getSur" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+          el-cascader.input-time.left-margin.doctor1(ref="cascaderDia" placeholder="请选择诊断信息" :options="arrays" filterable @change="getDia" :clearable="true" v-bind:show-all-levels="false" change-on-select)
+          span.to.left-margin.chose-first 年龄段
+          el-input.input-time.block-input.age-block(type="number" v-model="chooseStartAge" placeholder="起始年龄" min="0")
+          span.to ~
+          el-input.input-time.block-input.age-block(type="number" v-model="chooseEndAge" placeholder="结束年龄" min="0")
+          el-radio.left-margin(v-model="chooseRadio"  label="男") 男
+          el-radio.left-margin(v-model="chooseRadio"  label="女") 女
           el-button.search.left-margin(v-on:click="searchColumnar()") 查询
           el-button.reset.search(@click="resetMon") 重置
           div.clear
@@ -100,7 +107,7 @@
 </template>
 
 <script>
-  import {JdyyvisitURL, JdyystatURL, JdyysurURL} from '../../config.toml'
+  import {JdyyvisitURL, JdyystatURL, JdyysurURL, JdyydiaURL} from '../../config.toml'
   import {usersURL} from '../../../admin/config.toml'
   import Message from '../../../../components/corelib/common/message'
   import echarts from 'echarts'
@@ -118,9 +125,12 @@
         datevalue4: '',
         radio: '',
         items: [], // 定义今日数据指标数据集合
-        chooseYear: null, // 定义月份数据对比柱状图时间插件时间
+        chooseYear: null, // 定义数据对比柱状图时间插件时间
         columnar: [], // 定义柱状图数据
         columnarX: [], // 定义柱状图数据X轴
+        chooseStartAge: null, // 数据对比柱状图年龄段开始年龄
+        chooseEndAge: null, // 数据对比柱状图结束年龄
+        chooseRadio: null, // 数据对比柱状图男女单选按钮
         firstYear: new Date().getFullYear() + '', // 获取今年年份
         secondYear: new Date().getFullYear() - 1 + '', // 获取近两年年份
         threeYear: new Date().getFullYear() - 2 + '', // 获取近三年年份
@@ -153,7 +163,10 @@
         chooseEndDate: null, // 月份数据对比图查询的结束日期
         // surgical: null,
         surgicalCode: null,
+        diagnosisCode: null,
+        Code: null,
         options: [],
+        arrays: [],
         duty: '白班',
         monthShow: true,
         surShow: false,
@@ -195,7 +208,12 @@
         obj.stopPropagation = () => {
         }
         this.surgicalCode = null
-        this.$refs.cascader.clearValue(obj) // 术式级联选择器重置
+        this.diagnosisCode = null
+        this.$refs.cascaderSur.clearValue(obj) // 术式级联选择器重置
+        this.$refs.cascaderDia.clearValue(obj) // 诊断级联选择器重置
+        this.chooseStartAge = null
+        this.chooseEndAge = null
+        this.chooseRadio = null
       },
       resetSurPie() {
         this.surDate = null
@@ -279,20 +297,26 @@
         }
       },
       searchColumnar() {
-        if (this.directorDoctor != null) {
-          if (this.chooseYear == null && this.chooseStartDate == null && this.chooseEndDate == null) {
-            Message.info('请选择时间')
+        if (this.directorDoctor != null || this.surgicalCode != null || this.diagnosisCode != null ||
+          this.chooseStartAge != null || this.chooseEndAge != null || this.chooseRadio != null) {
+          if (this.surgicalCode != null && this.surgicalCode !== '' &&
+            this.diagnosisCode != null && this.diagnosisCode !== '') {
+            Message.info('诊断和术式不能同时选择')
           } else {
-            if (this.chooseYear != null) {
-              if (this.chooseStartDate != null || this.chooseEndDate != null) {
-                this.chooseYear = null
-              }
-              this.getColumnarData()
+            if (this.chooseYear == null && this.chooseStartDate == null && this.chooseEndDate == null) {
+              Message.info('请选择时间')
             } else {
-              if (new Date(this.chooseStartDate) <= new Date(this.chooseEndDate)) {
+              if (this.chooseYear != null) {
+                if (this.chooseStartDate != null || this.chooseEndDate != null) {
+                  this.chooseYear = null
+                }
                 this.getColumnarData()
               } else {
-                Message.info('日期选择有误')
+                if (new Date(this.chooseStartDate) <= new Date(this.chooseEndDate)) {
+                  this.getColumnarData()
+                } else {
+                  Message.info('日期选择有误')
+                }
               }
             }
           }
@@ -316,43 +340,47 @@
             }
           }
         }
-        if (this.surgicalCode != null || this.surgicalCode !== '') {
-          if (this.chooseYear == null && this.chooseStartDate == null && this.chooseEndDate == null) {
-            Message.info('请选择时间')
-          } else {
-            if (this.chooseYear != null) {
-              if (this.chooseStartDate != null || this.chooseEndDate != null) {
-                this.chooseYear = null
-              }
-              this.getColumnarData()
-            } else {
-              if (new Date(this.chooseStartDate) <= new Date(this.chooseEndDate)) {
-                this.getColumnarData()
-              } else {
-                Message.info('日期选择有误')
-              }
-            }
-          }
-        } else {
-          if (this.chooseYear != null) {
-            if (this.chooseStartDate != null || this.chooseEndDate != null) {
-              this.chooseYear = null
-            }
-            this.getColumnarData()
-          } else {
-            if (this.chooseStartDate != null && this.chooseEndDate != null) {
-              if (new Date(this.chooseStartDate) < new Date(this.chooseEndDate)) {
-                this.getColumnarData()
-              } else {
-                Message.info('日期选择有误')
-              }
-            } else if (this.chooseStartDate != null || this.chooseEndDate != null) {
-              this.getColumnarData()
-            } else {
-              Message.info('请选择查询条件')
-            }
-          }
-        }
+        // if (this.surgicalCode != null || this.surgicalCode !== '') {
+        //   if (this.diagnosisCode == null) {
+        //     if (this.chooseYear == null && this.chooseStartDate == null && this.chooseEndDate == null) {
+        //       Message.info('请选择时间')
+        //     } else {
+        //       if (this.chooseYear != null) {
+        //         if (this.chooseStartDate != null || this.chooseEndDate != null) {
+        //           this.chooseYear = null
+        //         }
+        //         this.getColumnarData()
+        //       } else {
+        //         if (new Date(this.chooseStartDate) <= new Date(this.chooseEndDate)) {
+        //           this.getColumnarData()
+        //         } else {
+        //           Message.info('日期选择有误')
+        //         }
+        //       }
+        //     }
+        //   } else {
+        //     Message.info('诊断和术式不能同时选择')
+        //   }
+        // } else {
+        //   if (this.chooseYear != null) {
+        //     if (this.chooseStartDate != null || this.chooseEndDate != null) {
+        //       this.chooseYear = null
+        //     }
+        //     this.getColumnarData()
+        //   } else {
+        //     if (this.chooseStartDate != null && this.chooseEndDate != null) {
+        //       if (new Date(this.chooseStartDate) < new Date(this.chooseEndDate)) {
+        //         this.getColumnarData()
+        //       } else {
+        //         Message.info('日期选择有误')
+        //       }
+        //     } else if (this.chooseStartDate != null || this.chooseEndDate != null) {
+        //       this.getColumnarData()
+        //     } else {
+        //       Message.info('请选择查询条件')
+        //     }
+        //   }
+        // }
       },
       getColumnarData() {
         this.axios.request({
@@ -363,7 +391,11 @@
             chooseStartDate: this.chooseStartDate,
             chooseEndDate: this.chooseEndDate,
             directorDoctor: this.directorDoctor,
-            surgicalCode: this.surgicalCode
+            surgicalCode: this.surgicalCode,
+            diagnosisCode: this.diagnosisCode,
+            chooseStartAge: this.chooseStartAge,
+            chooseEndAge: this.chooseEndAge,
+            chooseRadio: this.chooseRadio
           }
         }).then(res => {
           console.log('res======================', res.data.data)
@@ -839,7 +871,7 @@
             endValue: 6
           }],
           legend: {
-            data: ['手术人数'],
+            data: ['人数'],
             x: 'center',
             textStyle: {
               color: '#000',
@@ -891,14 +923,14 @@
           ],
           series: [
             {
-              name: '手术人数',
+              name: '人数',
               type: 'bar',
               barWidth: '30%',
               data: this.columnar,
               color: '#2d8ac7'
             },
             {
-              name: '手术人数',
+              name: '人数',
               type: 'line',
               data: this.columnar,
               color: '#012655',
@@ -1003,29 +1035,6 @@
         // this.chooseYear = year
         // this.getColumnarData()
       },
-      // getDataByMonth() {
-      //   console.log('getDataByMonth================', this.chooseYear)
-      //   let year = this.chooseYear
-      //   if (year === null || year === "") {
-      //     this.getColumnar(new Date().getFullYear())
-      //   } else {
-      //     this.getColumnar(year)
-      //   }
-      // },
-      // getColumnar(year) { // 根据获取柱状图月份数据对比数据
-      //   this.$http.request({// 向后台发送请求
-      //     method: 'get',
-      //     url: '/camel/rest/jdyy/statisticss/getAllByYear',
-      //     params: {
-      //       date: year
-      //     }
-      //   }).then(response => {
-      //     console.log('getColumnar:response.data=================', response.data)
-      //     this.columnar = response.data
-      //     console.log('9999999999999999999999999999', this.columnar)
-      //     this.histogram('histogram')
-      //   })
-      // },
       getLine() { // 获取近五年比手术量数据
         this.$http.request({// 向后台发送请求
           method: 'GET',
@@ -1261,31 +1270,28 @@
           this.options = res.data.data
         })
       },
+      getDiaCascader() { // 获取诊断信息并以级联形式显示
+        console.log('getDiaCascader========================')
+        this.axios.request({
+          method: 'GET',
+          url: JdyydiaURL + '/getDiaCascader'
+        }).then(res => {
+          console.log('Request-getDiaCascader-Success==============', res.data.data)
+          this.arrays = res.data.data
+        })
+      },
       getSur(val) { // 通过级联获取数据后转成字符串
         this.surgicalCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
-        // this.axios.request({
-        //   method: 'GET',
-        //   url: JdyysurURL + '/getCodeByContent',
-        //   params: {
-        //     code: this.surgicalCode
-        //   }
-        // }).then(res => {
-        //   console.log('formModel.diagnosisCode==============================', res.data.data)
-        //   this.surgical = res.data.data[0].content
-        // })
+      },
+      getDia(val) { // 通过级联获取数据后转成字符串
+        this.diagnosisCode = val.toString().substring(val.toString().lastIndexOf(',') + 1, val.toString().length)
       }
     },
     // 调用
     mounted() {
-      // this.$nextTick(function () {
-      //   // this.getDate() // 获取系统当前日期方法
-      //   this.diaPie('dia')
-      //   this.surPie('sur')
-      //   this.diagram('diagram')
-      //   this.histogram('histogram')
-      // })
       this.loadAllDoc() // 获取主管医生数据
       this.getSurCascader() // 获取术式信息并以级联形式显示
+      this.getDiaCascader() // 获取诊断信息并以级联形式显示
     },
     // watch:{
     //   surDate:function () {
@@ -1417,8 +1423,26 @@
       .el-input__inner
         padding-left: 30px;
         height 30px
+    .input-year
+      border 2px solid #909090
+      border-radius 4px
+      color #23769a
+      margin-bottom 10px
+      font-size 18px !important
+      font-weight bold !important
+      width 132px
+    .input-date
+      border 2px solid #909090
+      border-radius 4px
+      color #23769a
+      margin-bottom 10px
+      font-size 18px !important
+      font-weight bold !important
+      width 145px
     .doctor
-      width 200px
+      width 180px
+    .doctor1
+      width 190px
 
     .age-block
       width 120px
