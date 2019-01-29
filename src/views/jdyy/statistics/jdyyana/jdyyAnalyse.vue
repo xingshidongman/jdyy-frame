@@ -9,7 +9,7 @@
       el-button(@click="fiveClick") 五年比手术量
     div.left-box(v-if="monthShow")
       div.left-line
-        div.text-box.text 月份数据对比
+        div.text-box.text 数据对比
         div.left-sx
         div.block
           el-date-picker.input-year.chose-first(v-model="chooseYear" type="year" value-format="yyyy"
@@ -506,7 +506,7 @@
         console.log('charts++++++++++', this.charts)
         let charts = echarts.init(document.getElementById(id))
         charts.clear()
-        charts.setOption({
+        let option = {
           tooltip: {
             formatter: '{a}<br/>{b}:{c} ({d}%)',
             axisPointer: {
@@ -590,12 +590,24 @@
               }
             }
           ]
-        }, true)
+        }
+        charts.setOption(option)
+        charts.on('click', changePie)
+
+        // alert(option.series[0].data.length)
+        function changePie(param) {
+          // alert(option.series[0].data[i])
+          let data = param.dataIndex
+          option.series[0].data = [{name: '哈尔滨市', value: 10}]
+          charts.setOption(option)
+          console.log(data)
+        }
       },
+
       diaPie(id) {
         let charts = echarts.init(document.getElementById(id))
         charts.clear()
-        charts.setOption({
+        let option = {
           tooltip: {
             formatter: '{a}<br/>{b}:{c} ({d}%)',
             axisPointer: {
@@ -673,7 +685,19 @@
               }
             }
           ]
-        }, true)
+        }
+        charts.setOption(option)
+        charts.on('click', changePie)
+
+        // alert(option.series[0].data.length)
+        function changePie(param) {
+          // alert(option.series[0].data[i])
+          console.log('p++++++++++++++++++', param.name)
+          let data = param.dataIndex
+          option.series[0].data = [{name: '哈尔滨市', value: 10}]
+          charts.setOption(option)
+          console.log(data)
+        }
       },
       operateColumn(id) {
         let charts = echarts.init(document.getElementById(id))
